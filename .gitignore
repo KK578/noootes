@@ -1,0 +1,55 @@
+###################
+## Visual Studio ##
+.vs/
+*.suo
+*.user
+*.sln.docstates
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+##########
+## Logs ##
+*.log
+logs/
+
+##########
+## NTVS ##
+.ntvs_analysis.dat
+
+############
+## Caches ##
+*.tmp
+tmp/
+.sass-cache/
+
+##################
+## Dependencies ##
+node_modules/
+bower_components/
+
+############
+# Packages #
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+########################
+## OS generated files ##
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

@@ -1,0 +1,16 @@
+{
+  "name": "noootes",
+  "version": "0.0.0",
+  "homepage": "https://github.com/KK578/noootes",
+  "authors": [
+    "Kevin Kwan <KK1241@googlemail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
