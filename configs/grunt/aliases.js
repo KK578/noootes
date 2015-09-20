@@ -7,6 +7,7 @@
             'bower:developer',
             'build-bower',
             'build-components',
+            'build-server',
             'build-views'
         ]
     },
@@ -25,6 +26,7 @@
             'bower:production',
             'build-bower',
             'build-components',
+            'build-server',
             'build-views'
         ]
     },
@@ -43,6 +45,12 @@
             'newer:minifyPolymer:components',
             'newer:sass:components',
             'newer:uglify:components'
+        ]
+    },
+    'build-server': {
+        descript: 'Build node server files',
+        tasks: [
+            'newer:uglify:server'
         ]
     },
     'build-views': {
