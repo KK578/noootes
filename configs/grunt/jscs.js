@@ -12,6 +12,9 @@
     components: {
         src: ['browser/custom_components/**/*.js']
     },
+    views: {
+        src: ['browser/scripts/**/*.js']
+    },
     wct: {
         src: ['browser/test/**/*.js']
     }
