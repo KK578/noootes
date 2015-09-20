@@ -133,7 +133,7 @@
     "safeContextKeyword": null,
     "validateAlignedFunctionParameters": null,
     "validateIndentation": 4,
-    "validateLineBreaks": "LF",
+    "validateLineBreaks": null,
     "validateNewlineAfterArrayElements": {
         "maximum": 2
     },
