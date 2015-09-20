@@ -1,0 +1,35 @@
+﻿@import 'partials/_layouts.scss';
+@import 'partials/_mixins.scss';
+@import 'partials/_theme.scss';
+
+html, body {
+    @include layout-fullbleed;
+    @include user-select(none);
+    /* Text */
+    font-family: 'Roboto', 'Noto', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* Remove blue colouring on Android when tapping an item */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 8px 0;
+}
+
+i, em {
+    color: $black-secondary;
+}
+
+hr {
+    border-color: $black-divider;
+}
+
+a {
+    text-decoration: none;
+    color: $theme-accent;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
