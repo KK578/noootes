@@ -10,6 +10,8 @@ module.exports = function (grunt) {
         jitGrunt: {
             staticMappings: {
                 bower: 'grunt-bower-task',
+                minifyPolymer: 'grunt-minify-polymer',
+                minifyPolymerCSS: 'grunt-minify-polymer',
                 notify_hooks: 'grunt-notify'
             }
         }

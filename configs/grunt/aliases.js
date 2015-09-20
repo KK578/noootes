@@ -4,15 +4,8 @@
         tasks: [
             'notify_hooks',
             'lint',
-            'bower:developer'
-        ]
-    },
-    build: {
-        description: 'Builds the current build for Production',
-        tasks: [
-            'notify_hooks',
-            'lint',
-            'bower:production'
+            'bower:developer',
+            'build-bower'
         ]
     },
     lint: {
@@ -20,6 +13,24 @@
         tasks: [
             'jshint',
             'jscs'
+        ]
+    },
+    build: {
+        description: 'Builds the current build for Production',
+        tasks: [
+            'notify_hooks',
+            'lint',
+            'bower:production',
+            'build-bower'
+        ]
+    },
+    'build-bower': {
+        description: 'Build bower_components',
+        tasks: [
+            'newer:minifyPolymer:bower',
+            'newer:minifyPolymerCSS:bower',
+            'newer:uglify:bower',
+            'newer:copy:bower'
         ]
     }
 };

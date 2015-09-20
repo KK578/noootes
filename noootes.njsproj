@@ -24,6 +24,10 @@
     <Content Include="bower.json" />
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
+    <Compile Include="configs\grunt\copy.js" />
+    <Compile Include="configs\grunt\minifyPolymer.js" />
+    <Compile Include="configs\grunt\minifyPolymerCSS.js" />
+    <Compile Include="configs\grunt\uglify.js" />
     <Compile Include="gruntfile.js" />
     <Compile Include="configs\grunt\aliases.js" />
     <Compile Include="configs\grunt\jscs.js" />
