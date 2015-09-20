@@ -1,6 +1,14 @@
 ﻿var path = require('path');
 
 module.exports = function (grunt) {
+    // Reduce verbose logging from grunt-newer
+    var logHeader = grunt.log.header;
+    grunt.log.header = function (message) {
+        if (!/newer(-postrun)?:/.test(message)) {
+            logHeader.apply(this, arguments);
+        }
+    };
+
     // Print timers for executing tasks
     require('time-grunt')(grunt);
 
