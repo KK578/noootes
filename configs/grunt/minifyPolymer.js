@@ -12,5 +12,15 @@
                 dest: 'build/public/bower_components/'
             }
         ]
+    },
+    components: {
+        files: [
+            {
+                expand: true,
+                cwd: 'browser/custom_components/',
+                src: ['**/*.html'],
+                dest: 'build/public/custom_components/'
+            }
+        ]
     }
 };

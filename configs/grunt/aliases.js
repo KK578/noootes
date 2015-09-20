@@ -5,7 +5,8 @@
             'notify_hooks',
             'lint',
             'bower:developer',
-            'build-bower'
+            'build-bower',
+            'build-components'
         ]
     },
     lint: {
@@ -21,7 +22,8 @@
             'notify_hooks',
             'lint',
             'bower:production',
-            'build-bower'
+            'build-bower',
+            'build-components'
         ]
     },
     'build-bower': {
@@ -31,6 +33,14 @@
             'newer:minifyPolymerCSS:bower',
             'newer:uglify:bower',
             'newer:copy:bower'
+        ]
+    },
+    'build-components': {
+        description: 'Build custom_components',
+        tasks: [
+            'newer:minifyPolymer:components',
+            'newer:sass:components',
+            'newer:uglify:components'
         ]
     }
 };
