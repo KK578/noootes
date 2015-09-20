@@ -25,7 +25,7 @@
                 expand: true,
                 cwd: 'browser/behaviors/',
                 src: ['**/*.html'],
-                dest: 'build/public/behaviors/',
+                dest: 'build/public/behaviors/'
             }
         ]
     },
