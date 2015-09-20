@@ -1,4 +1,8 @@
 ﻿module.exports = {
+    options: {
+        spawn: false,
+        interrupt: true
+    },
     bower: {
         files: ['bower.json'],
         tasks: ['build-bower']
