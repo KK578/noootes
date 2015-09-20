@@ -20,6 +20,11 @@
   },
   "homepage": "https://noootes.firebaseapp.com/",
   "readme": "https://noootes.firebaseapp.com/",
+  "dependencies": {
+    "compression": "^1.5.2",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3"
+  },
   "devDependencies": {
     "glob": "^5.0.14",
     "grunt": "^0.4.5",
@@ -39,8 +44,5 @@
     "jit-grunt": "^0.9.1",
     "load-grunt-config": "^0.17.2",
     "time-grunt": "^1.2.1"
-  },
-  "dependencies": {
-    "express": "^4.13.3"
   }
 }
