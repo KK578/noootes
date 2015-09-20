@@ -33,3 +33,62 @@ a {
         text-decoration: underline;
     }
 }
+
+table {
+    border-spacing: 0;
+    width: 100%;
+    overflow-x: auto;
+    table-layout: fixed;
+
+    thead {
+        background-color: $theme-primary;
+        color: $white-primary;
+        font-size: 24px;
+        min-height: 64px;
+    }
+
+    tbody {
+        > :nth-child(2n) {
+            background-color: $theme-table-row-2;
+        }
+
+        > :nth-child(2n+1) {
+            background-color: $theme-table-row-1;
+        }
+    }
+
+    th, td {
+        height: 56px;
+        padding: 4px 12px;
+        /* All elements after the first */
+        &:nth-child(n+2) {
+            text-align: right;
+        }
+
+        &:first-of-type {
+            padding-left: 24px;
+            text-align: left;
+        }
+
+        &:last-of-type {
+            padding-right: 24px;
+        }
+    }
+}
+
+table.vertical {
+    table-layout: auto;
+
+    tr {
+        > :first-child {
+            background-color: $theme-primary;
+            color: $white-primary;
+            font-size: 24px;
+            text-align: right;
+        }
+        /* All elements after the first */
+        > :nth-child(n+2) {
+            text-align: left;
+        }
+    }
+}
