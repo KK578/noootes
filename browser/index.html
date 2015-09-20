@@ -11,7 +11,12 @@
     <script src="scripts/load.js" async></script>
 </head>
 <body>
-    <splash-screen></splash-screen>
+    <splash-screen id="splash-screen">
+        <paper-material id="splash-card">
+            <span>Welcome to Noootes!</span>
+            <paper-spinner id="splash-spinner"></paper-spinner>
+        </paper-material>
+    </splash-screen>
     <noootes-app></noootes-app>
     <paper-toast></paper-toast>
 </body>
