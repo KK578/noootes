@@ -18,6 +18,7 @@ module.exports = function (grunt) {
         jitGrunt: {
             staticMappings: {
                 bower: 'grunt-bower-task',
+                express: 'grunt-express-server',
                 minifyPolymer: 'grunt-minify-polymer',
                 minifyPolymerCSS: 'grunt-minify-polymer',
                 notify_hooks: 'grunt-notify'

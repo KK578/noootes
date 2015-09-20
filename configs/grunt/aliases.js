@@ -25,6 +25,7 @@
         tasks: [
             'notify_hooks',
             'lint',
+            'clean',
             'bower:production',
             'build-bower',
             'build-components',
@@ -33,6 +34,25 @@
             'build-views',
             'build-wct'
         ]
+    },
+    rebuild: {
+        description: 'Cleans the current build and rebuilds it for Development',
+        tasks: [
+            'notify_hooks',
+            'lint',
+            'clean:build',
+            'bower:developer',
+            'build-bower',
+            'build-components',
+            'build-media',
+            'build-server',
+            'build-views',
+            'build-wct'
+        ]
+    },
+    reserve: {
+        description: 'Cleans the current build, rebuilds it and serves for Development',
+        tasks: ['rebuild', 'serve']
     },
     serve: {
         description: 'Serve the current build as Developer',
