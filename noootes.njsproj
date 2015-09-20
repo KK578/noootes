@@ -16,6 +16,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="browser\scripts\browser_sync_client.js" />
     <Compile Include="browser\scripts\load.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
