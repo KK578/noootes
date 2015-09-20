@@ -9,13 +9,16 @@
 
     <link rel="icon" href="media/favicon.ico" />
 
+    <link rel="stylesheet" href="stylesheets/index.css?__inline=true" />
+    <link rel="stylesheet" href="stylesheets/theme.css?__inline=true" />
+
     <script src="scripts/load.js" async></script>
 </head>
 <body>
-    <splash-screen id="splash-screen">
-        <paper-material id="splash-card">
-            <span>Welcome to Noootes!</span>
-            <paper-spinner id="splash-spinner"></paper-spinner>
+    <splash-screen id="splash-screen" class="loading">
+        <paper-material id="splash-card" class="loading" animated="true" elevation="0">
+            <span id="splash-title" class="loading">Welcome to Noootes!</span>
+            <paper-spinner id="splash-spinner" class="loading"></paper-spinner>
         </paper-material>
     </splash-screen>
     <noootes-app></noootes-app>

@@ -35,6 +35,7 @@
     <Content Include="browser\404.html" />
     <Content Include="browser\index.html" />
     <Content Include="browser\media\favicon.ico" />
+    <Content Include="browser\stylesheets\index.scss" />
     <Content Include="browser\stylesheets\paper-theme.scss" />
     <Content Include="browser\stylesheets\partials\_layouts.scss" />
     <Content Include="browser\stylesheets\partials\_mixins.scss" />

@@ -42,7 +42,7 @@
     },
     views: {
         files: [
-            'browser/*/html',
+            'browser/*.html',
             'browser/stylesheets/*.scss',
             'browser/scripts/*.js'
         ],
