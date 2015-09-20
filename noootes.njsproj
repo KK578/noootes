@@ -16,8 +16,10 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="browser\custom_components\splash-screen\splash-screen.js" />
     <Compile Include="browser\scripts\browser_sync_client.js" />
     <Compile Include="browser\scripts\load.js" />
+    <Compile Include="browser\test\splash-screen\splash-screen-test.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
@@ -33,6 +35,8 @@
     <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Content Include="browser\404.html" />
+    <Content Include="browser\custom_components\splash-screen\splash-screen.html" />
+    <Content Include="browser\custom_components\splash-screen\splash-screen.scss" />
     <Content Include="browser\elements.html" />
     <Content Include="browser\index.html" />
     <Content Include="browser\media\favicon.ico" />
@@ -43,6 +47,7 @@
     <Content Include="browser\stylesheets\partials\_theme.scss" />
     <Content Include="browser\stylesheets\partials\_material_color.scss" />
     <Content Include="browser\stylesheets\theme.scss" />
+    <Content Include="browser\test\splash-screen\splash-screen-test.html" />
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
     <Compile Include="configs\grunt\clean.js" />
@@ -61,10 +66,14 @@
     <Compile Include="configs\grunt\notify_hooks.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="browser\custom_components\" />
+    <Folder Include="browser\custom_components\splash-screen\" />
     <Folder Include="browser\media\" />
     <Folder Include="browser\scripts\" />
     <Folder Include="browser\stylesheets\" />
     <Folder Include="browser\stylesheets\partials\" />
+    <Folder Include="browser\test\" />
+    <Folder Include="browser\test\splash-screen\" />
     <Folder Include="configs" />
     <Folder Include="configs\grunt" />
     <Folder Include="browser\" />
