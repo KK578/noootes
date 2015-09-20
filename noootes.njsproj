@@ -33,6 +33,8 @@
     <Content Include="browser\404.html" />
     <Content Include="browser\index.html" />
     <Content Include="browser\media\favicon.ico" />
+    <Content Include="browser\stylesheets\partials\_material_color.scss" />
+    <Content Include="browser\stylesheets\test.scss" />
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
     <Compile Include="configs\grunt\clean.js" />
@@ -52,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="browser\media\" />
+    <Folder Include="browser\stylesheets\" />
+    <Folder Include="browser\stylesheets\partials\" />
     <Folder Include="configs" />
     <Folder Include="configs\grunt" />
     <Folder Include="browser\" />
