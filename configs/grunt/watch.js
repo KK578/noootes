@@ -4,7 +4,7 @@
         tasks: ['build-bower']
     },
     components: {
-        files: ['browser/custom_components/**/*'],
+        files: ['browser/custom_components/**/*', 'browser/behaviors/**/*'],
         tasks: [
             'jshint:components',
             'jscs:components',

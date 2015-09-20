@@ -25,6 +25,12 @@
                 cwd: 'browser/custom_components/',
                 src: ['**/*.js'],
                 dest: 'build/public/custom_components/'
+            },
+            {
+                expand: true,
+                cwd: 'browser/behaviors/',
+                src: ['**/*.js'],
+                dest: 'build/public/behaviors/'
             }
         ]
     },
