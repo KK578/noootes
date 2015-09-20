@@ -34,6 +34,30 @@
             'build-wct'
         ]
     },
+    serve: {
+        description: 'Serve the current build as Developer',
+        tasks: [
+            'notify_hooks',
+            'express:developer',
+            'watch'
+        ]
+    },
+    'serve:public': {
+        description: 'Serve the current build as Developer',
+        tasks: [
+            'notify_hooks',
+            'express:developerPublic',
+            'watch'
+        ]
+    },
+    'serve:production': {
+        description: 'Serve the current build as Production',
+        tasks: [
+            'notify_hooks',
+            'express:production',
+            'watch'
+        ]
+    },
     'build-bower': {
         description: 'Build bower_components',
         tasks: [

@@ -25,6 +25,7 @@
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
     <Compile Include="configs\grunt\clean.js" />
+    <Compile Include="configs\grunt\express.js" />
     <Compile Include="configs\grunt\sync.js" />
     <Compile Include="configs\grunt\minifyPolymer.js" />
     <Compile Include="configs\grunt\minifyPolymerCSS.js" />
