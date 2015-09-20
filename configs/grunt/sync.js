@@ -19,5 +19,14 @@
                 dest: 'build/public/media/'
             }
         ]
+    },
+    wct: {
+        files: [
+            {
+                cwd: 'browser/test/',
+                src: ['**/*'],
+                dest: 'build/public/test/'
+            }
+        ]
     }
 };

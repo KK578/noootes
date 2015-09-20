@@ -9,7 +9,8 @@
             'build-components',
             'build-media',
             'build-server',
-            'build-views'
+            'build-views',
+            'build-wct'
         ]
     },
     lint: {
@@ -29,7 +30,8 @@
             'build-components',
             'build-media',
             'build-server',
-            'build-views'
+            'build-views',
+            'build-wct'
         ]
     },
     'build-bower': {
@@ -38,7 +40,7 @@
             'newer:minifyPolymer:bower',
             'newer:minifyPolymerCSS:bower',
             'newer:uglify:bower',
-            'newer:sync:bower'
+            'sync:bower'
         ]
     },
     'build-components': {
@@ -52,7 +54,7 @@
     'build-media': {
         description: 'Build media files',
         tasks: [
-            'newer:sync:media'
+            'sync:media'
         ]
     },
     'build-server': {
@@ -67,6 +69,13 @@
             'newer:minifyPolymer:views',
             'newer:sass:views',
             'newer:uglify:views'
+        ]
+    },
+    'build-wct': {
+        description: 'Build web component tests',
+        tasks: [
+            'sync:wct',
+            'wctSuite'
         ]
     }
 };

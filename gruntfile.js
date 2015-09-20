@@ -16,4 +16,27 @@ module.exports = function (grunt) {
             }
         }
     });
+
+    grunt.registerTask('wctSuite', 'Creates suite.js for loading WCT Tests', function () {
+        var path = require('path');
+        var glob = require('glob');
+
+        var done = this.async();
+        var directory = 'build/public/test/';
+
+        glob('**/*/*.html', { cwd: directory }, function (err, files) {
+            if (err) {
+                throw err;
+            }
+
+            var filePath = path.join(directory, 'suite.js');
+            var file = 'WCT.loadSuites(' + JSON.stringify(files) + ');';
+            grunt.file.write(filePath, file);
+
+            var message = files.length + ' ' +
+                grunt.util.pluralize(files.length, 'test/tests') + ' loaded into WCT Suite.';
+            grunt.log.ok(message);
+            done();
+        });
+    });
 };
