@@ -30,6 +30,9 @@
     <Content Include=".gitignore" />
     <Content Include=".travis.yml" />
     <Content Include="bower.json" />
+    <Content Include="browser\404.html" />
+    <Content Include="browser\index.html" />
+    <Content Include="browser\media\favicon.ico" />
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
     <Compile Include="configs\grunt\clean.js" />
@@ -48,8 +51,10 @@
     <Compile Include="configs\grunt\notify_hooks.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="browser\media\" />
     <Folder Include="configs" />
     <Folder Include="configs\grunt" />
+    <Folder Include="browser\" />
     <Folder Include="server\" />
     <Folder Include="server\util\" />
   </ItemGroup>
