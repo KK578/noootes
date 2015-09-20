@@ -20,6 +20,7 @@
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
     <Compile Include="server\util\logger.js" />
+    <Compile Include="server\util\router.js" />
     <Compile Include="server\util\setup.js" />
     <Compile Include="server\util\util.js" />
     <Content Include=".bowerrc" />
