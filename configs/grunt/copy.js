@@ -11,5 +11,15 @@
                 dest: 'build/public/bower_components/'
             }
         ]
+    },
+    media: {
+        files: [
+            {
+                expand: true,
+                cwd: 'browser/media/',
+                src: ['**/*.{jpg,png,ico}'],
+                dest: 'build/public/media/'
+            }
+        ]
     }
 };

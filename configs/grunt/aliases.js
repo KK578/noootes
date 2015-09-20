@@ -7,6 +7,7 @@
             'bower:developer',
             'build-bower',
             'build-components',
+            'build-media',
             'build-server',
             'build-views'
         ]
@@ -26,6 +27,7 @@
             'bower:production',
             'build-bower',
             'build-components',
+            'build-media',
             'build-server',
             'build-views'
         ]
@@ -45,6 +47,12 @@
             'newer:minifyPolymer:components',
             'newer:sass:components',
             'newer:uglify:components'
+        ]
+    },
+    'build-media': {
+        description: 'Build media files',
+        tasks: [
+            'newer:copy:media'
         ]
     },
     'build-server': {
