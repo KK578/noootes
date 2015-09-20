@@ -6,7 +6,8 @@
             'lint',
             'bower:developer',
             'build-bower',
-            'build-components'
+            'build-components',
+            'build-views'
         ]
     },
     lint: {
@@ -23,7 +24,8 @@
             'lint',
             'bower:production',
             'build-bower',
-            'build-components'
+            'build-components',
+            'build-views'
         ]
     },
     'build-bower': {
@@ -41,6 +43,14 @@
             'newer:minifyPolymer:components',
             'newer:sass:components',
             'newer:uglify:components'
+        ]
+    },
+    'build-views': {
+        description: 'Build views',
+        tasks: [
+            'newer:minifyPolymer:views',
+            'newer:sass:views',
+            'newer:uglify:views'
         ]
     }
 };

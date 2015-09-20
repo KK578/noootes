@@ -22,5 +22,15 @@
                 dest: 'build/public/custom_components/'
             }
         ]
+    },
+    views: {
+        files: [
+            {
+                expand: true,
+                cwd: 'browser/',
+                src: ['*.html'],
+                dest: 'build/public/'
+            }
+        ]
     }
 };

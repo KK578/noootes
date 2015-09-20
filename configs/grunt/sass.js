@@ -13,5 +13,16 @@
                 dest: 'build/public/custom_components/'
             }
         ]
+    },
+    views: {
+        files: [
+            {
+                expand: true,
+                cwd: 'browser/stylesheets/',
+                src: ['*.scss'],
+                ext: '.css',
+                dest: 'build/public/stylesheets/'
+            }
+        ]
     }
 };

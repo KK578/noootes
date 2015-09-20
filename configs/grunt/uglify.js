@@ -27,5 +27,15 @@
                 dest: 'build/public/custom_components/'
             }
         ]
+    },
+    views: {
+        files: [
+            {
+                expand: true,
+                cwd: 'browser/scripts/',
+                src: ['*.js'],
+                dest: 'build/public/scripts/'
+            }
+        ]
     }
 };
