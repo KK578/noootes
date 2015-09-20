@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>WCT Test - splash-screen</title>
@@ -7,11 +7,14 @@
     <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="../../bower_components/web-component-tester/browser.js"></script>
 
+    <script>var Noootes = Noootes || { Behaviors: {}, Elements: {} }</script>
     <link rel="import" href="../../custom_components/splash-screen/splash-screen.html" />
 </head>
 <body>
     <!-- Add element markup here -->
-    <splash-screen></splash-screen>
+    <splash-screen>
+        <h1>Loading...</h1>
+    </splash-screen>
 
     <!-- WCT Suite -->
     <script src="splash-screen-test.js"></script>
