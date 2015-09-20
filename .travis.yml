@@ -3,7 +3,9 @@ node_js:
   - "0.12"
 before_script:
   - npm install -g grunt-cli
+  - npm install -g web-component-tester
+  - grunt build
 script:
-  - grunt lint
+  - wct
 after_success:
   - echo "Yay"

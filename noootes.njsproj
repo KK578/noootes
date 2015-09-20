@@ -69,6 +69,7 @@
     <Compile Include="configs\grunt\jscs.js" />
     <Compile Include="configs\grunt\jshint.js" />
     <Compile Include="configs\grunt\notify_hooks.js" />
+    <Content Include="wct.conf.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="browser\custom_components\" />
