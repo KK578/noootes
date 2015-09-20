@@ -5,6 +5,7 @@
     util.setup(server);
     util.logger(server, environment);
     util.router(server, environment);
+    util.browserSync(server, environment);
 
     return server;
 };
