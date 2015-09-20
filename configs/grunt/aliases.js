@@ -32,7 +32,10 @@
             'build-media',
             'build-server',
             'build-views',
-            'build-wct'
+            'build-wct',
+            'inline',
+            'minifyPolymer:production',
+            'clean:production'
         ]
     },
     rebuild: {
