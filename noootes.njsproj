@@ -16,6 +16,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="server\developer.js" />
+    <Compile Include="server\production.js" />
+    <Compile Include="server\server.js" />
     <Content Include=".bowerrc" />
     <Content Include=".editorconfig" />
     <Content Include=".gitattributes" />
@@ -42,6 +45,7 @@
   <ItemGroup>
     <Folder Include="configs" />
     <Folder Include="configs\grunt" />
+    <Folder Include="server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

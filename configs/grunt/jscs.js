@@ -5,7 +5,8 @@
     server: {
         src: [
             'gruntfile.js',
-            'configs/grunt/*.js'
+            'configs/grunt/*.js',
+            'server/**/*.js'
         ]
     },
     components: {

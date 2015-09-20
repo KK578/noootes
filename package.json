@@ -11,8 +11,8 @@
     "url": "git+https://github.com/KK578/noootes.git"
   },
   "author": {
-    "name": "Kevin Kwan",
-    "email": "KK1241@googlemail.com"
+    "email": "KK1241@googlemail.com",
+    "name": "Kevin Kwan"
   },
   "license": "MIT",
   "bugs": {
@@ -39,5 +39,8 @@
     "jit-grunt": "^0.9.1",
     "load-grunt-config": "^0.17.2",
     "time-grunt": "^1.2.1"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
   }
 }
