@@ -30,6 +30,7 @@
     <Compile Include="configs\grunt\minifyPolymerCSS.js" />
     <Compile Include="configs\grunt\sass.js" />
     <Compile Include="configs\grunt\uglify.js" />
+    <Compile Include="configs\grunt\watch.js" />
     <Compile Include="gruntfile.js" />
     <Compile Include="configs\grunt\aliases.js" />
     <Compile Include="configs\grunt\jscs.js" />
