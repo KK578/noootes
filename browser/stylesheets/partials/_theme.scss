@@ -1,0 +1,15 @@
+﻿@import '_material_color.scss';
+
+$theme-color: deep-purple;
+$theme-accent-color: blue;
+
+$theme-background: material-color($theme-color, 50);
+$theme-loading-background: material-color($theme-color, 500);
+
+$theme-primary: material-color($theme-color, 500);
+$theme-primary-light: material-color($theme-color, 300);
+$theme-primary-dark: material-color($theme-color, 700);
+
+$theme-accent: material-color($theme-accent-color, A400);
+$theme-accent-light: material-color($theme-accent-color, A200);
+$theme-accent-dark: material-color($theme-accent-color, A700);
