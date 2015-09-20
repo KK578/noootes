@@ -6,14 +6,31 @@
 //  4) Hide Splash Screen
 (function () {
     var loadingDelay = 100;
+    var finishDelay = 100;
+
     var initialDependencies = [
         'bower_components/font-roboto/roboto.html',
         'bower_components/paper-material/paper-material.html',
         'bower_components/paper-spinner/paper-spinner.html'
     ];
 
+    function endSplashScreen() {
+        console.log('Loading is finished. App is ready!');
+    }
+
     function loadAppDependencies() {
-        console.log('Preparing to load app dependencies');
+        Polymer.Base.importHref('elements.html', function () {
+            var loaders = document.querySelectorAll('.loading');
+            for (var i = 0; i < loaders.length; i++) {
+                loaders[i].classList.remove('loading');
+            }
+
+            // End splash-screen animation
+            document.getElementById('splash-spinner').active = false;
+            document.getElementById('splash-card').elevation = 0;
+
+            window.setTimeout(endSplashScreen, finishDelay);
+        });
     }
 
     function startSplashScreen() {

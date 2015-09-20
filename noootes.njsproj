@@ -33,6 +33,7 @@
     <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Content Include="browser\404.html" />
+    <Content Include="browser\elements.html" />
     <Content Include="browser\index.html" />
     <Content Include="browser\media\favicon.ico" />
     <Content Include="browser\stylesheets\index.scss" />
