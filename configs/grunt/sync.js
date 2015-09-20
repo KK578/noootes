@@ -2,7 +2,6 @@
     bower: {
         files: [
             {
-                expand: true,
                 cwd: 'browser/bower_components/',
                 src: [
                     '**/*.min.js',
@@ -15,7 +14,6 @@
     media: {
         files: [
             {
-                expand: true,
                 cwd: 'browser/media/',
                 src: ['**/*.{jpg,png,ico}'],
                 dest: 'build/public/media/'

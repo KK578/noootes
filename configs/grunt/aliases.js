@@ -38,7 +38,7 @@
             'newer:minifyPolymer:bower',
             'newer:minifyPolymerCSS:bower',
             'newer:uglify:bower',
-            'newer:copy:bower'
+            'newer:sync:bower'
         ]
     },
     'build-components': {
@@ -52,7 +52,7 @@
     'build-media': {
         description: 'Build media files',
         tasks: [
-            'newer:copy:media'
+            'newer:sync:media'
         ]
     },
     'build-server': {
