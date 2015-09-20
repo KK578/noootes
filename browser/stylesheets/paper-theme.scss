@@ -1,0 +1,77 @@
+﻿@import 'partials/_layouts.scss';
+@import 'partials/_mixins.scss';
+@import 'partials/_theme.scss';
+
+/* Applies theme colouring to most paper-element items. */
+/* paper-header-panel */
+paper-header-panel {
+    background-color: $theme-background;
+}
+
+/* paper-toolbar */
+paper-toolbar.paper-toolbar-0 {
+    background-color: $theme-primary;
+}
+
+/* paper-ripple */
+paper-icon-button.paper-icon-button-0 paper-ripple#ink.paper-icon-button,
+paper-ripple {
+    color: $theme-accent;
+}
+
+/* paper-dialog */
+paper-dialog {
+    @include border-radius(4px);
+    background-color: $white-primary;
+}
+
+/* paper-material */
+:not(paper-button) > paper-material {
+    @include border-radius(4px);
+    padding: 20px;
+    margin: 16px 12px;
+    background-color: $white-primary;
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* paper-button */
+paper-button {
+    text-transform: none;
+}
+
+/* paper-input */
+paper-input-container {
+    .input-content.label-is-floating.label-is-highlighted .label-and-input-container label {
+        color: $theme-primary;
+    }
+
+    .underline.is-highlighted .focused-line {
+        background-color: $theme-primary;
+    }
+}
+
+/* paper-radio-button */
+paper-radio-button.paper-radio-button-0 {
+    &[checked] #offRadio.paper-radio-button {
+        border-color: $theme-primary;
+    }
+
+    #onRadio.paper-radio-button {
+        background-color: $theme-primary;
+    }
+
+    #ink.paper-radio-button {
+        color: $theme-accent;
+    }
+
+    #ink[checked].paper-radio-button {
+        color: $theme-accent;
+    }
+}

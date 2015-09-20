@@ -34,11 +34,12 @@
     <Content Include="browser\404.html" />
     <Content Include="browser\index.html" />
     <Content Include="browser\media\favicon.ico" />
+    <Content Include="browser\stylesheets\paper-theme.scss" />
     <Content Include="browser\stylesheets\partials\_layouts.scss" />
     <Content Include="browser\stylesheets\partials\_mixins.scss" />
     <Content Include="browser\stylesheets\partials\_theme.scss" />
     <Content Include="browser\stylesheets\partials\_material_color.scss" />
-    <Content Include="browser\stylesheets\test.scss" />
+    <Content Include="browser\stylesheets\theme.scss" />
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
     <Compile Include="configs\grunt\clean.js" />
