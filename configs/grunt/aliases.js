@@ -3,8 +3,16 @@
         description: 'Builds the current build for Development',
         tasks: [
             'notify_hooks',
-            'jshint',
-            'jscs'
+            'lint',
+            'bower:developer'
+        ]
+    },
+    build: {
+        description: 'Builds the current build for Production',
+        tasks: [
+            'notify_hooks',
+            'lint',
+            'bower:production'
         ]
     },
     lint: {

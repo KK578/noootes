@@ -16,12 +16,14 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include=".bowerrc" />
     <Content Include=".editorconfig" />
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
     <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
+    <Compile Include="configs\grunt\bower.js" />
     <Compile Include="gruntfile.js" />
     <Compile Include="configs\grunt\aliases.js" />
     <Compile Include="configs\grunt\jscs.js" />

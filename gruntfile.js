@@ -9,6 +9,7 @@ module.exports = function (grunt) {
         configPath: path.join(__dirname, 'configs/grunt/'),
         jitGrunt: {
             staticMappings: {
+                bower: 'grunt-bower-task',
                 notify_hooks: 'grunt-notify'
             }
         }
