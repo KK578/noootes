@@ -47,7 +47,12 @@
     <Content Include="browser\stylesheets\partials\_theme.scss" />
     <Content Include="browser\stylesheets\partials\_material_color.scss" />
     <Content Include="browser\stylesheets\theme.scss" />
+    <Content Include="browser\test\index.html" />
     <Content Include="browser\test\splash-screen\splash-screen-test.html" />
+    <Content Include="configs\wct.jscsrc" />
+    <Content Include="configs\wct.jshintrc" />
+    <Content Include="configs\.jscsrc" />
+    <Content Include="configs\.jshintrc" />
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
     <Compile Include="configs\grunt\clean.js" />
