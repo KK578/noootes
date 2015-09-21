@@ -914,12 +914,18 @@
     <Content Include="browser\bower_components\webcomponentsjs\README.md" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.html" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.scss" />
+    <Content Include="browser\custom_components\screen-login\screen-login.html" />
+    <Content Include="browser\custom_components\screen-login\screen-login.scss" />
+    <Content Include="browser\custom_components\screen-main\screen-main.html" />
+    <Content Include="browser\custom_components\screen-main\screen-main.scss" />
     <Content Include="browser\custom_components\splash-screen\splash-screen.js" />
     <Content Include="browser\scripts\browser_sync_client.js" />
     <Content Include="browser\scripts\load.js" />
     <Content Include="browser\stylesheets\404.scss" />
     <Content Include="browser\stylesheets\bower.scss" />
     <Content Include="browser\test\noootes-app\noootes-app-test.html" />
+    <Content Include="browser\test\screen-login\screen-login-test.html" />
+    <Content Include="browser\test\screen-main\screen-main-test.html" />
     <Content Include="browser\test\splash-screen\splash-screen-test.js" />
     <Content Include="browser\bower_components\stacky\lib\formatting.js" />
     <Content Include="browser\bower_components\stacky\lib\index.js" />
@@ -1157,6 +1163,10 @@
     <Content Include="browser\test\noootes-app\noootes-app-test.js" />
     <Content Include="browser\bower_components\web-component-tester\data\a11ySuite.js" />
     <Content Include="browser\bower_components\web-component-tester\browser.js" />
+    <Content Include="browser\test\screen-main\screen-main-test.js" />
+    <Content Include="browser\test\screen-login\screen-login-test.js" />
+    <Content Include="browser\custom_components\screen-main\screen-main.js" />
+    <Content Include="browser\custom_components\screen-login\screen-login.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
@@ -1453,6 +1463,8 @@
     <Folder Include="browser\bower_components\webcomponentsjs\" />
     <Folder Include="browser\custom_components\" />
     <Folder Include="browser\custom_components\noootes-app\" />
+    <Folder Include="browser\custom_components\screen-login\" />
+    <Folder Include="browser\custom_components\screen-main\" />
     <Folder Include="browser\custom_components\splash-screen\" />
     <Folder Include="browser\media\" />
     <Folder Include="browser\behaviors\" />
@@ -1461,6 +1473,8 @@
     <Folder Include="browser\stylesheets\partials\" />
     <Folder Include="browser\test\" />
     <Folder Include="browser\test\noootes-app\" />
+    <Folder Include="browser\test\screen-login\" />
+    <Folder Include="browser\test\screen-main\" />
     <Folder Include="browser\test\splash-screen\" />
     <Folder Include="configs" />
     <Folder Include="configs\grunt" />
