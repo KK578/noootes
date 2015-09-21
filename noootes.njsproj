@@ -784,6 +784,7 @@
     <Content Include="browser\stylesheets\theme.scss" />
     <Content Include="browser\test\index.html" />
     <Content Include="browser\test\splash-screen\splash-screen-test.html" />
+    <Content Include="configs\deploy-staging.sh" />
     <Content Include="configs\deploy.sh" />
     <Content Include="configs\wct.jscsrc" />
     <Content Include="configs\wct.jshintrc" />

@@ -7,6 +7,17 @@ before_script:
   - grunt build
 script:
   - wct --plugins sauce
-after_success:
+before_deploy:
   - chmod +x configs/deploy.sh
-  - ./configs/deploy.sh
+  - chmod +x configs/deploy-staging.sh
+deploy:
+  - provider: script
+    script: configs/deploy.sh
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: script
+    script: configs/deploy-staging.sh
+    skip_cleanup: true
+    on:
+      branch: staging

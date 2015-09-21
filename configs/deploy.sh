@@ -1,3 +1,3 @@
 ﻿#!/bin/sh
 
-echo "Yay"
+echo "Master Deploy"
