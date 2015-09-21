@@ -1,6 +1,6 @@
 ﻿(function () {
     function reloadComponentStyle(data) {
-        var element = data.style;
+        var element = data.element;
         var style = Polymer.StyleTransformer.css(data.style, element);
         var styleTag = document.querySelector('style[scope="' + element + '"');
 
