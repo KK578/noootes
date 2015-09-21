@@ -6,7 +6,7 @@
 //  4) Hide Splash Screen
 (function () {
     var loadingDelay = 100;
-    var finishDelay = 100;
+    var finishDelay = 500;
 
     var initialDependencies = [
         'bower_components/font-roboto/roboto.html',
@@ -25,9 +25,14 @@
                 loaders[i].classList.remove('loading');
             }
 
-            // End splash-screen animation
-            document.getElementById('splash-spinner').active = false;
-            document.getElementById('splash-card').elevation = 0;
+            // HACK: Some browsers don't appear to like multiple animations running on the same
+            // element at the same time. So run async to allow loading class styles to be
+            // removed before seaming the card into the background.
+            window.setTimeout(function () {
+                // End splash-screen animation
+                document.getElementById('splash-spinner').active = false;
+                document.getElementById('splash-card').elevation = 0;
+            }, finishDelay / 10);
 
             window.setTimeout(endSplashScreen, finishDelay);
         });
