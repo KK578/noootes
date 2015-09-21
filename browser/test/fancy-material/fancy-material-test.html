@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>WCT Test - fancy-material</title>
@@ -12,7 +12,12 @@
 </head>
 <body>
     <!-- Add element markup here -->
-    <fancy-material></fancy-material>
+    <fancy-material>
+        <h1 id="top-h1" class="top">On the top</h1>
+        <h1 id="normal-h1">Just some content</h1>
+        <p id="top-p" class="top">Top</p>
+        <div id="more-content"><p id="inner-top" class="top">Low</p></div>
+    </fancy-material>
 
     <!-- WCT Suite -->
     <script src="fancy-material-test.js"></script>
