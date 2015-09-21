@@ -16,6 +16,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.html" />
     <Content Include="browser\bower.html" />
     <Content Include="browser\bower_components\accessibility-developer-tools\.bower.json" />
     <Content Include="browser\bower_components\accessibility-developer-tools\bower.json" />
@@ -1105,6 +1106,7 @@
     <Content Include="browser\bower_components\async\lib\async.js" />
     <Content Include="browser\bower_components\async\support\sync-package-managers.js" />
     <Content Include="browser\bower_components\accessibility-developer-tools\dist\js\axs_testing.js" />
+    <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.js" />
     <Compile Include="browser\bower_components\accessibility-developer-tools\LICENSE" />
     <Compile Include="browser\bower_components\async\LICENSE" />
     <Compile Include="browser\bower_components\async\Makefile" />
@@ -1211,6 +1213,7 @@
     <Content Include="wct.conf.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="browser\behaviors\firebase-behavior\" />
     <Folder Include="browser\bower_components\" />
     <Folder Include="browser\bower_components\accessibility-developer-tools\" />
     <Folder Include="browser\bower_components\accessibility-developer-tools\dist\" />
@@ -1452,6 +1455,7 @@
     <Folder Include="browser\custom_components\noootes-app\" />
     <Folder Include="browser\custom_components\splash-screen\" />
     <Folder Include="browser\media\" />
+    <Folder Include="browser\behaviors\" />
     <Folder Include="browser\scripts\" />
     <Folder Include="browser\stylesheets\" />
     <Folder Include="browser\stylesheets\partials\" />
