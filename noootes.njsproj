@@ -912,6 +912,8 @@
     <Content Include="browser\bower_components\webcomponentsjs\build.log" />
     <Content Include="browser\bower_components\webcomponentsjs\package.json" />
     <Content Include="browser\bower_components\webcomponentsjs\README.md" />
+    <Content Include="browser\custom_components\fancy-material\fancy-material.html" />
+    <Content Include="browser\custom_components\fancy-material\fancy-material.scss" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.html" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.scss" />
     <Content Include="browser\custom_components\screen-login\screen-login.html" />
@@ -923,6 +925,7 @@
     <Content Include="browser\scripts\load.js" />
     <Content Include="browser\stylesheets\404.scss" />
     <Content Include="browser\stylesheets\bower.scss" />
+    <Content Include="browser\test\fancy-material\fancy-material-test.html" />
     <Content Include="browser\test\noootes-app\noootes-app-test.html" />
     <Content Include="browser\test\screen-login\screen-login-test.html" />
     <Content Include="browser\test\screen-main\screen-main-test.html" />
@@ -1167,6 +1170,8 @@
     <Content Include="browser\test\screen-login\screen-login-test.js" />
     <Content Include="browser\custom_components\screen-main\screen-main.js" />
     <Content Include="browser\custom_components\screen-login\screen-login.js" />
+    <Content Include="browser\custom_components\fancy-material\fancy-material.js" />
+    <Content Include="browser\test\fancy-material\fancy-material-test.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
@@ -1462,6 +1467,7 @@
     <Folder Include="browser\bower_components\web-component-tester\data\" />
     <Folder Include="browser\bower_components\webcomponentsjs\" />
     <Folder Include="browser\custom_components\" />
+    <Folder Include="browser\custom_components\fancy-material\" />
     <Folder Include="browser\custom_components\noootes-app\" />
     <Folder Include="browser\custom_components\screen-login\" />
     <Folder Include="browser\custom_components\screen-main\" />
@@ -1472,6 +1478,7 @@
     <Folder Include="browser\stylesheets\" />
     <Folder Include="browser\stylesheets\partials\" />
     <Folder Include="browser\test\" />
+    <Folder Include="browser\test\fancy-material\" />
     <Folder Include="browser\test\noootes-app\" />
     <Folder Include="browser\test\screen-login\" />
     <Folder Include="browser\test\screen-main\" />
