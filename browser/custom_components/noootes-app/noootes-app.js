@@ -28,7 +28,12 @@ Noootes.Elements['noootes-app'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        _location: {
+            type: String,
+            value: Noootes.Firebase
+        }
+    }
 
     /* Functions specific to this element go under here. */
 });

@@ -5,9 +5,12 @@
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <!-- Other -->
+<link rel="import" href="../../bower_components/firebase-element/firebase-auth.html" />
 
 <dom-module id="noootes-app">
     <link rel="import" type="css" href="noootes-app.css?__inline" />
-    <template></template>
+    <template>
+        <firebase-auth id="firebase-auth" provider="password" location="{{_location}}"></firebase-auth>
+    </template>
     <script src="noootes-app.js?__inline"></script>
 </dom-module>
