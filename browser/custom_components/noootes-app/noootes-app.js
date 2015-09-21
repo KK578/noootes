@@ -46,7 +46,7 @@ Noootes.Elements['noootes-app'] = Polymer({
         },
         _location: {
             type: String,
-            value: Noootes.Firebase
+            value: Noootes.Firebase.Location
         },
         _firebaseEventOngoing: {
             type: Boolean,
@@ -194,6 +194,6 @@ Noootes.Elements['noootes-app'] = Polymer({
     bindUser: function () {
         var user = this.$['firebase-auth'].user;
 
-        Noootes.User = user;
+        Noootes.Firebase.User = user;
     }
 });

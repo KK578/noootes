@@ -1,5 +1,8 @@
 ﻿var Noootes = Noootes || {
     Behaviors: {},
     Elements: {},
-    Firebase: 'https://noootes-staging.firebaseio.com/'
+    Firebase: {
+        Location: 'https://noootes-staging.firebaseio.com/',
+        User: undefined
+    }
 };
