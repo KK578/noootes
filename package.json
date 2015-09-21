@@ -1,6 +1,6 @@
 {
   "name": "noootes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Collaborative note editing",
   "main": "gruntfile.js",
   "scripts": {
