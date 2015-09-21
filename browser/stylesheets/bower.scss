@@ -22,8 +22,14 @@ paper-toolbar.paper-toolbar-0 {
 }
 
 paper-item.paper-item-0 {
+    @include transition(background-color 0.3s ease-out, color 0.3s ease-out);
     position: relative;
     min-height: 28px;
+
+    &.iron-selected {
+        background-color: $theme-primary-dark;
+        color: $white-primary;
+    }
 }
 
 paper-ripple {
