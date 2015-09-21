@@ -3,6 +3,9 @@
 <!-- Iron -->
 <!-- Paper -->
 <!-- Neon -->
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html" />
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html" />
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html" />
 <!-- Custom/Behaviors -->
 <!-- Other -->
 <link rel="import" href="../../bower_components/firebase-element/firebase-auth.html" />
@@ -11,6 +14,11 @@
     <link rel="import" type="css" href="noootes-app.css?__inline" />
     <template>
         <firebase-auth id="firebase-auth" provider="password" location="{{_location}}"></firebase-auth>
+
+        <neon-animated-pages class="fit" selected="{{_selectedPage}}" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+            <login-screen></login-screen>
+            <main-screen></main-screen>
+        </neon-animated-pages>
     </template>
     <script src="noootes-app.js?__inline"></script>
 </dom-module>
