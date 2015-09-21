@@ -6,13 +6,32 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
+<link rel="import" href="../fancy-material/fancy-material.html" />
 <!-- Other -->
 
 <dom-module id="screen-login">
     <link rel="import" type="css" href="screen-login.css?__inline" />
     <template>
         <paper-header-panel mode="cover">
+            <!-- paper-toolbar is placed in the background as paper-header-panel mode is cover. -->
             <paper-toolbar class="tall"></paper-toolbar>
+
+            <!-- Content -->
+            <!-- Welcome Card -->
+            <fancy-material>
+                <h1 class="top">Noootes</h1>
+                <p>Welcome to Noootes, a WebApp for collaboratively working on notes.</p>
+            </fancy-material>
+
+            <!-- Login -->
+            <fancy-material>
+                <h1 class="top">Login</h1>
+            </fancy-material>
+
+            <!-- Register -->
+            <fancy-material>
+                <h1 class="top">Register</h1>
+            </fancy-material>
         </paper-header-panel>
     </template>
     <script src="screen-login.js?__inline"></script>
