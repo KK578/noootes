@@ -16,6 +16,9 @@
         src: ['browser/scripts/**/*.js']
     },
     wct: {
+        options: {
+            jshintrc: 'configs/wct.jshintrc'
+        },
         src: ['browser/test/**/*.js']
     }
 };

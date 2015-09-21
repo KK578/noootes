@@ -16,6 +16,9 @@
         src: ['browser/scripts/**/*.js']
     },
     wct: {
+        options: {
+            config: 'configs/wct.jscsrc'
+        },
         src: ['browser/test/**/*.js']
     }
 };
