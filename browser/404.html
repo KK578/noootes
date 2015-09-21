@@ -7,10 +7,13 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#673AB7" />
 
-    <link rel="icon" href="media/favicon.ico" />
+    <link rel="icon" href="/media/favicon.ico" />
+
+    <!-- May fail to load in development, but will be inlined for production. -->
+    <link rel="stylesheet" href="stylesheets/404.css?__inline=true" />
 </head>
 <body>
-    <div id="404-container">
+    <div id="container-404">
         <div>
             <h1>Couldn't find what you were looking for...</h1>
             <p>Sorry :/</p>
