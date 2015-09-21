@@ -13,7 +13,7 @@ Noootes.Elements['noootes-app'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.FirebaseBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
@@ -41,7 +41,8 @@ Noootes.Elements['noootes-app'] = Polymer({
     properties: {
         _selectedPage: {
             type: Number,
-            value: 0
+            value: 0,
+            observer: 'validateAuthenticated'
         },
         _location: {
             type: String,
@@ -63,6 +64,8 @@ Noootes.Elements['noootes-app'] = Polymer({
         window.addEventListener('firebase-change-email', this.changeEmail.bind(this));
         window.addEventListener('firebase-change-password', this.changePassword.bind(this));
         window.addEventListener('firebase-reset-password', this.resetPassword.bind(this));
+
+        this.bindToLogin(this.bindUser);
     },
 
     // Ensures that only one firebase-auth method is being called at a time.
@@ -175,5 +178,22 @@ Noootes.Elements['noootes-app'] = Polymer({
             message: 'Successfully sent password reset.\nPlease check your email.'
         });
         this._fireSuccessEvent('firebase-reset-password');
+    },
+
+    // On Login
+    validateAuthenticated: function (n) {
+        if (n === 1) {
+            var user = this.$['firebase-auth'].user;
+
+            if (!user) {
+                this.selectedPage = 0;
+                this.fire('toast-message', { message: 'You\'re not logged in!' });
+            }
+        }
+    },
+    bindUser: function () {
+        var user = this.$['firebase-auth'].user;
+
+        Noootes.User = user;
     }
 });
