@@ -753,6 +753,7 @@
     <Content Include="browser\bower_components\webcomponentsjs\webcomponents-lite.min.js" />
     <Content Include="browser\bower_components\webcomponentsjs\webcomponents.js" />
     <Content Include="browser\bower_components\webcomponentsjs\webcomponents.min.js" />
+    <Content Include="browser\scripts\noootes.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
@@ -786,6 +787,7 @@
     <Content Include="configs\wct.jshintrc" />
     <Content Include="configs\.jscsrc" />
     <Content Include="configs\.jshintrc" />
+    <Content Include="firebase.json" />
     <Content Include="package.json" />
     <Compile Include="configs\grunt\bower.js" />
     <Compile Include="configs\grunt\clean.js" />
