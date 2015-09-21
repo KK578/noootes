@@ -61,3 +61,18 @@ body.splash-animating {
         width: 0;
     }
 }
+
+#noootes-toast {
+    background-color: $theme-primary-dark;
+    color: $white-primary;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-width: initial;
+    text-align: center;
+    z-index: 10000;
+
+    #label {
+        white-space: pre;
+    }
+}
