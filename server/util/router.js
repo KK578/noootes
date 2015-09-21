@@ -51,6 +51,11 @@ module.exports = function (server, environment) {
         // Inject BrowserSync client side handler
         server.get('/', injectBrowserSync);
 
+        // Redirect to use staging Firebase while in development.
+        server.get('/scripts/noootes.js', function (req, res) {
+            res.redirect('/scripts/noootes-staging.js');
+        });
+
         server.get('/bower', getBowerComponents);
         server.use('/bower', express.static(
             path.join(__dirname, '/../../browser/bower_components/'))
