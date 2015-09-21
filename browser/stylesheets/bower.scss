@@ -1,0 +1,45 @@
+﻿@import 'partials/_layouts.scss';
+@import 'partials/_mixins.scss';
+@import 'partials/_theme.scss';
+
+html, body {
+    @include layout-fullbleed;
+    @include user-select(none);
+    /* Text */
+    font-family: 'Roboto', 'Noto', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* Remove blue colouring on Android when tapping an item */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+paper-header-panel {
+    background-color: $theme-background;
+}
+
+paper-toolbar.paper-toolbar-0 {
+    background-color: $theme-primary;
+}
+
+paper-item.paper-item-0 {
+    @include transition(background-color 0.3s ease-out, color 0.3s ease-out);
+    position: relative;
+    min-height: 28px;
+
+    &.iron-selected {
+        background-color: $theme-primary-dark;
+        color: $white-primary;
+    }
+}
+
+paper-ripple {
+    color: $theme-accent;
+}
+
+#component-page {
+    background-color: $theme-background;
+    border-width: 0 0 0 2px;
+    border-color: $black-divider;
+    height: 100%;
+    width: 100%;
+}
