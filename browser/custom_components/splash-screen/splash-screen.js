@@ -11,10 +11,12 @@ Noootes.Elements['splash-screen'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Polymer.NeonAnimationRunnerBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'neon-animation-finish': 'onAnimationFinished'
+    },
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -28,7 +30,26 @@ Noootes.Elements['splash-screen'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        animationConfig: {
+            type: Object,
+            value: function () {
+                return {
+                    name: 'scale-down-animation',
+                    node: this,
+                    timing: { easing: 'ease-in' }
+                };
+            }
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    runAnimation: function () {
+        this.playAnimation();
+    },
+    onAnimationFinished: function () {
+        // After the exit animation has played, remove the splash-screen element
+        // from the DOM.
+        Polymer.dom(this.parentNode).removeChild(this);
+    }
 });

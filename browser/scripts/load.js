@@ -15,7 +15,7 @@
     ];
 
     function endSplashScreen() {
-        console.log('Loading is finished. App is ready!');
+        document.getElementById('splash-screen').runAnimation();
     }
 
     function loadAppDependencies() {
