@@ -25,7 +25,7 @@
         <paper-drawer-panel id="drawer-panel">
             <paper-header-panel drawer>
                 <paper-toolbar>
-                    <h1>Installed Components</h1>
+                    <h3>Installed Components</h3>
                 </paper-toolbar>
                 <template is="dom-repeat" items="{{components}}">
                     <paper-item on-tap="select">
@@ -33,9 +33,9 @@
                         <span>{{item.component}}</span>
                     </paper-item>
                 </template>
-
-                <iframe id="component-page" src="{{selected}}"></iframe>
             </paper-header-panel>
+
+            <iframe id="component-page" src="{{selected}}" main></iframe>
         </paper-drawer-panel>
     </template>
 

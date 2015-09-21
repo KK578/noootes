@@ -12,3 +12,28 @@ html, body {
     /* Remove blue colouring on Android when tapping an item */
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+paper-header-panel {
+    background-color: $theme-background;
+}
+
+paper-toolbar.paper-toolbar-0 {
+    background-color: $theme-primary;
+}
+
+paper-item.paper-item-0 {
+    position: relative;
+    min-height: 28px;
+}
+
+paper-ripple {
+    color: $theme-accent;
+}
+
+#component-page {
+    background-color: $theme-background;
+    border-width: 0 0 0 2px;
+    border-color: $black-divider;
+    height: 100%;
+    width: 100%;
+}
