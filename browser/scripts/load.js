@@ -78,8 +78,3 @@
 
     checkNativeWebComponents();
 })();
-
-var Noootes = Noootes || {
-    Behaviors: {},
-    Elements: {}
-};
