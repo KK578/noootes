@@ -1,6 +1,6 @@
 chai.should();
 
-describe('<md-noootes>', function () {
+describe('<noootes-app>', function () {
     function listenToResponseOnFiringEvent(firedEvent, responseEvent, eventDetail, done, assertions) {
         function listener(event) {
             if (assertions) {
@@ -15,12 +15,9 @@ describe('<md-noootes>', function () {
         window.dispatchEvent(new CustomEvent(firedEvent, { detail: eventDetail }));
     }
 
-    var firebase;
     var testUser;
 
     before(function () {
-        firebase = document.querySelector('#firebase-auth');
-
         var name = 'wct-tester-' + Math.round(50000 * Math.random());
         var email = name + '@test.suite';
         var password = 'wct-tester';
@@ -33,6 +30,8 @@ describe('<md-noootes>', function () {
     });
 
     after(function (done) {
+        var firebase = document.querySelector('#firebase-auth');
+
         firebase.addEventListener('user-removed', function () {
             done();
         });
@@ -126,7 +125,7 @@ describe('<md-noootes>', function () {
         function assertions(event) {
             event.detail.user.password.email.should.equal(testUser.email);
 
-            var element = document.querySelector('md-noootes');
+            var element = document.querySelector('noootes-app');
             element.selectedPage.should.equal(1);
         }
 
@@ -143,7 +142,7 @@ describe('<md-noootes>', function () {
     /////////////////////////////////////////////
     it('should fire "firebase-logout-success" on "firebase-logout"', function (done) {
         function assertions() {
-            var element = document.querySelector('md-noootes');
+            var element = document.querySelector('noootes-app');
             element.selectedPage.should.equal(0);
         }
 

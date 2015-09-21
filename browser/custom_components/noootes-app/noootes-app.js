@@ -16,7 +16,15 @@ Noootes.Elements['noootes-app'] = Polymer({
     //behaviors: [],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'firebase-auth.error': '_firebaseError',
+        'firebase-auth.login': '_firebaseLogin',
+        'firebase-auth.logout': '_firebaseLogout',
+        'firebase-auth.user-created': '_firebaseRegister',
+        'firebase-auth.email-changed': '_firebaseChangeEmail',
+        'firebase-auth.password-changed': '_firebaseChangePassword',
+        'firebase-auth.password-reset': '_firebaseResetPassword'
+    },
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -93,5 +101,75 @@ Noootes.Elements['noootes-app'] = Polymer({
         this._startFirebaseEvent(event, 'firebase-reset-password', function (auth, detail) {
             auth.sendPasswordResetEmail(detail.email);
         });
+    },
+
+    // Firebase-Auth Events.
+    // Error handler
+    _firebaseError: function (event) {
+        var detail = event.detail;
+        var allowedErrors = [
+            'INVALID_USER',
+            'INVALID_PASSWORD',
+            'EMAIL_TAKEN'
+        ];
+
+        // For errors that are handled, fire the corresponding error event name.
+        // For all other errors, they are handled by toasting to the user.
+        // TODO: Improve error handling?
+        if (allowedErrors.indexOf(detail.code) !== -1) {
+            this.fire(this.lastFirebaseEvent + '-error', detail);
+        }
+        else {
+            var message = detail.code + '\n' + detail.message;
+            this.fire('toast-message', {
+                message: message
+            });
+        }
+
+        // Allow any new events to happen.
+        this._firebaseEventOngoing = false;
+    },
+
+    // Successful event handlers
+    _fireSuccessEvent: function (eventName, event) {
+        this._firebaseEventOngoing = false;
+
+        var detail = event ? event.detail : undefined;
+        this.fire(eventName + '-success', detail);
+    },
+    _firebaseLogin: function (event) {
+        // Login was successful, change to main-screen and fire event for listening elements.
+        this.selectedPage = 1;
+        this._fireSuccessEvent('firebase-login', event);
+    },
+    _firebaseLogout: function () {
+        // Logout was successful, change to login-screen and fire event for listening elements.
+        this.selectedPage = 0;
+        this._fireSuccessEvent('firebase-logout');
+    },
+    _firebaseRegister: function () {
+        // Registration was successful, fire event for listening elements
+        //  and display message to user.
+        // TODO: Copy email/password from register form to login form?
+        this.fire('toast-message', {
+            message: 'Successfully registered your account!\nPlease log in.'
+        });
+        this._fireSuccessEvent('firebase-register');
+    },
+    _firebaseChangeEmail: function () {
+        // TODO: Force user to relogin? Automatically relog user?
+        this.fire('toast-message', { message: 'Successfully changed email!' });
+        this._fireSuccessEvent('firebase-change-email');
+    },
+    _firebaseChangePassword: function () {
+        // TODO: Force user to relogin? Automatically relog user?
+        this.fire('toast-message', { message: 'Successfully changed password!' });
+        this._fireSuccessEvent('firebase-change-password');
+    },
+    _firebaseResetPassword: function () {
+        this.fire('toast-message', {
+            message: 'Successfully sent password reset.\nPlease check your email.'
+        });
+        this._fireSuccessEvent('firebase-reset-password');
     }
 });
