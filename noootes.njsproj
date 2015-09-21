@@ -46,6 +46,7 @@
     <Compile Include="configs\grunt\jscs.js" />
     <Compile Include="configs\grunt\jshint.js" />
     <Compile Include="configs\grunt\notify_hooks.js" />
+    <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="configs" />
