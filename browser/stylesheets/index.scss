@@ -4,11 +4,14 @@
 
 $duration: 0.25s;
 
+body.splash-animating {
+    overflow: hidden;
+}
+
 #splash-screen {
     @include layout-vertical;
     @include layout-center;
     @include layout-center-justified;
-    @include transition(background-color $duration ease-out);
     background-color: $theme-loading-background;
     height: 100%;
     width: 100%;
@@ -21,6 +24,7 @@ $duration: 0.25s;
 }
 
 #splash-card {
+    @include transition(background-color ease-out $duration);
     @include layout-vertical;
     @include layout-center;
     @include border-radius(8px);

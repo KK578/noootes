@@ -34,10 +34,23 @@ Noootes.Elements['splash-screen'] = Polymer({
         animationConfig: {
             type: Object,
             value: function () {
+                var x = window.innerWidth / 2;
+                var y = window.innerHeight / 2;
+
                 return {
-                    name: 'scale-down-animation',
-                    node: this,
-                    timing: { easing: 'ease-in' }
+                    name: 'reverse-ripple-animation',
+                    id: 'ripple',
+                    gesture: { x: x, y: y },
+                    fromPage: this,
+                    toPage: this
+                };
+            }
+        },
+        sharedElements: {
+            type: Object,
+            value: function () {
+                return {
+                    ripple: this
                 };
             }
         }
@@ -45,11 +58,14 @@ Noootes.Elements['splash-screen'] = Polymer({
 
     /* Functions specific to this element go under here. */
     runAnimation: function () {
+        // Add class to body to hide overflow
+        document.body.classList.add('splash-animating');
         this.playAnimation();
     },
     onAnimationFinished: function () {
         // After the exit animation has played, remove the splash-screen element
         // from the DOM.
+        document.body.classList.remove('splash-animating');
         Polymer.dom(this.parentNode).removeChild(this);
     }
 });

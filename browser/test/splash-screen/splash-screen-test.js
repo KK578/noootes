@@ -1,16 +1,25 @@
 chai.should();
 
 describe('<splash-screen>', function () {
+    var splashScreen;
+
+    before(function () {
+        splashScreen = document.querySelector('splash-screen');
+    });
+
     it('should contain inner elements', function () {
-        var splashScreen = document.querySelector('splash-screen');
         splashScreen.innerHTML.should.match(/<h1>Loading...<\/h1>/);
     });
 
-    it('should remove itself from document after running animation', function (done) {
-        var splashScreen = document.querySelector('splash-screen');
+    // NOTE: Potential for a race condition to occur here as testing requires sequential calls.
+    it('should add class to body while animating', function () {
         splashScreen.runAnimation();
+        document.body.classList.contains('splash-animating').should.equal(true);
+    });
 
+    it('should remove class from body and remove itself from document after running animation', function (done) {
         splashScreen.addEventListener('neon-animation-finish', function () {
+            document.body.classList.contains('splash-animating').should.equal(false);
             splashScreen = document.querySelector('splash-screen');
 
             var result = splashScreen === null ?
