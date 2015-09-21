@@ -6,6 +6,6 @@ before_script:
   - npm install -g web-component-tester
   - grunt build
 script:
-  - wct
+  - wct --plugins sauce
 after_success:
   - echo "Yay"
