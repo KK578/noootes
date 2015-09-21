@@ -736,6 +736,7 @@
     <Content Include="browser\custom_components\splash-screen\splash-screen.js" />
     <Content Include="browser\scripts\browser_sync_client.js" />
     <Content Include="browser\scripts\load.js" />
+    <Content Include="browser\stylesheets\404.scss" />
     <Content Include="browser\test\splash-screen\splash-screen-test.js" />
     <Compile Include="browser\bower_components\web-animations-js\COPYING" />
     <Content Include="browser\bower_components\web-animations-js\web-animations-next-lite.min.js" />
