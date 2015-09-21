@@ -1,0 +1,59 @@
+﻿@import 'partials/_layouts.scss';
+@import 'partials/_mixins.scss';
+@import 'partials/_theme.scss';
+
+$duration: 0.25s;
+
+#splash-screen {
+    @include layout-vertical;
+    @include layout-center;
+    @include layout-center-justified;
+    @include transition(background-color $duration ease-out);
+    background-color: $theme-loading-background;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 20;
+
+    &.loading {
+        z-index: 100;
+    }
+}
+
+#splash-card {
+    @include layout-vertical;
+    @include layout-center;
+    @include border-radius(8px);
+    background-color: rgba(0, 0, 0, 0);
+    padding: 40px;
+
+    &.loading {
+        background-color: $white-primary;
+    }
+
+    #splash-title {
+        @include transition(color ease-out $duration);
+        color: rgba(0, 0, 0, 0);
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 28px;
+        margin: 0 0 4px;
+
+        &.loading {
+            color: $black-primary;
+        }
+    }
+}
+
+#splash-spinner {
+    @include transition(height $duration ease-out, width $duration ease-out, margin $duration ease-out);
+    height: 28px;
+    width: 28px;
+    margin: 1em 0 0.5em;
+
+    &.loading {
+        height: 0;
+        margin: 0;
+        width: 0;
+    }
+}

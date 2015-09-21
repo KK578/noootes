@@ -12,7 +12,13 @@
     components: {
         src: ['browser/custom_components/**/*.js']
     },
+    views: {
+        src: ['browser/scripts/**/*.js']
+    },
     wct: {
+        options: {
+            jshintrc: 'configs/wct.jshintrc'
+        },
         src: ['browser/test/**/*.js']
     }
 };

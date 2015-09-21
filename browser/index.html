@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Noootes</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#673AB7" />
+
+    <link rel="icon" href="media/favicon.ico" />
+
+    <link rel="stylesheet" href="stylesheets/index.css?__inline=true" />
+    <link rel="stylesheet" href="stylesheets/theme.css?__inline=true" />
+
+    <script src="scripts/load.js" async></script>
+</head>
+<body>
+    <splash-screen id="splash-screen" class="loading">
+        <paper-material id="splash-card" class="loading" animated="true" elevation="0">
+            <span id="splash-title" class="loading">Welcome to Noootes!</span>
+            <paper-spinner id="splash-spinner" class="loading" active="true"></paper-spinner>
+        </paper-material>
+    </splash-screen>
+    <noootes-app></noootes-app>
+    <paper-toast></paper-toast>
+</body>
+</html>

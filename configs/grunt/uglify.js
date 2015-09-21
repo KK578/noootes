@@ -10,6 +10,7 @@
                 cwd: 'browser/bower_components/',
                 src: [
                     '**/*.js',
+                    '!async/support/sync-package-managers.js',
                     '!**/*.min.js',
                     '!**/{gruntfile,gulpfile}.js',
                     '!**/{demo,demos,docs,explainer,node_modules,test,tests}/**/*'

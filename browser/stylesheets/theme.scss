@@ -1,0 +1,94 @@
+﻿@import 'partials/_layouts.scss';
+@import 'partials/_mixins.scss';
+@import 'partials/_theme.scss';
+
+html, body {
+    @include layout-fullbleed;
+    @include user-select(none);
+    /* Text */
+    font-family: 'Roboto', 'Noto', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* Remove blue colouring on Android when tapping an item */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 8px 0;
+}
+
+i, em {
+    color: $black-secondary;
+}
+
+hr {
+    border-color: $black-divider;
+}
+
+a {
+    text-decoration: none;
+    color: $theme-accent;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+    overflow-x: auto;
+    table-layout: fixed;
+
+    thead {
+        background-color: $theme-primary;
+        color: $white-primary;
+        font-size: 24px;
+        min-height: 64px;
+    }
+
+    tbody {
+        > :nth-child(2n) {
+            background-color: $theme-table-row-2;
+        }
+
+        > :nth-child(2n+1) {
+            background-color: $theme-table-row-1;
+        }
+    }
+
+    th, td {
+        height: 56px;
+        padding: 4px 12px;
+        /* All elements after the first */
+        &:nth-child(n+2) {
+            text-align: right;
+        }
+
+        &:first-of-type {
+            padding-left: 24px;
+            text-align: left;
+        }
+
+        &:last-of-type {
+            padding-right: 24px;
+        }
+    }
+}
+
+table.vertical {
+    table-layout: auto;
+
+    tr {
+        > :first-child {
+            background-color: $theme-primary;
+            color: $white-primary;
+            font-size: 24px;
+            text-align: right;
+        }
+        /* All elements after the first */
+        > :nth-child(n+2) {
+            text-align: left;
+        }
+    }
+}

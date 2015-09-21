@@ -1,0 +1,78 @@
+﻿/*
+	SCSS Mixin
+	Copyright (c) 2015 Kevin Kwan.
+
+	Color Values
+    Copyright (c) 2015 Google. All rights reserved.
+    http://www.google.co.uk/design/spec/style/color.html
+*/
+
+$material-red: #FFEBEE #FFCDD2 #EF9A9A #E57373 #EF5350 #F44336 #E53935 #D32F2F #C62828 #B71C1C #FF8A80 #FF5252 #FF1744 #D50000;
+$material-pink:  #FCE4EC #F8BBD0 #F48FB1 #F06292 #EC407A #E91E63 #D81B60 #C2185B #AD1457 #880E4F #FF80AB #FF4081 #F50057 #C51162;
+$material-purple: #F3E5F5 #E1BEE7 #CE93D8 #BA68C8 #AB47BC #9C27B0 #8E24AA #7B1FA2 #6A1B9A #4A148C #EA80FC #E040FB #D500F9 #AA00FF;
+$material-deep-purple: #EDE7F6 #D1C4E9 #B39DDB #9575CD #7E57C2 #673AB7 #5E35B1 #512DA8 #4527A0 #311B92 #B388FF #7C4DFF #651FFF #6200EA;
+$material-indigo: #E8EAF6 #C5CAE9 #9FA8DA #7986CB #5C6BC0 #3F51B5 #3949AB #303F9F #283593 #1A237E #8C9EFF #536DFE #3D5AFE #304FFE;
+$material-blue: #E3F2FD #BBDEFB #90CAF9 #64B5F6 #42A5F5 #2196F3 #1E88E5 #1976D2 #1565C0 #0D47A1 #82B1FF #448AFF #2979FF #2962FF;
+$material-light-blue: #E1F5FE #B3E5FC #81D4FA #4FC3F7 #29B6F6 #03A9F4 #039BE5 #0288D1 #0277BD #01579B #80D8FF #40C4FF #00B0FF #0091EA;
+$material-cyan: #E0F7FA #B2EBF2 #80DEEA #4DD0E1 #26C6DA #00BCD4 #00ACC1 #0097A7 #00838F #006064 #84FFFF #18FFFF #00E5FF #00B8D4;
+$material-teal: #E0F2F1 #B2DFDB #80CBC4 #4DB6AC #26A69A #009688 #00897B #00796B #00695C #004D40 #A7FFEB #64FFDA #1DE9B6 #00BFA5;
+$material-green: #E8F5E9 #C8E6C9 #A5D6A7 #81C784 #66BB6A #4CAF50 #43A047 #388E3C #2E7D32 #1B5E20 #B9F6CA #69F0AE #00E676 #00C853;
+$material-light-green: #F1F8E9 #DCEDC8 #C5E1A5 #AED581 #9CCC65 #8BC34A #7CB342 #689F38 #558B2F #33691E #CCFF90 #B2FF59 #76FF03 #64DD17;
+$material-lime: #F9FBE7 #F0F4C3 #E6EE9C #DCE775 #D4E157 #CDDC39 #C0CA33 #AFB42B #9E9D24 #827717 #F4FF81 #EEFF41 #C6FF00 #AEEA00;
+$material-yellow: #FFFDE7 #FFF9C4 #FFF59D #FFF176 #FFEE58 #FFEB3B #FDD835 #FBC02D #F9A825 #F57F17 #FFFF8D #FFFF00 #FFEA00 #FFD600;
+$material-amber: #FFF8E1 #FFECB3 #FFE082 #FFD54F #FFCA28 #FFC107 #FFB300 #FFA000 #FF8F00 #FF6F00 #FFE57F #FFD740 #FFC400 #FFAB00;
+$material-orange: #FFF3E0 #FFE0B2 #FFCC80 #FFB74D #FFA726 #FF9800 #FB8C00 #F57C00 #EF6C00 #E65100 #FFD180 #FFAB40 #FF9100 #FF6D00;
+$material-deep-orange: #FBE9E7 #FFCCBC #FFAB91 #FF8A65 #FF7043 #FF5722 #F4511E #E64A19 #D84315 #BF360C #FF9E80 #FF6E40 #FF3D00 #DD2C00;
+$material-brown: #EFEBE9 #D7CCC8 #BCAAA4 #A1887F #8D6E63 #795548 #6D4C41 #5D4037 #4E342E #3E2723;
+$material-grey: #FAFAFA #F5F5F5 #EEEEEE #E0E0E0 #BDBDBD #9E9E9E #757575 #616161 #424242 #212121;
+$material-blue-grey: #ECEFF1 #CFD8DC #B0BEC5 #90A4AE #78909C #607D8B #546E7A #455A64 #37474F #263238;
+
+$black-primary: rgba(0, 0, 0, 0.87);
+$black-secondary: rgba(0, 0, 0, 0.54);
+$black-disabled: rgba(0, 0, 0, 0.26);
+$black-divider: rgba(0, 0, 0, 0.12);
+
+$white-primary: rgba(255, 255, 255, 1.00);
+$white-secondary: rgba(255, 255, 255, 0.70);
+$white-disabled: rgba(255, 255, 255, 0.30);
+$white-divider: rgba(255, 255, 255, 0.12);
+
+@function material-color($color, $number) {
+    @if ($color == red) { @return -get-color($material-red, $number); }
+	@else if ($color == pink) { @return -get-color($material-pink, $number); }
+	@else if ($color == purple) { @return -get-color($material-purple, $number); }
+	@else if ($color == deep-purple) { @return -get-color($material-deep-purple, $number); }
+	@else if ($color == indigo) { @return -get-color($material-indigo, $number); }
+	@else if ($color == blue) { @return -get-color($material-blue, $number); }
+	@else if ($color == light-blue) { @return -get-color($material-light-blue, $number); }
+	@else if ($color == cyan) { @return -get-color($material-cyan, $number); }
+	@else if ($color == teal) { @return -get-color($material-teal, $number); }
+	@else if ($color == green) { @return -get-color($material-green, $number); }
+	@else if ($color == light-green) { @return -get-color($material-light-green, $number); }
+	@else if ($color == lime) { @return -get-color($material-lime, $number); }
+	@else if ($color == yellow) { @return -get-color($material-yellow, $number); }
+	@else if ($color == amber) { @return -get-color($material-amber, $number); }
+	@else if ($color == orange) { @return -get-color($material-orange, $number); }
+	@else if ($color == deep-orange) { @return -get-color($material-deep-orange, $number); }
+	@else if ($color == brown) { @return -get-color($material-brown, $number); }
+	@else if ($color == grey) { @return -get-color($material-grey, $number); }
+	@else if ($color == blue-grey) { @return -get-color($material-blue-grey, $number); }
+}
+
+@function -get-color($list, $number) {
+    @if ($number == 50) { @return nth($list, 1); }
+    @else if ($number == 100) { @return nth($list, 2); }
+    @else if ($number == 200) { @return nth($list, 3); }
+    @else if ($number == 300) { @return nth($list, 4); }
+    @else if ($number == 400) { @return nth($list, 5); }
+    @else if ($number == 500) { @return nth($list, 6); }
+    @else if ($number == 600) { @return nth($list, 7); }
+    @else if ($number == 700) { @return nth($list, 8); }
+    @else if ($number == 800) { @return nth($list, 9); }
+    @else if ($number == 900) { @return nth($list, 10); }
+    @else if ($number == A100) { @return nth($list, 11); }
+    @else if ($number == A200) { @return nth($list, 12); }
+    @else if ($number == A400) { @return nth($list, 13); }
+    @else if ($number == A700) { @return nth($list, 14); }
+    @else { @return nth($list, 6); }
+}
