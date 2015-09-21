@@ -4,6 +4,10 @@
 
 $duration: 0.25s;
 
+body.splash-animating {
+    overflow: hidden;
+}
+
 #splash-screen {
     @include layout-vertical;
     @include layout-center;

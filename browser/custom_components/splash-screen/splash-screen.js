@@ -58,11 +58,14 @@ Noootes.Elements['splash-screen'] = Polymer({
 
     /* Functions specific to this element go under here. */
     runAnimation: function () {
+        // Add class to body to hide overflow
+        document.body.classList.add('splash-animating');
         this.playAnimation();
     },
     onAnimationFinished: function () {
         // After the exit animation has played, remove the splash-screen element
         // from the DOM.
+        document.body.classList.remove('splash-animating');
         Polymer.dom(this.parentNode).removeChild(this);
     }
 });
