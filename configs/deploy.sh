@@ -1,3 +1,4 @@
 ﻿#!/bin/sh
 
-echo "Master Deploy"
+firebase login --email $FIREBASE_EMAIL --password $FIREBASE_PASSWORD
+firebase deploy
