@@ -754,6 +754,7 @@
     <Content Include="browser\bower_components\webcomponentsjs\webcomponents.js" />
     <Content Include="browser\bower_components\webcomponentsjs\webcomponents.min.js" />
     <Content Include="browser\scripts\noootes.js" />
+    <Content Include="browser\scripts\noootes-staging.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
