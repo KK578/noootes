@@ -34,10 +34,23 @@ Noootes.Elements['splash-screen'] = Polymer({
         animationConfig: {
             type: Object,
             value: function () {
+                var x = window.innerWidth / 2;
+                var y = window.innerHeight / 2;
+
                 return {
-                    name: 'scale-down-animation',
-                    node: this,
-                    timing: { easing: 'ease-in' }
+                    name: 'reverse-ripple-animation',
+                    id: 'ripple',
+                    gesture: { x: x, y: y },
+                    fromPage: this,
+                    toPage: this
+                };
+            }
+        },
+        sharedElements: {
+            type: Object,
+            value: function () {
+                return {
+                    ripple: this
                 };
             }
         }
