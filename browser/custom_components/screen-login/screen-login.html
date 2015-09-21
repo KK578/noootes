@@ -2,12 +2,18 @@
 
 <!-- Iron -->
 <!-- Paper -->
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html" />
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <!-- Other -->
 
 <dom-module id="screen-login">
     <link rel="import" type="css" href="screen-login.css?__inline" />
-    <template></template>
+    <template>
+        <paper-header-panel mode="cover">
+            <paper-toolbar class="tall"></paper-toolbar>
+        </paper-header-panel>
+    </template>
     <script src="screen-login.js?__inline"></script>
 </dom-module>
