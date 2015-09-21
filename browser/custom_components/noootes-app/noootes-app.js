@@ -33,7 +33,47 @@ Noootes.Elements['noootes-app'] = Polymer({
             type: String,
             value: Noootes.Firebase
         }
-    }
+    },
 
     /* Functions specific to this element go under here. */
+    _startFirebaseEvent: function (event, eventName, callback) {
+        if (!this._firebaseEventOngoing) {
+            this._firebaseEventOngoing = true;
+            this.lastFirebaseEvent = eventName;
+
+            var detail = event ? event.detail : undefined;
+            callback(this.$['firebase-auth'], detail);
+        }
+    },
+    // Wrapper functions for firebase-auth methods.
+    login: function (event) {
+        this._startFirebaseEvent(event, 'firebase-login', function (auth, detail) {
+            auth.login(detail);
+        });
+    },
+    logout: function () {
+        this._startFirebaseEvent(undefined, 'firebase-logout', function (auth) {
+            auth.logout();
+        });
+    },
+    register: function (event) {
+        this._startFirebaseEvent(event, 'firebase-register', function (auth, detail) {
+            auth.createUser(detail.email, detail.password);
+        });
+    },
+    changeEmail: function (event) {
+        this._startFirebaseEvent(event, 'firebase-change-email', function (auth, detail) {
+            auth.changeEmail(detail.email, detail.newEmail, detail.password);
+        });
+    },
+    changePassword: function (event) {
+        this._startFirebaseEvent(event, 'firebase-change-password', function (auth, detail) {
+            auth.changePassword(detail.email, detail.password, detail.newPassword);
+        });
+    },
+    resetPassword: function (event) {
+        this._startFirebaseEvent(event, 'firebase-reset-password', function (auth, detail) {
+            auth.sendPasswordResetEmail(detail.email);
+        });
+    }
 });
