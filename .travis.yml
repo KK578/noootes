@@ -8,4 +8,4 @@ before_script:
 script:
   - wct --plugins sauce
 after_success:
-  - echo "Yay"
+  - ./configs/deploy.sh
