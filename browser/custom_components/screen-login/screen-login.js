@@ -55,6 +55,11 @@ Noootes.Elements['screen-login'] = Polymer({
         window.addEventListener('firebase-login-error', this._handleLoginFail.bind(this));
         window.addEventListener('firebase-login-success', this._resetFormLogin.bind(this));
 
+        window.addEventListener('firebase-reset-password-error',
+            this._handleResetPasswordFail.bind(this));
+        window.addEventListener('firebase-reset-password-success',
+            this._resetFormResetPassword.bind(this));
+
         window.addEventListener('firebase-register-error', this._handleRegisterFail.bind(this));
         window.addEventListener('firebase-register-success', this._resetFormRegister.bind(this));
     },
@@ -76,7 +81,14 @@ Noootes.Elements['screen-login'] = Polymer({
         var validEmail = this.validateEmail(inputEmail);
 
         if (validEmail) {
-            this.fire('firebase-login', detail);
+            if (this._forgottenPassword) {
+                this.fire('firebase-reset-password', {
+                    email: detail.email
+                });
+            }
+            else {
+                this.fire('firebase-login', detail);
+            }
         }
     },
     _handleLoginFail: function (event) {
@@ -121,6 +133,24 @@ Noootes.Elements['screen-login'] = Polymer({
                 submit: 'Login'
             };
         }
+    },
+    _handleResetPasswordFail: function (event) {
+        var detail = event.detail;
+        var selector;
+
+        switch (detail.code) {
+            case 'INVALID_USER':
+                selector = 'paper-input[name=email]';
+                break;
+
+            default:
+                return;
+        }
+
+        this._handleFormFail(this.$['form-login'], selector, detail.message);
+    },
+    _resetFormResetPassword: function () {
+        this.changeForm();
     },
 
     // Form Register

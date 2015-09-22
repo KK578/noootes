@@ -2,6 +2,7 @@
 
 <!-- Iron -->
 <link rel="import" href="../../bower_components/iron-form/iron-form.html" />
+<link rel="import"href="../../bower_components/iron-collapse/iron-collapse.html" />
 <!-- Paper -->
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html" />
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
@@ -32,7 +33,9 @@
                 <h1 class="top">{{_stringsLogin.title}}</h1>
                 <form is="iron-form" id="form-login" method="post" action="/form.html">
                     <paper-input name="email" label="Email" required on-keydown="submitForm"></paper-input>
-                    <paper-input name="password" label="Password" required on-keydown="submitForm"></paper-input>
+                    <iron-collapse opened="{{!_forgottenPassword}}">
+                        <paper-input name="password" label="Password" required on-keydown="submitForm"></paper-input>
+                    </iron-collapse>
 
                     <div class="button-container layout horizontal">
                         <paper-button id="button-change" on-tap="changeForm">{{_stringsLogin.change}}</paper-button>

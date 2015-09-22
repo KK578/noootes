@@ -160,7 +160,7 @@ describe('<screen-login>', function () {
 
             function listener() {
                 var element = document.querySelector('screen-login');
-                element.forgottenPassword.should.equal(true);
+                element._forgottenPassword.should.equal(true);
 
                 loginButton.textContent.should.equal('Send Password Reset Email');
                 changeButton.textContent.should.equal('Cancel');
@@ -190,6 +190,22 @@ describe('<screen-login>', function () {
 
             form.querySelector(button).textContent.should.equal('Send Password Reset Email');
             listenToEventOnClickingButton(form, 'firebase-reset-password', inputs, button, done, assertions);
+        });
+
+        it('should show an error message on "firebase-reset-password-error[Code=INVALID_USER]"', function (done) {
+            function assertions() {
+                var emailInput = form.querySelector('paper-input[name=email]');
+                emailInput.errorMessage.should.equal('The specified user does not exist.');
+                emailInput.invalid.should.equal(true);
+            }
+
+            var detail = {
+                code: 'INVALID_USER',
+                message: 'The specified user does not exist.'
+            };
+            var inputs = [];
+
+            listenToResponseOnFiringEvent(form, 'firebase-reset-password-error', detail, inputs, done, assertions);
         });
 
         it('should clear inputs on "firebase-reset-password-success"', function (done) {
