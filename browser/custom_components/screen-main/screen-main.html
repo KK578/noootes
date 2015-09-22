@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html" />
 
 <!-- Iron -->
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html" />
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html" />
 <!-- Paper -->
 <link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html" />
@@ -28,12 +29,14 @@
                 </paper-toolbar>
 
                 <!-- Page Navigation Itmes -->
-                <template is="dom-repeat" items="{{pages}}">
-                    <paper-item class="navigation-item">
-                        <paper-ripple></paper-ripple>
-                        <span>{{item.title}}</span>
-                    </paper-item>
-                </template>
+                <iron-selector selected="{{_selectedPage}}">
+                    <template is="dom-repeat" items="{{pages}}">
+                        <paper-item class="navigation-item">
+                            <paper-ripple></paper-ripple>
+                            <span>{{item.title}}</span>
+                        </paper-item>
+                    </template>
+                </iron-selector>
             </paper-header-panel>
 
             <!-- Content -->
@@ -42,6 +45,8 @@
                     <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
                     <h2>Title</h2>
                 </paper-toolbar>
+
+                <routed-pages class="fit"></routed-pages>
             </paper-header-panel>
         </paper-drawer-panel>
 

@@ -7,10 +7,16 @@
 }
 
 .navigation-item {
+    @include transition(color 0.3s ease-out, background-color 0.3s ease-out);
     position: relative;
     color: $black-primary;
     background-color: $theme-background;
     cursor: pointer;
     min-height: 0;
     padding: 1em;
+
+    &.iron-selected {
+        color: $white-primary;
+        background-color: $theme-primary-dark;
+    }
 }
