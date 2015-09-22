@@ -17,6 +17,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.html" />
+    <Content Include="browser\behaviors\form-behavior\form-behavior.html" />
     <Content Include="browser\bower.html" />
     <Content Include="browser\bower_components\accessibility-developer-tools\.bower.json" />
     <Content Include="browser\bower_components\accessibility-developer-tools\bower.json" />
@@ -1116,6 +1117,7 @@
     <Content Include="browser\bower_components\async\support\sync-package-managers.js" />
     <Content Include="browser\bower_components\accessibility-developer-tools\dist\js\axs_testing.js" />
     <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.js" />
+    <Content Include="browser\behaviors\form-behavior\form-behavior.js" />
     <Compile Include="browser\bower_components\accessibility-developer-tools\LICENSE" />
     <Compile Include="browser\bower_components\async\LICENSE" />
     <Compile Include="browser\bower_components\async\Makefile" />
@@ -1229,6 +1231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="browser\behaviors\firebase-behavior\" />
+    <Folder Include="browser\behaviors\form-behavior\" />
     <Folder Include="browser\bower_components\" />
     <Folder Include="browser\bower_components\accessibility-developer-tools\" />
     <Folder Include="browser\bower_components\accessibility-developer-tools\dist\" />
