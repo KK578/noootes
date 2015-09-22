@@ -2,6 +2,7 @@ module.exports = {
     suites: ['build/public/test/'],
     plugins: {
         local: {
+            disabled: true,
             browsers: [
                 'chrome'
             ]
