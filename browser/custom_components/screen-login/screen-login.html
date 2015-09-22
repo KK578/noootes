@@ -5,6 +5,8 @@
 <!-- Paper -->
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html" />
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="../../bower_components/paper-input/paper-input.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../fancy-material/fancy-material.html" />
@@ -28,7 +30,15 @@
             <!-- Login -->
             <fancy-material>
                 <h1 class="top">Login</h1>
-                <form is="iron-form" id="form-login" method="post" action="/form.html"></form>
+                <form is="iron-form" id="form-login" method="post" action="/form.html">
+                    <paper-input name="email" label="Email" required on-keydown="submitForm"></paper-input>
+                    <paper-input name="password" label="Password" required on-keydown="submitForm"></paper-input>
+
+                    <div class="button-container layout horizontal">
+                        <span class="flex"></span>
+                        <paper-button id="button-login" on-tap="submitForm">Login</paper-button>
+                    </div>
+                </form>
             </fancy-material>
 
             <!-- Register -->
