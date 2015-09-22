@@ -17,7 +17,10 @@ Noootes.Elements['screen-main'] = Polymer({
     },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    behaviors: [Noootes.Behaviors.PageBehavior],
+    behaviors: [
+        Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.PageBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
@@ -36,12 +39,19 @@ Noootes.Elements['screen-main'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {},
+    properties: {
+        _username: {
+            type: String,
+            value: ''
+        }
+    },
 
     /* Functions specific to this element go under here. */
     // Element Setup
     _attachListeners: function () {
         window.addEventListener('hashchange', this._checkHash.bind(this));
+
+        this.bindToLogin(this._setUser);
     },
 
     // Hash Location
@@ -94,5 +104,10 @@ Noootes.Elements['screen-main'] = Polymer({
         if (event.detail.confirmed) {
             this.fire('firebase-logout');
         }
+    },
+
+    // Toolbar
+    _setUser: function () {
+        this._username = Noootes.Firebase.User.password.email;
     }
 });
