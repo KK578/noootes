@@ -1,0 +1,1 @@
+﻿Noootes.Behaviors.PageBehavior = {};

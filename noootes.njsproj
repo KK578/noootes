@@ -18,6 +18,7 @@
   <ItemGroup>
     <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.html" />
     <Content Include="browser\behaviors\form-behavior\form-behavior.html" />
+    <Content Include="browser\behaviors\page-behavior\page-behavior.html" />
     <Content Include="browser\bower.html" />
     <Content Include="browser\bower_components\accessibility-developer-tools\.bower.json" />
     <Content Include="browser\bower_components\accessibility-developer-tools\bower.json" />
@@ -928,6 +929,8 @@
     <Content Include="browser\custom_components\fancy-material\fancy-material.scss" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.html" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.scss" />
+    <Content Include="browser\custom_components\routed-pages\routed-pages.html" />
+    <Content Include="browser\custom_components\routed-pages\routed-pages.scss" />
     <Content Include="browser\custom_components\screen-login\screen-login.html" />
     <Content Include="browser\custom_components\screen-login\screen-login.scss" />
     <Content Include="browser\custom_components\screen-main\screen-main.html" />
@@ -940,6 +943,7 @@
     <Content Include="browser\stylesheets\bower.scss" />
     <Content Include="browser\test\fancy-material\fancy-material-test.html" />
     <Content Include="browser\test\noootes-app\noootes-app-test.html" />
+    <Content Include="browser\test\routed-pages\routed-pages-test.html" />
     <Content Include="browser\test\screen-login\screen-login-test.html" />
     <Content Include="browser\test\screen-main\screen-main-test.html" />
     <Content Include="browser\test\splash-screen\splash-screen-test.js" />
@@ -1130,6 +1134,7 @@
     <Content Include="browser\bower_components\accessibility-developer-tools\dist\js\axs_testing.js" />
     <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.js" />
     <Content Include="browser\behaviors\form-behavior\form-behavior.js" />
+    <Content Include="browser\behaviors\page-behavior\page-behavior.js" />
     <Compile Include="browser\bower_components\accessibility-developer-tools\LICENSE" />
     <Compile Include="browser\bower_components\async\LICENSE" />
     <Compile Include="browser\bower_components\async\Makefile" />
@@ -1186,6 +1191,8 @@
     <Content Include="browser\custom_components\screen-login\screen-login.js" />
     <Content Include="browser\custom_components\fancy-material\fancy-material.js" />
     <Content Include="browser\test\fancy-material\fancy-material-test.js" />
+    <Content Include="browser\custom_components\routed-pages\routed-pages.js" />
+    <Content Include="browser\test\routed-pages\routed-pages-test.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
@@ -1244,6 +1251,7 @@
   <ItemGroup>
     <Folder Include="browser\behaviors\firebase-behavior\" />
     <Folder Include="browser\behaviors\form-behavior\" />
+    <Folder Include="browser\behaviors\page-behavior\" />
     <Folder Include="browser\bower_components\" />
     <Folder Include="browser\bower_components\accessibility-developer-tools\" />
     <Folder Include="browser\bower_components\accessibility-developer-tools\dist\" />
@@ -1487,6 +1495,7 @@
     <Folder Include="browser\custom_components\" />
     <Folder Include="browser\custom_components\fancy-material\" />
     <Folder Include="browser\custom_components\noootes-app\" />
+    <Folder Include="browser\custom_components\routed-pages\" />
     <Folder Include="browser\custom_components\screen-login\" />
     <Folder Include="browser\custom_components\screen-main\" />
     <Folder Include="browser\custom_components\splash-screen\" />
@@ -1498,6 +1507,7 @@
     <Folder Include="browser\test\" />
     <Folder Include="browser\test\fancy-material\" />
     <Folder Include="browser\test\noootes-app\" />
+    <Folder Include="browser\test\routed-pages\" />
     <Folder Include="browser\test\screen-login\" />
     <Folder Include="browser\test\screen-main\" />
     <Folder Include="browser\test\splash-screen\" />
