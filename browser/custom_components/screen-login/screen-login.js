@@ -17,7 +17,8 @@ Noootes.Elements['screen-login'] = Polymer({
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
-        'form-login.iron-form-submit': '_validateFormLogin'
+        'form-login.iron-form-submit': '_validateFormLogin',
+        'form-register.iron-form-submit': 'validateFormRegister'
     },
 
     /**
@@ -82,5 +83,27 @@ Noootes.Elements['screen-login'] = Polymer({
     },
     _resetFormLogin: function () {
         this.resetForm(this.$['form-login'], true);
+    },
+
+    // Form Register
+    validateFormRegister: function (event) {
+        var form = this.$['form-register'];
+        // Ensure all previous error messages are cleared first.
+        this.resetForm(form, false);
+
+        var detail = event.detail;
+        var inputEmail = form.querySelector('paper-input[name=email]');
+        var inputPassword = form.querySelector('paper-input[name=password]');
+        var inputConfirm = form.querySelector('paper-input[name=confirm]');
+
+        var validEmail = this.validateEmail(inputEmail);
+        var validPasswords = this.validateMatch(inputPassword, inputConfirm);
+
+        if (validEmail && validPasswords) {
+            this.fire('firebase-register', {
+                email: detail.email,
+                password: detail.password
+            });
+        }
     }
 });
