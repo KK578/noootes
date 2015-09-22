@@ -5,3 +5,26 @@
 :host {
     display: block;
 }
+
+.navigation-item {
+    @include transition(color 0.3s ease-out, background-color 0.3s ease-out);
+    position: relative;
+    color: $black-primary;
+    background-color: $theme-background;
+    cursor: pointer;
+    min-height: 0;
+    padding: 1em;
+
+    &.iron-selected {
+        color: $white-primary;
+        background-color: $theme-primary-dark;
+    }
+}
+
+paper-button[dialog-dismiss]::shadow paper-ripple {
+    color: -get-color($material-red, 500);
+}
+
+paper-toolbar h2 {
+    margin: 0;
+}
