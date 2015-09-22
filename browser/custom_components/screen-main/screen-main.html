@@ -7,8 +7,10 @@
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html" />
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
+<link rel="import" href="../../behaviors/page-behavior/page-behavior.html" />
 <!-- Other -->
 
 <dom-module id="screen-main">
@@ -32,6 +34,8 @@
                 </paper-toolbar>
             </paper-header-panel>
         </paper-drawer-panel>
+
+        <paper-dialog id="dialog-logout"></paper-dialog>
     </template>
     <script src="screen-main.js?__inline"></script>
 </dom-module>
