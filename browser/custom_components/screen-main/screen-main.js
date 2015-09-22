@@ -76,11 +76,12 @@ Noootes.Elements['screen-main'] = Polymer({
         this._forceHome();
     },
     _handlePageChange: function (page) {
+        this._selectedPage = page.tag;
+        this._updateToolbar(page);
+
         if (this._selectedPage !== page.tag) {
             this.fire('page-changed', page);
         }
-
-        this._selectedPage = page.tag;
     },
     _forceHome: function () {
         history.replaceState(null, null, '#/home/');
@@ -109,5 +110,9 @@ Noootes.Elements['screen-main'] = Polymer({
     // Toolbar
     _setUser: function () {
         this._username = Noootes.Firebase.User.password.email;
+    },
+    _updateToolbar: function (page) {
+        this._title = page.title;
+        this._subtitle = '';
     }
 });
