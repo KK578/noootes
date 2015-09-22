@@ -11,6 +11,7 @@
 <link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html" />
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../behaviors/page-behavior/page-behavior.html" />
@@ -57,7 +58,11 @@
         </paper-drawer-panel>
 
         <paper-dialog id="dialog-logout">
-            <h1>Dialog</h1>
+            <h2>Logout?</h2>
+            <div class="buttons">
+                <paper-button dialog-dismiss>No</paper-button>
+                <paper-button dialog-confirm>Yes</paper-button>
+            </div>
         </paper-dialog>
     </template>
     <script src="screen-main.js?__inline"></script>

@@ -72,7 +72,7 @@ describe('<screen-main>', function () {
         it('should close Logout dialog without firing other events on clicking cancel button', function (done) {
             var buttons = dialog.querySelectorAll('paper-button');
             var button = buttons[0];
-            button.textContent.should.equal('Cancel');
+            button.textContent.should.equal('No');
 
             function assertNotCalled() {
                 done(new Error('Logout event was called'));
@@ -85,23 +85,30 @@ describe('<screen-main>', function () {
                     done();
                 }, 1000);
             });
+
+            button.click();
         });
 
         it('should close Logout dialog and fire "firebase-logout" on clicking logout button', function (done) {
-            var buttons = dialog.querySelectorAll('paper-button');
-            var button = buttons[1];
-            button.textContent.should.equal('Logout');
+            dialog.addEventListener('iron-overlay-opened', function () {
+                var buttons = dialog.querySelectorAll('paper-button');
+                var button = buttons[1];
+                button.textContent.should.equal('Yes');
 
-            var counter = 0;
+                var counter = 0;
 
-            function end() {
-                if (++counter >= 2) {
-                    done();
+                function end() {
+                    if (++counter >= 2) {
+                        done();
+                    }
                 }
-            }
 
-            window.addEventListener('firebase-logout', end);
-            dialog.addEventListener('iron-overlay-closed', end);
+                window.addEventListener('firebase-logout', end);
+                dialog.addEventListener('iron-overlay-closed', end);
+                button.click();
+            });
+
+            dialog.open();
         });
     });
 });
