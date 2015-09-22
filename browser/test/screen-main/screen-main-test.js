@@ -4,6 +4,12 @@ describe('<screen-main>', function () {
     var screenMain;
 
     before(function () {
+        Noootes.Firebase.User = {
+            password: {
+                email: 'spoof@test.suite'
+            }
+        };
+
         screenMain = document.querySelector('screen-main');
     });
 
@@ -62,9 +68,12 @@ describe('<screen-main>', function () {
             var button = buttons[buttons.length - 1];
             button.textContent.should.equal('Logout', 'Logout button is not the last navigation item in the drawer.');
 
-            dialog.addEventListener('iron-overlay-opened', function () {
+            function end() {
+                dialog.removeEventListener('iron-overlay-opened', end);
                 done();
-            });
+            }
+
+            dialog.addEventListener('iron-overlay-opened', end);
 
             button.click();
         });
@@ -109,6 +118,19 @@ describe('<screen-main>', function () {
             });
 
             dialog.open();
+        });
+    });
+
+    describe('Toolbar Updates', function () {
+        it('should set user\'s email in drawer toolbar', function () {
+            window.dispatchEvent(new CustomEvent('firebase-login-success'));
+            var toolbar = screenMain.querySelector('#drawer-toolbar');
+            toolbar.querySelector('span').textContent.should.equal('spoof@test.suite');
+        });
+
+        it('should set current page name in main toolbar', function () {
+            var toolbar = screenMain.querySelector('#main-toolbar');
+            toolbar.querySelector('h2').textContent.should.equal('Home');
         });
     });
 });
