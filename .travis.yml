@@ -11,6 +11,7 @@ before_script:
   - npm install -g grunt-cli
   - npm install -g web-component-tester
   - grunt build
+  - set -o pipefail
 script:
   - wct --plugins sauce | cat
 after_success:
