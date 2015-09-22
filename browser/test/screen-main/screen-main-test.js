@@ -49,4 +49,59 @@ describe('<screen-main>', function () {
             }
         }
     });
+
+    describe('Logout Dialog', function () {
+        var dialog;
+
+        before(function () {
+            dialog = screenMain.querySelector('#dialog-logout');
+        });
+
+        it('should open Logout dialog on clicking Logout button', function (done) {
+            var buttons = screenMain.querySelectorAll('.navigation-item');
+            var button = buttons[buttons.length - 1];
+            button.textContent.should.equal('Logout', 'Logout button is not the last navigation item in the drawer.');
+
+            dialog.addEventListener('iron-overlay-opened', function () {
+                done();
+            });
+
+            button.click();
+        });
+
+        it('should close Logout dialog without firing other events on clicking cancel button', function (done) {
+            var buttons = dialog.querySelectorAll('paper-button');
+            var button = buttons[0];
+            button.textContent.should.equal('Cancel');
+
+            function assertNotCalled() {
+                done(new Error('Logout event was called'));
+            }
+
+            window.addEventListener('firebase-logout', assertNotCalled);
+            dialog.addEventListener('iron-overlay-closed', function () {
+                window.setTimeout(function () {
+                    window.removeEventListener('firebase-logout', assertNotCalled);
+                    done();
+                }, 1000);
+            });
+        });
+
+        it('should close Logout dialog and fire "firebase-logout" on clicking logout button', function (done) {
+            var buttons = dialog.querySelectorAll('paper-button');
+            var button = buttons[1];
+            button.textContent.should.equal('Logout');
+
+            var counter = 0;
+
+            function end() {
+                if (++counter >= 2) {
+                    done();
+                }
+            }
+
+            window.addEventListener('firebase-logout', end);
+            dialog.addEventListener('iron-overlay-closed', end);
+        });
+    });
 });
