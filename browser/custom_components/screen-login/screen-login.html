@@ -34,7 +34,7 @@
                 <form is="iron-form" id="form-login" method="post" action="/form.html">
                     <paper-input name="email" label="Email" required on-keydown="submitForm"></paper-input>
                     <iron-collapse opened="{{!_forgottenPassword}}">
-                        <paper-input name="password" label="Password" required$="{{!_forgottenPassword}}" on-keydown="submitForm"></paper-input>
+                        <paper-input name="password" label="Password" type="password" required$="{{!_forgottenPassword}}" on-keydown="submitForm"></paper-input>
                     </iron-collapse>
 
                     <div class="button-container layout horizontal">
