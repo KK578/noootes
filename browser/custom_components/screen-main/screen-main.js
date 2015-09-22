@@ -20,7 +20,9 @@ Noootes.Elements['screen-main'] = Polymer({
     behaviors: [Noootes.Behaviors.PageBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'dialog-logout.iron-overlay-closed': '_checkDialogResponse'
+    },
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -87,5 +89,10 @@ Noootes.Elements['screen-main'] = Polymer({
     openLogoutDialog: function () {
         this.$['dialog-logout'].open();
         this.$['drawer-container'].closeDrawer();
+    },
+    _checkDialogResponse: function (event) {
+        if (event.detail.confirmed) {
+            this.fire('firebase-logout');
+        }
     }
 });
