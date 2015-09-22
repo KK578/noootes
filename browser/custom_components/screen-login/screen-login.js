@@ -18,7 +18,7 @@ Noootes.Elements['screen-login'] = Polymer({
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
         'form-login.iron-form-submit': '_validateFormLogin',
-        'form-register.iron-form-submit': 'validateFormRegister'
+        'form-register.iron-form-submit': '_validateFormRegister'
     },
 
     /**
@@ -40,6 +40,9 @@ Noootes.Elements['screen-login'] = Polymer({
     _attachListeners: function () {
         window.addEventListener('firebase-login-error', this._handleLoginFail.bind(this));
         window.addEventListener('firebase-login-success', this._resetFormLogin.bind(this));
+
+        window.addEventListener('firebase-register-error', this._handleRegisterFail.bind(this));
+        window.addEventListener('firebase-register-success', this._resetFormRegister.bind(this));
     },
 
     // All Forms
@@ -86,7 +89,7 @@ Noootes.Elements['screen-login'] = Polymer({
     },
 
     // Form Register
-    validateFormRegister: function (event) {
+    _validateFormRegister: function (event) {
         var form = this.$['form-register'];
         // Ensure all previous error messages are cleared first.
         this.resetForm(form, false);
@@ -105,5 +108,23 @@ Noootes.Elements['screen-login'] = Polymer({
                 password: detail.password
             });
         }
+    },
+    _handleRegisterFail: function (event) {
+        var detail = event.detail;
+        var selector;
+
+        switch (detail.code) {
+            case 'EMAIL_TAKEN':
+                selector = 'paper-input[name=email]';
+                break;
+
+            default:
+                return;
+        }
+
+        this._handleFormFail(this.$['form-register'], selector, detail.message);
+    },
+    _resetFormRegister: function () {
+        this.resetForm(this.$['form-register'], true);
     }
 });

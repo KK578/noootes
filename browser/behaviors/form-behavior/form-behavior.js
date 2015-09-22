@@ -34,7 +34,7 @@
             input.invalid = true;
 
             confirmInput.errorMessage = 'The values did not match.';
-            confirm.invalid = true;
+            confirmInput.invalid = true;
         }
 
         return match;
