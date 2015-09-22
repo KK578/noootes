@@ -4,9 +4,6 @@ node_js:
 cache:
   directories:
     - node_modules
-    - $(npm config get prefix)/bin/grunt-cli
-    - $(npm config get prefix)/bin/web-component-tester
-    - $(npm config get prefix)/bin/firebase-tools
 before_script:
   - npm install -g grunt-cli
   - npm install -g web-component-tester
