@@ -33,7 +33,21 @@ Noootes.Elements['screen-login'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {},
+    properties: {
+        _stringsLogin: {
+            type: Object,
+            value: {
+                title: 'Login',
+                change: 'Forgot your password?',
+                submit: 'Login'
+            }
+        },
+        _forgottenPassword: {
+            type: Boolean,
+            value: false,
+            observer: '_changeStringsLogin'
+        }
+    },
 
     /* Functions specific to this element go under here. */
     // Element Setup
@@ -86,6 +100,27 @@ Noootes.Elements['screen-login'] = Polymer({
     },
     _resetFormLogin: function () {
         this.resetForm(this.$['form-login'], true);
+    },
+    // Toggles between Login and Password Reset forms
+    changeForm: function () {
+        this._forgottenPassword = !this._forgottenPassword;
+        this.resetForm(this.$['form-login'], true);
+    },
+    _changeStringsLogin: function (n) {
+        if (n) {
+            this._stringsLogin = {
+                title: 'Reset Password',
+                change: 'Cancel',
+                submit: 'Send Password Reset Email'
+            };
+        }
+        else {
+            this._stringsLogin = {
+                title: 'Login',
+                change: 'Forgot your password?',
+                submit: 'Login'
+            };
+        }
     },
 
     // Form Register

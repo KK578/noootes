@@ -29,14 +29,15 @@
 
             <!-- Login -->
             <fancy-material>
-                <h1 class="top">Login</h1>
+                <h1 class="top">{{_stringsLogin.title}}</h1>
                 <form is="iron-form" id="form-login" method="post" action="/form.html">
                     <paper-input name="email" label="Email" required on-keydown="submitForm"></paper-input>
                     <paper-input name="password" label="Password" required on-keydown="submitForm"></paper-input>
 
                     <div class="button-container layout horizontal">
+                        <paper-button id="button-change" on-tap="changeForm">{{_stringsLogin.change}}</paper-button>
                         <span class="flex"></span>
-                        <paper-button id="button-login" on-tap="submitForm">Login</paper-button>
+                        <paper-button id="button-login" on-tap="submitForm">{{_stringsLogin.submit}}</paper-button>
                     </div>
                 </form>
             </fancy-material>
@@ -48,6 +49,7 @@
                     <paper-input name="email" label="Email" required on-keydown="submitForm"></paper-input>
                     <paper-input name="password" label="Password" type="password" required on-keydown="submitForm"></paper-input>
                     <paper-input name="confirm" label="Confirm Password" type="password" required on-keydown="submitForm"></paper-input>
+
                     <div class="button-container layout horizontal">
                         <span class="flex"></span>
                         <paper-button id="button-register" on-tap="submitForm">Register</paper-button>
