@@ -64,8 +64,6 @@ Noootes.Elements['noootes-app'] = Polymer({
         window.addEventListener('firebase-change-email', this.changeEmail.bind(this));
         window.addEventListener('firebase-change-password', this.changePassword.bind(this));
         window.addEventListener('firebase-reset-password', this.resetPassword.bind(this));
-
-        this.bindToLogin(this.bindUser);
     },
 
     // Ensures that only one firebase-auth method is being called at a time.
@@ -147,11 +145,13 @@ Noootes.Elements['noootes-app'] = Polymer({
     _firebaseLogin: function (event) {
         // Login was successful, change to main-screen and fire event for listening elements.
         this._selectedPage = 1;
+        Noootes.Firebase.User = event.detail.user;
         this._fireSuccessEvent('firebase-login', event);
     },
     _firebaseLogout: function () {
         // Logout was successful, change to login-screen and fire event for listening elements.
         this._selectedPage = 0;
+        Noootes.Firebase.User = undefined;
         this._fireSuccessEvent('firebase-logout');
     },
     _firebaseRegister: function () {
@@ -190,10 +190,5 @@ Noootes.Elements['noootes-app'] = Polymer({
                 this.fire('toast-message', { message: 'You\'re not logged in!' });
             }
         }
-    },
-    bindUser: function () {
-        var user = this.$['firebase-auth'].user;
-
-        Noootes.Firebase.User = user;
     }
 });
