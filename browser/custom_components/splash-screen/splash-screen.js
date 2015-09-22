@@ -66,6 +66,6 @@ Noootes.Elements['splash-screen'] = Polymer({
         // After the exit animation has played, remove the splash-screen element
         // from the DOM.
         document.body.classList.remove('splash-animating');
-        Polymer.dom(this.parentNode).removeChild(this);
+        //Polymer.dom(this.parentNode).removeChild(this);
     }
 });
