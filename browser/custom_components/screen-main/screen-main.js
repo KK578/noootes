@@ -81,5 +81,11 @@ Noootes.Elements['screen-main'] = Polymer({
 
         window.location.hash = hash;
         this.$['drawer-container'].closeDrawer();
+    },
+
+    // Logout Dialog
+    openLogoutDialog: function () {
+        this.$['dialog-logout'].open();
+        this.$['drawer-container'].closeDrawer();
     }
 });

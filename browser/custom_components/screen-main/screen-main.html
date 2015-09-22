@@ -37,6 +37,12 @@
                         </paper-item>
                     </template>
                 </iron-selector>
+
+                <!-- After page navigation items, add  -->
+                <paper-item class="navigation-item" on-tap="openLogoutDialog">
+                    <paper-ripple></paper-ripple>
+                    <span>Logout</span>
+                </paper-item>
             </paper-header-panel>
 
             <!-- Content -->
@@ -50,7 +56,9 @@
             </paper-header-panel>
         </paper-drawer-panel>
 
-        <paper-dialog id="dialog-logout"></paper-dialog>
+        <paper-dialog id="dialog-logout">
+            <h1>Dialog</h1>
+        </paper-dialog>
     </template>
     <script src="screen-main.js?__inline"></script>
 </dom-module>
