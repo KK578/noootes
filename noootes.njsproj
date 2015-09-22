@@ -214,6 +214,17 @@
     <Content Include="browser\bower_components\iron-form-element-behavior\index.html" />
     <Content Include="browser\bower_components\iron-form-element-behavior\iron-form-element-behavior.html" />
     <Content Include="browser\bower_components\iron-form-element-behavior\README.md" />
+    <Content Include="browser\bower_components\iron-form\.bower.json" />
+    <Content Include="browser\bower_components\iron-form\.gitignore" />
+    <Content Include="browser\bower_components\iron-form\bower.json" />
+    <Content Include="browser\bower_components\iron-form\demo\index.html" />
+    <Content Include="browser\bower_components\iron-form\demo\simple-element.html" />
+    <Content Include="browser\bower_components\iron-form\index.html" />
+    <Content Include="browser\bower_components\iron-form\iron-form.html" />
+    <Content Include="browser\bower_components\iron-form\README.md" />
+    <Content Include="browser\bower_components\iron-form\test\basic.html" />
+    <Content Include="browser\bower_components\iron-form\test\index.html" />
+    <Content Include="browser\bower_components\iron-form\test\simple-element.html" />
     <Content Include="browser\bower_components\iron-iconset-svg\.bower.json" />
     <Content Include="browser\bower_components\iron-iconset-svg\.gitignore" />
     <Content Include="browser\bower_components\iron-iconset-svg\bower.json" />
@@ -1285,6 +1296,9 @@
     <Folder Include="browser\bower_components\iron-flex-layout\demo\" />
     <Folder Include="browser\bower_components\iron-form-element-behavior\" />
     <Folder Include="browser\bower_components\iron-form-element-behavior\demo\" />
+    <Folder Include="browser\bower_components\iron-form\" />
+    <Folder Include="browser\bower_components\iron-form\demo\" />
+    <Folder Include="browser\bower_components\iron-form\test\" />
     <Folder Include="browser\bower_components\iron-iconset-svg\" />
     <Folder Include="browser\bower_components\iron-iconset-svg\demo\" />
     <Folder Include="browser\bower_components\iron-iconset-svg\test\" />

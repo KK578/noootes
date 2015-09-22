@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "firebase-element": "GoogleWebComponents/firebase-element#~1.0.6",
+    "iron-form": "PolymerElements/iron-form#~1.0.9",
     "paper-elements": "PolymerElements/paper-elements#~1.0.5",
     "polymer": "Polymer/Polymer#~1.1.3"
   },
