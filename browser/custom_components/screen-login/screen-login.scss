@@ -1,0 +1,15 @@
+@import '../../stylesheets/partials/_layouts.scss';
+@import '../../stylesheets/partials/_mixins.scss';
+@import '../../stylesheets/partials/_theme.scss';
+
+:host {
+    display: block;
+}
+
+paper-toolbar.paper-toolbar-0 {
+    background-color: $theme-primary-dark;
+}
+
+.button-container {
+    clear: both;
+}

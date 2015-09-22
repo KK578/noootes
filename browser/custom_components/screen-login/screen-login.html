@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+
+<!-- Iron -->
+<link rel="import" href="../../bower_components/iron-form/iron-form.html" />
+<link rel="import"href="../../bower_components/iron-collapse/iron-collapse.html" />
+<!-- Paper -->
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html" />
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="../../bower_components/paper-input/paper-input.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+<!-- Neon -->
+<!-- Custom/Behaviors -->
+<link rel="import" href="../fancy-material/fancy-material.html" />
+<link rel="import" href="../../behaviors/form-behavior/form-behavior.html" />
+<!-- Other -->
+
+<dom-module id="screen-login">
+    <link rel="import" type="css" href="screen-login.css?__inline" />
+    <template>
+        <paper-header-panel mode="cover">
+            <!-- paper-toolbar is placed in the background as paper-header-panel mode is cover. -->
+            <paper-toolbar class="tall"></paper-toolbar>
+
+            <!-- Content -->
+            <!-- Welcome Card -->
+            <fancy-material>
+                <h1 class="top">Noootes</h1>
+                <p>Welcome to Noootes, a WebApp for collaboratively working on notes.</p>
+            </fancy-material>
+
+            <!-- Login -->
+            <fancy-material>
+                <h1 class="top">{{_stringsLogin.title}}</h1>
+                <form is="iron-form" id="form-login" method="post" action="/form.html">
+                    <paper-input name="email" label="Email" required on-keydown="submitForm"></paper-input>
+                    <iron-collapse opened="{{!_forgottenPassword}}">
+                        <paper-input name="password" label="Password" required$="{{!_forgottenPassword}}" on-keydown="submitForm"></paper-input>
+                    </iron-collapse>
+
+                    <div class="button-container layout horizontal">
+                        <paper-button id="button-change" on-tap="changeForm">{{_stringsLogin.change}}</paper-button>
+                        <span class="flex"></span>
+                        <paper-button id="button-login" on-tap="submitForm">{{_stringsLogin.submit}}</paper-button>
+                    </div>
+                </form>
+            </fancy-material>
+
+            <!-- Register -->
+            <fancy-material>
+                <h1 class="top">Register</h1>
+                <form is="iron-form" id="form-register" method="post" action="/form.html">
+                    <paper-input name="email" label="Email" required on-keydown="submitForm"></paper-input>
+                    <paper-input name="password" label="Password" type="password" required on-keydown="submitForm"></paper-input>
+                    <paper-input name="confirm" label="Confirm Password" type="password" required on-keydown="submitForm"></paper-input>
+
+                    <div class="button-container layout horizontal">
+                        <span class="flex"></span>
+                        <paper-button id="button-register" on-tap="submitForm">Register</paper-button>
+                    </div>
+                </form>
+            </fancy-material>
+        </paper-header-panel>
+    </template>
+    <script src="screen-login.js?__inline"></script>
+</dom-module>
