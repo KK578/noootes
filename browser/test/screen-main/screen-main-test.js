@@ -38,7 +38,7 @@ describe('<screen-main>', function () {
         var pages = screenMain.pages;
         var navigationItems = screenMain.querySelectorAll('.navigation-item');
 
-        screenMain._selectedPage.should.equal('#/home/');
+        screenMain._selectedPage.should.equal('/home/');
 
         for (var i = 0; i < pages.length; i++) {
             if (pages[i].title === 'Home') {

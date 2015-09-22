@@ -29,9 +29,9 @@
                 </paper-toolbar>
 
                 <!-- Page Navigation Itmes -->
-                <iron-selector selected="{{_selectedPage}}">
+                <iron-selector attr-for-selected="route" selected="{{_selectedPage}}">
                     <template is="dom-repeat" items="{{pages}}">
-                        <paper-item class="navigation-item">
+                        <paper-item class="navigation-item" route$="{{item.tag}}" on-tap="changePage">
                             <paper-ripple></paper-ripple>
                             <span>{{item.title}}</span>
                         </paper-item>
