@@ -126,7 +126,7 @@ describe('<noootes-app>', function () {
             event.detail.user.password.email.should.equal(testUser.email);
 
             var element = document.querySelector('noootes-app');
-            element.selectedPage.should.equal(1);
+            element._selectedPage.should.equal(1);
         }
 
         var detail = {
@@ -143,7 +143,7 @@ describe('<noootes-app>', function () {
     it('should fire "firebase-logout-success" on "firebase-logout"', function (done) {
         function assertions() {
             var element = document.querySelector('noootes-app');
-            element.selectedPage.should.equal(0);
+            element._selectedPage.should.equal(0);
         }
 
         var detail = {};
