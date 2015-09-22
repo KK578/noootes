@@ -933,6 +933,7 @@
     <Content Include="browser\custom_components\screen-main\screen-main.html" />
     <Content Include="browser\custom_components\screen-main\screen-main.scss" />
     <Content Include="browser\custom_components\splash-screen\splash-screen.js" />
+    <Content Include="browser\form.html" />
     <Content Include="browser\scripts\browser_sync_client.js" />
     <Content Include="browser\scripts\load.js" />
     <Content Include="browser\stylesheets\404.scss" />
