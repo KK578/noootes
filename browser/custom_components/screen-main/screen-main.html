@@ -6,6 +6,8 @@
 <link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html" />
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html" />
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="../../bower_components/paper-item/paper-item.html" />
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html" />
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html" />
 <!-- Neon -->
@@ -24,6 +26,14 @@
                         <h2>Navigation</h2>
                     </div>
                 </paper-toolbar>
+
+                <!-- Page Navigation Itmes -->
+                <template is="dom-repeat" items="{{pages}}">
+                    <paper-item class="navigation-item">
+                        <paper-ripple></paper-ripple>
+                        <span>{{item.title}}</span>
+                    </paper-item>
+                </template>
             </paper-header-panel>
 
             <!-- Content -->

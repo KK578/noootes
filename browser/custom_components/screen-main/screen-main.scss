@@ -5,3 +5,12 @@
 :host {
     display: block;
 }
+
+.navigation-item {
+    position: relative;
+    color: $black-primary;
+    background-color: $theme-background;
+    cursor: pointer;
+    min-height: 0;
+    padding: 1em;
+}
