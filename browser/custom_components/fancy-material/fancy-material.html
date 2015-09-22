@@ -1,0 +1,19 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+
+<!-- Iron -->
+<!-- Paper -->
+<link rel="import" href="../../bower_components/paper-material/paper-material.html" />
+<!-- Neon -->
+<!-- Custom/Behaviors -->
+<!-- Other -->
+
+<dom-module id="fancy-material">
+    <link rel="import" type="css" href="fancy-material.css?__inline" />
+    <template>
+        <paper-material>
+            <div id="top"><content select=".top"></content></div>
+            <div id="content"><content></content></div>
+        </paper-material>
+    </template>
+    <script src="fancy-material.js?__inline"></script>
+</dom-module>
