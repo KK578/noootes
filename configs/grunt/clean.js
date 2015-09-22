@@ -7,5 +7,9 @@
         'build/public/behaviors/**/*.js',
         'build/public/stylesheets/'
     ],
-    wct: ['build/public/test']
+    deploy: [
+        'build/public/test',
+        'build/public/scripts/browser_sync_client.js',
+        'build/public/bower.html'
+    ]
 };
