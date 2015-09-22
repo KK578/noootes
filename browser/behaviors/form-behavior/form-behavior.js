@@ -8,7 +8,7 @@
      * @returns {Boolean} Input element value is a valid email.
      */
     validateEmail: function (input) {
-        var pattern = /.+@,+\...+/;
+        var pattern = /.+@.+\...+/;
         var match = pattern.test(input.value);
 
         if (!match) {
