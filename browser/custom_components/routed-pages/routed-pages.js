@@ -17,7 +17,9 @@ Noootes.Elements['routed-pages'] = Polymer({
     behaviors: [Noootes.Behaviors.PageBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'pages.neon-animation-finish': 'cleanupAnimation'
+    },
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -62,13 +64,39 @@ Noootes.Elements['routed-pages'] = Polymer({
         var page = event.detail;
         var element = page.element;
 
+        function success() {
+            this._selectedPage = page.tag;
+        }
+
+        function error() {
+            history.replaceState(null, null, '#' + this._selectedPage);
+
+            this.fire('hashchange');
+            this.fire('toast-message', {
+                message: 'Failed to load "' + page.title + '" page.\n' +
+                    'Please check your internet connection and refresh.'
+            });
+        }
+
         // Check global array of imported elements, import if element is not present.
         if (!Noootes.Elements[element]) {
-            console.log('Import required.');
+            var href = 'custom_components/pages/' + element + '/' + element + '.html';
+            this.importHref(href, success.bind(this), error.bind(this));
         }
         else {
             // Otherwise, element is already imported, can change page immediately.
-            this._selectedPage = page.tag;
+            success.call(this);
+        }
+    },
+
+    // Animations
+    // NOTE: Temporary fix for https://github.com/PolymerElements/neon-animation/issues/71
+    cleanupAnimation: function () {
+        var pages = this.$.pages;
+        var animators = pages.querySelectorAll('.neon-animating');
+
+        for (var i = 0; i < animators.length; i++) {
+            animators[i].classList.remove('neon-animating');
         }
     }
 });

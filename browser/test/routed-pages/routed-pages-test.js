@@ -37,10 +37,10 @@ describe('<routed-pages>', function () {
         routedPages._selectedPage.should.equal('/home/');
     });
 
-    it('should fire "toat-message" on failing to load the new page.', function (done) {
+    it('should fire "toast-message" on failing to load the new page.', function (done) {
         window.addEventListener('toast-message', function (event) {
-            event.detail.message.should.startWith('Failed to load the Fake page.');
-            routedPages.selectedPage.should.equal('/home/');
+            event.detail.message.should.match(/Failed to load "Fake" page./);
+            routedPages._selectedPage.should.equal('/home/');
 
             done();
         });
@@ -51,7 +51,5 @@ describe('<routed-pages>', function () {
             element: 'fake-page'
         };
         window.dispatchEvent(new CustomEvent('page-changed', { detail: detail }));
-
-        routedPages._selectedPage.should.equal('/home/');
     });
 });
