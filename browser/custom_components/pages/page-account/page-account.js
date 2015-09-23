@@ -38,11 +38,11 @@ Noootes.Elements['page-account'] = Polymer({
     /* Functions specific to this element go under here. */
     // Element Setup
     _attachListeners: function () {
-        window.addEventListener('firebase-change-email-error', this._handleEmailFail.bind(this));
+        window.addEventListener('firebase-change-email-error', this._handleFailEmail.bind(this));
         window.addEventListener('firebase-change-email-success', this._resetFormEmail.bind(this));
 
         window.addEventListener('firebase-change-password-error',
-            this._handlePasswordFail.bind(this));
+            this._handleFailPassword.bind(this));
         window.addEventListener('firebase-change-password-success',
             this._resetFormPassword.bind(this));
     },
@@ -73,7 +73,7 @@ Noootes.Elements['page-account'] = Polymer({
             }
         }
     },
-    _handleEmailFail: function (event) {
+    _handleFailEmail: function (event) {
         var detail = event.detail;
         var selector;
 
@@ -125,7 +125,7 @@ Noootes.Elements['page-account'] = Polymer({
             }
         }
     },
-    _handlePasswordFail: function (event) {
+    _handleFailPassword: function (event) {
         var detail = event.detail;
         var selector;
 
