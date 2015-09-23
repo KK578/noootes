@@ -7,11 +7,13 @@ Noootes.Elements['routed-pages'] = Polymer({
      * using this.async(function).
      */
     //created: function () {},
-    //ready: function () {},
+    ready: function () {
+        this._setupPages();
+    },
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.PageBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -28,7 +30,26 @@ Noootes.Elements['routed-pages'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        _selectedPage: {
+            type: String
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    // Element Setup
+    _setupPages: function () {
+        var pages = this.$.pages;
+
+        // For each page in the pages array, create its corresponding element and attach to #pages.
+        // Set route to allow #pages to navigate correctly
+        // It will be imported later dynamically.
+        for (var i = 0; i < this.pages.length; i++) {
+            var page = this.pages[i];
+            var element = document.createElement(page.element);
+            element.setAttribute('route', page.tag);
+
+            Polymer.dom(pages).appendChild(element);
+        }
+    }
 });
