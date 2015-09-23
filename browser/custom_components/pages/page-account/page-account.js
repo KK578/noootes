@@ -7,7 +7,9 @@ Noootes.Elements['page-account'] = Polymer({
      * using this.async(function).
      */
     //created: function () {},
-    //ready: function () {},
+    ready: function () {
+        this._attachListeners();
+    },
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
@@ -34,6 +36,19 @@ Noootes.Elements['page-account'] = Polymer({
     properties: {},
 
     /* Functions specific to this element go under here. */
+    // Element Setup
+    _attachListeners: function () {
+        window.addEventListener('firebase-change-email-error', this._handleEmailFail.bind(this));
+        window.addEventListener('firebase-change-email-success', this._resetFormEmail.bind(this));
+    },
+
+    // All Forms
+    _handleFormFail: function (form, selector, message) {
+        var input = form.querySelector(selector);
+        input.errorMessage = message;
+        input.invalid = true;
+    },
+
     // Email Form
     _validateFormEmail: function (event) {
         var form = this.$['form-email'];
@@ -59,6 +74,32 @@ Noootes.Elements['page-account'] = Polymer({
                 });
             }
         }
+    },
+    _handleEmailFail: function (event) {
+        var detail = event.detail;
+        var selector;
+
+        switch (detail.code) {
+            case 'INVALID_USER':
+                selector = 'paper-input[name=email]';
+                break;
+
+            case 'INVALID_PASSWORD':
+                selector = 'paper-input[name=password]';
+                break;
+
+            case 'EMAIL_TAKEN':
+                selector = 'paper-input[name=newEmail]';
+                break;
+
+            default:
+                return;
+        }
+
+        this._handleFormFail(this.$['form-email'], selector, detail.message);
+    },
+    _resetFormEmail: function () {
+        this.resetForm(this.$['form-email'], true);
     },
 
     // Password Form
