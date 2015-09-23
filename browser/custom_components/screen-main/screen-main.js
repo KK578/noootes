@@ -66,7 +66,7 @@ Noootes.Elements['screen-main'] = Polymer({
         var route = '/' + hash[1] + '/';
         for (var i = 0; i < this.pages.length; i++) {
             if (route === this.pages[i].tag) {
-                this._handlePageChange(this.pages[i]);
+                this._handlePageChange(i, this.pages[i]);
                 return;
             }
         }
@@ -75,18 +75,16 @@ Noootes.Elements['screen-main'] = Polymer({
         // Force change back to home if this has occurred.
         this._forceHome();
     },
-    _handlePageChange: function (page) {
-        this._selectedPage = page.tag;
+    _handlePageChange: function (index, page) {
+        this._selectedPage = index;
         this._updateToolbar(page);
-
-        if (this._selectedPage !== page.tag) {
-            this.fire('page-changed', page);
-        }
+        this.fire('page-changed', page);
     },
     _forceHome: function () {
         history.replaceState(null, null, '#/home/');
         this._checkHash();
     },
+
     // Tap listener for navigation-items
     changePage: function (e) {
         var event = Polymer.dom(e).event;

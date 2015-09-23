@@ -1,17 +1,17 @@
 chai.should();
 
 describe('<screen-main>', function () {
-    function listenToEventOnce(event, done, assertions) {
+    function listenToEventOnce(eventName, done, assertions) {
         function listener(event) {
             if (assertions) {
                 assertions(event);
             }
 
-            window.removeEventListener(event, listener);
+            window.removeEventListener(eventName, listener);
             done();
         }
 
-        window.addEventListener(event, listener);
+        window.addEventListener(eventName, listener);
     }
 
     var screenMain;
@@ -57,8 +57,6 @@ describe('<screen-main>', function () {
         var pages = screenMain.pages;
         var navigationItems = screenMain.querySelectorAll('.navigation-item');
 
-        screenMain._selectedPage.should.equal('/home/');
-
         for (var i = 0; i < pages.length; i++) {
             if (pages[i].title === 'Home') {
                 navigationItems[i].classList.contains('iron-selected').should.equal(true);
@@ -85,7 +83,7 @@ describe('<screen-main>', function () {
             var detail = event.detail;
             detail.tag.should.equal('/home/');
             detail.element.should.equal('page-home');
-            window.location.hash.should.equal('/home/');
+            window.location.hash.should.equal('#/home/');
         }
 
         listenToEventOnce('page-changed', done, assertions);
