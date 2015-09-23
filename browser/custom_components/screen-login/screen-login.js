@@ -52,23 +52,16 @@ Noootes.Elements['screen-login'] = Polymer({
     /* Functions specific to this element go under here. */
     // Element Setup
     _attachListeners: function () {
-        window.addEventListener('firebase-login-error', this._handleLoginFail.bind(this));
+        window.addEventListener('firebase-login-error', this._handleFailLogin.bind(this));
         window.addEventListener('firebase-login-success', this._resetFormLogin.bind(this));
 
         window.addEventListener('firebase-reset-password-error',
-            this._handleResetPasswordFail.bind(this));
+            this._handleFailResetPassword.bind(this));
         window.addEventListener('firebase-reset-password-success',
             this._resetFormResetPassword.bind(this));
 
-        window.addEventListener('firebase-register-error', this._handleRegisterFail.bind(this));
+        window.addEventListener('firebase-register-error', this._handleFailRegister.bind(this));
         window.addEventListener('firebase-register-success', this._resetFormRegister.bind(this));
-    },
-
-    // All Forms
-    _handleFormFail: function (form, selector, message) {
-        var input = form.querySelector(selector);
-        input.errorMessage = message;
-        input.invalid = true;
     },
 
     // Form Login
@@ -91,7 +84,7 @@ Noootes.Elements['screen-login'] = Polymer({
             }
         }
     },
-    _handleLoginFail: function (event) {
+    _handleFailLogin: function (event) {
         var detail = event.detail;
         var selector;
 
@@ -108,7 +101,7 @@ Noootes.Elements['screen-login'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-login'], selector, detail.message);
+        this.handleFormFail(this.$['form-login'], selector, detail.message);
     },
     _resetFormLogin: function () {
         this.resetForm(this.$['form-login'], true);
@@ -134,7 +127,7 @@ Noootes.Elements['screen-login'] = Polymer({
             };
         }
     },
-    _handleResetPasswordFail: function (event) {
+    _handleFailResetPassword: function (event) {
         var detail = event.detail;
         var selector;
 
@@ -147,7 +140,7 @@ Noootes.Elements['screen-login'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-login'], selector, detail.message);
+        this.handleFormFail(this.$['form-login'], selector, detail.message);
     },
     _resetFormResetPassword: function () {
         this.changeForm();
@@ -174,7 +167,7 @@ Noootes.Elements['screen-login'] = Polymer({
             });
         }
     },
-    _handleRegisterFail: function (event) {
+    _handleFailRegister: function (event) {
         var detail = event.detail;
         var selector;
 
@@ -187,7 +180,7 @@ Noootes.Elements['screen-login'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-register'], selector, detail.message);
+        this.handleFormFail(this.$['form-register'], selector, detail.message);
     },
     _resetFormRegister: function () {
         this.resetForm(this.$['form-register'], true);

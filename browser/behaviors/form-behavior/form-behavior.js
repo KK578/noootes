@@ -41,6 +41,23 @@
     },
 
     /**
+     * Checks if input element matches the current logged in user.
+     *
+     * @param {HTMLInputElement} input - Input element to be tested.
+     * @returns {Boolean} Input value matches current user.
+     */
+    validateUser: function (input) {
+        var match = input.value === Noootes.Firebase.User.password.email;
+
+        if (!match) {
+            input.errorMessage = 'That isn\'t your email!';
+            input.invalid = true;
+        }
+
+        return match;
+    },
+
+    /**
      * Finds the input element's corresponding form and submit.
      * Attach this function to 'tap' or 'keydown' listener input elements that should submit the
      * form when tapped or pressing the enter key.     *
@@ -95,5 +112,17 @@
                 input.value = '';
             }
         }
+    },
+
+    /**
+     * Set error message on the selected input in the form.
+     * @param {HTMLElement} form - Form to select element from.
+     * @param {String} selector - CSS Selector string for input element which has errored.
+     * @param {String} message - Error message to set on the input.
+     */
+    handleFormFail: function (form, selector, message) {
+        var input = form.querySelector(selector);
+        input.errorMessage = message;
+        input.invalid = true;
     }
 };
