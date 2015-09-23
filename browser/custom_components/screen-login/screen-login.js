@@ -154,13 +154,15 @@ Noootes.Elements['screen-login'] = Polymer({
 
         var detail = event.detail;
         var inputEmail = form.querySelector('paper-input[name=email]');
+        var inputUsername = form.querySelector('paper-input[name=username]');
         var inputPassword = form.querySelector('paper-input[name=password]');
         var inputConfirm = form.querySelector('paper-input[name=confirm]');
 
         var validEmail = this.validateEmail(inputEmail);
+        var validUsername = this.validateUsername(inputUsername);
         var validPasswords = this.validateMatch(inputPassword, inputConfirm);
 
-        if (validEmail && validPasswords) {
+        if (validEmail && validUsername && validPasswords) {
             this.fire('firebase-register', {
                 email: detail.email,
                 password: detail.password

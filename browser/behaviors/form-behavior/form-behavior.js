@@ -9,10 +9,32 @@
      */
     validateEmail: function (input) {
         var pattern = /.+@.+\...+/;
-        var match = pattern.test(input.value);
+        var match = input.value.match(pattern);
 
         if (!match) {
             input.errorMessage = 'Please enter a valid email.';
+            input.invalid = true;
+        }
+
+        return match;
+    },
+
+    /**
+     * Checks if the input element contains a valid username.
+     * This is checked by ensuring it does not contain any characters that prevent it from being
+     * used as a firebase key or in a url.
+     *
+     * @param {HTMLInputElement} input - Input element to be tested.
+     * @returns {Boolean} Input element value is a valid username.
+     */
+    validateUsername: function (input) {
+        var pattern = /[a-zA-Z0-9]*/;
+        var username = input.value;
+        var match = username.match(pattern);
+        match = username === match[0];
+
+        if (!match) {
+            input.errorMessage = 'Alphanumeric characters only.';
             input.invalid = true;
         }
 
