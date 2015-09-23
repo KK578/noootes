@@ -62,5 +62,28 @@ Noootes.Elements['page-account'] = Polymer({
     },
 
     // Password Form
-    _validateFormPassword: function (event) {}
+    _validateFormPassword: function (event) {
+        var form = this.$['form-password'];
+        this.resetForm(form, false);
+
+        var detail = event.detail;
+        var inputEmail = form.querySelector('paper-input[name=email]');
+        var inputNewPassword = form.querySelector('paper-input[name=newPassword');
+        var inputConfirm = form.querySelector('paper-input[name=confirm]');
+
+        var validEmail = this.validateEmail(inputEmail);
+        var validPasswords = this.validateMatch(inputNewPassword, inputConfirm);
+
+        if (validEmail && validPasswords) {
+            var validUser = this.validateUser(inputEmail);
+
+            if (validUser) {
+                this.fire('firebase-change-password', {
+                    email: detail.email,
+                    password: detail.password,
+                    newPassword: detail.newPassword
+                });
+            }
+        }
+    }
 });
