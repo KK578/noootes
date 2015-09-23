@@ -1,4 +1,4 @@
-﻿Noootes.Behaviors.PageBehavior = {
+Noootes.Behaviors.PageBehavior = {
     properties: {
         pages: {
             type: Object,
@@ -7,6 +7,11 @@
                     'tag': '/home/',
                     'title': 'Home',
                     'element': 'page-home'
+                },
+                {
+                    'tag': '/groups/',
+                    'title': 'Groups',
+                    'element': 'page-groups'
                 },
                 {
                     'tag': '/account/',
