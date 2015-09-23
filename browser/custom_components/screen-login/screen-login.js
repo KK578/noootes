@@ -163,10 +163,12 @@ Noootes.Elements['screen-login'] = Polymer({
         var validPasswords = this.validateMatch(inputPassword, inputConfirm);
 
         if (validEmail && validUsername && validPasswords) {
-            this.fire('firebase-register', {
-                email: detail.email,
-                password: detail.password
-            });
+            this.validateUsernameAvailable(inputUsername, function () {
+                this.fire('firebase-register', {
+                    email: detail.email,
+                    password: detail.password
+                });
+            }.bind(this));
         }
     },
     _handleFailRegister: function (event) {

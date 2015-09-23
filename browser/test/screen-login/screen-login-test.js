@@ -348,22 +348,29 @@ describe('<screen-login>', function () {
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
 
-        it('should show an error message with valid inputs but a username in use', function (done) {
-            function assertions() {
+        it('should show an error message with valid inputs but a username already in use', function (done) {
+            function listener() {
                 var usernameInput = form.querySelector('paper-input[name=username]');
-                usernameInput.errorMessage.should.equal('That username is already taken.');
-                usernameInput.invalid.should.equal(true);
+
+                var handle = window.setInterval(function () {
+                    if (usernameInput.invalid) {
+                        usernameInput.errorMessage.should.equal('That username is already taken.');
+
+                        window.clearInterval(handle);
+                        done();
+                    }
+                }, 500);
+
+                window.removeEventListener('iron-form-submit', listener);
             }
 
-            var inputs = [
-                { name: 'paper-input[name=email]', value: 'Email@test.com' },
-                { name: 'paper-input[name=username]', value: 'Kek' },
-                { name: 'paper-input[name=password]', value: 'AnyPassword' },
-                { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
-            ];
-            var button = 'paper-button#button-register';
+            window.addEventListener('iron-form-submit', listener);
+            form.querySelector('paper-input[name=email]').value = 'Email@test.com';
+            form.querySelector('paper-input[name=username]').value = 'Kek';
+            form.querySelector('paper-input[name=password]').value = 'AnyPassword';
+            form.querySelector('paper-input[name=confirm]').value = 'AnyPassword';
 
-            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            form.querySelector('paper-button#button-register').click();
         });
 
         it('should fire "firebase-register" with all valid input', function (done) {
