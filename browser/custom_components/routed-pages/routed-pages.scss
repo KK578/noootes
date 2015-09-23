@@ -5,3 +5,11 @@
 :host {
     display: block;
 }
+
+neon-animated-pages {
+    overflow-y: auto;
+
+    & > * {
+        height: auto;
+    }
+}

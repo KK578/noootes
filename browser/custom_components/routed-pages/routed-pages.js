@@ -35,7 +35,8 @@ Noootes.Elements['routed-pages'] = Polymer({
      */
     properties: {
         _selectedPage: {
-            type: String
+            type: String,
+            observer: '_scrollPage'
         }
     },
 
@@ -90,6 +91,32 @@ Noootes.Elements['routed-pages'] = Polymer({
     },
 
     // Animations
+    _scrollPage: function () {
+        var pages = this.$.pages;
+        var start = pages.scrollTop;
+
+        function scrollToTop(duration) {
+            if (duration > 400) {
+                pages.scrollTop = 0;
+                return;
+            }
+
+            setTimeout(function () {
+                var tick = duration / 400.0;
+                var perTick = Math.pow(tick, 0.333);
+                pages.scrollTop = start * (1 - perTick);
+
+                if (pages.scrollTop <= 0) {
+                    pages.scrollTop = 0;
+                    return;
+                }
+
+                scrollToTop(duration + 10);
+            }, 10);
+        }
+
+        scrollToTop(0);
+    },
     // NOTE: Temporary fix for https://github.com/PolymerElements/neon-animation/issues/71
     cleanupAnimation: function () {
         var pages = this.$.pages;
