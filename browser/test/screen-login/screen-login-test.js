@@ -224,9 +224,16 @@ describe('<screen-login>', function () {
 
     describe('Register Form', function () {
         var form;
+        var username;
 
         before(function () {
             form = document.querySelector('#form-register');
+            username = 'NoTrollPls' + Math.floor((Math.random() * 50000));
+        });
+
+        after(function (done) {
+            var firebase = new Firebase('https://noootes-staging.firebaseio.com/users/stashed/' + username);
+            firebase.set(null, done);
         });
 
         it('should fire "iron-form-invalid" with empty inputs', function (done) {
@@ -379,11 +386,9 @@ describe('<screen-login>', function () {
                 event.detail.password.should.equal('AnyPassword');
             }
 
-            var randomUsername = 'NoTrollPls' + Math.floor((Math.random() * 50000));
-
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'Email@test.com' },
-                { name: 'paper-input[name=username]', value: randomUsername },
+                { name: 'paper-input[name=username]', value: username },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
             ];
