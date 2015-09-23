@@ -232,6 +232,7 @@ describe('<screen-login>', function () {
         it('should fire "iron-form-invalid" with empty inputs', function (done) {
             var inputs = [
                 { name: 'paper-input[name=email]', value: '' },
+                { name: 'paper-input[name=username]', value: '' },
                 { name: 'paper-input[name=password]', value: '' },
                 { name: 'paper-input[name=confirm]', value: '' }
             ];
@@ -243,12 +244,14 @@ describe('<screen-login>', function () {
         it('should fire "iron-form-submit" with any input', function (done) {
             function assertions(event) {
                 event.detail.email.should.equal('NotAnEmail');
+                event.detail.username.should.equal('A Username');
                 event.detail.password.should.equal('AnyPassword');
                 event.detail.confirm.should.equal('AnotherPassword');
             }
 
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'NotAnEmail' },
+                { name: 'paper-input[name=username]', value: 'A Username' },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnotherPassword' }
             ];
@@ -266,6 +269,25 @@ describe('<screen-login>', function () {
 
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'NotAnEmail' },
+                { name: 'paper-input[name=username]', value: 'AUsername' },
+                { name: 'paper-input[name=password]', value: 'AnyPassword' },
+                { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
+            ];
+            var button = 'paper-button#button-register';
+
+            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+        });
+
+        it('should show an error message with an invalid username', function (done) {
+            function assertions() {
+                var usernameInput = form.querySelector('paper-input[name=username]');
+                usernameInput.errorMessage.should.equal('Alphanumeric characters only.');
+                usernameInput.invalid.should.equal(true);
+            }
+
+            var inputs = [
+                { name: 'paper-input[name=email]', value: 'NotAnEmail' },
+                { name: 'paper-input[name=username]', value: '#A Username' },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
             ];
@@ -287,6 +309,7 @@ describe('<screen-login>', function () {
 
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'Email@test.com' },
+                { name: 'paper-input[name=username]', value: 'AUsername' },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnotherPassword' }
             ];
@@ -295,11 +318,15 @@ describe('<screen-login>', function () {
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
 
-        it('should show both error messages with all bad input', function (done) {
+        it('should show all error messages with all bad input', function (done) {
             function assertions() {
                 var emailInput = form.querySelector('paper-input[name=email]');
                 emailInput.errorMessage.should.equal('Please enter a valid email.');
                 emailInput.invalid.should.equal(true);
+
+                var usernameInput = form.querySelector('paper-input[name=username');
+                usernameInput.errorMessage.should.equal('Alphanumeric characters only.');
+                usernameInput.invalid.should.equal(true);
 
                 var passwordInput = form.querySelector('paper-input[name=password]');
                 passwordInput.errorMessage.should.equal('The values did not match.');
@@ -312,6 +339,7 @@ describe('<screen-login>', function () {
 
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'NotAnEmail' },
+                { name: 'paper-input[name=username]', value: '#A Username' },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnotherPassword' }
             ];
@@ -328,6 +356,7 @@ describe('<screen-login>', function () {
 
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'Email@test.com' },
+                { name: 'paper-input[name=username]', value: 'AUsername' },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
             ];
@@ -355,6 +384,7 @@ describe('<screen-login>', function () {
         it('should clear inputs on "firebase-register-success"', function (done) {
             function assertions() {
                 form.querySelector('paper-input[name=email]').value.should.not.equal('Email@test.com');
+                form.querySelector('paper-input[name=username]').value.should.not.equal('AUsername');
                 form.querySelector('paper-input[name=password]').value.should.not.equal('AnyPassword');
                 form.querySelector('paper-input[name=confirm]').value.should.not.equal('AnyPassword');
             }
@@ -362,6 +392,7 @@ describe('<screen-login>', function () {
             var detail = {};
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'Email@test.com' },
+                { name: 'paper-input[name=username]', value: 'AUsername' },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
             ];
