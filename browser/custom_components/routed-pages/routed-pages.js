@@ -67,6 +67,7 @@ Noootes.Elements['routed-pages'] = Polymer({
 
         function success() {
             this._selectedPage = page.tag;
+            this._endAnimation();
         }
 
         function error() {
@@ -77,10 +78,12 @@ Noootes.Elements['routed-pages'] = Polymer({
                 message: 'Failed to load "' + page.title + '" page.\n' +
                     'Please check your internet connection and refresh.'
             });
+            this._endAnimation();
         }
 
         // Check global array of imported elements, import if element is not present.
         if (!Noootes.Elements[element]) {
+            this._startAnimation();
             var href = 'custom_components/pages/' + element + '/' + element + '.html';
             this.importHref(href, success.bind(this), error.bind(this));
         }
@@ -91,6 +94,22 @@ Noootes.Elements['routed-pages'] = Polymer({
     },
 
     // Animations
+    _startAnimation: function () {
+        var loader = this.$['page-loader'];
+        var spinner = this.$['page-spinner'];
+
+        spinner.active = true;
+        loader.classList.add('block');
+        loader.classList.add('loading');
+    },
+    _endAnimation: function () {
+        var loader = this.$['page-loader'];
+        var spinner = this.$['page-spinner'];
+
+        spinner.active = false;
+        loader.classList.remove('loading');
+        loader.classList.remove('block');
+    },
     _scrollPage: function () {
         var pages = this.$.pages;
         var start = pages.scrollTop;
