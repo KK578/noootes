@@ -40,6 +40,11 @@ Noootes.Elements['page-account'] = Polymer({
     _attachListeners: function () {
         window.addEventListener('firebase-change-email-error', this._handleEmailFail.bind(this));
         window.addEventListener('firebase-change-email-success', this._resetFormEmail.bind(this));
+
+        window.addEventListener('firebase-change-password-error',
+            this._handlePasswordFail.bind(this));
+        window.addEventListener('firebase-change-password-success',
+            this._resetFormPassword.bind(this));
     },
 
     // All Forms
@@ -126,5 +131,27 @@ Noootes.Elements['page-account'] = Polymer({
                 });
             }
         }
+    },
+    _handlePasswordFail: function (event) {
+        var detail = event.detail;
+        var selector;
+
+        switch (detail.code) {
+            case 'INVALID_USER':
+                selector = 'paper-input[name=email]';
+                break;
+
+            case 'INVALID_PASSWORD':
+                selector = 'paper-input[name=password]';
+                break;
+
+            default:
+                return;
+        }
+
+        this._handleFormFail(this.$['form-password'], selector, detail.message);
+    },
+    _resetFormPassword: function () {
+        this.resetForm(this.$['form-password'], true);
     }
 });
