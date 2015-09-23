@@ -13,7 +13,7 @@ Noootes.Elements['screen-main'] = Polymer({
     attached: function () {
         var hash = window.location.hash.split('#')[1];
         window.location.hash = hash ? hash : '/home/';
-        this._checkHash();
+        this.async(this._checkHash);
     },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
