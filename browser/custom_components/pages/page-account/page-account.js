@@ -47,13 +47,6 @@ Noootes.Elements['page-account'] = Polymer({
             this._resetFormPassword.bind(this));
     },
 
-    // All Forms
-    _handleFormFail: function (form, selector, message) {
-        var input = form.querySelector(selector);
-        input.errorMessage = message;
-        input.invalid = true;
-    },
-
     // Email Form
     _validateFormEmail: function (event) {
         var form = this.$['form-email'];
@@ -101,7 +94,7 @@ Noootes.Elements['page-account'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-email'], selector, detail.message);
+        this.handleFormFail(this.$['form-email'], selector, detail.message);
     },
     _resetFormEmail: function () {
         this.resetForm(this.$['form-email'], true);
@@ -149,7 +142,7 @@ Noootes.Elements['page-account'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-password'], selector, detail.message);
+        this.handleFormFail(this.$['form-password'], selector, detail.message);
     },
     _resetFormPassword: function () {
         this.resetForm(this.$['form-password'], true);

@@ -64,13 +64,6 @@ Noootes.Elements['screen-login'] = Polymer({
         window.addEventListener('firebase-register-success', this._resetFormRegister.bind(this));
     },
 
-    // All Forms
-    _handleFormFail: function (form, selector, message) {
-        var input = form.querySelector(selector);
-        input.errorMessage = message;
-        input.invalid = true;
-    },
-
     // Form Login
     _validateFormLogin: function (event) {
         var form = this.$['form-login'];
@@ -108,7 +101,7 @@ Noootes.Elements['screen-login'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-login'], selector, detail.message);
+        this.handleFormFail(this.$['form-login'], selector, detail.message);
     },
     _resetFormLogin: function () {
         this.resetForm(this.$['form-login'], true);
@@ -147,7 +140,7 @@ Noootes.Elements['screen-login'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-login'], selector, detail.message);
+        this.handleFormFail(this.$['form-login'], selector, detail.message);
     },
     _resetFormResetPassword: function () {
         this.changeForm();
@@ -187,7 +180,7 @@ Noootes.Elements['screen-login'] = Polymer({
                 return;
         }
 
-        this._handleFormFail(this.$['form-register'], selector, detail.message);
+        this.handleFormFail(this.$['form-register'], selector, detail.message);
     },
     _resetFormRegister: function () {
         this.resetForm(this.$['form-register'], true);

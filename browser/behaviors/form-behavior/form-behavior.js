@@ -112,5 +112,17 @@
                 input.value = '';
             }
         }
+    },
+
+    /**
+     * Set error message on the selected input in the form.
+     * @param {HTMLElement} form - Form to select element from.
+     * @param {String} selector - CSS Selector string for input element which has errored.
+     * @param {String} message - Error message to set on the input.
+     */
+    handleFormFail: function (form, selector, message) {
+        var input = form.querySelector(selector);
+        input.errorMessage = message;
+        input.invalid = true;
     }
 };
