@@ -1,6 +1,19 @@
 chai.should();
 
 describe('<screen-main>', function () {
+    function listenToEventOnce(event, done, assertions) {
+        function listener(event) {
+            if (assertions) {
+                assertions(event);
+            }
+
+            window.removeEventListener(event, listener);
+            done();
+        }
+
+        window.addEventListener(event, listener);
+    }
+
     var screenMain;
 
     before(function () {
@@ -54,6 +67,30 @@ describe('<screen-main>', function () {
                 navigationItems[i].classList.contains('iron-selected').should.equal(false);
             }
         }
+    });
+
+    it('should fire "page-changed" on changing hash location', function (done) {
+        function assertions(event) {
+            var detail = event.detail;
+            detail.tag.should.equal('/about/');
+            detail.element.should.equal('page-about');
+        }
+
+        listenToEventOnce('page-changed', done, assertions);
+        window.location.hash = '/about/';
+    });
+
+    it('should fire "page-changed" on clicking a navigation item', function (done) {
+        function assertions(event) {
+            var detail = event.detail;
+            detail.tag.should.equal('/home/');
+            detail.element.should.equal('page-home');
+            window.location.hash.should.equal('/home/');
+        }
+
+        listenToEventOnce('page-changed', done, assertions);
+        var item = screenMain.querySelectorAll('.navigation-item')[0];
+        item.click();
     });
 
     describe('Logout Dialog', function () {
