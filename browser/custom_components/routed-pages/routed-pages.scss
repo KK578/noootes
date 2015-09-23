@@ -7,7 +7,7 @@
 }
 
 #page-loader {
-    @include transition(background-color 0.3s ease-out);
+    @include transition(transition-standard(background-color));
     z-index: -10;
     background-color: rgba(0, 0, 0, 0);
 

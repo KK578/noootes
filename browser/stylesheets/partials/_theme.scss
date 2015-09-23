@@ -1,5 +1,16 @@
 ﻿@import '_material_color.scss';
 
+/* Transitions */
+$theme-transition-duration: 0.3s;
+@function transition-standard($args, $duration:$theme-transition-duration) {
+    $string: nth($args, 1) $duration ease-out;
+    @for $i from 2 to length($args) + 1 {
+        $string: $string, nth($args, $i) $duration ease-out;
+    }
+    @return $string;
+}
+
+/* Colors */
 $theme-color: deep-purple;
 $theme-accent-color: blue;
 $theme-warning-color: red;

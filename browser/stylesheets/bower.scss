@@ -22,7 +22,7 @@ paper-toolbar.paper-toolbar-0 {
 }
 
 paper-item.paper-item-0 {
-    @include transition(background-color 0.3s ease-out, color 0.3s ease-out);
+    @include transition(transition-standard((background-color, color)));
     position: relative;
     min-height: 28px;
 

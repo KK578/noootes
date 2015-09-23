@@ -2,8 +2,6 @@
 @import 'partials/_mixins.scss';
 @import 'partials/_theme.scss';
 
-$duration: 0.25s;
-
 body.splash-animating {
     overflow: hidden;
 }
@@ -24,7 +22,7 @@ body.splash-animating {
 }
 
 #splash-card {
-    @include transition(background-color ease-out $duration);
+    @include transition(transition-standard(background-color));
     @include layout-vertical;
     @include layout-center;
     @include border-radius(8px);
@@ -36,7 +34,7 @@ body.splash-animating {
     }
 
     #splash-title {
-        @include transition(color ease-out $duration);
+        @include transition(transition-standard(color));
         color: rgba(0, 0, 0, 0);
         font-size: 24px;
         font-weight: 500;
@@ -50,7 +48,7 @@ body.splash-animating {
 }
 
 #splash-spinner {
-    @include transition(height $duration ease-out, width $duration ease-out, margin $duration ease-out);
+    @include transition(transition-standard((height, width, margin)));
     height: 28px;
     width: 28px;
     margin: 1em 0 0.5em;

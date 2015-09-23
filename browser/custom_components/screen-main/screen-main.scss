@@ -7,7 +7,7 @@
 }
 
 .navigation-item {
-    @include transition(color 0.3s ease-out, background-color 0.3s ease-out);
+    @include transition(transition-standard((background-color, color)));
     position: relative;
     color: $black-primary;
     background-color: $theme-background;
