@@ -164,6 +164,7 @@ Noootes.Elements['screen-login'] = Polymer({
 
         if (validEmail && validUsername && validPasswords) {
             this.validateUsernameAvailable(inputUsername, function () {
+                this._stashUsernameForLogin(detail.email, detail.username);
                 this.fire('firebase-register', {
                     email: detail.email,
                     password: detail.password
@@ -188,5 +189,11 @@ Noootes.Elements['screen-login'] = Polymer({
     },
     _resetFormRegister: function () {
         this.resetForm(this.$['form-register'], true);
+    },
+    _stashUsernameForLogin: function (email, username) {
+        var location = Noootes.Firebase.Location + 'users/stashed/' + username;
+        var firebase = new Firebase(location);
+
+        firebase.set(email);
     }
 });
