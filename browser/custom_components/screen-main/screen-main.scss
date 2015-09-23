@@ -22,7 +22,7 @@
 }
 
 paper-button[dialog-dismiss]::shadow paper-ripple {
-    color: -get-color($material-red, 500);
+    color: $theme-warning;
 }
 
 paper-toolbar h2 {
