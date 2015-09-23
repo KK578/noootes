@@ -7,6 +7,7 @@
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
+<link rel="import" href="../../../behaviors/form-behavior/form-behavior.html" />
 <link rel="import" href="../../fancy-material/fancy-material.html" />
 <!-- Other -->
 
@@ -16,13 +17,13 @@
         <fancy-material>
             <h1 class="top">Change Email</h1>
             <form is="iron-form" id="form-email" method="post" action="/form.html">
-                <paper-input name="email" label="Current Email" required></paper-input>
-                <paper-input name="password" label="Password" type="password" required></paper-input>
-                <paper-input name="newEmail" label="New Email" required></paper-input>
-                <paper-input name="confirm" label="Confirm New Email" required></paper-input>
+                <paper-input name="email" label="Current Email" required on-keydown="submitForm"></paper-input>
+                <paper-input name="password" label="Password" type="password" required on-keydown="submitForm"></paper-input>
+                <paper-input name="newEmail" label="New Email" required on-keydown="submitForm"></paper-input>
+                <paper-input name="confirm" label="Confirm New Email" required on-keydown="submitForm"></paper-input>
                 <div class="button-container layout horizontal">
                     <span class="flex"></span>
-                    <paper-button id="button-email">Change Email</paper-button>
+                    <paper-button id="button-email" on-tap="submitForm">Change Email</paper-button>
                 </div>
             </form>
         </fancy-material>
@@ -30,13 +31,13 @@
         <fancy-material>
             <h1 class="top">Change Password</h1>
             <form is="iron-form" id="form-password" method="post" action="/form.html">
-                <paper-input name="email" label="Current Email" required></paper-input>
-                <paper-input name="password" label="Password" type="password"></paper-input>
-                <paper-input name="newPassword" label="New Password" type="password"></paper-input>
-                <paper-input name="confirm" label="Confirm Password" type="password"></paper-input>
+                <paper-input name="email" label="Current Email" required on-keydown="submitForm"></paper-input>
+                <paper-input name="password" label="Password" type="password" required on-keydown="submitForm"></paper-input>
+                <paper-input name="newPassword" label="New Password" type="password" required on-keydown="submitForm"></paper-input>
+                <paper-input name="confirm" label="Confirm Password" type="password" required on-keydown="submitForm"></paper-input>
                 <div class="button-container layout horizontal">
                     <span class="flex"></span>
-                    <paper-button id="button-password">Change Password</paper-button>
+                    <paper-button id="button-password" on-tap="submitForm">Change Password</paper-button>
                 </div></form>
         </fancy-material>
     </template>
