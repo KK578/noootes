@@ -9,6 +9,7 @@ Noootes.Elements['routed-pages'] = Polymer({
     //created: function () {},
     ready: function () {
         this._setupPages();
+        this._attachListeners();
     },
     //attached: function () {},
 
@@ -50,6 +51,24 @@ Noootes.Elements['routed-pages'] = Polymer({
             element.setAttribute('route', page.tag);
 
             Polymer.dom(pages).appendChild(element);
+        }
+    },
+    _attachListeners: function () {
+        window.addEventListener('page-changed', this._handlePageChange.bind(this));
+    },
+
+    // Page Changes
+    _handlePageChange: function (event) {
+        var page = event.detail;
+        var element = page.element;
+
+        // Check global array of imported elements, import if element is not present.
+        if (!Noootes.Elements[element]) {
+            console.log('Import required.');
+        }
+        else {
+            // Otherwise, element is already imported, can change page immediately.
+            this._selectedPage = page.tag;
         }
     }
 });
