@@ -929,6 +929,12 @@
     <Content Include="browser\custom_components\fancy-material\fancy-material.scss" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.html" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.scss" />
+    <Content Include="browser\custom_components\pages\page-about\page-about.html" />
+    <Content Include="browser\custom_components\pages\page-about\page-about.scss" />
+    <Content Include="browser\custom_components\pages\page-account\page-account.html" />
+    <Content Include="browser\custom_components\pages\page-account\page-account.scss" />
+    <Content Include="browser\custom_components\pages\page-home\page-home.html" />
+    <Content Include="browser\custom_components\pages\page-home\page-home.scss" />
     <Content Include="browser\custom_components\routed-pages\routed-pages.html" />
     <Content Include="browser\custom_components\routed-pages\routed-pages.scss" />
     <Content Include="browser\custom_components\screen-login\screen-login.html" />
@@ -943,6 +949,7 @@
     <Content Include="browser\stylesheets\bower.scss" />
     <Content Include="browser\test\fancy-material\fancy-material-test.html" />
     <Content Include="browser\test\noootes-app\noootes-app-test.html" />
+    <Content Include="browser\test\pages\page-account\page-account-test.html" />
     <Content Include="browser\test\routed-pages\routed-pages-test.html" />
     <Content Include="browser\test\screen-login\screen-login-test.html" />
     <Content Include="browser\test\screen-main\screen-main-test.html" />
@@ -1193,6 +1200,10 @@
     <Content Include="browser\test\fancy-material\fancy-material-test.js" />
     <Content Include="browser\custom_components\routed-pages\routed-pages.js" />
     <Content Include="browser\test\routed-pages\routed-pages-test.js" />
+    <Content Include="browser\test\pages\page-account\page-account-test.js" />
+    <Content Include="browser\custom_components\pages\page-about\page-about.js" />
+    <Content Include="browser\custom_components\pages\page-account\page-account.js" />
+    <Content Include="browser\custom_components\pages\page-home\page-home.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
@@ -1495,6 +1506,10 @@
     <Folder Include="browser\custom_components\" />
     <Folder Include="browser\custom_components\fancy-material\" />
     <Folder Include="browser\custom_components\noootes-app\" />
+    <Folder Include="browser\custom_components\pages\" />
+    <Folder Include="browser\custom_components\pages\page-about\" />
+    <Folder Include="browser\custom_components\pages\page-account\" />
+    <Folder Include="browser\custom_components\pages\page-home\" />
     <Folder Include="browser\custom_components\routed-pages\" />
     <Folder Include="browser\custom_components\screen-login\" />
     <Folder Include="browser\custom_components\screen-main\" />
@@ -1507,6 +1522,8 @@
     <Folder Include="browser\test\" />
     <Folder Include="browser\test\fancy-material\" />
     <Folder Include="browser\test\noootes-app\" />
+    <Folder Include="browser\test\pages\" />
+    <Folder Include="browser\test\pages\page-account\" />
     <Folder Include="browser\test\routed-pages\" />
     <Folder Include="browser\test\screen-login\" />
     <Folder Include="browser\test\screen-main\" />
