@@ -1,7 +1,24 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html" />
 
+<!-- Iron -->
+<!-- Paper -->
+<!-- Neon -->
+<!-- Custom/Behaviors -->
+<link rel="import" href="../../fancy-material/fancy-material.html" />
+<!-- Other -->
+
 <dom-module id="page-home">
     <link rel="import" type="css" href="page-home.css?__inline" />
-    <template></template>
+    <template>
+        <fancy-material>
+            <h1 class="top">Home</h1>
+            <p>Welcome to Noootes!</p>
+        </fancy-material>
+
+        <fancy-material>
+            <h1 class="top">Navigation</h1>
+            <p>To navigate the app, select an item from the menu.</p>
+        </fancy-material>
+    </template>
     <script src="page-home.js?__inline"></script>
 </dom-module>
