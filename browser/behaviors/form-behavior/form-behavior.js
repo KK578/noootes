@@ -42,6 +42,28 @@
     },
 
     /**
+     * Checks if the input element contains a username that is not already taken.
+     *
+     * @param {HTMLInputElement} input - Input element to be tested.
+     * @param {Function} callback - Function to be called if username is available.
+     */
+    validateUsernameAvailable: function (input, callback) {
+        var username = input.value;
+        var location = Noootes.Firebase.Location + 'users/usernames/' + username;
+        var firebase = new Firebase(location);
+
+        firebase.once('value', function (ss) {
+            if (ss.val()) {
+                input.errorMessage = 'That username is already taken.';
+                input.invalid = true;
+            }
+            else {
+                callback();
+            }
+        });
+    },
+
+    /**
      * Checks if input element and confirmInput element have matching values.
      *
      * @param {HTMLInputElement} input - Input element to match.
