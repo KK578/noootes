@@ -348,15 +348,35 @@ describe('<screen-login>', function () {
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
 
+        it('should show an error message with valid inputs but a username in use', function (done) {
+            function assertions() {
+                var usernameInput = form.querySelector('paper-input[name=username]');
+                usernameInput.errorMessage.should.equal('That username is already taken.');
+                usernameInput.invalid.should.equal(true);
+            }
+
+            var inputs = [
+                { name: 'paper-input[name=email]', value: 'Email@test.com' },
+                { name: 'paper-input[name=username]', value: 'Kek' },
+                { name: 'paper-input[name=password]', value: 'AnyPassword' },
+                { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
+            ];
+            var button = 'paper-button#button-register';
+
+            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+        });
+
         it('should fire "firebase-register" with all valid input', function (done) {
             function assertions(event) {
                 event.detail.email.should.equal('Email@test.com');
                 event.detail.password.should.equal('AnyPassword');
             }
 
+            var randomUsername = 'NoTrollPls' + Math.floor((Math.random() * 50000));
+
             var inputs = [
                 { name: 'paper-input[name=email]', value: 'Email@test.com' },
-                { name: 'paper-input[name=username]', value: 'AUsername' },
+                { name: 'paper-input[name=username]', value: randomUsername },
                 { name: 'paper-input[name=password]', value: 'AnyPassword' },
                 { name: 'paper-input[name=confirm]', value: 'AnyPassword' }
             ];
