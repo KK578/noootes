@@ -33,11 +33,11 @@ describe('<noootes-group>', function () {
     });
 
     it('should use readable username', function (done) {
-        var info = noootesGroup.querySelector('paper-item');
+        var info = noootesGroup.querySelector('#group');
         var name = info.querySelector('#group-name');
 
         var handle = window.setInterval(function () {
-            if (name.textContent === 'Kek/Web Component Testing') {
+            if (name.textContent === 'Kek/WCT') {
                 window.clearInterval(handle);
                 done();
             }

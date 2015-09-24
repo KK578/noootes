@@ -2,7 +2,6 @@
 
 <!-- Iron -->
 <!-- Paper -->
-<link rel="import" href="../../bower_components/paper-item/paper-item.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <!-- Other -->
@@ -13,11 +12,13 @@
     <template>
         <firebase-document location="[[_location]]" data="{{_data}}"></firebase-document>
 
-        <paper-item>
-            <span id="group-name">
-                <span>[[_username]]</span><span>/</span><span>[[_data.title]]</span>
-            </span>
-        </paper-item>
+        <div id="group">
+            <span id="group-name"><span>[[_username]]</span><span>/</span><span>[[_data.code]]</span></span>
+            <div id="group-info" class="layout vertical">
+                <h2>[[_data.title]]</h2>
+                <span>[[_data.description]]</span>
+            </div>
+        </div>
     </template>
     <script src="noootes-group.js?__inline"></script>
 </dom-module>
