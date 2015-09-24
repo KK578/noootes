@@ -29,13 +29,18 @@ describe('<noootes-group>', function () {
                 window.clearInterval(handle);
                 done();
             }
-        }, 500);
+        }, 100);
     });
 
-    it('should user readable username', function () {
+    it('should use readable username', function (done) {
         var info = noootesGroup.querySelector('paper-item');
-
         var name = info.querySelector('#group-name');
-        name.textContent.should.equal('Kek/WCT');
+
+        var handle = window.setInterval(function () {
+            if (name.textContent === 'Kek/Web Component Testing') {
+                window.clearInterval(handle);
+                done();
+            }
+        }, 100);
     });
 });
