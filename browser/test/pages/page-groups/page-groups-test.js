@@ -3,8 +3,14 @@ chai.should();
 describe('<page-groups>', function () {
     var pageGroups;
 
-    before(function () {
+    before(function (done) {
         pageGroups = document.querySelector('page-groups');
+
+        var firebase = new Firebase(Noootes.Firebase.Location);
+        firebase.authWithPassword({
+            email: 'Web@Component.Tester',
+            password: 'WebComponentTester'
+        }, done);
     });
 
     describe('Search', function () {
