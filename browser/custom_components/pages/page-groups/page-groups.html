@@ -2,20 +2,34 @@
 
 <!-- Iron -->
 <!-- Paper -->
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../fancy-material/fancy-material.html" />
 <!-- Other -->
+<link rel="import" href="../../../bower_components/firebase-element/firebase-collection.html" />
 
 <dom-module id="page-groups">
     <link rel="import" type="css" href="page-groups.css?__inline" />
     <template>
+        <firebase-collection id="firebase-public-groups" location="[[_location]]" data="{{_groups}}"></firebase-collection>
+
         <fancy-material>
             <h1 class="top">Search</h1>
         </fancy-material>
 
         <fancy-material>
-            <h1 class="top">Public Groups</h1>
+            <div class="top layout horizontal flex">
+                <span class="anti-icon flex"></span>
+                <h1>Public Groups</h1>
+                <span class="flex"></span>
+                <paper-icon-button id="button-public-groups" class="top" icon="refresh" on-tap="setLocation"></paper-icon-button>
+            </div>
+            <div id="container-public-groups">
+                <template is="dom-repeat" items="{{_groups}}">
+                    <div>{{item.__firebaseKey__}}</div>
+                </template>
+            </div>
         </fancy-material>
     </template>
     <script src="page-groups.js?__inline"></script>
