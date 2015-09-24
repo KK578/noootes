@@ -35,7 +35,7 @@
             <iron-collapse opened="[[_locationSet]]">
                 <div id="container-public-groups">
                     <template is="dom-repeat" items="{{_groups}}">
-                        <div group="{{item.__firebaseKey__}}">{{item.__firebaseKey__}}</div>
+                        <noootes-group group="{{item.__firebaseKey__}}"></noootes-group>
                     </template>
                 </div>
             </iron-collapse>
