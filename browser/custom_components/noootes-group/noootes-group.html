@@ -13,11 +13,14 @@
         <firebase-document location="[[_location]]" data="{{_data}}"></firebase-document>
 
         <div id="group">
-            <span id="group-name"><span>[[_username]]</span><span>/</span><span>[[_data.code]]</span></span>
-            <div id="group-info" class="layout vertical">
-                <h2>[[_data.title]]</h2>
-                <span>[[_data.description]]</span>
-            </div>
+            <h2 id="group-name">
+                <span id="group-code">
+                    <span>[[_username]]</span><span>/</span><span>[[_data.code]]</span>
+                </span>
+                <span>-</span>
+                <span>[[_data.title]]</span>
+            </h2>
+            <em>[[_data.description]]</em>
         </div>
     </template>
     <script src="noootes-group.js?__inline"></script>

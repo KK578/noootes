@@ -34,7 +34,7 @@ describe('<noootes-group>', function () {
 
     it('should use readable username', function (done) {
         var info = noootesGroup.querySelector('#group');
-        var name = info.querySelector('#group-name');
+        var name = info.querySelector('#group-code');
 
         var handle = window.setInterval(function () {
             if (name.textContent === 'Kek/WCT') {
