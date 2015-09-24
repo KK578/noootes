@@ -1,8 +1,9 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html" />
 
 <!-- Iron -->
+<link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html" />
 <!-- Paper -->
-<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../fancy-material/fancy-material.html" />
@@ -19,17 +20,25 @@
         </fancy-material>
 
         <fancy-material>
-            <div class="top layout horizontal flex">
-                <span class="anti-icon flex"></span>
-                <h1>Public Groups</h1>
-                <span class="flex"></span>
-                <paper-icon-button id="button-public-groups" class="top" icon="refresh" on-tap="setLocation"></paper-icon-button>
-            </div>
-            <div id="container-public-groups">
-                <template is="dom-repeat" items="{{_groups}}">
-                    <div>{{item.__firebaseKey__}}</div>
-                </template>
-            </div>
+            <h1 class="top">Public Groups</h1>
+
+            <!-- Prior to load -->
+            <iron-collapse opened="[[!_locationSet]]">
+                <p>To see the list of all publically available groups. Click the button!</p>
+                <div class="layout horizontal">
+                    <span class="flex"></span>
+                    <paper-button id="button-public-groups" on-tap="setLocation">Show Groups</paper-button>
+                </div>
+            </iron-collapse>
+
+            <!-- Location set, groups will load. -->
+            <iron-collapse opened="[[_locationSet]]">
+                <div id="container-public-groups">
+                    <template is="dom-repeat" items="{{_groups}}">
+                        <div>{{item.__firebaseKey__}}</div>
+                    </template>
+                </div>
+            </iron-collapse>
         </fancy-material>
     </template>
     <script src="page-groups.js?__inline"></script>
