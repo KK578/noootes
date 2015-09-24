@@ -30,5 +30,19 @@ describe('<page-groups>', function () {
                 }
             }, 500);
         });
+
+        it('should set group property on templated items', function () {
+            var container = pageGroups.querySelector('#container-public-groups');
+            var children = container.childNodes;
+
+            for (var i = 0; i < children.length - 1; i++) {
+                if (i === children.length) {
+                    children[i].nodeName.should.equal('TEMPLATE');
+                }
+                else {
+                    children[i].group.should.match(/.{20}/);
+                }
+            }
+        });
     });
 });
