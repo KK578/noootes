@@ -31,4 +31,11 @@ describe('<noootes-group>', function () {
             }
         }, 500);
     });
+
+    it('should user readable username', function () {
+        var info = noootesGroup.querySelector('paper-item');
+
+        var name = info.querySelector('#group-name');
+        name.textContent.should.equal('Kek/WCT');
+    });
 });
