@@ -28,7 +28,44 @@ Noootes.Elements['noootes-group'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        group: {
+            type: String,
+            value: undefined,
+            observer: '_groupChanged'
+        },
+        _data: {
+            type: Object,
+            value: undefined,
+            observer: '_dataChanged'
+        },
+        _username: {
+            type: String,
+            value: undefined
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    // Property Observers
+    _groupChanged: function (n) {
+        if (n) {
+            this._location = Noootes.Firebase.Location + 'groups/metadata/' + n;
+        }
+    },
+    _dataChanged: function (n) {
+        if (n) {
+            this._getUsername(n.owner);
+        }
+    },
+
+    _getUsername: function (uid) {
+        if (uid) {
+            var location = Noootes.Firebase.Location + 'users/usernames/uid/' + uid;
+            var firebase = new Firebase(location);
+
+            firebase.once('value', function (ss) {
+                this._username = ss.val();
+            }.bind(this));
+        }
+    }
 });
