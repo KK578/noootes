@@ -164,7 +164,12 @@ Noootes.Elements['screen-login'] = Polymer({
 
         if (validEmail && validUsername && validPasswords) {
             this.validateUsernameAvailable(inputUsername, function () {
-                this._stashUsernameForLogin(detail.email, detail.username);
+                // Stash username locally to allow firebase-register to return status.
+                this._stash = {
+                    email: detail.email,
+                    username: detail.username
+                };
+
                 this.fire('firebase-register', {
                     email: detail.email,
                     password: detail.password
@@ -186,14 +191,26 @@ Noootes.Elements['screen-login'] = Polymer({
         }
 
         this.handleFormFail(this.$['form-register'], selector, detail.message);
+        // Registration failed, stash is no longer required.
+        this._stash = undefined;
     },
     _resetFormRegister: function () {
+        // Only stash username after firebase-register-success.
+        // This allows checks for the email not already being taken to be done.
+        if (this._stash) {
+            this._stashUsername();
+        }
+
         this.resetForm(this.$['form-register'], true);
     },
-    _stashUsernameForLogin: function (email, username) {
-        var location = Noootes.Firebase.Location + 'users/stashed/' + username;
+
+    // Usernames
+    _stashUsername: function () {
+        var location = Noootes.Firebase.Location + 'users/stashed/' + this._stash.username;
         var firebase = new Firebase(location);
 
-        firebase.set(email);
+        firebase.set(this._stash.email);
+
+        this._stash = undefined;
     }
 });

@@ -34,7 +34,7 @@
         match = username === match[0];
 
         if (!match) {
-            input.errorMessage = 'Alphanumeric characters only.';
+            input.errorMessage = 'Please enter a valid username.';
             input.invalid = true;
         }
 
@@ -49,7 +49,7 @@
      */
     validateUsernameAvailable: function (input, callback) {
         var username = input.value;
-        var location = Noootes.Firebase.Location + 'users/usernames/' + username;
+        var location = Noootes.Firebase.Location + 'users/usernames/names/' + username;
         var firebase = new Firebase(location);
 
         firebase.once('value', function (ss) {

@@ -288,7 +288,7 @@ describe('<screen-login>', function () {
         it('should show an error message with an invalid username', function (done) {
             function assertions() {
                 var usernameInput = form.querySelector('paper-input[name=username]');
-                usernameInput.errorMessage.should.equal('Alphanumeric characters only.');
+                usernameInput.errorMessage.should.equal('Please enter a valid username.');
                 usernameInput.invalid.should.equal(true);
             }
 
@@ -332,7 +332,7 @@ describe('<screen-login>', function () {
                 emailInput.invalid.should.equal(true);
 
                 var usernameInput = form.querySelector('paper-input[name=username');
-                usernameInput.errorMessage.should.equal('Alphanumeric characters only.');
+                usernameInput.errorMessage.should.equal('Please enter a valid username.');
                 usernameInput.invalid.should.equal(true);
 
                 var passwordInput = form.querySelector('paper-input[name=password]');
@@ -366,7 +366,7 @@ describe('<screen-login>', function () {
                         window.clearInterval(handle);
                         done();
                     }
-                }, 500);
+                }, 100);
 
                 window.removeEventListener('iron-form-submit', listener);
             }
