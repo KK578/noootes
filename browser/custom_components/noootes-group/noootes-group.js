@@ -28,7 +28,19 @@ Noootes.Elements['noootes-group'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        group: {
+            type: String,
+            value: undefined,
+            observer: '_groupChanged'
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    // Group listener
+    _groupChanged: function (n) {
+        if (n) {
+            this._location = Noootes.Firebase.Location + 'groups/metadata/' + n;
+        }
+    }
 });

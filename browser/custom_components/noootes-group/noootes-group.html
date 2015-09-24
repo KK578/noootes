@@ -5,9 +5,12 @@
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <!-- Other -->
+<link rel="import" href="../../bower_components/firebase-element/firebase-document.html" />
 
 <dom-module id="noootes-group">
     <link rel="import" type="css" href="noootes-group.css?__inline" />
-    <template></template>
+    <template>
+        <firebase-document location="[[_location]]" data="{{_data}}"></firebase-document>
+    </template>
     <script src="noootes-group.js?__inline"></script>
 </dom-module>

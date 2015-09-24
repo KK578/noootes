@@ -18,6 +18,7 @@ describe('<noootes-group>', function () {
                 data.code.should.equal('WCT');
                 data.title.should.equal('Web Component Testing');
                 data.owner.should.equal('bdcdc03c-01b8-4080-b77c-40df9b64067b');
+                data.description.should.equal('The First Nooote.');
 
                 window.clearInterval(handle);
                 done();
