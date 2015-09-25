@@ -10,7 +10,10 @@ describe('<noootes-group>', function () {
         firebase.authWithPassword({
             email: 'Web@Component.Tester',
             password: 'WebComponentTester'
-        }, done);
+        }, function (err, user) {
+            Noootes.Firebase.User = user;
+            done();
+        });
     });
 
     it('should fetch data from firebase on changing group', function (done) {
@@ -59,10 +62,10 @@ describe('<noootes-group>', function () {
 
     it('should show access status in iron-collapse', function () {
         var statusAccess = noootesGroup.querySelector('#group-status-access');
-        statusAccess.textContent.should.equal('Global Access Status: "Read"');
+        statusAccess.textContent.should.equal('Global Access Status: Read');
 
         var statusRequest = noootesGroup.querySelector('#group-status-request');
-        statusRequest.textContent.should.equal('Your Status: "Read"');
+        statusRequest.textContent.should.equal('Your Status: Read');
     });
 
     it('should remove all data on removing group', function () {

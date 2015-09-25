@@ -122,7 +122,59 @@ Noootes.Elements['noootes-group'] = Polymer({
         });
     },
     _setAccessStrings: function (data) {
-        this._accessData = data;
+        function global(access) {
+            var result;
+
+            switch (access) {
+                case 'read':
+                    result = 'Read';
+                    break;
+
+                case 'write':
+                    result = 'Read/Write';
+                    break;
+
+                case 'N/A':
+                    /* falls through */
+                default:
+                    result = 'None';
+                    break;
+            }
+
+            return result;
+        }
+
+        function user(uid, collab, request) {
+            var result;
+
+            if (Noootes.Firebase.User.uid === uid) {
+                result = 'Owner';
+            }
+            else {
+                switch (collab) {
+                    case 'read':
+                        result = 'Read';
+                        break;
+
+                    case 'write':
+                        result = 'Read/Write';
+                        break;
+
+                    case 'N/A':
+                        /* falls through */
+                    default:
+                        result = request ? 'Under Request' : 'None';
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        this._accessData = {
+            global: global(data.global),
+            user: user(this._data.owner, data.user)
+        };
         this._accessDataLoaded = true;
     },
     _accessDataLoadedChanged: function (n) {
