@@ -67,7 +67,7 @@
                 else {
                     callback(new Error('Invalid Name.'));
                 }
-            })
+            });
         }
     }
 };

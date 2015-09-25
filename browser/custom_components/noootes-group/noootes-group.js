@@ -11,7 +11,7 @@ Noootes.Elements['noootes-group'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.FirebaseBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -76,18 +76,8 @@ Noootes.Elements['noootes-group'] = Polymer({
     },
     _dataChanged: function (n) {
         if (n) {
-            this._getUsername(n.owner);
-        }
-    },
-
-    // TODO: Move to firebase behavior method.
-    _getUsername: function (uid) {
-        if (uid) {
-            var location = Noootes.Firebase.Location + 'users/usernames/uid/' + uid;
-            var firebase = new Firebase(location);
-
-            firebase.once('value', function (ss) {
-                this._username = ss.val();
+            this.getUsername(n.owner, function (err, name) {
+                this._username = name;
             }.bind(this));
         }
     },
