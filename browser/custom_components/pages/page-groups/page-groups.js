@@ -28,7 +28,20 @@ Noootes.Elements['page-groups'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        _location: {
+            type: String,
+            value: undefined
+        },
+        _locationSet: {
+            type: Boolean,
+            value: false
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    setLocation: function () {
+        this._location = Noootes.Firebase.Location + 'groups/public';
+        this._locationSet = true;
+    }
 });
