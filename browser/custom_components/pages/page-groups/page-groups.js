@@ -11,7 +11,10 @@ Noootes.Elements['page-groups'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    behaviors: [Noootes.Behaviors.FormBehavior],
+    behaviors: [
+        Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.FormBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
@@ -64,16 +67,17 @@ Noootes.Elements['page-groups'] = Polymer({
         }
     },
     _searchGroup: function (user, code) {
-        // TODO: Fetch UID.
-        var location = Noootes.Firebase.Location + 'groups/access/';
-        var firebase = new Firebase(location);
+        this.getUid(user, function (uid) {
+            var location = Noootes.Firebase.Location + 'groups/access/id/';
+            var firebase = new Firebase(location);
 
-        firebase.child(user).child(code).once('value', function (ss) {
-            var data = ss.val();
+            firebase.child(uid).child(code).once('value', function (ss) {
+                var data = ss.val();
 
-            if (data) {
-                console.log('Found group id: ' + data);
-            }
+                if (data) {
+                    console.log('Found group id: ' + data);
+                }
+            });
         });
     }
 });
