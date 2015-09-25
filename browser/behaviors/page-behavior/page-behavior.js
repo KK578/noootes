@@ -10,12 +10,17 @@ Noootes.Behaviors.PageBehavior = {
                 },
                 {
                     'tag': '/groups/',
-                    'title': 'Groups',
+                    'title': 'All Noootes',
                     'element': 'page-groups'
                 },
                 {
+                    'tag': '/personal/',
+                    'title': 'My Noootes',
+                    'element': 'page-personal'
+                },
+                {
                     'tag': '/account/',
-                    'title': 'Manage Account',
+                    'title': 'Account Settings',
                     'element': 'page-account'
                 },
                 {
