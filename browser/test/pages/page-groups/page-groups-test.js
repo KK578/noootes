@@ -26,7 +26,7 @@ describe('<page-groups>', function () {
     before(function (done) {
         pageGroups = document.querySelector('page-groups');
 
-        var firebase = new Firebase(Noootes.Firebase.Location);
+        var firebase = Noootes.FirebaseRef();
         firebase.authWithPassword({
             email: 'Web@Component.Tester',
             password: 'WebComponentTester'

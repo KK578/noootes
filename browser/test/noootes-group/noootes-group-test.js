@@ -6,7 +6,7 @@ describe('<noootes-group>', function () {
     before(function (done) {
         noootesGroup = document.querySelector('noootes-group');
 
-        var firebase = new Firebase(Noootes.Firebase.Location);
+        var firebase = Noootes.FirebaseRef();
         firebase.authWithPassword({
             email: 'Web@Component.Tester',
             password: 'WebComponentTester'
