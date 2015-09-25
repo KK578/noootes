@@ -9,3 +9,13 @@
 .button-container {
     clear: both;
 }
+
+#container-public-groups {
+    noootes-group {
+        border-top: solid $black-divider 2px;
+
+        &:first-child {
+            border-top: none;
+        }
+    }
+}

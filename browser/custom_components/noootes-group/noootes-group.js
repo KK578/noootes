@@ -69,6 +69,8 @@ Noootes.Elements['noootes-group'] = Polymer({
     // Property Observers
     _groupChanged: function (n) {
         if (n) {
+            this._accessDataLoaded = false;
+            this._collapseOpen = false;
             this._location = Noootes.Firebase.Location + 'groups/metadata/' + n;
         }
     },

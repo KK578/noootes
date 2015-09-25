@@ -4,12 +4,9 @@
 
 :host {
     display: block;
+    padding: 8px 12px;
 }
 
-#group {
-    padding: 8px 12px;
-
-    h2 {
-        margin-top: 0;
-    }
+#group h2 {
+    margin-top: 0;
 }
