@@ -10,7 +10,10 @@
         ]
     },
     components: {
-        src: ['browser/custom_components/**/*.js']
+        src: [
+            'browser/custom_components/**/*.js',
+            'browser/behaviors/**/*.js'
+        ]
     },
     views: {
         src: ['browser/scripts/**/*.js']

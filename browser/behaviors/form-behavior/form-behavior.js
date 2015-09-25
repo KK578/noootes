@@ -125,8 +125,7 @@
                 if (event.keyCode === 13) {
                     break;
                 }
-                return;
-
+                /* falls through */
             default:
                 return;
         }
@@ -153,7 +152,7 @@
      * @param {Boolean} clear - If true, paper-input value will also be emptied.
      */
     resetForm: function (form, clear) {
-        var inputs = form.querySelectorAll('paper-input')
+        var inputs = form.querySelectorAll('paper-input');
 
         for (var i = 0; i < inputs.length; i++) {
             var input = inputs[i];
