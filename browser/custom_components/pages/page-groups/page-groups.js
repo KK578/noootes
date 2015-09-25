@@ -63,6 +63,7 @@ Noootes.Elements['page-groups'] = Polymer({
         var validCode = this.validateCode(inputCode);
 
         if (validUser && validCode) {
+            this._showSearchResult = false;
             this._searchGroup(detail.user, detail.code);
         }
     },
@@ -85,6 +86,7 @@ Noootes.Elements['page-groups'] = Polymer({
                 return;
         }
 
+        this._groupSearchResult = undefined;
         this.handleFormFail(this.$['form-search'], selector, message);
     },
     _searchGroup: function (user, code) {
@@ -101,6 +103,7 @@ Noootes.Elements['page-groups'] = Polymer({
                 var data = ss.val();
 
                 if (data) {
+                    this._showSearchResult = true;
                     this._groupSearchResult = data;
                 }
                 else {

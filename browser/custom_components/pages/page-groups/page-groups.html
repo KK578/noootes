@@ -31,7 +31,10 @@
                 </div>
             </form>
 
-            <noootes-group id="group-search-result" group="{{_groupSearchResult}}"></noootes-group>
+            <iron-collapse opened="{{_showSearchResult}}">
+                <hr />
+                <noootes-group id="group-search-result" group="{{_groupSearchResult}}"></noootes-group>
+            </iron-collapse>
         </fancy-material>
 
         <fancy-material>
