@@ -96,8 +96,7 @@ Noootes.Elements['page-groups'] = Polymer({
                 return;
             }
 
-            var location = Noootes.Firebase.Location + 'groups/access/id/';
-            var firebase = new Firebase(location);
+            var firebase = Noootes.FirebaseRef('groups/access/id/');
 
             firebase.child(uid).child(code).once('value', function (ss) {
                 var data = ss.val();

@@ -243,8 +243,7 @@ Noootes.Elements['screen-login'] = Polymer({
         }
 
         if (user) {
-            var location = Noootes.Firebase.Location + 'users/usernames';
-            var firebase = new Firebase(location);
+            var firebase = Noootes.FirebaseRef('users/usernames/');
 
             // Check if uid is already registered with a username.
             firebase.child('uid/' + user.uid).once('value', function (ss) {
@@ -259,8 +258,7 @@ Noootes.Elements['screen-login'] = Polymer({
         var user = Noootes.Firebase.User;
 
         if (user) {
-            var location = Noootes.Firebase.Location + 'users/usernames';
-            var firebase = new Firebase(location);
+            var firebase = Noootes.FirebaseRef('users/usernames/');
 
             // Copy item to both uid key list and name key list.
             firebase.child('uid/' + user.uid).set(username);
@@ -270,12 +268,11 @@ Noootes.Elements['screen-login'] = Polymer({
         }
     },
     _stashUsername: function () {
-        var location = Noootes.Firebase.Location + 'users/usernames/stash/' +
-            this._stash.username;
-        var firebase = new Firebase(location);
+        var username = this._stash.username;
+        var email = this._stash.email.toLowerCase();
+        var firebase = Noootes.FirebaseRef('users/usernames/stash/');
 
-        firebase.set(this._stash.email.toLowerCase());
-
+        firebase.child(username).set(email);
         this._stash = undefined;
     }
 });

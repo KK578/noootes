@@ -105,8 +105,7 @@ Noootes.Elements['noootes-group'] = Polymer({
         }
 
         var user = Noootes.Firebase.User;
-        var location = Noootes.Firebase.Location + 'groups/access';
-        var firebase = new Firebase(location);
+        var firebase = Noootes.FirebaseRef('groups/access');
 
         firebase.child('global/' + this.group).on('value', function (ss) {
             data.global = ss.val() || 'N/A';

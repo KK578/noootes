@@ -25,8 +25,7 @@
             callback(null, Noootes.Usernames.uid[uid]);
         }
         else {
-            var location = Noootes.Firebase.Location + 'users/usernames/uid/' + uid;
-            var firebase = new Firebase(location);
+            var firebase = Noootes.FirebaseRef('users/usernames/uid/' + uid);
 
             firebase.once('value', function (ss) {
                 var name = ss.val();
@@ -53,8 +52,7 @@
             callback(null, Noootes.Usernames.names[name]);
         }
         else {
-            var location = Noootes.Firebase.Location + 'users/usernames/names/' + name;
-            var firebase = new Firebase(location);
+            var firebase = Noootes.FirebaseRef('users/usernames/names/' + name);
 
             firebase.once('value', function (ss) {
                 var uid = ss.val();

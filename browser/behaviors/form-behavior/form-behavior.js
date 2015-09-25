@@ -49,8 +49,7 @@
      */
     validateUsernameAvailable: function (input, callback) {
         var username = input.value;
-        var location = Noootes.Firebase.Location + 'users/usernames';
-        var firebase = new Firebase(location);
+        var firebase = Noootes.FirebaseRef('users/usernames/');
 
         firebase.child('names/' + username).once('value', function (ss) {
             if (ss.val()) {
