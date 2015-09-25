@@ -49,16 +49,24 @@
      */
     validateUsernameAvailable: function (input, callback) {
         var username = input.value;
-        var location = Noootes.Firebase.Location + 'users/usernames/names/' + username;
+        var location = Noootes.Firebase.Location + 'users';
         var firebase = new Firebase(location);
 
-        firebase.once('value', function (ss) {
+        firebase.child('usernames/names/' + username).once('value', function (ss) {
             if (ss.val()) {
                 input.errorMessage = 'That username is already taken.';
                 input.invalid = true;
             }
             else {
-                callback();
+                firebase.child('stashed/' + username).once('value', function (s) {
+                    if (s.val()) {
+                        input.errorMessage = 'That username is already taken.';
+                        input.invalid = true;
+                    }
+                    else {
+                        callback();
+                    }
+                });
             }
         });
     },
