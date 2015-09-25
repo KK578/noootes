@@ -10,7 +10,10 @@ describe('<page-personal>', function () {
         firebase.authWithPassword({
             email: 'Web@Component.Tester',
             password: 'WebComponentTester'
-        }, done);
+        }, function (err, user) {
+            Noootes.Firebase.User = user;
+            done();
+        });
     });
 
     describe('Owned Groups', function () {
@@ -34,7 +37,7 @@ describe('<page-personal>', function () {
         });
 
         it('should set group property on templated items', function () {
-            var container = pagePersonal.querySelector('#container-public-groups');
+            var container = pagePersonal.querySelector('#container-groups-owned');
             var children = container.childNodes;
 
             for (var i = 0; i < children.length - 1; i++) {

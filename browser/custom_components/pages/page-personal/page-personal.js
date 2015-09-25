@@ -28,7 +28,21 @@ Noootes.Elements['page-personal'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        _ownedLocation: {
+            type: String,
+            value: undefined
+        },
+        _ownedLocationSet: {
+            type: Boolean,
+            value: false
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    setOwnedLocation: function () {
+        var user = Noootes.Firebase.User;
+        this._ownedLocation = Noootes.Firebase.Location + 'users/personal/' + user.uid + '/owned';
+        this._ownedLocationSet = true;
+    }
 });
