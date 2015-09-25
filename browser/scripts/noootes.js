@@ -5,6 +5,9 @@
         Location: 'https://noootes.firebaseio.com/',
         User: {}
     },
+    FirebaseRef: function (location) {
+        return new Firebase(this.Firebase.Location + location);
+    },
     Usernames: {
         names: {},
         uid: {}
