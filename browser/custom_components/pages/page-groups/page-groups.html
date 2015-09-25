@@ -9,6 +9,7 @@
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../fancy-material/fancy-material.html" />
+<link rel="import" href="../../../behaviors/firebase-behavior/firebase-behavior.html" />
 <link rel="import" href="../../../behaviors/form-behavior/form-behavior.html" />
 <!-- Other -->
 <link rel="import" href="../../../bower_components/firebase-element/firebase-collection.html" />
@@ -29,6 +30,11 @@
                     <paper-button id="button-search" on-tap="submitForm">Search Group</paper-button>
                 </div>
             </form>
+
+            <iron-collapse opened="{{_showSearchResult}}">
+                <hr />
+                <noootes-group id="group-search-result" group="{{_groupSearchResult}}"></noootes-group>
+            </iron-collapse>
         </fancy-material>
 
         <fancy-material>

@@ -42,6 +42,26 @@ Noootes.Elements['noootes-group'] = Polymer({
         _username: {
             type: String,
             value: undefined
+        },
+
+        // Access
+        _accessData: {
+            type: Object,
+            value: {}
+        },
+        _accessDataLoaded: {
+            type: Boolean,
+            value: false,
+            observer: '_accessDataLoadedChanged'
+        },
+        _buttonIcon: {
+            type: String,
+            value: 'arrow-drop-down'
+        },
+        _collapseOpen: {
+            type: Boolean,
+            value: false,
+            observer: '_collapseChanged'
         }
     },
 
@@ -49,6 +69,8 @@ Noootes.Elements['noootes-group'] = Polymer({
     // Property Observers
     _groupChanged: function (n) {
         if (n) {
+            this._accessDataLoaded = false;
+            this._collapseOpen = false;
             this._location = Noootes.Firebase.Location + 'groups/metadata/' + n;
         }
     },
@@ -58,6 +80,7 @@ Noootes.Elements['noootes-group'] = Polymer({
         }
     },
 
+    // TODO: Move to firebase behavior method.
     _getUsername: function (uid) {
         if (uid) {
             var location = Noootes.Firebase.Location + 'users/usernames/uid/' + uid;
@@ -66,6 +89,104 @@ Noootes.Elements['noootes-group'] = Polymer({
             firebase.once('value', function (ss) {
                 this._username = ss.val();
             }.bind(this));
+        }
+    },
+
+    // Access Data
+    toggleCollapse: function () {
+        if (!this._accessDataLoaded) {
+            this._loadAccessData();
+        }
+        else {
+            this._collapseOpen = !this._collapseOpen;
+        }
+    },
+    _collapseChanged: function (n) {
+        this._buttonIcon = 'arrow-drop-' + (n ? 'up' : 'down');
+    },
+    _loadAccessData: function () {
+        var data = {};
+        var self = this;
+
+        function done() {
+            if (data.global && data.user) {
+                self._setAccessStrings(data);
+            }
+        }
+
+        var user = Noootes.Firebase.User;
+        var location = Noootes.Firebase.Location + 'groups/access';
+        var firebase = new Firebase(location);
+
+        firebase.child('global/' + this.group).on('value', function (ss) {
+            data.global = ss.val() || 'N/A';
+            done();
+        });
+
+        firebase.child('collaborators/' + this.group).child(user.uid).on('value', function (ss) {
+            data.user = ss.val() || 'N/A';
+            done();
+        });
+    },
+    _setAccessStrings: function (data) {
+        function global(access) {
+            var result;
+
+            switch (access) {
+                case 'read':
+                    result = 'Read';
+                    break;
+
+                case 'write':
+                    result = 'Read/Write';
+                    break;
+
+                case 'N/A':
+                    /* falls through */
+                default:
+                    result = 'None';
+                    break;
+            }
+
+            return result;
+        }
+
+        function user(uid, collab, request) {
+            var result;
+
+            if (Noootes.Firebase.User.uid === uid) {
+                result = 'Owner';
+            }
+            else {
+                switch (collab) {
+                    case 'read':
+                        result = 'Read';
+                        break;
+
+                    case 'write':
+                        result = 'Read/Write';
+                        break;
+
+                    case 'N/A':
+                        /* falls through */
+                    default:
+                        result = request ? 'Under Request' : 'None';
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        this._accessData = {
+            global: global(data.global),
+            user: user(this._data.owner, data.user)
+        };
+        this._accessDataLoaded = true;
+    },
+    _accessDataLoadedChanged: function (n) {
+        if (n) {
+            this._collapseOpen = true;
         }
     }
 });

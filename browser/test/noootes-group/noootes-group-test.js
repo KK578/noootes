@@ -10,7 +10,10 @@ describe('<noootes-group>', function () {
         firebase.authWithPassword({
             email: 'Web@Component.Tester',
             password: 'WebComponentTester'
-        }, done);
+        }, function (err, user) {
+            Noootes.Firebase.User = user;
+            done();
+        });
     });
 
     it('should fetch data from firebase on changing group', function (done) {
@@ -33,8 +36,8 @@ describe('<noootes-group>', function () {
     });
 
     it('should use readable username', function (done) {
-        var info = noootesGroup.querySelector('#group');
-        var name = info.querySelector('#group-name');
+        var group = noootesGroup.querySelector('#group');
+        var name = group.querySelector('#group-code');
 
         var handle = window.setInterval(function () {
             if (name.textContent === 'Kek/WCT') {
@@ -42,5 +45,26 @@ describe('<noootes-group>', function () {
                 done();
             }
         }, 100);
+    });
+
+    it('should open collapse on clicking button', function (done) {
+        var button = noootesGroup.querySelector('#group-button');
+        var collapse = noootesGroup.querySelector('#group-collapse');
+        button.click();
+
+        var handle = window.setInterval(function () {
+            if (collapse.opened) {
+                window.clearInterval(handle);
+                done();
+            }
+        }, 100);
+    });
+
+    it('should show access status in iron-collapse', function () {
+        var statusAccess = noootesGroup.querySelector('#group-status-access');
+        statusAccess.textContent.should.equal('Global Access Status: Read');
+
+        var statusRequest = noootesGroup.querySelector('#group-status-request');
+        statusRequest.textContent.should.equal('Your Status: Read');
     });
 });

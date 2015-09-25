@@ -11,7 +11,10 @@ Noootes.Elements['page-groups'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    behaviors: [Noootes.Behaviors.FormBehavior],
+    behaviors: [
+        Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.FormBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
@@ -60,20 +63,53 @@ Noootes.Elements['page-groups'] = Polymer({
         var validCode = this.validateCode(inputCode);
 
         if (validUser && validCode) {
+            this._showSearchResult = false;
             this._searchGroup(detail.user, detail.code);
         }
     },
+    _handleFailSearch: function (err) {
+        var selector;
+        var message;
+
+        switch (err) {
+            case 'INVALID_NAME':
+                selector = 'paper-input[name=user]';
+                message = 'The specified username was not found.';
+                break;
+
+            case 'INVALID_CODE':
+                selector = 'paper-input[name=code]';
+                message = 'The specified code was not found.';
+                break;
+
+            default:
+                return;
+        }
+
+        this._groupSearchResult = undefined;
+        this.handleFormFail(this.$['form-search'], selector, message);
+    },
     _searchGroup: function (user, code) {
-        // TODO: Fetch UID.
-        var location = Noootes.Firebase.Location + 'groups/access/';
-        var firebase = new Firebase(location);
-
-        firebase.child(user).child(code).once('value', function (ss) {
-            var data = ss.val();
-
-            if (data) {
-                console.log('Found group id: ' + data);
+        this.getUid(user, function (err, uid) {
+            if (err) {
+                this._handleFailSearch('INVALID_NAME');
+                return;
             }
-        });
+
+            var location = Noootes.Firebase.Location + 'groups/access/id/';
+            var firebase = new Firebase(location);
+
+            firebase.child(uid).child(code).once('value', function (ss) {
+                var data = ss.val();
+
+                if (data) {
+                    this._showSearchResult = true;
+                    this._groupSearchResult = data;
+                }
+                else {
+                    this._handleFailSearch('INVALID_CODE');
+                }
+            }.bind(this));
+        }.bind(this));
     }
 });
