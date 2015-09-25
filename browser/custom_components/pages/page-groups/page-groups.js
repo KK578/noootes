@@ -66,8 +66,34 @@ Noootes.Elements['page-groups'] = Polymer({
             this._searchGroup(detail.user, detail.code);
         }
     },
+    _handleFailSearch: function (err) {
+        var selector;
+        var message;
+
+        switch (err) {
+            case 'INVALID_NAME':
+                selector = 'paper-input[name=user]';
+                message = 'The specified username was not found.';
+                break;
+
+            case 'INVALID_CODE':
+                selector = 'paper-input[name=code]';
+                message = 'The specified code was not found.';
+                break;
+
+            default:
+                return;
+        }
+
+        this.handleFormFail(this.$['form-search'], selector, message);
+    },
     _searchGroup: function (user, code) {
-        this.getUid(user, function (uid) {
+        this.getUid(user, function (err, uid) {
+            if (err) {
+                this._handleFailSearch('INVALID_NAME');
+                return;
+            }
+
             var location = Noootes.Firebase.Location + 'groups/access/id/';
             var firebase = new Firebase(location);
 
@@ -75,9 +101,12 @@ Noootes.Elements['page-groups'] = Polymer({
                 var data = ss.val();
 
                 if (data) {
-                    console.log('Found group id: ' + data);
+                    this._groupSearchResult = data;
                 }
-            });
-        });
+                else {
+                    this._handleFailSearch('INVALID_CODE');
+                }
+            }.bind(this));
+        }.bind(this));
     }
 });

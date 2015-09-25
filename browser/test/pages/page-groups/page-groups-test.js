@@ -112,7 +112,12 @@ describe('<page-groups>', function () {
         it('should show a noootes-group if a group is found', function (done) {
             function assertions() {
                 var result = pageGroups.querySelector('noootes-group#group-search-result');
-                result.textContent.should.match(/Kek\/WCTPRIVATE/);
+                var handle = window.setInterval(function () {
+                    if (result.group === '-K--hpGSiFYYF07BXJNL') {
+                        window.clearInterval(handle);
+                        done();
+                    }
+                }, 100);
             }
 
             var inputs = [
@@ -121,7 +126,7 @@ describe('<page-groups>', function () {
             ];
             var button = 'paper-button#button-search';
 
-            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, assertions);
         });
     });
 
