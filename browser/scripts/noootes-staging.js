@@ -3,6 +3,10 @@
     Elements: {},
     Firebase: {
         Location: 'https://noootes-staging.firebaseio.com/',
-        User: undefined
+        User: {}
+    },
+    Usernames: {
+        names: {},
+        uid: {}
     }
 };

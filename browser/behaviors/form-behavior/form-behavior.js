@@ -110,6 +110,26 @@
     },
 
     /**
+     * Checks if input element contains a valid code.
+     *
+     * @param {HTMLInputElement} input - Input element to be tested.
+     * @returns {Boolean} Input value is a valid code.
+     */
+    validateCode: function (input) {
+        var pattern = /[A-Z0-9]*/;
+        var code = input.value;
+        var match = code.match(pattern);
+        match = code === match[0];
+
+        if (!match) {
+            input.errorMessage = 'Please enter a valid code.';
+            input.invalid = true;
+        }
+
+        return match;
+    },
+
+    /**
      * Finds the input element's corresponding form and submit.
      * Attach this function to 'tap' or 'keydown' listener input elements that should submit the
      * form when tapped or pressing the enter key.     *
