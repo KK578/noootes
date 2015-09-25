@@ -230,20 +230,21 @@ Noootes.Elements['screen-login'] = Polymer({
                 }
             }
 
+            // TODO: Increase severity of this error.
             self.fire('toast-message', {
                 message: 'You don\'t seem to have a username set.'
             });
         }
 
         if (user) {
-            var location = Noootes.Firebase.Location + 'users/';
+            var location = Noootes.Firebase.Location + 'users/usernames';
             var firebase = new Firebase(location);
 
             // Check if uid is already registered with a username.
-            firebase.child('usernames/uid/' + user.uid).once('value', function (ss) {
+            firebase.child('uid/' + user.uid).once('value', function (ss) {
                 if (!ss.val()) {
                     // If it is not found, check stashed usernames.
-                    firebase.child('stashed').once('value', stashCheck);
+                    firebase.child('stash').once('value', stashCheck);
                 }
             });
         }
@@ -252,18 +253,19 @@ Noootes.Elements['screen-login'] = Polymer({
         var user = Noootes.Firebase.User;
 
         if (user) {
-            var location = Noootes.Firebase.Location + 'users/';
+            var location = Noootes.Firebase.Location + 'users/usernames';
             var firebase = new Firebase(location);
 
             // Copy item to both uid key list and name key list.
-            firebase.child('usernames/uid/' + user.uid).set(username);
-            firebase.child('usernames/names/' + username).set(user.uid);
+            firebase.child('uid/' + user.uid).set(username);
+            firebase.child('names/' + username).set(user.uid);
             // Remove key from stash.
-            firebase.child('stashed/' + username).set(null);
+            firebase.child('stash/' + username).set(null);
         }
     },
     _stashUsername: function () {
-        var location = Noootes.Firebase.Location + 'users/stashed/' + this._stash.username;
+        var location = Noootes.Firebase.Location + 'users/usernames/stash/' +
+            this._stash.username;
         var firebase = new Firebase(location);
 
         firebase.set(this._stash.email.toLowerCase());

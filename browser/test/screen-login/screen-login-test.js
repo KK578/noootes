@@ -232,7 +232,7 @@ describe('<screen-login>', function () {
         });
 
         after(function (done) {
-            var firebase = new Firebase('https://noootes-staging.firebaseio.com/users/stashed/' + username);
+            var firebase = new Firebase('https://noootes-staging.firebaseio.com/users/usernames/stash/' + username);
             firebase.set(null, done);
         });
 
