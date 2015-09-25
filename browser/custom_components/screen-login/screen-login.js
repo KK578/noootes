@@ -104,7 +104,10 @@ Noootes.Elements['screen-login'] = Polymer({
         this.handleFormFail(this.$['form-login'], selector, detail.message);
     },
     _resetFormLogin: function () {
-        this._checkUsername();
+        if (Noootes.Firebase.User) {
+            this._checkUsername();
+        }
+
         this.resetForm(this.$['form-login'], true);
     },
     // Toggles between Login and Password Reset forms
@@ -212,20 +215,23 @@ Noootes.Elements['screen-login'] = Polymer({
 
         function stashCheck(s) {
             var stash = s.val();
-            var email = user.password.email.toLowerCase();
 
-            // To ensure usernames are only registered once, they are stored as the key.
-            // As the only reference used is the user's email, which is the key's value,
-            // the list must be iterated to find the email.
-            // This can be justified, as though it is O(n), the list should remain short
-            // as the key is removed upon logging in after registration.
-            for (var username in stash) {
-                if (stash.hasOwnProperty(username)) {
-                    var stashedEmail = stash[username].toLowerCase();
+            if (stash) {
+                var email = user.password.email.toLowerCase();
 
-                    if (stashedEmail === email) {
-                        self._setupUsername(username);
-                        return;
+                // To ensure usernames are only registered once, they are stored as the key.
+                // As the only reference used is the user's email, which is the key's value,
+                // the list must be iterated to find the email.
+                // This can be justified, as though it is O(n), the list should remain short
+                // as the key is removed upon logging in after registration.
+                for (var username in stash) {
+                    if (stash.hasOwnProperty(username)) {
+                        var stashedEmail = stash[username].toLowerCase();
+
+                        if (stashedEmail === email) {
+                            self._setupUsername(username);
+                            return;
+                        }
                     }
                 }
             }
