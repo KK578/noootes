@@ -67,12 +67,4 @@ describe('<noootes-group>', function () {
         var statusRequest = noootesGroup.querySelector('#group-status-request');
         statusRequest.textContent.should.equal('Your Status: Read');
     });
-
-    it('should remove all data on removing group', function () {
-        noootesGroup.group = '';
-
-        (noootesGroup._data === undefined).should.equal(true);
-        var group = noootesGroup.querySelector('#group');
-        group.textContent.should.equal('');
-    });
 });

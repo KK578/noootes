@@ -46,7 +46,8 @@ Noootes.Elements['noootes-group'] = Polymer({
 
         // Access
         _accessData: {
-            type: Object
+            type: Object,
+            value: {}
         },
         _accessDataLoaded: {
             type: Boolean,
@@ -59,7 +60,8 @@ Noootes.Elements['noootes-group'] = Polymer({
         },
         _collapseOpen: {
             type: Boolean,
-            value: false
+            value: false,
+            observer: '_collapseChanged'
         }
     },
 
@@ -96,6 +98,9 @@ Noootes.Elements['noootes-group'] = Polymer({
         else {
             this._collapseOpen = !this._collapseOpen;
         }
+    },
+    _collapseChanged: function (n) {
+        this._buttonIcon = 'arrow-drop-' + (n ? 'up' : 'down');
     },
     _loadAccessData: function () {
         var data = {};
