@@ -104,6 +104,7 @@ Noootes.Elements['screen-login'] = Polymer({
         this.handleFormFail(this.$['form-login'], selector, detail.message);
     },
     _resetFormLogin: function () {
+        this._checkUsername();
         this.resetForm(this.$['form-login'], true);
     },
     // Toggles between Login and Password Reset forms
@@ -154,17 +155,27 @@ Noootes.Elements['screen-login'] = Polymer({
 
         var detail = event.detail;
         var inputEmail = form.querySelector('paper-input[name=email]');
+        var inputUsername = form.querySelector('paper-input[name=username]');
         var inputPassword = form.querySelector('paper-input[name=password]');
         var inputConfirm = form.querySelector('paper-input[name=confirm]');
 
         var validEmail = this.validateEmail(inputEmail);
+        var validUsername = this.validateUsername(inputUsername);
         var validPasswords = this.validateMatch(inputPassword, inputConfirm);
 
-        if (validEmail && validPasswords) {
-            this.fire('firebase-register', {
-                email: detail.email,
-                password: detail.password
-            });
+        if (validEmail && validUsername && validPasswords) {
+            this.validateUsernameAvailable(inputUsername, function () {
+                // Stash username locally to allow firebase-register to return status.
+                this._stash = {
+                    email: detail.email,
+                    username: detail.username
+                };
+
+                this.fire('firebase-register', {
+                    email: detail.email,
+                    password: detail.password
+                });
+            }.bind(this));
         }
     },
     _handleFailRegister: function (event) {
@@ -181,8 +192,84 @@ Noootes.Elements['screen-login'] = Polymer({
         }
 
         this.handleFormFail(this.$['form-register'], selector, detail.message);
+        // Registration failed, stash is no longer required.
+        this._stash = undefined;
     },
     _resetFormRegister: function () {
+        // Only stash username after firebase-register-success.
+        // This allows checks for the email not already being taken to be done.
+        if (this._stash) {
+            this._stashUsername();
+        }
+
         this.resetForm(this.$['form-register'], true);
+    },
+
+    // Usernames
+    _checkUsername: function () {
+        var user = Noootes.Firebase.User;
+        var self = this;
+
+        function stashCheck(s) {
+            var stash = s.val();
+            var email = user.password.email.toLowerCase();
+
+            // To ensure usernames are only registered once, they are stored as the key.
+            // As the only reference used is the user's email, which is the key's value,
+            // the list must be iterated to find the email.
+            // This can be justified, as though it is O(n), the list should remain short
+            // as the key is removed upon logging in after registration.
+            for (var username in stash) {
+                if (stash.hasOwnProperty(username)) {
+                    var stashedEmail = stash[username].toLowerCase();
+
+                    if (stashedEmail === email) {
+                        self._setupUsername(username);
+                        return;
+                    }
+                }
+            }
+
+            // TODO: Increase severity of this error.
+            self.fire('toast-message', {
+                message: 'You don\'t seem to have a username set.'
+            });
+        }
+
+        if (user) {
+            var location = Noootes.Firebase.Location + 'users/usernames';
+            var firebase = new Firebase(location);
+
+            // Check if uid is already registered with a username.
+            firebase.child('uid/' + user.uid).once('value', function (ss) {
+                if (!ss.val()) {
+                    // If it is not found, check stashed usernames.
+                    firebase.child('stash').once('value', stashCheck);
+                }
+            });
+        }
+    },
+    _setupUsername: function (username) {
+        var user = Noootes.Firebase.User;
+
+        if (user) {
+            var location = Noootes.Firebase.Location + 'users/usernames';
+            var firebase = new Firebase(location);
+
+            // Copy item to both uid key list and name key list.
+            firebase.child('uid/' + user.uid).set(username);
+            firebase.child('names/' + username).set(user.uid);
+            // Remove key from stash.
+            firebase.child('stash/' + username).set(null);
+        }
+    },
+    _stashUsername: function () {
+        var location = Noootes.Firebase.Location + 'users/usernames/stash/' +
+            this._stash.username;
+        var firebase = new Firebase(location);
+
+        firebase.set(this._stash.email.toLowerCase());
+
+        this._stash = undefined;
     }
 });

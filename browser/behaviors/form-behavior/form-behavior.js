@@ -9,7 +9,7 @@
      */
     validateEmail: function (input) {
         var pattern = /.+@.+\...+/;
-        var match = pattern.test(input.value);
+        var match = input.value.match(pattern);
 
         if (!match) {
             input.errorMessage = 'Please enter a valid email.';
@@ -17,6 +17,58 @@
         }
 
         return match;
+    },
+
+    /**
+     * Checks if the input element contains a valid username.
+     * This is checked by ensuring it does not contain any characters that prevent it from being
+     * used as a firebase key or in a url.
+     *
+     * @param {HTMLInputElement} input - Input element to be tested.
+     * @returns {Boolean} Input element value is a valid username.
+     */
+    validateUsername: function (input) {
+        var pattern = /[a-zA-Z0-9]*/;
+        var username = input.value;
+        var match = username.match(pattern);
+        match = username === match[0];
+
+        if (!match) {
+            input.errorMessage = 'Please enter a valid username.';
+            input.invalid = true;
+        }
+
+        return match;
+    },
+
+    /**
+     * Checks if the input element contains a username that is not already taken.
+     *
+     * @param {HTMLInputElement} input - Input element to be tested.
+     * @param {Function} callback - Function to be called if username is available.
+     */
+    validateUsernameAvailable: function (input, callback) {
+        var username = input.value;
+        var location = Noootes.Firebase.Location + 'users/usernames';
+        var firebase = new Firebase(location);
+
+        firebase.child('names/' + username).once('value', function (ss) {
+            if (ss.val()) {
+                input.errorMessage = 'That username is already taken.';
+                input.invalid = true;
+            }
+            else {
+                firebase.child('stash/' + username).once('value', function (s) {
+                    if (s.val()) {
+                        input.errorMessage = 'That username is already taken.';
+                        input.invalid = true;
+                    }
+                    else {
+                        callback();
+                    }
+                });
+            }
+        });
     },
 
     /**
