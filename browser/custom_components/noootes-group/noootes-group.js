@@ -58,6 +58,7 @@ Noootes.Elements['noootes-group'] = Polymer({
         }
     },
 
+    // TODO: Move to firebase behavior method.
     _getUsername: function (uid) {
         if (uid) {
             var location = Noootes.Firebase.Location + 'users/usernames/uid/' + uid;
@@ -67,5 +68,10 @@ Noootes.Elements['noootes-group'] = Polymer({
                 this._username = ss.val();
             }.bind(this));
         }
+    },
+
+    // Access Data
+    loadAccessData: function () {
+        this._accessDataLoaded = true;
     }
 });

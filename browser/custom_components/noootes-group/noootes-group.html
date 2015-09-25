@@ -1,7 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html" />
 
 <!-- Iron -->
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html" />
 <!-- Paper -->
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <!-- Other -->
@@ -12,16 +14,23 @@
     <template>
         <firebase-document location="[[_location]]" data="{{_data}}"></firebase-document>
 
-        <div id="group">
-            <h2 id="group-name">
-                <span id="group-code">
-                    <span>[[_username]]</span><span>/</span><span>[[_data.code]]</span>
-                </span>
-                <span>-</span>
-                <span>[[_data.title]]</span>
-            </h2>
-            <em>[[_data.description]]</em>
+        <div id="group" class="layout horizontal center">
+            <div id="group-metadata" class="flex">
+                <h2 id="group-name">
+                    <span id="group-code">
+                        <span>[[_username]]</span><span>/</span><span>[[_data.code]]</span>
+                    </span>
+                    <span>-</span>
+                    <span>[[_data.title]]</span>
+                </h2>
+                <em>[[_data.description]]</em>
+            </div>
+            <paper-icon-button id="group-button" icon="arrow-drop-down" on-tap="loadAccessData"></paper-icon-button>
         </div>
+
+        <iron-collapse id="group-collapse" opened="{{_accessDataLoaded}}">
+            <p>Button works!</p>
+        </iron-collapse>
     </template>
     <script src="noootes-group.js?__inline"></script>
 </dom-module>
