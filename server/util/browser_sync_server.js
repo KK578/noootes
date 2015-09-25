@@ -39,7 +39,11 @@ module.exports = function (server, environment) {
                         fn: handleCustomElement
                     },
                     {
-                        match: ['build/public', '!build/public/custom_components/**/*.css']
+                        match: [
+                            'build/public',
+                            '!build/public/custom_components/**/*.css',
+                            '!build/public/test/**/*'
+                        ]
                     }
                 ],
                 logPrefix: 'BrowserSync',
