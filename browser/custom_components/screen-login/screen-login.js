@@ -104,6 +104,7 @@ Noootes.Elements['screen-login'] = Polymer({
         this.handleFormFail(this.$['form-login'], selector, detail.message);
     },
     _resetFormLogin: function () {
+        this._checkUsername();
         this.resetForm(this.$['form-login'], true);
     },
     // Toggles between Login and Password Reset forms
@@ -205,11 +206,67 @@ Noootes.Elements['screen-login'] = Polymer({
     },
 
     // Usernames
+    _checkUsername: function () {
+        var user = Noootes.Firebase.User;
+        var self = this;
+
+        function stashCheck(s) {
+            var stash = s.val();
+            var email = user.password.email.toLowerCase();
+
+            // To ensure usernames are only registered once, they are stored as the key.
+            // As the only reference used is the user's email, which is the key's value,
+            // the list must be iterated to find the email.
+            // This can be justified, as though it is O(n), the list should remain short
+            // as the key is removed upon logging in after registration.
+            for (var username in stash) {
+                if (stash.hasOwnProperty(username)) {
+                    var stashedEmail = stash[username].toLowerCase();
+
+                    if (stashedEmail === email) {
+                        self._setupUsername(username);
+                        return;
+                    }
+                }
+            }
+
+            self.fire('toast-message', {
+                message: 'You don\'t seem to have a username set.'
+            });
+        }
+
+        if (user) {
+            var location = Noootes.Firebase.Location + 'users/';
+            var firebase = new Firebase(location);
+
+            // Check if uid is already registered with a username.
+            firebase.child('usernames/uid/' + user.uid).once('value', function (ss) {
+                if (!ss.val()) {
+                    // If it is not found, check stashed usernames.
+                    firebase.child('stashed').once('value', stashCheck);
+                }
+            });
+        }
+    },
+    _setupUsername: function (username) {
+        var user = Noootes.Firebase.User;
+
+        if (user) {
+            var location = Noootes.Firebase.Location + 'users/';
+            var firebase = new Firebase(location);
+
+            // Copy item to both uid key list and name key list.
+            firebase.child('usernames/uid/' + user.uid).set(username);
+            firebase.child('usernames/names/' + username).set(user.uid);
+            // Remove key from stash.
+            firebase.child('stashed/' + username).set(null);
+        }
+    },
     _stashUsername: function () {
         var location = Noootes.Firebase.Location + 'users/stashed/' + this._stash.username;
         var firebase = new Firebase(location);
 
-        firebase.set(this._stash.email);
+        firebase.set(this._stash.email.toLowerCase());
 
         this._stash = undefined;
     }
