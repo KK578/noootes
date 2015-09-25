@@ -37,7 +37,7 @@ describe('<page-groups>', function () {
         var form;
 
         before(function (done) {
-            form = pageGroups.querySelector('form-search');
+            form = pageGroups.querySelector('#form-search');
             window.setTimeout(done, 0);
         });
 

@@ -1,12 +1,15 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html" />
 
 <!-- Iron -->
+<link rel="import" href="../../../bower_components/iron-form/iron-form.html" />
 <link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html" />
 <!-- Paper -->
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html" />
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../fancy-material/fancy-material.html" />
+<link rel="import" href="../../../behaviors/form-behavior/form-behavior.html" />
 <!-- Other -->
 <link rel="import" href="../../../bower_components/firebase-element/firebase-collection.html" />
 
@@ -17,6 +20,15 @@
 
         <fancy-material>
             <h1 class="top">Search</h1>
+            <form is="iron-form" id="form-search" method="post" action="/form.html">
+                <paper-input name="user" label="Username" required on-keydown="submitForm"></paper-input>
+                <paper-input name="code" label="Code" required on-keydown="submitForm"></paper-input>
+
+                <div class="button-container layout horizontal">
+                    <span class="flex"></span>
+                    <paper-button id="button-search" on-tap="submitForm">Search Group</paper-button>
+                </div>
+            </form>
         </fancy-material>
 
         <fancy-material>
