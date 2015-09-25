@@ -25,11 +25,18 @@
                 </h2>
                 <em>[[_data.description]]</em>
             </div>
-            <paper-icon-button id="group-button" icon="arrow-drop-down" on-tap="loadAccessData"></paper-icon-button>
+            <paper-icon-button id="group-button" icon="{{_buttonIcon}}" on-tap="toggleCollapse"></paper-icon-button>
         </div>
 
-        <iron-collapse id="group-collapse" opened="{{_accessDataLoaded}}">
-            <p>Button works!</p>
+        <iron-collapse id="group-collapse" opened="{{_collapseOpen}}">
+            <p>
+                <span>Global Access Status:</span>
+                <span>{{_accessData.global}}</span>
+            </p>
+            <p>
+                <span>Your Status:</span>
+                <span>{{_accessData.user}}</span>
+            </p>
         </iron-collapse>
     </template>
     <script src="noootes-group.js?__inline"></script>

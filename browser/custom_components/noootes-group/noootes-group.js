@@ -42,6 +42,24 @@ Noootes.Elements['noootes-group'] = Polymer({
         _username: {
             type: String,
             value: undefined
+        },
+
+        // Access
+        _accessData: {
+            type: Object
+        },
+        _accessDataLoaded: {
+            type: Boolean,
+            value: false,
+            observer: '_accessDataLoadedChanged'
+        },
+        _buttonIcon: {
+            type: String,
+            value: 'arrow-drop-down'
+        },
+        _collapseOpen: {
+            type: Boolean,
+            value: false
         }
     },
 
@@ -71,7 +89,45 @@ Noootes.Elements['noootes-group'] = Polymer({
     },
 
     // Access Data
-    loadAccessData: function () {
+    toggleCollapse: function () {
+        if (!this._accessDataLoaded) {
+            this._loadAccessData();
+        }
+        else {
+            this._collapseOpen = !this._collapseOpen;
+        }
+    },
+    _loadAccessData: function () {
+        var data = {};
+        var self = this;
+
+        function done() {
+            if (data.global && data.user) {
+                self._setAccessStrings(data);
+            }
+        }
+
+        var user = Noootes.Firebase.User;
+        var location = Noootes.Firebase.Location + 'groups/access';
+        var firebase = new Firebase(location);
+
+        firebase.child('global/' + this.group).on('value', function (ss) {
+            data.global = ss.val() || 'N/A';
+            done();
+        });
+
+        firebase.child('collaborators/' + this.group).child(user.uid).on('value', function (ss) {
+            data.user = ss.val() || 'N/A';
+            done();
+        });
+    },
+    _setAccessStrings: function (data) {
+        this._accessData = data;
         this._accessDataLoaded = true;
+    },
+    _accessDataLoadedChanged: function (n) {
+        if (n) {
+            this._collapseOpen = true;
+        }
     }
 });
