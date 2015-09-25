@@ -62,10 +62,6 @@ module.exports = function (server, environment) {
         );
     }
 
-    server.post('/form.html', function (req, res) {
-        res.render(path.join(__dirname, '/../public/form.html'));
-    });
-
     // Serve static HTML from public directory
     server.use('/', express.static(path.join(__dirname, '/../public/')));
 

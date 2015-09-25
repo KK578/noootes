@@ -16,7 +16,7 @@
     <template>
         <fancy-material>
             <h1 class="top">Change Email</h1>
-            <form is="iron-form" id="form-email" method="post" action="/form.html">
+            <form is="iron-form" id="form-email" method="get" action="/form.html">
                 <paper-input name="email" label="Current Email" required on-keydown="submitForm"></paper-input>
                 <paper-input name="password" label="Password" type="password" required on-keydown="submitForm"></paper-input>
                 <paper-input name="newEmail" label="New Email" required on-keydown="submitForm"></paper-input>
@@ -30,7 +30,7 @@
 
         <fancy-material>
             <h1 class="top">Change Password</h1>
-            <form is="iron-form" id="form-password" method="post" action="/form.html">
+            <form is="iron-form" id="form-password" method="get" action="/form.html">
                 <paper-input name="email" label="Current Email" required on-keydown="submitForm"></paper-input>
                 <paper-input name="password" label="Password" type="password" required on-keydown="submitForm"></paper-input>
                 <paper-input name="newPassword" label="New Password" type="password" required on-keydown="submitForm"></paper-input>
