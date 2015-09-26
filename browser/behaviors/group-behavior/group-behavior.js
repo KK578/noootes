@@ -94,22 +94,68 @@
     /////////////////////////
     // Group Detail Functions
     /////////////////////////
+    /**
+     * Update metadata for the given group key.
+     * Use to only update a specific path without accidentally removing other metadata.
+     *
+     * @param {String} key - Group key for group to set new metadata.
+     * @param {Object} value - Meta data value to set.
+     * @property {String} value.code - New group's code.
+     * @property {String} value.title - New group's title.
+     * @property {String} value.owner - New group's owner.
+     * @property {String} value.description - New group's description.
+     */
+    updateGroupMetadata: function (key, value) {
+        var firebase = Noootes.FirebaseRef('groups/metadata').child(key);
+        firebase.update(value);
+    },
+
+    /**
+     * Set metadata for the given group key.
+     *
+     * @param {String} key - Group key for group to set new metadata.
+     * @param {Object} value - Meta data value to set.
+     * @property {String} value.code - New group's code.
+     * @property {String} value.title - New group's title.
+     * @property {String} value.owner - New group's owner.
+     * @property {String} value.description - New group's description.
+     */
     editGroupMetadata: function (key, value) {
         var firebase = Noootes.FirebaseRef('groups/metadata').child(key);
         firebase.set(value);
     },
 
+    /**
+     * Set global access variable for the given group key.
+     *
+     * @param {String} key - Group key for group to set new value.
+     * @param {String} value - Value to set.
+     * @returns {}
+     */
     editGroupAccessGlobal: function (key, value) {
         var firebase = Noootes.FirebaseRef('groups/access/global').child(key);
         firebase.set(value);
     },
 
+    /**
+     * Set human readable path to fetch group key.
+     * Will set for the current logged in user.
+     *
+     * @param {String} code - Code for group.
+     * @param {String} value - Group key
+     */
     editGroupAccessId: function (code, value) {
         var user = Noootes.Firebase.User;
         var firebase = Noootes.FirebaseRef('groups/access/id').child(user.uid).child(code);
         firebase.set(value);
     },
 
+    /**
+     * Set group public visibility.
+     *
+     * @param {String} key - Group key for group.
+     * @param {Any} value - Set to any truthy value to make public.
+     */
     editGroupVisibility: function (key, value) {
         var firebase = Noootes.FirebaseRef('groups/public').child(key);
         firebase.set(value ? true : null);
