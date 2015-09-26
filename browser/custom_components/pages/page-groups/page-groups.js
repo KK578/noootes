@@ -13,7 +13,8 @@ Noootes.Elements['page-groups'] = Polymer({
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
     behaviors: [
         Noootes.Behaviors.FirebaseBehavior,
-        Noootes.Behaviors.FormBehavior
+        Noootes.Behaviors.FormBehavior,
+        Noootes.Behaviors.GroupBehavior
     ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
@@ -89,6 +90,7 @@ Noootes.Elements['page-groups'] = Polymer({
         this._groupSearchResult = undefined;
         this.handleFormFail(this.$['form-search'], selector, message);
     },
+    // TODO: Split searchGroup -> searchGroupByName and searchGroupByUid?
     _searchGroup: function (user, code) {
         this.getUid(user, function (err, uid) {
             if (err) {
@@ -96,14 +98,10 @@ Noootes.Elements['page-groups'] = Polymer({
                 return;
             }
 
-            var firebase = Noootes.FirebaseRef('groups/access/id/');
-
-            firebase.child(uid).child(code).once('value', function (ss) {
-                var data = ss.val();
-
-                if (data) {
+            this.searchGroup(uid, code, function (key) {
+                if (key) {
                     this._showSearchResult = true;
-                    this._groupSearchResult = data;
+                    this._groupSearchResult = key;
                 }
                 else {
                     this._handleFailSearch('INVALID_CODE');
