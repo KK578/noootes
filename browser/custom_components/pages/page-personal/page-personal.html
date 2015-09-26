@@ -1,12 +1,15 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html" />
 
 <!-- Iron -->
+<link rel="import" href="../../../bower_components/iron-form/iron-form.html" />
 <link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html" />
 <!-- Paper -->
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html" />
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../fancy-material/fancy-material.html" />
+<link rel="import" href="../../../behaviors/form-behavior/form-behavior.html" />
 <!-- Other -->
 <link rel="import" href="../../../bower_components/firebase-element/firebase-collection.html" />
 
@@ -14,6 +17,20 @@
     <link rel="import" type="css" href="page-personal.css?__inline" />
     <template>
         <firebase-collection id="firebase-groups-owned" location="{{_ownedLocation}}" data="{{_ownedGroups}}"></firebase-collection>
+
+        <fancy-material>
+            <h1 class="top">Create a new Group</h1>
+            <form is="iron-form" id="form-create" method="get" action="/form.html">
+                <paper-input name="code" label="Code" required on-keydown="submitForm"></paper-input>
+                <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
+                <paper-input name="description" label="Description" on-keydown="submitForm"></paper-input>
+
+                <div class="button-container layout horizontal">
+                    <span class="flex"></span>
+                    <paper-button id="button-create" on-tap="submitForm">Create new Group</paper-button>
+                </div>
+            </form>
+        </fancy-material>
 
         <fancy-material>
             <h1 class="top">My Groups</h1>

@@ -85,7 +85,7 @@ describe('<page-personal>', function () {
                 { name: 'paper-input[name=title]', value: '' },
                 { name: 'paper-input[name=description]', value: '' }
             ];
-            var button = 'paper-button#button-search';
+            var button = 'paper-button#button-create';
 
             listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
         });
@@ -96,7 +96,7 @@ describe('<page-personal>', function () {
                 { name: 'paper-input[name=title]', value: 'The Title' },
                 { name: 'paper-input[name=description]', value: 'The Description' }
             ];
-            var button = 'paper-button#button-search';
+            var button = 'paper-button#button-create';
 
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done);
         });
@@ -113,7 +113,7 @@ describe('<page-personal>', function () {
                 { name: 'paper-input[name=title]', value: 'The Title' },
                 { name: 'paper-input[name=description]', value: 'The Description' }
             ];
-            var button = 'paper-button#button-search';
+            var button = 'paper-button#button-create';
 
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
@@ -137,7 +137,7 @@ describe('<page-personal>', function () {
                 { name: 'paper-input[name=title]', value: 'The Title' },
                 { name: 'paper-input[name=description]', value: 'The Description' }
             ];
-            var button = 'paper-button#button-search';
+            var button = 'paper-button#button-create';
 
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
