@@ -868,7 +868,6 @@
     <Content Include="browser\custom_components\pages\page-groups\page-groups.scss" />
     <Content Include="browser\custom_components\pages\page-home\page-home.html" />
     <Content Include="browser\custom_components\pages\page-home\page-home.scss" />
-    <Content Include="browser\custom_components\pages\page-personal\group-behavior.html" />
     <Content Include="browser\custom_components\pages\page-personal\page-personal.html" />
     <Content Include="browser\custom_components\pages\page-personal\page-personal.scss" />
     <Content Include="browser\custom_components\routed-pages\routed-pages.html" />

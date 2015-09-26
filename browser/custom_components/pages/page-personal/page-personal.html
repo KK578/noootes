@@ -21,6 +21,7 @@
     <link rel="import" type="css" href="page-personal.css?__inline" />
     <template>
         <firebase-collection id="firebase-groups-owned" location="{{_ownedLocation}}" data="{{_ownedGroups}}"></firebase-collection>
+        <firebase-collection id="firebase-groups-joined" location="{{_joinedLocation}}" data="{{_joinedGroups}}"></firebase-collection>
 
         <fancy-material>
             <h1 class="top">Create a new Group</h1>
@@ -80,6 +81,28 @@
             <iron-collapse opened="[[_ownedLocationSet]]">
                 <div id="container-groups-owned">
                     <template is="dom-repeat" items="{{_ownedGroups}}">
+                        <noootes-group-management group="{{item.__firebaseKey__}}"></noootes-group-management>
+                    </template>
+                </div>
+            </iron-collapse>
+        </fancy-material>
+
+        <fancy-material>
+            <h1 class="top">Joined Groups</h1>
+
+            <!-- Prior to load -->
+            <iron-collapse opened="[[!_joinedLocationSet]]">
+                <p>To load your groups, click the button!</p>
+                <div class="layout horizontal">
+                    <span class="flex"></span>
+                    <paper-button id="button-groups-joined" on-tap="setJoinedLocation">Show Joined Groups</paper-button>
+                </div>
+            </iron-collapse>
+
+            <!-- Location set, groups will load. -->
+            <iron-collapse opened="[[_joinedLocationSet]]">
+                <div id="container-groups-joined">
+                    <template is="dom-repeat" items="{{_joinedGroups}}">
                         <noootes-group-management group="{{item.__firebaseKey__}}"></noootes-group-management>
                     </template>
                 </div>

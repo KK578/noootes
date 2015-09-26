@@ -46,6 +46,15 @@ Noootes.Elements['page-personal'] = Polymer({
         _ownedLocationSet: {
             type: Boolean,
             value: false
+        },
+
+        _joinedLocation: {
+            type: String,
+            value: undefined
+        },
+        _joinedLocationSet: {
+            type: Boolean,
+            value: false
         }
     },
 
@@ -54,6 +63,12 @@ Noootes.Elements['page-personal'] = Polymer({
         var user = Noootes.Firebase.User;
         this._ownedLocation = Noootes.Firebase.Location + 'users/personal/' + user.uid + '/owned';
         this._ownedLocationSet = true;
+    },
+    setJoinedLocation: function () {
+        var user = Noootes.Firebase.User;
+        this._joinedLocation = Noootes.Firebase.Location + 'users/personal/' +
+            user.uid + '/joined';
+        this._joinedLocationSet = true;
     },
 
     // Form Create
