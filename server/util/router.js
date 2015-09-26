@@ -60,6 +60,23 @@ module.exports = function (server, environment) {
         server.use('/bower', express.static(
             path.join(__dirname, '/../../browser/bower_components/'))
         );
+
+        // HACK: Windows URLs on WCT break due to \ encoding or something.
+        // If present, remove backslash from URL and redirect.
+        server.get('/test', function (req, res, next) {
+            var query = req.query;
+
+            if (query && query.grep) {
+                var grep = query.grep.replace(/\\/g, '');
+
+                if (query.grep !== grep) {
+                    res.redirect('/test/?grep=' + grep);
+                    return;
+                }
+            }
+
+            next();
+        });
     }
 
     // Serve static HTML from public directory
