@@ -130,7 +130,6 @@
      *
      * @param {String} key - Group key for group to set new value.
      * @param {String} value - Value to set.
-     * @returns {}
      */
     editGroupAccessGlobal: function (key, value) {
         var firebase = Noootes.FirebaseRef('groups/access/global').child(key);
@@ -164,10 +163,43 @@
     /////////////////
     // User Functions
     /////////////////
+    /**
+     * Add group key to current user's owned groups list.
+     *
+     * @param {String} key - Group key for group.
+     * @param {Any} value - Value to set group to. Use null if deleting.
+     */
     editUserOwned: function (key, value) {
         var user = Noootes.Firebase.User;
         var firebase = Noootes.FirebaseRef('users/personal').child(user.uid).child('owned')
             .child(key);
         firebase.set(value);
+    },
+
+    /**
+     * Add request to join group and add to user's joined groups.
+     *
+     * @param {String} key - Group key for group.
+     * @param {Any} value - Value to set group to. Use null if deleting.
+     */
+    applyToGroup: function (key, value) {
+        var user = Noootes.Firebase.User;
+        var firebase = Noootes.FirebaseRef();
+
+        firebase.child('groups/access/requests').child(key).child(user.uid).set(value);
+        firebase.child('users/personal').child(user.uid).child(key).set(value);
+    },
+
+    /**
+     * Move join request to collaborators.
+     *
+     * @param {String} key - Group key for group.
+     * @param {String} uid - UID to move.
+     * @param {Any} value - Value to set collaborator to. Use null if rejecting.
+     */
+    moveToCollaborators: function (key, uid, value) {
+        var firebase = Noootes.FirebaseRef('groups/access');
+        firebase.child('requests').child(key).child(uid).set(null);
+        firebase.child('collaborators').child(key).child(uid).set(value);
     }
 };
