@@ -11,7 +11,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.FirebaseBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -28,7 +28,54 @@ Noootes.Elements['noootes-group-management'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        group: {
+            type: String,
+            value: undefined,
+            observer: '_groupChanged'
+        },
+        _data: {
+            type: Object,
+            value: undefined,
+            observer: '_dataChanged'
+        },
+        _username: {
+            type: String,
+            value: undefined
+        },
+
+        _buttonIcon: {
+            type: String,
+            value: 'arrow-drop-down'
+        },
+        _collapseOpen: {
+            type: Boolean,
+            value: false,
+            observer: '_collapseChanged'
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    // Property Observers
+    _groupChanged: function (n) {
+        if (n) {
+            this._accessDataLoaded = false;
+            this._collapseOpen = false;
+            this._location = Noootes.Firebase.Location + 'groups/metadata/' + n;
+        }
+    },
+    _dataChanged: function (n) {
+        if (n) {
+            this.getUsername(n.owner, function (err, name) {
+                this._username = name;
+            }.bind(this));
+        }
+    },
+
+    _collapseChanged: function (n) {
+        this._buttonIcon = 'arrow-drop-' + (n ? 'up' : 'down');
+    },
+    toggleCollapse: function () {
+        this._collapseOpen = !this._collapseOpen;
+    }
 });
