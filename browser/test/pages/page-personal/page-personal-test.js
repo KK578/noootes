@@ -79,6 +79,14 @@ describe('<page-personal>', function () {
             window.setTimeout(done, 0);
         });
 
+        it('should open Form inputs on clicking button', function () {
+            var button = document.querySelector('#button-form-create');
+            button.click();
+
+            var collapse = form.parentNode;
+            collapse.opened.should.equal(true);
+        });
+
         it('should fire "iron-form-invalid" with empty inputs', function (done) {
             var inputs = [
                 { name: 'paper-input[name=code]', value: '' },
@@ -118,7 +126,7 @@ describe('<page-personal>', function () {
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
 
-        it('should show an error message registering the same code again', function (done) {
+        it('should show an error message registering a code already in use', function (done) {
             function assertions() {
                 var codeInput = form.querySelector('paper-input[name=code]');
                 var handle = window.setInterval(function () {

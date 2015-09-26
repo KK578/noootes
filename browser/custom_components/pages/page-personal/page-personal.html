@@ -23,32 +23,44 @@
 
         <fancy-material>
             <h1 class="top">Create a new Group</h1>
-            <form is="iron-form" id="form-create" method="get" action="/form.html">
-                <paper-input name="code" label="Code" required on-keydown="submitForm"></paper-input>
-                <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
-                <paper-input name="description" label="Description" on-keydown="submitForm"></paper-input>
 
-                <div class="layout horizontal center">
-                    <p class="helper flex">Global Allowed Access:</p>
-                    <paper-radio-group class="flex" attr-for-selected="value" selected="none">
-                        <paper-radio-button name="global" value="none">None</paper-radio-button>
-                        <paper-radio-button name="global" value="read">Read</paper-radio-button>
-                        <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
-                    </paper-radio-group>
-                </div>
-
-                <div class="layout horizontal center">
-                    <p class="helper flex">Public?</p>
-                    <div class="flex">
-                        <paper-checkbox name="public"></paper-checkbox>
-                    </div>
-                </div>
-
-                <div class="button-container layout horizontal">
+            <iron-collapse opened="[[!_formCreateOpen]]">
+                <p>Want to make your own group? Click the button!</p>
+                <div class="layout horizontal">
                     <span class="flex"></span>
-                    <paper-button id="button-create" on-tap="submitForm">Create new Group</paper-button>
+                    <paper-button id="button-form-create" on-tap="openFormCreate">Create New Group</paper-button>
                 </div>
-            </form>
+            </iron-collapse>
+
+            <iron-collapse opened="[[_formCreateOpen]]">
+                <form is="iron-form" id="form-create" method="get" action="/form.html">
+                    <paper-input name="code" label="Code" required on-keydown="submitForm"></paper-input>
+                    <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
+                    <paper-input name="description" label="Description" on-keydown="submitForm"></paper-input>
+
+                    <div class="layout horizontal center">
+                        <p class="helper flex">Global Allowed Access:</p>
+                        <paper-radio-group class="flex" attr-for-selected="value" selected="none">
+                            <paper-radio-button name="global" value="none">None</paper-radio-button>
+                            <paper-radio-button name="global" value="read">Read</paper-radio-button>
+                            <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
+                        </paper-radio-group>
+                    </div>
+
+                    <div class="layout horizontal center">
+                        <p class="helper flex">Public?</p>
+                        <div class="flex">
+                            <paper-checkbox name="public"></paper-checkbox>
+                        </div>
+                    </div>
+
+                    <div class="button-container layout horizontal">
+                        <span class="flex"></span>
+                        <paper-button id="button-create-cancel" on-tap="resetFormCreate">Cancel</paper-button>
+                        <paper-button id="button-create" on-tap="submitForm">Submit</paper-button>
+                    </div>
+                </form>
+            </iron-collapse>
         </fancy-material>
 
         <fancy-material>

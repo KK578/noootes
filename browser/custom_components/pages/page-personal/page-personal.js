@@ -31,6 +31,11 @@ Noootes.Elements['page-personal'] = Polymer({
      *  observer {string}
      */
     properties: {
+        _formCreateOpen: {
+            type: Boolean,
+            value: false
+        },
+
         _ownedLocation: {
             type: String,
             value: undefined
@@ -49,6 +54,9 @@ Noootes.Elements['page-personal'] = Polymer({
     },
 
     // Form Create
+    openFormCreate: function () {
+        this._formCreateOpen = true;
+    },
     _validateFormCreate: function (event) {
         var form = this.$['form-create'];
         this.resetForm(form, false);
@@ -69,6 +77,11 @@ Noootes.Elements['page-personal'] = Polymer({
                 }
             }.bind(this));
         }
+    },
+    resetFormCreate: function () {
+        var form = this.$['form-create'];
+        this.resetForm(form, true);
+        this._formCreateOpen = !this._formCreateOpen;
     },
     _searchGroup: function (code, callback) {
         var uid = Noootes.Firebase.User.uid;
@@ -100,5 +113,11 @@ Noootes.Elements['page-personal'] = Polymer({
         if (detail.public) {
             firebase.child('groups/public/' + key).set(true);
         }
+
+        this.fire('toast-message', {
+            message: 'Group "' + detail.code + '" created!'
+        });
+
+        this.resetFormCreate();
     }
 });
