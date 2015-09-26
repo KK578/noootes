@@ -18,6 +18,7 @@
   <ItemGroup>
     <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.html" />
     <Content Include="browser\behaviors\form-behavior\form-behavior.html" />
+    <Content Include="browser\behaviors\group-behavior\group-behavior.html" />
     <Content Include="browser\behaviors\page-behavior\page-behavior.html" />
     <Content Include="browser\bower.html" />
     <Content Include="browser\bower_components\firebase-element\.bower.json" />
@@ -867,6 +868,7 @@
     <Content Include="browser\custom_components\pages\page-groups\page-groups.scss" />
     <Content Include="browser\custom_components\pages\page-home\page-home.html" />
     <Content Include="browser\custom_components\pages\page-home\page-home.scss" />
+    <Content Include="browser\custom_components\pages\page-personal\group-behavior.html" />
     <Content Include="browser\custom_components\pages\page-personal\page-personal.html" />
     <Content Include="browser\custom_components\pages\page-personal\page-personal.scss" />
     <Content Include="browser\custom_components\routed-pages\routed-pages.html" />
@@ -905,6 +907,7 @@
     <Content Include="browser\behaviors\form-behavior\form-behavior.js" />
     <Content Include="browser\behaviors\page-behavior\page-behavior.js" />
     <Content Include="browser\bower_components\promise-polyfill\Gruntfile.js" />
+    <Content Include="browser\behaviors\group-behavior\group-behavior.js" />
     <Compile Include="browser\bower_components\promise-polyfill\LICENSE" />
     <Content Include="browser\bower_components\promise-polyfill\Promise.js" />
     <Content Include="browser\bower_components\promise-polyfill\Promise.min.js" />
@@ -1012,6 +1015,7 @@
   <ItemGroup>
     <Folder Include="browser\behaviors\firebase-behavior\" />
     <Folder Include="browser\behaviors\form-behavior\" />
+    <Folder Include="browser\behaviors\group-behavior\" />
     <Folder Include="browser\behaviors\page-behavior\" />
     <Folder Include="browser\bower_components\" />
     <Folder Include="browser\bower_components\firebase-element\" />
