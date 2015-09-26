@@ -1,4 +1,3 @@
-/* globals sinon */
 /* jshint -W030 */
 chai.should();
 

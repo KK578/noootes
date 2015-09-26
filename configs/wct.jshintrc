@@ -17,6 +17,7 @@
     "globals": {
         "Noootes": true,
         "chai": true,
+        "sinon": true,
         "Firebase":  true,
         "Polymer": true
     }
