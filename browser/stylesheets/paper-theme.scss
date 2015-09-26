@@ -41,6 +41,11 @@ paper-dialog {
     }
 }
 
+/* paper-item */
+paper-item:focus {
+    outline: none;
+}
+
 /* paper-button */
 paper-button {
     text-transform: none;
