@@ -47,31 +47,37 @@ paper-button {
 }
 
 /* paper-input */
-paper-input-container {
-    .input-content.label-is-floating.label-is-highlighted .label-and-input-container label {
-        color: $theme-primary;
-    }
+paper-input-container.paper-input-container-0 {
+    .paper-input-container {
+        &.input-content {
+            label {
+                color: $black-secondary;
+            }
 
-    .underline.is-highlighted .focused-line {
-        background-color: $theme-primary;
+            &.label-is-floating.label-is-highlighted label {
+                color: $theme-primary;
+            }
+        }
+
+        &.underline.is-highlighted .focused-line {
+            background-color: $theme-primary;
+        }
     }
 }
 
 /* paper-radio-button */
 paper-radio-button.paper-radio-button-0 {
+    .paper-radio-button {
+        &#onRadio {
+            background-color: $theme-primary;
+        }
+
+        &#ink, #ink[checked] {
+            color: $theme-accent;
+        }
+    }
+
     &[checked] #offRadio.paper-radio-button {
         border-color: $theme-primary;
-    }
-
-    #onRadio.paper-radio-button {
-        background-color: $theme-primary;
-    }
-
-    #ink.paper-radio-button {
-        color: $theme-accent;
-    }
-
-    #ink[checked].paper-radio-button {
-        color: $theme-accent;
     }
 }
