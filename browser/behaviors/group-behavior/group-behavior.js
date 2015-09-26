@@ -187,7 +187,7 @@
         var firebase = Noootes.FirebaseRef();
 
         firebase.child('groups/access/requests').child(key).child(user.uid).set(value);
-        firebase.child('users/personal').child(user.uid).child(key).set(value);
+        firebase.child('users/personal/joined').child(user.uid).child(key).set(value);
     },
 
     /**

@@ -149,9 +149,19 @@ describe('<page-personal>', function () {
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, assertions);
         });
 
-        // TODO: Find way to test that the group was properly made without going online.
         it('should create group with all valid input', function (done) {
-            Firebase.goOffline();
+            function assertions() {
+                pagePersonal.createGroup.should.have.been.calledWith({
+                    code: 'WCTTEST',
+                    title: 'The Title',
+                    description: 'The Description',
+                    owner: '3f8f4d76-8d58-4a56-a3f2-661dce66d085'
+                });
+
+                pagePersonal.createGroup.restore();
+            }
+
+            sinon.stub(pagePersonal, 'createGroup');
 
             var inputs = [
                 { name: 'paper-input[name=code]', value: 'WCTTEST' },
@@ -160,7 +170,7 @@ describe('<page-personal>', function () {
             ];
             var button = 'paper-button#button-create';
 
-            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done);
+            listenToEventOnClickingButton(form, 'toast-message', inputs, button, done, assertions);
         });
     });
 

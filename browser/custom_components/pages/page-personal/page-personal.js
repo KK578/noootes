@@ -11,7 +11,10 @@ Noootes.Elements['page-personal'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    behaviors: [Noootes.Behaviors.FormBehavior],
+    behaviors: [
+        Noootes.Behaviors.FormBehavior,
+        Noootes.Behaviors.GroupBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
@@ -67,13 +70,29 @@ Noootes.Elements['page-personal'] = Polymer({
         var validCode = this.validateCode(inputCode);
 
         if (validCode) {
-            this._searchGroup(detail.code, function (freeCode) {
-                if (freeCode) {
-                    this._createGroup(detail);
-                }
-                else {
+            this.searchGroup(Noootes.Firebase.User.uid, detail.code, function (key) {
+                if (key) {
                     this.handleFormFail(form, 'paper-input[name=code]',
                         'Code "' + detail.code + '" already exists.');
+                }
+                else {
+                    var meta = {
+                        code: detail.code,
+                        title: detail.title,
+                        owner: Noootes.Firebase.User.uid,
+                        description: detail.description
+                    };
+                    var access = {
+                        global: detail.global,
+                        public: detail.public
+                    };
+
+                    this.createGroup(meta, access);
+
+                    this.fire('toast-message', {
+                        message: 'Group "' + detail.code + '" created!'
+                    });
+                    this.resetFormCreate();
                 }
             }.bind(this));
         }
@@ -82,42 +101,5 @@ Noootes.Elements['page-personal'] = Polymer({
         var form = this.$['form-create'];
         this.resetForm(form, true);
         this._formCreateOpen = !this._formCreateOpen;
-    },
-    _searchGroup: function (code, callback) {
-        var uid = Noootes.Firebase.User.uid;
-        var firebase = Noootes.FirebaseRef('groups/access/id/');
-
-        firebase.child(uid).child(code).once('value', function (ss) {
-            callback(!ss.val());
-        });
-    },
-    _createGroup: function (detail) {
-        var firebase = Noootes.FirebaseRef();
-        var user = Noootes.Firebase.User;
-        var key = firebase.push().key();
-
-        // Add group to user's owned groups.
-        firebase.child('users/personal/' + user.uid + '/owned/' + key).set(true);
-        // Add public group metadata.
-        firebase.child('groups/metadata/' + key).set({
-            code: detail.code,
-            title: detail.title,
-            owner: user.uid,
-            description: detail.description
-        });
-        // Add group identifier (User/Code).
-        firebase.child('groups/access/id/' + user.uid).child(detail.code).set(key);
-        // Add group's global access permissions.
-        firebase.child('groups/access/global/' + key).set(detail.global);
-        // Add group to public listings if requested.
-        if (detail.public) {
-            firebase.child('groups/public/' + key).set(true);
-        }
-
-        this.fire('toast-message', {
-            message: 'Group "' + detail.code + '" created!'
-        });
-
-        this.resetFormCreate();
     }
 });
