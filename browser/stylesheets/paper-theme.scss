@@ -75,3 +75,17 @@ paper-radio-button.paper-radio-button-0 {
         color: $theme-accent;
     }
 }
+
+/* paper-checkbox */
+paper-checkbox.paper-checkbox-0 {
+    .paper-checkbox {
+        &#ink, #ink[checked] {
+            color: $theme-accent;
+        }
+
+        &#checkbox.checked {
+            background-color: $theme-primary;
+            border-color: $theme-primary;
+        }
+    }
+}

@@ -83,14 +83,22 @@ Noootes.Elements['page-personal'] = Polymer({
         var user = Noootes.Firebase.User;
         var key = firebase.push().key();
 
+        // Add group to user's owned groups.
         firebase.child('users/personal/' + user.uid + '/owned/' + key).set(true);
-        firebase.child('groups/access/id/' + user.uid).child(detail.code).set(key);
-        firebase.child('groups/access/global/' + key).set(detail.global);
+        // Add public group metadata.
         firebase.child('groups/metadata/' + key).set({
             code: detail.code,
             title: detail.title,
             owner: user.uid,
             description: detail.description
         });
+        // Add group identifier (User/Code).
+        firebase.child('groups/access/id/' + user.uid).child(detail.code).set(key);
+        // Add group's global access permissions.
+        firebase.child('groups/access/global/' + key).set(detail.global);
+        // Add group to public listings if requested.
+        if (detail.public) {
+            firebase.child('groups/public/' + key).set(true);
+        }
     }
 });
