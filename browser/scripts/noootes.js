@@ -6,7 +6,13 @@
         User: {}
     },
     FirebaseRef: function (location) {
-        return new Firebase(this.Firebase.Location + location);
+        var firebase = new Firebase(this.Firebase.Location);
+
+        if (location) {
+            firebase = firebase.child(location);
+        }
+
+        return firebase;
     },
     Usernames: {
         names: {},

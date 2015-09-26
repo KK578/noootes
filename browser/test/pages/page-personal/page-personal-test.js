@@ -109,7 +109,7 @@ describe('<page-personal>', function () {
             }
 
             var inputs = [
-                { name: 'paper-input[name=code]', value: 'WCTTEST' },
+                { name: 'paper-input[name=code]', value: 'Not a Code' },
                 { name: 'paper-input[name=title]', value: 'The Title' },
                 { name: 'paper-input[name=description]', value: 'The Description' }
             ];
@@ -118,19 +118,32 @@ describe('<page-personal>', function () {
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
 
-        it('should show the created group in "Owned Groups"', function () {
-            var container = pagePersonal.querySelector('#container-groups-owned');
-            var children = container.childNodes;
-            var createdGroup = children[children.length - 2];
-            createdGroup.textContent.should.match(/WCTTEST\/The Title/);
-        });
-
         it('should show an error message registering the same code again', function (done) {
             function assertions() {
                 var codeInput = form.querySelector('paper-input[name=code]');
-                codeInput.errorMessage.should.equal('Code "WCTTEST" already exists.');
-                codeInput.invalid.should.equal(true);
+                var handle = window.setInterval(function () {
+                    if (codeInput.errorMessage === 'Code "PERMANENT" already exists.') {
+                        codeInput.invalid.should.equal(true);
+
+                        window.clearInterval(handle);
+                        done();
+                    }
+                }, 100);
             }
+
+            var inputs = [
+                { name: 'paper-input[name=code]', value: 'PERMANENT' },
+                { name: 'paper-input[name=title]', value: 'The Title' },
+                { name: 'paper-input[name=description]', value: 'The Description' }
+            ];
+            var button = 'paper-button#button-create';
+
+            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, assertions);
+        });
+
+        // TODO: Find way to test that the group was properly made without going online.
+        it('should create group with all valid input', function (done) {
+            Firebase.goOffline();
 
             var inputs = [
                 { name: 'paper-input[name=code]', value: 'WCTTEST' },
@@ -139,7 +152,7 @@ describe('<page-personal>', function () {
             ];
             var button = 'paper-button#button-create';
 
-            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done);
         });
     });
 
