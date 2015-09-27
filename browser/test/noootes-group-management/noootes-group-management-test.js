@@ -83,9 +83,16 @@ describe('<noootes-group-management>', function () {
     describe('Form Edit', function () {
         var form;
 
-        before(function () {
+        before(function (done) {
             form = noootesGroup.querySelector('#form-edit');
             sinon.stub(noootesGroup, 'editGroup');
+
+            var handle = window.setInterval(function () {
+                if (noootesGroup._accessDataLoaded) {
+                    window.clearInterval(handle);
+                    done();
+                }
+            }, 100);
         });
 
         it('should show edit button and open collapse on click', function () {
@@ -123,15 +130,18 @@ describe('<noootes-group-management>', function () {
 
         it('should call editGroup with valid inputs', function (done) {
             function assertions() {
-                noootesGroup.editGroup.should.have.been.calledWithMatch({
-                    code: 'PERMANENT',
-                    title: 'WCT\'s Group',
-                    owner: '3f8f4d76-8d58-4a56-a3f2-661dce66d085',
-                    description: '[WCT] Please do not remove.'
-                }, {
-                    global: 'none',
-                    public: undefined
-                });
+                noootesGroup.editGroup.should.have.been.calledWithMatch(
+                    '-K-9osCRSNg4n6dtFgcB',
+                    {
+                        code: 'PERMANENT',
+                        title: 'WCT\'s Group',
+                        owner: '3f8f4d76-8d58-4a56-a3f2-661dce66d085',
+                        description: '[WCT] Please do not remove.'
+                    },
+                    {
+                        global: 'none',
+                        public: undefined
+                    });
             }
 
             var inputs = [

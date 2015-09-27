@@ -93,6 +93,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     },
     _dataChanged: function (n) {
         if (n) {
+            this._owned = n.owner === Noootes.Firebase.User.uid;
             this.getUsername(n.owner, function (err, name) {
                 this._username = name;
             }.bind(this));

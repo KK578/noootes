@@ -34,63 +34,75 @@
                 </h2>
                 <em>[[_data.description]]</em>
             </div>
-            <paper-icon-button id="button-edit" icon="create" hidden="{{!_collapseOpen}}" on-tap="toggleEditCollapse"></paper-icon-button>
+            <template is="dom-if" if="{{_owned}}">
+                <paper-icon-button id="button-edit" icon="create" hidden="{{!_collapseOpen}}" on-tap="toggleEditCollapse"></paper-icon-button>
+            </template>
             <paper-icon-button id="button-display" icon="{{_buttonIcon}}" on-tap="toggleCollapse"></paper-icon-button>
         </div>
 
         <iron-collapse opened="{{_collapseOpen}}">
-            <iron-collapse id="group-collapse-display" opened="{{!_editCollapseOpen}}">
-                <p id="group-status-access">
-                    <span>Global Access Status:</span>
-                    <span>{{_accessData.global}}</span>
-                </p>
-                <p id="group-status-request">
-                    <span>Your Status:</span>
-                    <span>{{_accessData.user}}</span>
-                </p>
-            </iron-collapse>
+            <!-- Group access permissions and and edit menu -->
+            <div id="group-meta-data">
+                <!-- Access Information -->
+                <iron-collapse id="group-collapse-display" opened="{{!_editCollapseOpen}}">
+                    <p id="group-status-access">
+                        <span>Global Access Status:</span>
+                        <span>{{_accessData.global}}</span>
+                    </p>
+                    <p id="group-status-request">
+                        <span>Your Status:</span>
+                        <span>{{_accessData.user}}</span>
+                    </p>
+                </iron-collapse>
 
-            <iron-collapse id="group-collapse-edit" opened="{{_editCollapseOpen}}">
-                <form is="iron-form" id="form-edit" method="get" action="/form.html">
-                    <paper-input name="title" label="Title" value="{{_editData.title}}" required on-keydown="submitForm"></paper-input>
-                    <paper-input name="description" label="Description" value="{{_editData.description}}" on-keydown="submitForm"></paper-input>
+                <!-- Edit Menu -->
+                <iron-collapse id="group-collapse-edit" opened="{{_editCollapseOpen}}">
+                    <form is="iron-form" id="form-edit" method="get" action="/form.html">
+                        <paper-input name="title" label="Title" value="{{_editData.title}}" required on-keydown="submitForm"></paper-input>
+                        <paper-input name="description" label="Description" value="{{_editData.description}}" on-keydown="submitForm"></paper-input>
 
-                    <div class="layout horizontal center">
-                        <p class="helper flex">Global Allowed Access:</p>
-                        <paper-radio-group class="flex" attr-for-selected="value" selected="{{_editData.global}}">
-                            <paper-radio-button name="global" value="none">None</paper-radio-button>
-                            <paper-radio-button name="global" value="read">Read</paper-radio-button>
-                            <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
-                        </paper-radio-group>
-                    </div>
-
-                    <div class="layout horizontal center">
-                        <p class="helper flex">Public?</p>
-                        <div class="flex">
-                            <paper-checkbox name="public" checked="{{_editData.public}}"></paper-checkbox>
+                        <!-- Global Permissions -->
+                        <div class="layout horizontal center">
+                            <p class="helper flex">Global Allowed Access:</p>
+                            <paper-radio-group class="flex" attr-for-selected="value" selected="{{_editData.global}}">
+                                <paper-radio-button name="global" value="none">None</paper-radio-button>
+                                <paper-radio-button name="global" value="read">Read</paper-radio-button>
+                                <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
+                            </paper-radio-group>
                         </div>
-                    </div>
 
-                    <div class="button-container layout horizontal">
-                        <span class="flex"></span>
-                        <paper-button id="button-edit-apply" on-tap="submitForm">Apply</paper-button>
-                    </div>
-                </form>
-            </iron-collapse>
+                        <!-- Visibility Permissions -->
+                        <div class="layout horizontal center">
+                            <p class="helper flex">Public?</p>
+                            <div class="flex">
+                                <paper-checkbox name="public" checked="{{_editData.public}}"></paper-checkbox>
+                            </div>
+                        </div>
 
-            <hr />
-
-            <div id="group-members">
-                <div class="layout horizontal">
-                    <h3>Members</h3>
-                    <span class="flex"></span>
-                    <paper-icon-button icon="{{_memberIcon}}" on-tap="toggleMemberCollapse"></paper-icon-button>
-                </div>
-
-                <iron-collapse opened="{{_memberCollapseOpen}}">
-                    <p>Not yet implemented.</p>
+                        <div class="button-container layout horizontal">
+                            <span class="flex"></span>
+                            <paper-button id="button-edit-apply" on-tap="submitForm">Apply</paper-button>
+                        </div>
+                    </form>
                 </iron-collapse>
             </div>
+
+            <!-- Collaborators and Join Requests -->
+            <template is="dom-if" if="{{_owned}}">
+                <div id="group-members">
+                    <hr />
+
+                    <div class="layout horizontal">
+                        <h3>Members</h3>
+                        <span class="flex"></span>
+                        <paper-icon-button icon="{{_memberIcon}}" on-tap="toggleMemberCollapse"></paper-icon-button>
+                    </div>
+
+                    <iron-collapse opened="{{_memberCollapseOpen}}">
+                        <p>Not yet implemented.</p>
+                    </iron-collapse>
+                </div>
+            </template>
         </iron-collapse>
     </template>
     <script src="noootes-group-management.js?__inline"></script>
