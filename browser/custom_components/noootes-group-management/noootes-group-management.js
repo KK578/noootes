@@ -65,6 +65,17 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             type: Boolean,
             value: false,
             observer: '_collapseChanged'
+        },
+
+        // Members
+        _memberIcon: {
+            type: String,
+            value: 'arrow-drop-down'
+        },
+        _memberCollapseOpen: {
+            type: Boolean,
+            value: false,
+            observer: '_memberCollapseChanged'
         }
     },
 
@@ -151,5 +162,13 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         }.bind(this));
 
         this.set('_editData', data);
+    },
+
+    // Members
+    toggleMemberCollapse: function () {
+        this._memberCollapseOpen = !this._memberCollapseOpen;
+    },
+    _memberCollapseChanged: function (n) {
+        this._memberIcon = 'arrow-drop-' + (n ? 'up' : 'down');
     }
 });

@@ -71,6 +71,20 @@
                     </div>
                 </form>
             </iron-collapse>
+
+            <hr />
+
+            <div id="group-members">
+                <div class="layout horizontal">
+                    <h3>Members</h3>
+                    <span class="flex"></span>
+                    <paper-icon-button icon="{{_memberIcon}}" on-tap="toggleMemberCollapse"></paper-icon-button>
+                </div>
+
+                <iron-collapse opened="{{_memberCollapseOpen}}">
+                    <p>Not yet implemented.</p>
+                </iron-collapse>
+            </div>
         </iron-collapse>
     </template>
     <script src="noootes-group-management.js?__inline"></script>
