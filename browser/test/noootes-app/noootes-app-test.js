@@ -18,7 +18,7 @@ describe('<noootes-app>', function () {
     var testUser;
     var firebase;
 
-    before(function () {
+    before(function (done) {
         firebase = document.querySelector('#firebase-auth');
 
         var name = 'wct-tester-' + Math.round(50000 * Math.random());
@@ -30,6 +30,15 @@ describe('<noootes-app>', function () {
             newEmail: 'new-' + email,
             newPassword: 'new-' + password
         };
+
+        // NOTE: Perhaps not the best workaround here.
+        Noootes.FirebaseRef().authWithPassword({
+            email: 'Web@Component.Tester',
+            password: 'WebComponentTester'
+        }, function (err, user) {
+            Noootes.Firebase.User = user;
+            done();
+        });
     });
 
     describe('Login', function () {
@@ -62,7 +71,7 @@ describe('<noootes-app>', function () {
 
         it('should fire "firebase-login-success" on "login"', function (done) {
             listenOnce('firebase-login-success', function () {
-                window.setTimeout(done);
+                done();
             });
 
             var detail = {
@@ -73,7 +82,7 @@ describe('<noootes-app>', function () {
             firebase.fire('login', detail);
         });
 
-        it.skip('should have changed selected page [ERRORING VALUE APPEARS UNDEFINED ON FIRST LOAD]', function () {
+        it('should be on screen-main', function () {
             var element = document.querySelector('neon-animated-pages');
             element.selected.should.equal(1);
 
@@ -92,14 +101,16 @@ describe('<noootes-app>', function () {
 
         it('should fire "firebase-logout-success" on "logout"', function (done) {
             listenOnce('firebase-logout-success', function () {
-                var element = document.querySelector('noootes-app');
-                element._selectedPage.should.equal(0);
-                (Noootes.Firebase.User === undefined).should.equal(true);
-
                 done();
             });
 
             firebase.fire('logout');
+        });
+
+        it('should be on screen-login', function () {
+            var element = document.querySelector('neon-animated-pages');
+            element.selected.should.equal(0);
+            (Noootes.Firebase.User === undefined).should.equal(true);
         });
     });
 
