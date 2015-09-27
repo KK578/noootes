@@ -4,4 +4,15 @@
 
 :host {
     display: block;
+    padding: 4px 8px;
+}
+
+#group {
+    h2 {
+        margin-bottom: 0;
+    }
+
+    #group-metadata {
+        margin-bottom: 8px;
+    }
 }
