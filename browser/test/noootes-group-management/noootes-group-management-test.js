@@ -48,7 +48,7 @@ describe('<noootes-group-management>', function () {
     });
 
     it('should open collapse on clicking button', function (done) {
-        var button = noootesGroup.querySelector('#group-button');
+        var button = noootesGroup.querySelector('#button-display');
         var collapse = noootesGroup.querySelector('#group-collapse-display');
         button.click();
 
@@ -58,5 +58,35 @@ describe('<noootes-group-management>', function () {
                 done();
             }
         }, 100);
+    });
+
+    describe('Form Edit', function () {
+        it('should show edit button and open collapse on click', function () {
+            var button = noootesGroup.querySelector('#button-edit');
+            button.style.display.should.not.equal('none');
+            button.click();
+
+            var collapse = noootesGroup.querySelector('#group-collapse-edit');
+            collapse.opened.should.equal(true);
+        });
+
+        it('should set data to current data', function (done) {
+            var form = noootesGroup.querySelector('#form-edit');
+            form.querySelector('paper-input[name=title]').value.should.equal('Web Component Testing');
+            form.querySelector('paper-input[name=description]').value.should.equal('The First Nooote');
+            form.querySelector('paper-radio-group').selected.should.equal('read');
+
+            var checkbox = form.querySelector('paper-checkbox');
+            var handle = window.setInterval(function () {
+                if (checkbox.checked) {
+                    window.clearInterval(handle);
+                    done();
+                }
+            }, 100);
+        });
+
+        it('should fire "iron-form-invalid" if title is not set');
+
+        it('should call editGroup with valid inputs');
     });
 });

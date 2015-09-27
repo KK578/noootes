@@ -132,16 +132,16 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         var data = this._data;
 
         switch (this._accessData.global) {
-            case 'None':
-                data.global = 'none';
-                break;
-
             case 'Read':
                 data.global = 'read';
                 break;
 
             case 'Read/Write':
                 data.global = 'write';
+                break;
+
+            default:
+                data.global = 'none';
                 break;
         }
 
