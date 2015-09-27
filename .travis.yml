@@ -4,10 +4,12 @@ node_js:
 cache:
   directories:
     - node_modules
-before_script:
+install:
+  - npm install
   - npm install -g grunt-cli
-  - npm install -g web-component-tester
+before_script:
   - grunt build
+  - npm install -g web-component-tester
   - set -o pipefail
 script:
   - wct --plugins sauce | cat
