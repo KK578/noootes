@@ -160,8 +160,81 @@
         firebase.set(value ? true : null);
     },
 
+    ///////////////////
+    // Status Functions
+    ///////////////////
+    checkGroupGlobalStatus: function (group, callback) {
+        var firebase = Noootes.FirebaseRef('groups/access/global').child(group);
+        firebase.on('value', callback);
+    },
+
+    readableGroupGlobalStatus: function (global) {
+        var result;
+
+        switch (global) {
+            case 'read':
+                result = 'Read';
+                break;
+
+            case 'write':
+                result = 'Read/Write';
+                break;
+
+            case 'N/A':
+                /* falls through */
+            default:
+                result = 'None';
+                break;
+        }
+
+        return result;
+    },
+
+    checkGroupRequestStatus: function (group, callback) {
+        var user = Noootes.Firebase.User;
+        var firebase = Noootes.FirebaseRef('groups/access');
+
+        var collaborator;
+        var request;
+
+        firebase.child('collaborators').child(group).child(user.uid).on('value', function (ss) {
+            collaborator = ss.val();
+            callback(collaborator, request);
+        });
+
+        firebase.child('requests').child(group).child(user.uid).on('value', function (ss) {
+            request = ss.val();
+            callback(collaborator, request);
+        });
+    },
+
+    readableGroupRequestStatus: function (uid, collaborator, request) {
+        var result;
+
+        if (Noootes.Firebase.User.uid === uid) {
+            result = 'Owner';
+        }
+        else {
+            switch (collaborator) {
+                case true:
+                    result = 'Read/Write';
+                    break;
+
+                case false:
+                    result = 'Read';
+                    break;
+
+                default:
+                    result = request ? 'Under Request' : 'None';
+                    break;
+            }
+        }
+
+        return result;
+    },
+
     /////////////////
-    // User Functions
+    // Owner Functions
     /////////////////
     /**
      * Add group key to current user's owned groups list.
