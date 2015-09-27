@@ -133,7 +133,25 @@
      */
     editGroupAccessGlobal: function (key, value) {
         var firebase = Noootes.FirebaseRef('groups/access/global').child(key);
-        firebase.set(value);
+        var set;
+
+        switch (value) {
+            case 'write':
+            case true:
+                set = true;
+                break;
+
+            case 'read':
+            case false:
+                set = false;
+                break;
+
+            default:
+                set = null;
+                break;
+        }
+
+        firebase.set(set);
     },
 
     /**
@@ -171,25 +189,16 @@
     },
 
     readableGroupGlobalStatus: function (global) {
-        var result;
-
         switch (global) {
-            case 'read':
-                result = 'Read';
-                break;
+            case true:
+                return 'Read/Write';
 
-            case 'write':
-                result = 'Read/Write';
-                break;
+            case false:
+                return 'Read';
 
-            case 'N/A':
-                /* falls through */
             default:
-                result = 'None';
-                break;
+                return 'None';
         }
-
-        return result;
     },
 
     checkGroupRequestStatus: function (group, callback) {
@@ -211,28 +220,21 @@
     },
 
     readableGroupRequestStatus: function (uid, collaborator, request) {
-        var result;
-
         if (Noootes.Firebase.User.uid === uid) {
-            result = 'Owner';
+            return 'Owner';
         }
         else {
             switch (collaborator) {
                 case true:
-                    result = 'Read/Write';
-                    break;
+                    return 'Read/Write';
 
                 case false:
-                    result = 'Read';
-                    break;
+                    return 'Read';
 
                 default:
-                    result = request ? 'Under Request' : 'None';
-                    break;
+                    return request ? 'Under Request' : 'None';
             }
         }
-
-        return result;
     },
 
     /////////////////
@@ -275,6 +277,25 @@
     moveToCollaborators: function (key, uid, value) {
         var firebase = Noootes.FirebaseRef('groups/access');
         firebase.child('requests').child(key).child(uid).set(null);
-        firebase.child('collaborators').child(key).child(uid).set(value);
+
+        var set;
+
+        switch (value) {
+            case 'write':
+            case true:
+                set = true;
+                break;
+
+            case 'read':
+            case false:
+                set = false;
+                break;
+
+            default:
+                set = null;
+                break;
+        }
+
+        firebase.child('collaborators').child(key).child(uid).set(set);
     }
 };
