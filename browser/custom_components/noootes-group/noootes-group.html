@@ -36,10 +36,14 @@
                 <span>Global Access Status:</span>
                 <span>{{_accessData.global}}</span>
             </p>
-            <p id="group-status-request">
-                <span>Your Status:</span>
-                <span>{{_accessData.user}}</span>
-            </p>
+            <div class="layout horizontal">
+                <p id="group-status-request">
+                    <span>Your Status:</span>
+                    <span>{{_accessData.user}}</span>
+                </p>
+                <span class="flex"></span>
+                <paper-button id="group-apply" hidden$="{{_hideApplyButton}}" on-tap="requestAccess">Apply to Group</paper-button>
+            </div>
         </iron-collapse>
     </template>
     <script src="noootes-group.js?__inline"></script>

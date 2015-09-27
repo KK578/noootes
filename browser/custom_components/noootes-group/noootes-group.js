@@ -110,6 +110,7 @@ Noootes.Elements['noootes-group'] = Polymer({
         this.checkGroupRequestStatus(this.group, function (collaborator, request) {
             var status = this.readableGroupRequestStatus(this._data.owner, collaborator, request);
             this.set('_accessData.user', status);
+            this._setApplyButtonVisibility(status);
 
             if (this._accessData.global) {
                 this._accessDataLoaded = true;
@@ -120,5 +121,14 @@ Noootes.Elements['noootes-group'] = Polymer({
         if (n) {
             this._collapseOpen = true;
         }
+    },
+
+    // Join Groups
+    _setApplyButtonVisibility: function (status) {
+        this._hideApplyButton = status !== 'None';
+    },
+    requestAccess: function () {
+        // TODO: Add security checks.
+        this.applyToGroup(this.group, true);
     }
 });
