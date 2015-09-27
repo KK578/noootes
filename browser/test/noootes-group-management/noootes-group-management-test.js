@@ -100,11 +100,11 @@ describe('<noootes-group-management>', function () {
         it('should set data to current data', function (done) {
             form.querySelector('paper-input[name=title]').value.should.equal('Owned Groups');
             form.querySelector('paper-input[name=description]').value.should.equal('[WCT] Do not remove.');
-            form.querySelector('paper-radio-group').selected.should.equal('read');
 
             var checkbox = form.querySelector('paper-checkbox');
             var handle = window.setInterval(function () {
                 if (checkbox.checked) {
+                    form.querySelector('paper-radio-group').selected.should.equal('read');
                     window.clearInterval(handle);
                     done();
                 }
@@ -112,17 +112,13 @@ describe('<noootes-group-management>', function () {
         });
 
         it('should fire "iron-form-invalid" if title is not set', function (done) {
-            function assertions() {
-                done();
-            }
-
             var inputs = [
                 { name: 'paper-input[name=title]', value: '' },
-                { name: 'paper-input[name=description]', value: 'Not A Code' }
+                { name: 'paper-input[name=description]', value: '[WCT] Please do not remove.' }
             ];
             var button = 'paper-button#button-edit-apply';
 
-            listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done, assertions);
+            listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
         });
 
         it('should call editGroup with valid inputs', function (done) {
@@ -130,17 +126,21 @@ describe('<noootes-group-management>', function () {
                 noootesGroup.editGroup.should.have.been.calledWithMatch({
                     code: 'PERMANENT',
                     title: 'WCT\'s Group',
+                    owner: '3f8f4d76-8d58-4a56-a3f2-661dce66d085',
                     description: '[WCT] Please do not remove.'
                 }, {
                     global: 'none',
-                    public: null
+                    public: undefined
                 });
             }
 
             var inputs = [
-                { name: 'paper-input[name=title]', value: 'Ayyylmao' },
-                { name: 'paper-input[name=description]', value: 'Not A Code' }
+                { name: 'paper-input[name=title]', value: 'WCT\'s Group' },
+                { name: 'paper-input[name=description]', value: '[WCT] Please do not remove.' }
             ];
+            form.querySelector('paper-radio-button[value=none]').click();
+            form.querySelector('paper-checkbox[name=public]').click();
+
             var button = 'paper-button#button-edit-apply';
 
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);

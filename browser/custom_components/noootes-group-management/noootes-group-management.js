@@ -13,11 +13,14 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
     behaviors: [
         Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.FormBehavior,
         Noootes.Behaviors.GroupBehavior
     ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'form-edit.iron-form-submit': '_validateFormEdit'
+    },
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -162,6 +165,23 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         }.bind(this));
 
         this.set('_editData', data);
+    },
+    _validateFormEdit: function (event) {
+        var detail = event.detail;
+
+        var meta = {
+            code: this._data.code,
+            title: detail.title,
+            description: detail.description,
+            owner: this._data.owner
+        };
+        var access = {
+            global: detail.global,
+            public: detail.public
+        };
+
+        this.editGroup(meta, access);
+        this._editCollapseOpen = false;
     },
 
     // Members
