@@ -11,7 +11,10 @@ Noootes.Elements['noootes-group'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    behaviors: [Noootes.Behaviors.FirebaseBehavior],
+    behaviors: [
+        Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.GroupBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -95,83 +98,23 @@ Noootes.Elements['noootes-group'] = Polymer({
         this._buttonIcon = 'arrow-drop-' + (n ? 'up' : 'down');
     },
     _loadAccessData: function () {
-        var data = {};
-        var self = this;
+        this.checkGroupGlobalStatus(this.group, function (global) {
+            var status = this.readableGroupGlobalStatus(global);
+            this.set('_accessData.global', status);
 
-        function done() {
-            if (data.global && data.user) {
-                self._setAccessStrings(data);
+            if (this._accessData.user) {
+                this._accessDataLoaded = true;
             }
-        }
+        }.bind(this));
 
-        var user = Noootes.Firebase.User;
-        var firebase = Noootes.FirebaseRef('groups/access');
+        this.checkGroupRequestStatus(this.group, function (collaborator, request) {
+            var status = this.readableGroupRequestStatus(this._data.owner, collaborator, request);
+            this.set('_accessData.user', status);
 
-        firebase.child('global/' + this.group).on('value', function (ss) {
-            data.global = ss.val() || 'N/A';
-            done();
-        });
-
-        firebase.child('collaborators/' + this.group).child(user.uid).on('value', function (ss) {
-            data.user = ss.val() || 'N/A';
-            done();
-        });
-    },
-    _setAccessStrings: function (data) {
-        function global(access) {
-            var result;
-
-            switch (access) {
-                case 'read':
-                    result = 'Read';
-                    break;
-
-                case 'write':
-                    result = 'Read/Write';
-                    break;
-
-                case 'N/A':
-                    /* falls through */
-                default:
-                    result = 'None';
-                    break;
+            if (this._accessData.global) {
+                this._accessDataLoaded = true;
             }
-
-            return result;
-        }
-
-        function user(uid, collab, request) {
-            var result;
-
-            if (Noootes.Firebase.User.uid === uid) {
-                result = 'Owner';
-            }
-            else {
-                switch (collab) {
-                    case 'read':
-                        result = 'Read';
-                        break;
-
-                    case 'write':
-                        result = 'Read/Write';
-                        break;
-
-                    case 'N/A':
-                        /* falls through */
-                    default:
-                        result = request ? 'Under Request' : 'None';
-                        break;
-                }
-            }
-
-            return result;
-        }
-
-        this._accessData = {
-            global: global(data.global),
-            user: user(this._data.owner, data.user)
-        };
-        this._accessDataLoaded = true;
+        }.bind(this));
     },
     _accessDataLoadedChanged: function (n) {
         if (n) {

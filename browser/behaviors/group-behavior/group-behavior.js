@@ -165,7 +165,9 @@
     ///////////////////
     checkGroupGlobalStatus: function (group, callback) {
         var firebase = Noootes.FirebaseRef('groups/access/global').child(group);
-        firebase.on('value', callback);
+        firebase.on('value', function (ss) {
+            callback(ss.val());
+        });
     },
 
     readableGroupGlobalStatus: function (global) {
