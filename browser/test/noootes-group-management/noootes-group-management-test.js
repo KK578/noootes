@@ -49,7 +49,7 @@ describe('<noootes-group-management>', function () {
 
     it('should open collapse on clicking button', function (done) {
         var button = noootesGroup.querySelector('#group-button');
-        var collapse = noootesGroup.querySelector('#group-collapse');
+        var collapse = noootesGroup.querySelector('#group-collapse-display');
         button.click();
 
         var handle = window.setInterval(function () {

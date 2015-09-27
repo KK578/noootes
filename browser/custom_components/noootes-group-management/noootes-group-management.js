@@ -11,7 +11,10 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    behaviors: [Noootes.Behaviors.FirebaseBehavior],
+    behaviors: [
+        Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.GroupBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -44,6 +47,16 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             value: undefined
         },
 
+        // Access
+        _accessData: {
+            type: Object,
+            value: {}
+        },
+        _accessDataLoaded: {
+            type: Boolean,
+            value: false,
+            observer: '_accessDataLoadedChanged'
+        },
         _buttonIcon: {
             type: String,
             value: 'arrow-drop-down'
@@ -72,10 +85,40 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         }
     },
 
+    // Access Data
+    toggleCollapse: function () {
+        if (!this._accessDataLoaded) {
+            this._loadAccessData();
+        }
+        else {
+            this._collapseOpen = !this._collapseOpen;
+        }
+    },
     _collapseChanged: function (n) {
         this._buttonIcon = 'arrow-drop-' + (n ? 'up' : 'down');
     },
-    toggleCollapse: function () {
-        this._collapseOpen = !this._collapseOpen;
+    _loadAccessData: function () {
+        this.checkGroupGlobalStatus(this.group, function (global) {
+            var status = this.readableGroupGlobalStatus(global);
+            this.set('_accessData.global', status);
+
+            if (this._accessData.user) {
+                this._accessDataLoaded = true;
+            }
+        }.bind(this));
+
+        this.checkGroupRequestStatus(this.group, function (collaborator, request) {
+            var status = this.readableGroupRequestStatus(this._data.owner, collaborator, request);
+            this.set('_accessData.user', status);
+
+            if (this._accessData.global) {
+                this._accessDataLoaded = true;
+            }
+        }.bind(this));
+    },
+    _accessDataLoadedChanged: function (n) {
+        if (n) {
+            this._collapseOpen = true;
+        }
     }
 });
