@@ -180,7 +180,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             public: detail.public
         };
 
-        this.editGroup(meta, access);
+        this.editGroup(this.group, meta, access);
         this._editCollapseOpen = false;
     },
 

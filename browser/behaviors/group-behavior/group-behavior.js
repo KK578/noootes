@@ -65,8 +65,10 @@
         }
     },
 
-    editGroup: function (meta, access) {
-        throw new Error('Not yet implemented.');
+    editGroup: function (group, meta, access) {
+        this.updateGroupMetadata(group, meta);
+        this.editGroupAccessGlobal(group, access.global);
+        this.editGroupVisibility(group, access.public);
     },
 
     /**
