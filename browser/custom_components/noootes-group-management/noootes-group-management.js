@@ -92,6 +92,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         }
         else {
             this._collapseOpen = !this._collapseOpen;
+            this._editCollapseOpen = false;
         }
     },
     _collapseChanged: function (n) {
@@ -120,5 +121,35 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         if (n) {
             this._collapseOpen = true;
         }
+    },
+
+    // Edit
+    toggleEditCollapse: function () {
+        this._loadEditData();
+        this._editCollapseOpen = !this._editCollapseOpen;
+    },
+    _loadEditData: function () {
+        var data = this._data;
+
+        switch (this._accessData.global) {
+            case 'None':
+                data.global = 'none';
+                break;
+
+            case 'Read':
+                data.global = 'read';
+                break;
+
+            case 'Read/Write':
+                data.global = 'write';
+                break;
+        }
+
+        this.getGroupVisibility(this.group, function (isPublic) {
+            data.public = isPublic;
+            this.set('_editData.public', isPublic);
+        }.bind(this));
+
+        this.set('_editData', data);
     }
 });

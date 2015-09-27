@@ -167,6 +167,14 @@
         firebase.set(value);
     },
 
+    getGroupVisibility: function (key, callback) {
+        var firebase = Noootes.FirebaseRef('groups/public').child(key);
+        firebase.on('value', function (ss) {
+            var data = ss.val();
+            callback(data ? true : false);
+        });
+    },
+
     /**
      * Set group public visibility.
      *
