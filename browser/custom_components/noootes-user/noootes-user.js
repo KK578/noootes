@@ -72,7 +72,12 @@ Noootes.Elements['noootes-user'] = Polymer({
             }.bind(this));
         }
     },
+
+    // Request Mode
     _changeMode: function (n) {
         this._requestMode = n !== undefined;
+    },
+    _checkboxText: function (checked) {
+        return checked ? 'Read/Write' : 'Read';
     }
 });

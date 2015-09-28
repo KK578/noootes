@@ -2,6 +2,8 @@
 
 <!-- Iron -->
 <!-- Paper -->
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../behaviors/firebase-behavior/firebase-behavior.html" />
@@ -18,9 +20,13 @@
                 <span class="flex">{{_status}}</span>
             </template>
             <template is="dom-if" if="{{_requestMode}}">
-                <div class="layout horizontal flex">
-                    <paper-button>Decline</paper-button>
-                    <paper-button>Add</paper-button>
+                <div class="layout horizontal center flex">
+                    <div><paper-checkbox checked="{{_checked}}">{{_checkboxText(_checked)}}</paper-checkbox></div>
+                    <span class="flex"></span>
+                    <div class="layout horizontal">
+                        <paper-icon-button icon="close"></paper-icon-button>
+                        <paper-icon-button icon="check"></paper-icon-button>
+                    </div>
                 </div>
             </template>
         </div>
