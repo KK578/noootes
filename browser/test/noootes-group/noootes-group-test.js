@@ -65,6 +65,6 @@ describe('<noootes-group>', function () {
         statusAccess.textContent.should.equal('Global Access Status: Read');
 
         var statusRequest = noootesGroup.querySelector('#group-status-request');
-        statusRequest.textContent.should.equal('Your Status: Read');
+        statusRequest.textContent.should.equal('Your Status:Read');
     });
 });
