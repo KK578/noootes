@@ -8,6 +8,7 @@
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../behaviors/firebase-behavior/firebase-behavior.html" />
+<link rel="import" href="../../behaviors/group-behavior/group-behavior.html" />
 <!-- Other -->
 <link rel="import" href="../../bower_components/firebase-element/firebase-document.html" />
 
@@ -31,14 +32,21 @@
         </div>
 
         <iron-collapse id="group-collapse" opened="{{_collapseOpen}}">
-            <p id="group-status-access">
-                <span>Global Access Status:</span>
-                <span>{{_accessData.global}}</span>
+            <p id="group-status-access" class="layout horizontal center">
+                <span class="flex">Global Access Status:</span>
+                <span class="flex">{{_accessData.global}}</span>
             </p>
-            <p id="group-status-request">
-                <span>Your Status:</span>
-                <span>{{_accessData.user}}</span>
-            </p>
+            <div class="layout horizontal center">
+                <p id="group-status-request" class="layout horizontal flex">
+                    <span class="flex">Your Status:</span>
+                    <template is="dom-if" if="{{_hideApplyButton}}">
+                        <span class="flex">{{_accessData.user}}</span>
+                    </template>
+                </p>
+                <template is="dom-if" if="{{!_hideApplyButton}}">
+                    <paper-button id="group-apply" class="flex" on-tap="requestAccess">Click to Join Group</paper-button>
+                </template>
+            </div>
         </iron-collapse>
     </template>
     <script src="noootes-group.js?__inline"></script>

@@ -133,7 +133,25 @@
      */
     editGroupAccessGlobal: function (key, value) {
         var firebase = Noootes.FirebaseRef('groups/access/global').child(key);
-        firebase.set(value);
+        var set;
+
+        switch (value) {
+            case 'write':
+            case true:
+                set = true;
+                break;
+
+            case 'read':
+            case false:
+                set = false;
+                break;
+
+            default:
+                set = null;
+                break;
+        }
+
+        firebase.set(set);
     },
 
     /**
@@ -160,8 +178,67 @@
         firebase.set(value ? true : null);
     },
 
+    ///////////////////
+    // Status Functions
+    ///////////////////
+    checkGroupGlobalStatus: function (group, callback) {
+        var firebase = Noootes.FirebaseRef('groups/access/global').child(group);
+        firebase.on('value', function (ss) {
+            callback(ss.val());
+        });
+    },
+
+    readableGroupGlobalStatus: function (global) {
+        switch (global) {
+            case true:
+                return 'Read/Write';
+
+            case false:
+                return 'Read';
+
+            default:
+                return 'None';
+        }
+    },
+
+    checkGroupRequestStatus: function (group, callback) {
+        var user = Noootes.Firebase.User;
+        var firebase = Noootes.FirebaseRef('groups/access');
+
+        var collaborator;
+        var request;
+
+        firebase.child('collaborators').child(group).child(user.uid).on('value', function (ss) {
+            collaborator = ss.val();
+            callback(collaborator, request);
+        });
+
+        firebase.child('requests').child(group).child(user.uid).on('value', function (ss) {
+            request = ss.val();
+            callback(collaborator, request);
+        });
+    },
+
+    readableGroupRequestStatus: function (uid, collaborator, request) {
+        if (Noootes.Firebase.User.uid === uid) {
+            return 'Owner';
+        }
+        else {
+            switch (collaborator) {
+                case true:
+                    return 'Read/Write';
+
+                case false:
+                    return 'Read';
+
+                default:
+                    return request ? 'Under Request' : 'None';
+            }
+        }
+    },
+
     /////////////////
-    // User Functions
+    // Owner Functions
     /////////////////
     /**
      * Add group key to current user's owned groups list.
@@ -200,6 +277,25 @@
     moveToCollaborators: function (key, uid, value) {
         var firebase = Noootes.FirebaseRef('groups/access');
         firebase.child('requests').child(key).child(uid).set(null);
-        firebase.child('collaborators').child(key).child(uid).set(value);
+
+        var set;
+
+        switch (value) {
+            case 'write':
+            case true:
+                set = true;
+                break;
+
+            case 'read':
+            case false:
+                set = false;
+                break;
+
+            default:
+                set = null;
+                break;
+        }
+
+        firebase.child('collaborators').child(key).child(uid).set(set);
     }
 };
