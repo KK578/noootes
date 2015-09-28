@@ -94,6 +94,7 @@
                 <hr />
 
                 <firebase-collection location="[[_memberLocation]]" data="{{_memberData}}"></firebase-collection>
+                <firebase-collection location="[[_requestLocation]]" data="{{_requestData}}"></firebase-collection>
 
                 <div id="group-members">
                     <div class="layout horizontal">
@@ -105,6 +106,20 @@
                     <iron-collapse opened="{{_memberCollapseOpen}}">
                         <template is="dom-repeat" items="{{_memberData}}">
                             <noootes-user group="[[group]]" user="[[item.__firebaseKey__]]"></noootes-user>
+                        </template>
+                    </iron-collapse>
+                </div>
+
+                <div id="group-requests">
+                    <div class="layout horizontal">
+                        <h3>Requests</h3>
+                        <span class="flex"></span>
+                        <paper-icon-button icon="{{_getArrowIcon(_requestCollapseOpen)}}" on-tap="toggleRequestCollapse"></paper-icon-button>
+                    </div>
+
+                    <iron-collapse opened="{{_requestCollapseOpen}}">
+                        <template is="dom-repeat" items="{{_requestData}}">
+                            <noootes-user group="[[group]]" user="[[item.__firebaseKey__]]" request="true"></noootes-user>
                         </template>
                     </iron-collapse>
                 </div>

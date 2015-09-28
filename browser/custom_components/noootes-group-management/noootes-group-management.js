@@ -195,5 +195,13 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         }
 
         this._memberCollapseOpen = !this._memberCollapseOpen;
+    },
+    toggleRequestCollapse: function () {
+        if (!this._requestLocation) {
+            this._requestLocation = Noootes.Firebase.Location +
+                'groups/access/requests/' + this.group;
+        }
+
+        this._requestCollapseOpen = !this._requestCollapseOpen;
     }
 });

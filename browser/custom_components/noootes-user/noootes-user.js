@@ -45,19 +45,34 @@ Noootes.Elements['noootes-user'] = Polymer({
         user: {
             type: String,
             value: undefined
+        },
+        request: {
+            type: String,
+            value: undefined,
+            observer: '_changeMode'
+        },
+        _requestMode: {
+            type: Boolean,
+            value: false
         }
     },
 
     /* Functions specific to this element go under here. */
-    _loadUserAccess: function (group, user) {
-        var firebase = Noootes.FirebaseRef('groups/access/collaborators');
-        firebase.child(group).child(user).on('value', function (ss) {
-            this._status = this.readableGroupRequestStatus(user, ss.val());
-        }.bind(this));
-    },
     _loadUsername: function (user) {
         this.getUsername(user, function (err, name) {
             this._username = name;
         }.bind(this));
+    },
+    _loadUserAccess: function (group, user) {
+        if (this.request === undefined) {
+            var firebase = Noootes.FirebaseRef('groups/access/collaborators');
+
+            firebase.child(group).child(user).on('value', function (ss) {
+                this._status = this.readableGroupRequestStatus(user, ss.val());
+            }.bind(this));
+        }
+    },
+    _changeMode: function (n) {
+        this._requestMode = n !== undefined;
     }
 });

@@ -11,10 +11,19 @@
 <dom-module id="noootes-user">
     <link rel="import" type="css" href="noootes-user.css?__inline" />
     <template>
-        <p class="layout horizontal flex">
+        <div class="layout horizontal center">
             <span class="flex">{{_username}}</span>
-            <span class="flex">{{_status}}</span>
-        </p>
+
+            <template is="dom-if" if="{{!_requestMode}}">
+                <span class="flex">{{_status}}</span>
+            </template>
+            <template is="dom-if" if="{{_requestMode}}">
+                <div class="layout horizontal flex">
+                    <paper-button>Decline</paper-button>
+                    <paper-button>Add</paper-button>
+                </div>
+            </template>
+        </div>
     </template>
     <script src="noootes-user.js?__inline"></script>
 </dom-module>

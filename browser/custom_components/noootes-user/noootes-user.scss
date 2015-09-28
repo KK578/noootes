@@ -5,3 +5,8 @@
 :host {
     display: block;
 }
+
+paper-button {
+    min-width: 0;
+    padding: 8px 0.9em;
+}
