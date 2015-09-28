@@ -64,25 +64,15 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             value: false,
             observer: '_accessDataLoadedChanged'
         },
-        _buttonIcon: {
-            type: String,
-            value: 'arrow-drop-down'
-        },
         _collapseOpen: {
             type: Boolean,
-            value: false,
-            observer: '_collapseChanged'
+            value: false
         },
 
         // Members
-        _memberIcon: {
-            type: String,
-            value: 'arrow-drop-down'
-        },
         _memberCollapseOpen: {
             type: Boolean,
-            value: false,
-            observer: '_memberCollapseChanged'
+            value: false
         }
     },
 
@@ -106,7 +96,12 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         return data.owner === Noootes.Firebase.User.uid;
     },
 
-    // Access Data
+    // All Collapses
+    _getArrowIcon: function (open) {
+        return 'arrow-drop-' + (open ? 'up' : 'down');
+    },
+
+    // Access Collapse
     toggleCollapse: function () {
         if (!this._accessDataLoaded) {
             this._loadAccessData();
@@ -114,10 +109,8 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         else {
             this._collapseOpen = !this._collapseOpen;
             this._editCollapseOpen = false;
+            this._memberCollapseOpen = false;
         }
-    },
-    _collapseChanged: function (n) {
-        this._buttonIcon = 'arrow-drop-' + (n ? 'up' : 'down');
     },
     _loadAccessData: function () {
         this.checkGroupGlobalStatus(this.group, function (global) {
@@ -144,7 +137,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         }
     },
 
-    // Edit
+    // Edit Collapse
     toggleEditCollapse: function () {
         this._loadEditData();
     },
@@ -191,11 +184,8 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         this._editCollapseOpen = false;
     },
 
-    // Members
+    // Members Collapse
     toggleMemberCollapse: function () {
         this._memberCollapseOpen = !this._memberCollapseOpen;
-    },
-    _memberCollapseChanged: function (n) {
-        this._memberIcon = 'arrow-drop-' + (n ? 'up' : 'down');
     }
 });

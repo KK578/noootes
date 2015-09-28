@@ -37,7 +37,7 @@
             <template is="dom-if" if="{{_owned}}">
                 <paper-icon-button id="button-edit" icon="create" hidden="{{!_collapseOpen}}" on-tap="toggleEditCollapse"></paper-icon-button>
             </template>
-            <paper-icon-button id="button-display" icon="{{_buttonIcon}}" on-tap="toggleCollapse"></paper-icon-button>
+            <paper-icon-button id="button-display" icon="{{_getArrowIcon(_collapseOpen)}}" on-tap="toggleCollapse"></paper-icon-button>
         </div>
 
         <iron-collapse opened="{{_collapseOpen}}">
@@ -95,7 +95,7 @@
                     <div class="layout horizontal">
                         <h3>Members</h3>
                         <span class="flex"></span>
-                        <paper-icon-button icon="{{_memberIcon}}" on-tap="toggleMemberCollapse"></paper-icon-button>
+                        <paper-icon-button icon="{{_getArrowIcon(_memberCollapseOpen)}}" on-tap="toggleMemberCollapse"></paper-icon-button>
                     </div>
 
                     <iron-collapse opened="{{_memberCollapseOpen}}">
