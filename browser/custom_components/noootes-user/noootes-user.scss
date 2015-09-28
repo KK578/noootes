@@ -4,20 +4,9 @@
 
 :host {
     display: block;
-    padding: 4px 8px;
 }
 
-#group {
-    h2 {
-        margin-bottom: 0;
-    }
-
-    #group-metadata {
-        margin-bottom: 8px;
-    }
-}
-
-#group-apply {
-    text-align: left;
+paper-button {
+    min-width: 0;
     padding: 8px 0.9em;
 }

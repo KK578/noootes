@@ -4,4 +4,33 @@
 
 :host {
     display: block;
+    padding: 4px 8px;
+}
+
+.button-container {
+    clear: both;
+}
+
+#group {
+    h2 {
+        margin-bottom: 0;
+    }
+
+    #group-metadata {
+        margin-bottom: 8px;
+    }
+}
+
+#group-members, #group-requests {
+    paper-icon-button {
+        margin-right: 20px;
+    }
+}
+
+.helper {
+    color: $black-secondary;
+}
+
+paper-checkbox {
+    margin-left: 12px;
 }

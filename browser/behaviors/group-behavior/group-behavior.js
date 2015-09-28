@@ -65,6 +65,12 @@
         }
     },
 
+    editGroup: function (group, meta, access) {
+        this.updateGroupMetadata(group, meta);
+        this.editGroupAccessGlobal(group, access.global);
+        this.editGroupVisibility(group, access.public);
+    },
+
     /**
      * Delete group under the current logged in user.
      *
@@ -167,6 +173,14 @@
         firebase.set(value);
     },
 
+    getGroupVisibility: function (key, callback) {
+        var firebase = Noootes.FirebaseRef('groups/public').child(key);
+        firebase.on('value', function (ss) {
+            var data = ss.val();
+            callback(data ? true : false);
+        });
+    },
+
     /**
      * Set group public visibility.
      *
@@ -264,7 +278,7 @@
         var firebase = Noootes.FirebaseRef();
 
         firebase.child('groups/access/requests').child(key).child(user.uid).set(value);
-        firebase.child('users/personal/joined').child(user.uid).child(key).set(value);
+        firebase.child('users/personal').child(user.uid).child('joined').child(key).set(value);
     },
 
     /**

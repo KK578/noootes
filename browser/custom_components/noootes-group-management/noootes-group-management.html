@@ -1,13 +1,20 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html" />
 
 <!-- Iron -->
+<link rel="import" href="../../bower_components/iron-form/iron-form.html" />
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html" />
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html" />
 <!-- Paper -->
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="../../bower_components/paper-input/paper-input.html" />
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html" />
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html" />
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../../behaviors/firebase-behavior/firebase-behavior.html" />
+<link rel="import" href="../../behaviors/form-behavior/form-behavior.html" />
+<link rel="import" href="../../behaviors/group-behavior/group-behavior.html" />
 <!-- Other -->
 <link rel="import" href="../../bower_components/firebase-element/firebase-document.html" />
 
@@ -27,11 +34,96 @@
                 </h2>
                 <em>[[_data.description]]</em>
             </div>
-            <paper-icon-button id="group-button" icon="{{_buttonIcon}}" on-tap="toggleCollapse"></paper-icon-button>
+            <template is="dom-if" if="{{_owned}}">
+                <paper-icon-button id="button-edit" icon="create" hidden="{{!_collapseOpen}}" on-tap="toggleEditCollapse"></paper-icon-button>
+            </template>
+            <paper-icon-button id="button-display" icon="{{_getArrowIcon(_collapseOpen)}}" on-tap="toggleCollapse"></paper-icon-button>
         </div>
 
-        <iron-collapse id="group-collapse" opened="{{_collapseOpen}}">
-            <p>In the collapse</p>
+        <iron-collapse opened="{{_collapseOpen}}">
+            <!-- Group access permissions and and edit menu -->
+            <div id="group-meta-data">
+                <!-- Access Information -->
+                <iron-collapse id="group-collapse-display" opened="{{!_editCollapseOpen}}">
+                    <p id="group-status-access" class="layout horizontal">
+                        <span class="flex">Global Access Status:</span>
+                        <span class="flex">{{_accessData.global}}</span>
+                    </p>
+                    <p id="group-status-request" class="layout horizontal">
+                        <span class="flex">Your Status:</span>
+                        <span class="flex">{{_accessData.user}}</span>
+                    </p>
+                </iron-collapse>
+
+                <!-- Edit Menu -->
+                <template is="dom-if" if="{{_owned}}">
+                    <iron-collapse id="group-collapse-edit" opened="{{_editCollapseOpen}}">
+                        <form is="iron-form" id="form-edit" method="get" action="/form.html" on-iron-form-submit="_validateFormEdit">
+                            <paper-input name="title" label="Title" value="{{_editData.title}}" required on-keydown="submitForm"></paper-input>
+                            <paper-input name="description" label="Description" value="{{_editData.description}}" on-keydown="submitForm"></paper-input>
+
+                            <!-- Global Permissions -->
+                            <div class="layout horizontal center">
+                                <p class="helper flex">Global Allowed Access:</p>
+                                <paper-radio-group class="flex" attr-for-selected="value" selected="{{_editData.global}}">
+                                    <paper-radio-button name="global" value="none">None</paper-radio-button>
+                                    <paper-radio-button name="global" value="read">Read</paper-radio-button>
+                                    <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
+                                </paper-radio-group>
+                            </div>
+
+                            <!-- Visibility Permissions -->
+                            <div class="layout horizontal center">
+                                <p class="helper flex">Public?</p>
+                                <div class="flex">
+                                    <paper-checkbox name="public" checked="{{_editData.public}}"></paper-checkbox>
+                                </div>
+                            </div>
+
+                            <div class="button-container layout horizontal">
+                                <span class="flex"></span>
+                                <paper-button id="button-edit-apply" on-tap="submitForm">Apply</paper-button>
+                            </div>
+                        </form>
+                    </iron-collapse>
+                </template>
+            </div>
+
+            <!-- Collaborators and Join Requests -->
+            <template is="dom-if" if="{{_owned}}">
+                <hr />
+
+                <firebase-collection location="[[_memberLocation]]" data="{{_memberData}}"></firebase-collection>
+                <firebase-collection location="[[_requestLocation]]" data="{{_requestData}}"></firebase-collection>
+
+                <div id="group-members">
+                    <div class="layout horizontal">
+                        <h3>Members</h3>
+                        <span class="flex"></span>
+                        <paper-icon-button icon="{{_getArrowIcon(_memberCollapseOpen)}}" on-tap="toggleMemberCollapse"></paper-icon-button>
+                    </div>
+
+                    <iron-collapse opened="{{_memberCollapseOpen}}">
+                        <template is="dom-repeat" items="{{_memberData}}">
+                            <noootes-user group="[[group]]" user="[[item.__firebaseKey__]]"></noootes-user>
+                        </template>
+                    </iron-collapse>
+                </div>
+
+                <div id="group-requests">
+                    <div class="layout horizontal">
+                        <h3>Requests</h3>
+                        <span class="flex"></span>
+                        <paper-icon-button icon="{{_getArrowIcon(_requestCollapseOpen)}}" on-tap="toggleRequestCollapse"></paper-icon-button>
+                    </div>
+
+                    <iron-collapse opened="{{_requestCollapseOpen}}">
+                        <template is="dom-repeat" items="{{_requestData}}">
+                            <noootes-user group="[[group]]" user="[[item.__firebaseKey__]]" request="true"></noootes-user>
+                        </template>
+                    </iron-collapse>
+                </div>
+            </template>
         </iron-collapse>
     </template>
     <script src="noootes-group-management.js?__inline"></script>

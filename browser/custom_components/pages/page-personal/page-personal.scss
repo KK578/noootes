@@ -11,6 +11,16 @@
     clear: both;
 }
 
+#container-groups-owned, #container-groups-joined {
+    noootes-group-management {
+        border-top: solid $black-divider 2px;
+
+        &:first-child {
+            border-top: none;
+        }
+    }
+}
+
 .helper {
     color: $black-secondary;
 }
