@@ -45,6 +45,10 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             value: undefined,
             observer: '_dataChanged'
         },
+        _owned: {
+            type: Boolean,
+            computed: '_isOwner(_data)'
+        },
         _username: {
             type: String,
             value: undefined
@@ -93,11 +97,13 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     },
     _dataChanged: function (n) {
         if (n) {
-            this._owned = n.owner === Noootes.Firebase.User.uid;
             this.getUsername(n.owner, function (err, name) {
                 this._username = name;
             }.bind(this));
         }
+    },
+    _isOwner: function (data) {
+        return data.owner === Noootes.Firebase.User.uid;
     },
 
     // Access Data
@@ -141,7 +147,6 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     // Edit
     toggleEditCollapse: function () {
         this._loadEditData();
-        this._editCollapseOpen = !this._editCollapseOpen;
     },
     _loadEditData: function () {
         var data = this._data;
@@ -160,12 +165,13 @@ Noootes.Elements['noootes-group-management'] = Polymer({
                 break;
         }
 
+        this.set('_editData', data);
+
         this.getGroupVisibility(this.group, function (isPublic) {
             data.public = isPublic;
             this.set('_editData.public', isPublic);
+            this._editCollapseOpen = !this._editCollapseOpen;
         }.bind(this));
-
-        this.set('_editData', data);
     },
     _validateFormEdit: function (event) {
         var detail = event.detail;
