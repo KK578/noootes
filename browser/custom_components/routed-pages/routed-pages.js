@@ -71,13 +71,19 @@ Noootes.Elements['routed-pages'] = Polymer({
         }
 
         function error() {
-            history.replaceState(null, null, '#' + this._selectedPage);
+            var hash = window.location.hash.split('#')[1];
 
-            this.fire('hashchange');
-            this.fire('toast-message', {
-                message: 'Failed to load "' + page.title + '" page.\n' +
-                    'Please check your internet connection and refresh.'
-            });
+            // Force page change to previously selected.
+            if (this._selectedPage !== hash) {
+                history.replaceState(null, null, '#' + this._selectedPage);
+
+                this.fire('hashchange');
+                this.fire('toast-message', {
+                    message: 'Failed to load "' + page.title + '" page.\n' +
+                        'Please check your internet connection and refresh.'
+                });
+            }
+
             this._endAnimation();
         }
 
