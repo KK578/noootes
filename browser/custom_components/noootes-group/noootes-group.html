@@ -32,17 +32,20 @@
         </div>
 
         <iron-collapse id="group-collapse" opened="{{_collapseOpen}}">
-            <p id="group-status-access">
-                <span>Global Access Status:</span>
-                <span>{{_accessData.global}}</span>
+            <p id="group-status-access" class="layout horizontal center">
+                <span class="flex">Global Access Status:</span>
+                <span class="flex">{{_accessData.global}}</span>
             </p>
-            <div class="layout horizontal">
-                <p id="group-status-request">
-                    <span>Your Status:</span>
-                    <span>{{_accessData.user}}</span>
+            <div class="layout horizontal center">
+                <p id="group-status-request" class="layout horizontal flex">
+                    <span class="flex">Your Status:</span>
+                    <template is="dom-if" if="{{_hideApplyButton}}">
+                        <span class="flex">{{_accessData.user}}</span>
+                    </template>
                 </p>
-                <span class="flex"></span>
-                <paper-button id="group-apply" hidden$="{{_hideApplyButton}}" on-tap="requestAccess">Apply to Group</paper-button>
+                <template is="dom-if" if="{{!_hideApplyButton}}">
+                    <paper-button id="group-apply" class="flex" on-tap="requestAccess">Click to Join Group</paper-button>
+                </template>
             </div>
         </iron-collapse>
     </template>
