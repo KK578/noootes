@@ -45,13 +45,13 @@
             <div id="group-meta-data">
                 <!-- Access Information -->
                 <iron-collapse id="group-collapse-display" opened="{{!_editCollapseOpen}}">
-                    <p id="group-status-access">
-                        <span>Global Access Status:</span>
-                        <span>{{_accessData.global}}</span>
+                    <p id="group-status-access" class="layout horizontal">
+                        <span class="flex">Global Access Status:</span>
+                        <span class="flex">{{_accessData.global}}</span>
                     </p>
-                    <p id="group-status-request">
-                        <span>Your Status:</span>
-                        <span>{{_accessData.user}}</span>
+                    <p id="group-status-request" class="layout horizontal">
+                        <span class="flex">Your Status:</span>
+                        <span class="flex">{{_accessData.user}}</span>
                     </p>
                 </iron-collapse>
 
