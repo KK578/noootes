@@ -71,6 +71,10 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         _memberCollapseOpen: {
             type: Boolean,
             value: false
+        },
+        _memberLocationSet: {
+            type: Boolean,
+            value: false
         }
     },
 
@@ -185,6 +189,11 @@ Noootes.Elements['noootes-group-management'] = Polymer({
 
     // Members Collapse
     toggleMemberCollapse: function () {
+        if (!this._memberLocation) {
+            this._memberLocation = Noootes.Firebase.Location +
+                'groups/access/collaborators/' + this.group;
+        }
+
         this._memberCollapseOpen = !this._memberCollapseOpen;
     }
 });

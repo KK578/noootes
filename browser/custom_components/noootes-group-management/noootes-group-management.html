@@ -93,6 +93,8 @@
             <template is="dom-if" if="{{_owned}}">
                 <hr />
 
+                <firebase-collection location="[[_memberLocation]]" data="{{_memberData}}"></firebase-collection>
+
                 <div id="group-members">
                     <div class="layout horizontal">
                         <h3>Members</h3>
@@ -101,7 +103,9 @@
                     </div>
 
                     <iron-collapse opened="{{_memberCollapseOpen}}">
-                        <p>Not yet implemented.</p>
+                        <template is="dom-repeat" items="{{_memberData}}">
+                            <noootes-user group="[[group]]" user="[[item.__firebaseKey__]]"></noootes-user>
+                        </template>
                     </iron-collapse>
                 </div>
             </template>
