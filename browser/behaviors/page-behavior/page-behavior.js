@@ -19,6 +19,16 @@ Noootes.Behaviors.PageBehavior = {
                     'element': 'page-personal'
                 },
                 {
+                    'tag': '/editor/',
+                    'title': 'Noootes Editor',
+                    'element': 'page-editor'
+                },
+                {
+                    'tag': '/reader/',
+                    'title': 'Noootes Reader',
+                    'element': 'page-reader'
+                },
+                {
                     'tag': '/account/',
                     'title': 'Account Settings',
                     'element': 'page-account'
