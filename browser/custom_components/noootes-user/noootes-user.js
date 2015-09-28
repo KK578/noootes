@@ -79,5 +79,12 @@ Noootes.Elements['noootes-user'] = Polymer({
     },
     _checkboxText: function (checked) {
         return checked ? 'Read/Write' : 'Read';
+    },
+    requestReject: function () {
+        this.moveToCollaborators(this.group, this.user, null);
+    },
+    requestAccept: function () {
+        var value = this.querySelector('#checkbox-access').checked;
+        this.moveToCollaborators(this.group, this.user, value);
     }
 });
