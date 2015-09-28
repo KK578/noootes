@@ -11,10 +11,19 @@ Noootes.Elements['noootes-user'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [
+        Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.GroupBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
+
+    /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
+    observers: [
+        '_loadUsername(user)',
+        '_loadUserAccess(group, user)'
+    ],
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -28,7 +37,27 @@ Noootes.Elements['noootes-user'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        group: {
+            type: String,
+            value: undefined
+        },
+        user: {
+            type: String,
+            value: undefined
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    _loadUserAccess: function (group, user) {
+        var firebase = Noootes.FirebaseRef('groups/access/collaborators');
+        firebase.child(group).child(user).on('value', function (ss) {
+            this._status = this.readableGroupRequestStatus(user, ss.val());
+        }.bind(this));
+    },
+    _loadUsername: function (user) {
+        this.getUsername(user, function (err, name) {
+            this._username = name;
+        }.bind(this));
+    }
 });
