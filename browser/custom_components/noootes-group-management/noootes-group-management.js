@@ -18,9 +18,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    listeners: {
-        'form-edit.iron-form-submit': '_validateFormEdit'
-    },
+    //listeners: {},
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -108,9 +106,10 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         }
         else {
             this._collapseOpen = !this._collapseOpen;
-            this._editCollapseOpen = false;
-            this._memberCollapseOpen = false;
         }
+
+        this._editCollapseOpen = false;
+        this._memberCollapseOpen = false;
     },
     _loadAccessData: function () {
         this.checkGroupGlobalStatus(this.group, function (global) {

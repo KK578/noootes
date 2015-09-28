@@ -56,42 +56,44 @@
                 </iron-collapse>
 
                 <!-- Edit Menu -->
-                <iron-collapse id="group-collapse-edit" opened="{{_editCollapseOpen}}">
-                    <form is="iron-form" id="form-edit" method="get" action="/form.html">
-                        <paper-input name="title" label="Title" value="{{_editData.title}}" required on-keydown="submitForm"></paper-input>
-                        <paper-input name="description" label="Description" value="{{_editData.description}}" on-keydown="submitForm"></paper-input>
+                <template is="dom-if" if="{{_owned}}">
+                    <iron-collapse id="group-collapse-edit" opened="{{_editCollapseOpen}}">
+                        <form is="iron-form" id="form-edit" method="get" action="/form.html" on-iron-form-submit="_validateFormEdit">
+                            <paper-input name="title" label="Title" value="{{_editData.title}}" required on-keydown="submitForm"></paper-input>
+                            <paper-input name="description" label="Description" value="{{_editData.description}}" on-keydown="submitForm"></paper-input>
 
-                        <!-- Global Permissions -->
-                        <div class="layout horizontal center">
-                            <p class="helper flex">Global Allowed Access:</p>
-                            <paper-radio-group class="flex" attr-for-selected="value" selected="{{_editData.global}}">
-                                <paper-radio-button name="global" value="none">None</paper-radio-button>
-                                <paper-radio-button name="global" value="read">Read</paper-radio-button>
-                                <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
-                            </paper-radio-group>
-                        </div>
-
-                        <!-- Visibility Permissions -->
-                        <div class="layout horizontal center">
-                            <p class="helper flex">Public?</p>
-                            <div class="flex">
-                                <paper-checkbox name="public" checked="{{_editData.public}}"></paper-checkbox>
+                            <!-- Global Permissions -->
+                            <div class="layout horizontal center">
+                                <p class="helper flex">Global Allowed Access:</p>
+                                <paper-radio-group class="flex" attr-for-selected="value" selected="{{_editData.global}}">
+                                    <paper-radio-button name="global" value="none">None</paper-radio-button>
+                                    <paper-radio-button name="global" value="read">Read</paper-radio-button>
+                                    <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
+                                </paper-radio-group>
                             </div>
-                        </div>
 
-                        <div class="button-container layout horizontal">
-                            <span class="flex"></span>
-                            <paper-button id="button-edit-apply" on-tap="submitForm">Apply</paper-button>
-                        </div>
-                    </form>
-                </iron-collapse>
+                            <!-- Visibility Permissions -->
+                            <div class="layout horizontal center">
+                                <p class="helper flex">Public?</p>
+                                <div class="flex">
+                                    <paper-checkbox name="public" checked="{{_editData.public}}"></paper-checkbox>
+                                </div>
+                            </div>
+
+                            <div class="button-container layout horizontal">
+                                <span class="flex"></span>
+                                <paper-button id="button-edit-apply" on-tap="submitForm">Apply</paper-button>
+                            </div>
+                        </form>
+                    </iron-collapse>
+                </template>
             </div>
 
             <!-- Collaborators and Join Requests -->
             <template is="dom-if" if="{{_owned}}">
-                <div id="group-members">
-                    <hr />
+                <hr />
 
+                <div id="group-members">
                     <div class="layout horizontal">
                         <h3>Members</h3>
                         <span class="flex"></span>
