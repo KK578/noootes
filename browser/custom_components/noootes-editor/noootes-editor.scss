@@ -5,3 +5,12 @@
 :host {
     display: block;
 }
+
+#firepad-container {
+    padding: 0;
+    overflow: auto;
+
+    #firepad {
+        height: 100%;
+    }
+}

@@ -10,6 +10,11 @@
 <!-- Custom/Behaviors -->
 <link rel="import" href="../noootes-chapter-list/noootes-chapter-list.html" />
 <!-- Other -->
+<!-- Firepad/CodeMirror -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.min.css" />
+<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.2.0/firepad.css" />
+<script src="https://cdn.firebase.com/libs/firepad/1.2.0/firepad.min.js"></script>
 
 <dom-module id="noootes-editor">
     <link rel="import" type="css" href="noootes-editor.css?__inline" />
@@ -23,7 +28,7 @@
             </paper-header-panel>
 
             <paper-header-panel main mode="seamed">
-                <paper-material class="fit">
+                <paper-material id="firepad-container" class="fit">
                     <div id="firepad"></div>
                 </paper-material>
             </paper-header-panel>

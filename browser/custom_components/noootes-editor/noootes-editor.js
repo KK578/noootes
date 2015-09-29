@@ -40,13 +40,23 @@ Noootes.Elements['noootes-editor'] = Polymer({
         },
         chapter: {
             type: String,
-            value: '',
+            value: 'Test',
             reflectToAttribute: true
         }
     },
 
     /* Functions specific to this element go under here. */
     _loadNoootes: function (group, chapter) {
-        console.log(group);
+        /* globals Firepad, CodeMirror */
+        if (group && chapter) {
+            var firebase = Noootes.FirebaseRef('notes/chapters/').child(group).child(chapter);
+
+            var codeMirror = CodeMirror(this.$.firepad, {
+                lineNumbers: true,
+                lineWrapping: true
+            });
+
+            this._firepad = Firepad.fromCodeMirror(firebase, codeMirror);
+        }
     }
 });
