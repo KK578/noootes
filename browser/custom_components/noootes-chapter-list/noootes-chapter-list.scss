@@ -14,18 +14,6 @@ paper-toolbar {
     height: 64px;
 }
 
-#tab {
-    @include border-radius(4px 4px 0 0);
-    position: absolute;
-    transform-origin: 0% 0%;
-    transform: rotate(270deg) translate(-120%, -100%);
-    background-color: $theme-primary;
-    color: $white-primary;
-    cursor: pointer;
-    padding: 4px 8px;
-    visibility: visible;
-}
-
 #chapters-container {
     position: absolute;
     overflow: auto;
