@@ -17,7 +17,7 @@
      * Add new chapter to Noootes before the target key.
      *
      * @param {String} group - Group ID.
-     * @param {String} key - Key to add group before.
+     * @param {String} key - Chapter Key to add new chapter before.
      * @param {String} title - Title of new chapter.
      * @param {Number} indentation - Indentation of new chapter.
      */
@@ -43,7 +43,28 @@
         });
     },
 
-    editChapter: function (key, title, indentation) { },
+    /**
+     * Edit the title and indentation of key.
+     *
+     * @param {String} group - Group ID.
+     * @param {String} key - Chapter Key to edit
+     * @param {String} title - New title of chapter.
+     * @param {Number} indentation - New indentation of chapter.
+     */
+    editChapter: function (group, key, title, indentation) {
+        var firebase = Noootes.FirebaseRef('notes/order/' + group);
+
+        // NOTE: Though it is possible to just use firebase.set here, use transaction to
+        // keep parity with all other chapter editing functions.
+        // https://www.firebase.com/docs/web/api/firebase/transaction.html
+        firebase.transaction(function (data) {
+            data[key].title = title;
+            // Currently not allowing indentation changes.
+            //data[key].indentation = indentation;
+
+            return data;
+        });
+    },
 
     removeChapter: function (key) { },
 
