@@ -23,13 +23,21 @@
                 <span class="flex"></span>
                 <paper-icon-button id="button-mode" icon="{{_getIcon(_editMode)}}" on-tap="toggleMode"></paper-icon-button>
             </div>
+
+            <!-- Editing Menu -->
             <iron-collapse opened="{{_editMode}}">
+                <!-- Main Menu -->
                 <iron-collapse class="layout horizontal justified" opened="{{_menusOpen.main}}">
                     <paper-icon-button id="button-add" icon="add"></paper-icon-button>
                     <paper-icon-button id="button-edit" icon="create"></paper-icon-button>
                     <paper-icon-button id="button-move" icon="reorder"></paper-icon-button>
                     <paper-icon-button id="button-delete" icon="delete"></paper-icon-button>
                 </iron-collapse>
+
+                <!-- Add -->
+                <!-- Edit -->
+                <!-- Move -->
+                <!-- Delete -->
             </iron-collapse>
         </div>
 

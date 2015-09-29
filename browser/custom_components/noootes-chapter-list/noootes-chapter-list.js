@@ -128,6 +128,11 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
         set.call(this, 0);
     },
+    _getIcon: function (edit) {
+        return edit ? 'done' : 'create';
+    },
+
+    // Changing Menus
     toggleMode: function () {
         this._editMode = !this._editMode;
         this._openMenu('main');
@@ -147,8 +152,10 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         };
 
         this._setContainerTop();
-    },
-    _getIcon: function (edit) {
-        return edit ? 'done' : 'create';
     }
+
+    // Add Menu
+    // Edit Menu
+    // Move Menu
+    // Delete Menu
 });
