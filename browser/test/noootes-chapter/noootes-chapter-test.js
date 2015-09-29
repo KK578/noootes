@@ -1,5 +1,5 @@
 chai.should();
 
 describe('<noootes-chapter>', function () {
-    it('has no tests written yet');
+    it('should fire "chapter-select" on tapping body');
 });

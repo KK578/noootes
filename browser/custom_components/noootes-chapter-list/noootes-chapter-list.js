@@ -1,5 +1,5 @@
-Noootes.Elements['noootes--chapter-list'] = Polymer({
-    is: 'noootes--chapter-list',
+Noootes.Elements['noootes-chapter-list'] = Polymer({
+    is: 'noootes-chapter-list',
 
     /* Lifecycle Callbacks: https://www.polymer-project.org/1.0/docs/devguide/registering-elements.html
      * Note that the order that all elements are ready may not be reliable.
