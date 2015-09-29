@@ -115,6 +115,11 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     // Edit Mode
     toggleMode: function () {
         this._editMode = !this._editMode;
+
+        if (!this._editMode) {
+            // On exiting edit mode, match private chapter to public chapter.
+            this._selectedChapter = this.selected;
+        }
     },
     _getIcon: function (edit) {
         return edit ? 'done' : 'create';

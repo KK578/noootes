@@ -112,7 +112,15 @@ describe('<noootes-chapter-list>', function () {
     });
 
     describe('Exit Edit Mode', function () {
+        it('should reselect the public chapter on exiting Edit mode', function () {
+            chapterList.selected.should.equal('-K-OYWuzamCbn6-9j8FB');
+
+            var button = chapterList.querySelector('#button-mode');
+            button.click();
+            chapterList._editMode.should.equal(false);
+            chapterList._selectedChapter.should.equal('-K-OYWuzamCbn6-9j8FB');
+        });
+
         it('should reset and close any open menus');
-        it('should reselect the public chapter on exiting Edit mode');
     });
 });
