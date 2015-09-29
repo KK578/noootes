@@ -16,6 +16,11 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
 
+    /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
+    observers: [
+        '_loadChapters(group)'
+    ],
+
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
      *
@@ -28,7 +33,10 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {},
 
     /* Functions specific to this element go under here. */
+    _loadChapters: function (group) {
+        this._location = Noootes.Firebase.Location + 'notes/order/' + group;
+    }
 });

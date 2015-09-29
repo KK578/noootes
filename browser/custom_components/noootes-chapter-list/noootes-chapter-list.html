@@ -2,12 +2,20 @@
 
 <!-- Iron -->
 <!-- Paper -->
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <!-- Other -->
+<link rel="import" href="../../bower_components/firebase-element/firebase-collection.html" />
 
 <dom-module id="noootes-chapter-list">
     <link rel="import" type="css" href="noootes-chapter-list.css?__inline" />
-    <template></template>
+    <template>
+        <firebase-collection id="firebase-chapter-list" location="[[_location]]" data="{{_data}}"></firebase-collection>
+
+        <paper-toolbar>
+            <h3>Chapters</h3>
+        </paper-toolbar>
+    </template>
     <script src="noootes-chapter-list.js?__inline"></script>
 </dom-module>

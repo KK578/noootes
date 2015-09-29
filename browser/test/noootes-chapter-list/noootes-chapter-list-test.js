@@ -1,6 +1,28 @@
 chai.should();
 
 describe('<noootes-chapter-list>', function () {
+    var chapterList;
+
+    before(function (done) {
+        chapterList = document.querySelector('noootes-chapter-list');
+
+        var firebase = Noootes.FirebaseRef();
+        firebase.authWithPassword({
+            email: 'Web@Component.Tester',
+            password: 'WebComponentTester'
+        }, function (err, user) {
+            Noootes.Firebase.User = user;
+            done();
+        });
+    });
+
+    it('should set location on group set', function () {
+        var firebase = chapterList.querySelector('#firebase-chapter-list');
+        chapterList.group = '-K-9osCRSNg4n6dtFgcB';
+
+        firebase.location.should.equal('https://noootes-staging.firebaseio.com/notes/order/-K-9osCRSNg4n6dtFgcB');
+    });
+
     it('should correctly order chapter list');
     it('should set chapter numbers');
     it('should select notify the public chapter on tapping item');
