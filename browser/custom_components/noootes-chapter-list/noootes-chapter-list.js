@@ -14,7 +14,9 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     //behaviors: [],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'chapters-template.dom-change': '_setupChapterList'
+    },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
     observers: [
@@ -36,7 +38,35 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     properties: {},
 
     /* Functions specific to this element go under here. */
+    // Load
     _loadChapters: function (group) {
         this._location = Noootes.Firebase.Location + 'notes/order/' + group;
+    },
+
+    // Order
+    _setupChapterList: function () {
+        var container = this.$['chapters-container'];
+        var length = container.childNodes.length;
+
+        if (length > 1) {
+            this._sortChapterList();
+        }
+    },
+    _sortChapterList: function () {
+        var container = this.$['chapters-container'];
+
+        // Setup by first moving the start tag to the top.
+        var node = container.querySelector('#start');
+        var insert = container.firstChild;
+
+        do {
+            // On the first call this will ensure that #start is the firstChild of the container
+            container.insertBefore(node, insert.nextSibling);
+
+            // Move to the next chapter.
+            insert = node;
+            node = container.querySelector('#' + node.nextChapter);
+        }
+        while (node.nextChapter);
     }
 });

@@ -19,7 +19,7 @@
         </paper-toolbar>
 
         <div id="chapters-container">
-            <template is="dom-repeat" items="{{_data}}">
+            <template is="dom-repeat" id="chapters-template" items="{{_data}}">
                 <noootes-chapter id="{{item.__firebaseKey__}}" chapter="{{item}}"></noootes-chapter>
             </template>
         </div>

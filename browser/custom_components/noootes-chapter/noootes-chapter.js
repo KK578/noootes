@@ -28,7 +28,17 @@ Noootes.Elements['noootes-chapter'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        chapter: {
+            type: Object,
+            value: {},
+            observer: '_chapterChanged'
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    _chapterChanged: function (n) {
+        this.nextChapter = n.next;
+        this.previousChapter = n.previous;
+    }
 });
