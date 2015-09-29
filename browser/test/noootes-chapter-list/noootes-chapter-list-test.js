@@ -50,7 +50,23 @@ describe('<noootes-chapter-list>', function () {
         }, 100);
     });
 
-    it('should set chapter numbers');
+    it('should set chapter numbers', function () {
+        var chaptersContainer = chapterList.querySelector('#chapters-container');
+        var chapters = chaptersContainer.childNodes;
+        var correctNumbers = [
+            '',
+            '1',
+            '1.1',
+            '1.1.1',
+            '1.2',
+            '2'
+        ];
+
+        for (var i = 0; i < correctNumbers.length; i++) {
+            chapters[i].chapterNumber.should.equal(correctNumbers[i]);
+        }
+    });
+
     it('should select notify the public chapter on tapping item');
 
     describe('Edit Mode', function () {

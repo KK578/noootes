@@ -53,13 +53,33 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         }
     },
     _sortChapterList: function () {
+        // Chapter Number Methods
+        function incrementChapter(numbers, indentation) {
+            if (indentation === undefined) {
+                return [];
+            }
+
+            var newNumbers = numbers.slice(0, indentation + 1);
+            newNumbers[indentation] = ++newNumbers[indentation] || 1;
+
+            return newNumbers;
+        }
+
+        function chapterNumbersToString(numbers) {
+            return numbers.join('.');
+        }
+
         var container = this.$['chapters-container'];
+        var chapterNumbers = [];
 
         // Setup by first moving the start tag to the top.
         var node = container.querySelector('#start');
         var insert = container.firstChild;
 
         do {
+            chapterNumbers = incrementChapter(chapterNumbers, node.indentation);
+            node.chapterNumber = chapterNumbersToString(chapterNumbers);
+
             // On the first call this will ensure that #start is the firstChild of the container
             container.insertBefore(node, insert.nextSibling);
 

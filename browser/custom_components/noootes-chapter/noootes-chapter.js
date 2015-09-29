@@ -40,5 +40,6 @@ Noootes.Elements['noootes-chapter'] = Polymer({
     _chapterChanged: function (n) {
         this.nextChapter = n.next;
         this.previousChapter = n.previous;
+        this.indentation = n.indentation;
     }
 });
