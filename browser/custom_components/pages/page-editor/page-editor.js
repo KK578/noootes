@@ -7,14 +7,23 @@ Noootes.Elements['page-editor'] = Polymer({
      * using this.async(function).
      */
     //created: function () {},
-    //ready: function () {},
-    //attached: function () {},
+    ready: function () {
+        this._attachListeners();
+    },
+    attached: function () {
+        this._checkHash();
+    },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
     //behaviors: [],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
+
+    /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
+    observers: [
+        '_loadGroup(user, code)'
+    ],
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -28,7 +37,35 @@ Noootes.Elements['page-editor'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        _selectedPage: {
+            type: Number,
+            value: 0
+        },
+        _errorMessage: {
+            type: String,
+            value: 'No group selected. Please select a group from your Noootes.'
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    _attachListeners: function () {
+        window.addEventListener('hashchange', this._checkHash.bind(this));
+    },
+    // Hash Change
+    _checkHash: function () {
+        var hash = window.location.hash.split('/');
+
+        // Only care if first hash [0 = '#'], is the editor page.
+        if (hash[1] === 'editor') {
+            // Ensure that following editor exists a username and a code.
+            if (hash.length >= 4) {
+                this.user = hash[2];
+                this.code = hash[3];
+            }
+        }
+    },
+    _loadGroup: function (user, code) {
+        console.log(user, code);
+    }
 });
