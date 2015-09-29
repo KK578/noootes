@@ -16,6 +16,11 @@ Noootes.Elements['noootes-editor'] = Polymer({
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
 
+    /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
+    observers: [
+        '_loadNoootes(group, chapter)'
+    ],
+
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
      *
@@ -28,7 +33,20 @@ Noootes.Elements['noootes-editor'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        group: {
+            type: String,
+            reflectToAttribute: true
+        },
+        chapter: {
+            type: String,
+            value: '',
+            reflectToAttribute: true
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    _loadNoootes: function (group, chapter) {
+        console.log(group);
+    }
 });
