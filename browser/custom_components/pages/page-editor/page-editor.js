@@ -41,6 +41,11 @@ Noootes.Elements['page-editor'] = Polymer({
      *  observer {string}
      */
     properties: {
+        _group: {
+            type: String,
+            value: '',
+            observer: '_groupChanged'
+        },
         _selectedPage: {
             type: Number,
             value: 0
@@ -77,7 +82,6 @@ Noootes.Elements['page-editor'] = Polymer({
 
             this.searchGroup(uid, code, function (key) {
                 if (key) {
-                    this._errorMessage = '';
                     this._group = key;
                 }
                 else {
@@ -86,5 +90,20 @@ Noootes.Elements['page-editor'] = Polymer({
                 }
             }.bind(this));
         }.bind(this));
+    },
+    _groupChanged: function (n) {
+        if (n) {
+            var firebase = Noootes.FirebaseRef('groups/access/test');
+            firebase.child(n).set(null, function (err) {
+                if (err) {
+                    this._errorMessage = 'You don\'t have permission to write to these Noootes.';
+                    this._group = '';
+                }
+                else {
+                    this._errorMessage = '';
+                    this._selectedPage = 1;
+                }
+            }.bind(this));
+        }
     }
 });

@@ -77,12 +77,12 @@ describe('<page-editor>', function () {
         listenOnce('hashchange', function () {
             var handle = window.setInterval(function () {
                 if (editorError.textContent === '') {
+                    pageEditor._selectedPage.should.equal(1);
+
                     window.clearInterval(handle);
                     done();
                 }
             }, 100);
-
-            pageEditor._selectedPage.should.equal(1);
         });
 
         window.location.hash = '/editor/WCT/PERMANENT';
