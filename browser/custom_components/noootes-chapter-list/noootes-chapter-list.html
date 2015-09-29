@@ -23,6 +23,8 @@
             <paper-icon-button id="button-mode" icon="{{_getIcon(_editMode)}}" on-tap="toggleMode"></paper-icon-button>
         </paper-toolbar>
 
+        <div id="tab">Chapters</div>
+
         <iron-selector id="chapters-container" selected="{{_selectedChapter}}" attr-for-selected="id">
             <template is="dom-repeat" id="chapters-template" items="{{_data}}">
                 <noootes-chapter id="{{item.__firebaseKey__}}" chapter="{{item}}"></noootes-chapter>

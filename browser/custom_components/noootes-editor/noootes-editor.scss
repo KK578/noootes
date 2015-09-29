@@ -5,3 +5,8 @@
 :host {
     display: block;
 }
+
+#drawer-chapters::shadow #mainContainer {
+    overflow: visible;
+    overflow: initial;
+}
