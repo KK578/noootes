@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
+<link rel="import" href="../noootes-chapter/noootes-chapter.html" />
 <!-- Other -->
 <link rel="import" href="../../bower_components/firebase-element/firebase-collection.html" />
 
@@ -16,6 +17,12 @@
         <paper-toolbar>
             <h3>Chapters</h3>
         </paper-toolbar>
+
+        <div id="chapters-container">
+            <template is="dom-repeat" items="{{_data}}">
+                <noootes-chapter id="{{item.__firebaseKey__}}" chapter="{{item}}"></noootes-chapter>
+            </template>
+        </div>
     </template>
     <script src="noootes-chapter-list.js?__inline"></script>
 </dom-module>

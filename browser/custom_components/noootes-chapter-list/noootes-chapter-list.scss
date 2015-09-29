@@ -5,3 +5,20 @@
 :host {
     display: block;
 }
+
+paper-toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+}
+
+#chapters-container {
+    position: absolute;
+    overflow: auto;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

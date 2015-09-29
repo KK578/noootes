@@ -23,7 +23,33 @@ describe('<noootes-chapter-list>', function () {
         firebase.location.should.equal('https://noootes-staging.firebaseio.com/notes/order/-K-9osCRSNg4n6dtFgcB');
     });
 
-    it('should correctly order chapter list');
+    it('should correctly order chapter list', function (done) {
+        var chaptersContainer = chapterList.querySelector('#chapters-container');
+        var correctOrder = [
+            'start',
+            '-K-OQciTe2Q7ltENcAx7',
+            '-K-OS5tB1C8Y_TfGmx5I',
+            '-K-OYWuzamCbn6-9j8FB',
+            '-K-OYPE-cxp4xzlAX9yi',
+            '-K-ORJFSh-NjDCFsjbW4',
+            'end'
+        ];
+
+        var handle = window.setInterval(function () {
+            var chapters = chaptersContainer.childNodes;
+
+            if (chapters.length > 1) {
+                window.clearInterval(handle);
+
+                for (var i = 0; i < correctOrder.length; i++) {
+                    chapters[i].id.should.equal(correctOrder[i]);
+                }
+
+                done();
+            }
+        }, 100);
+    });
+
     it('should set chapter numbers');
     it('should select notify the public chapter on tapping item');
 
