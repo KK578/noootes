@@ -66,9 +66,51 @@
         });
     },
 
-    removeChapter: function (key) { },
+    /**
+     * Remove chapter key from Linked list, running callback on data.
+     *
+     * @param {String} group - Group ID.
+     * @param {String} key - Chapter key to remove.
+     * @param {Function} callback - Function to run on data after removing from list.
+     */
+    removeChapter: function (group, key, callback) {
+        var firebase = Noootes.FirebaseRef('notes/order/' + group);
 
-    moveChapter: function (key, target) { },
+        firebase.transaction(function (data) {
+            // Unlink from previous key.
+            data[data[key].previous].next = data[key].next;
+            // Relink chain to next key.
+            data[data[key].next].previous = data[key].previous;
+
+            // Physical data handling is to be done by the callback.
+            if (callback) {
+                data = callback(data);
+            }
+
+            return data;
+        });
+    },
+
+    /**
+     * Move chapter from current position to before target key position.
+     *
+     * @param {String} group - Group ID.
+     * @param {String} key - Chapter key to move.
+     * @param {String} target - Chapter Key to move chapter before.
+     */
+    moveChapter: function (group, key, target) {
+        this.removeChapter(group, key, function (data) {
+            // Key is now isolated from chain, relink to chain before target.
+            data[key].next = target;
+            data[key].previous = data[target].previous;
+            // Link target's previous to inserted chapter.
+            data[data[target].previous].next = key;
+            // Link target to inserted chapter.
+            data[target].previous = key;
+
+            return data;
+        });
+    },
 
     deleteChapter: function (key) { }
 };
