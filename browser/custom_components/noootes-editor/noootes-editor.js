@@ -58,5 +58,10 @@ Noootes.Elements['noootes-editor'] = Polymer({
 
             this._firepad = Firepad.fromCodeMirror(firebase, codeMirror);
         }
+    },
+
+    // Text
+    getText: function () {
+        return this._firepad.getText();
     }
 });
