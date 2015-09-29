@@ -35,7 +35,22 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {},
+    properties: {
+        selected: {
+            type: String,
+            value: ''
+        },
+        _selectedChapter: {
+            type: String,
+            value: '',
+            observer: '_selectedChapterChanged'
+        },
+
+        _editMode: {
+            type: Boolean,
+            value: false
+        }
+    },
 
     /* Functions specific to this element go under here. */
     // Load
@@ -88,5 +103,20 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
             node = container.querySelector('#' + node.nextChapter);
         }
         while (node.nextChapter);
+    },
+
+    // Selected Chapter
+    _selectedChapterChanged: function (n) {
+        if (!this._editMode) {
+            this.selected = n;
+        }
+    },
+
+    // Edit Mode
+    toggleMode: function () {
+        this._editMode = !this._editMode;
+    },
+    _getIcon: function (edit) {
+        return edit ? 'done' : 'create';
     }
 });

@@ -3,5 +3,16 @@
 @import '../../stylesheets/partials/_theme.scss';
 
 :host {
+    @include transition(transition-standard((background-color, color)));
     display: block;
+    cursor: pointer;
+
+    &[id="start"], &[id="end"] {
+        display: none;
+    }
+
+    &.iron-selected {
+        background-color: $theme-primary-dark;
+        color: $white-primary;
+    }
 }

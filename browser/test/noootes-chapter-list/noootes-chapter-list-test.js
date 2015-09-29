@@ -67,11 +67,25 @@ describe('<noootes-chapter-list>', function () {
         }
     });
 
-    it('should select notify the public chapter on tapping item');
+    it('should select notify the public chapter on tapping item', function () {
+        chapterList.querySelector('#-K-OYWuzamCbn6-9j8FB').click();
+        chapterList._selectedChapter.should.equal('-K-OYWuzamCbn6-9j8FB');
+        chapterList.selected.should.equal('-K-OYWuzamCbn6-9j8FB');
+    });
 
     describe('Edit Mode', function () {
-        it('should change the private chapter on tapping item');
-        it('should not notify the public chapter on tapping item');
+        it('should change to edit mode on tapping icon', function () {
+            var button = chapterList.querySelector('#button-mode');
+            button.click();
+            chapterList._editMode.should.equal(true);
+            button.icon.should.equal('done');
+        });
+
+        it('should only change the private chapter on tapping item', function () {
+            chapterList.querySelector('#-K-OS5tB1C8Y_TfGmx5I').click();
+            chapterList._selectedChapter.should.equal('-K-OS5tB1C8Y_TfGmx5I');
+            chapterList.selected.should.equal('-K-OYWuzamCbn6-9j8FB');
+        });
 
         describe('Add Menu', function () {
             it('should show add menu only');
