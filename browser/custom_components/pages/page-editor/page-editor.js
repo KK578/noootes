@@ -15,7 +15,10 @@ Noootes.Elements['page-editor'] = Polymer({
     },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [
+        Noootes.Behaviors.FirebaseBehavior,
+        Noootes.Behaviors.GroupBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -66,6 +69,22 @@ Noootes.Elements['page-editor'] = Polymer({
         }
     },
     _loadGroup: function (user, code) {
-        console.log(user, code);
+        this.getUid(user, function (err, uid) {
+            if (err) {
+                this._errorMessage = 'Couldn\'t find a user with the name "' + user + '".';
+                return;
+            }
+
+            this.searchGroup(uid, code, function (key) {
+                if (key) {
+                    this._errorMessage = '';
+                    this._group = key;
+                }
+                else {
+                    this._errorMessage = 'Couldn\'t find a group with the code "' + code + '".';
+                    this._group = '';
+                }
+            }.bind(this));
+        }.bind(this));
     }
 });

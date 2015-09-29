@@ -37,14 +37,14 @@ describe('<page-editor>', function () {
     it('should display a message if the user doesn\'t exist', function (done) {
         listenOnce('hashchange', function () {
             var handle = window.setInterval(function () {
-                if (editorError.textContent === 'Couldn\'t find a user with the name "user".') {
+                if (editorError.textContent === 'Couldn\'t find a user with the name "FakeUser".') {
                     window.clearInterval(handle);
                     done();
                 }
             }, 100);
         });
 
-        window.location.hash = '/editor/user/CODE';
+        window.location.hash = '/editor/FakeUser/CODE';
     });
 
     it('should display a message if the group doesn\'t exist', function (done) {
