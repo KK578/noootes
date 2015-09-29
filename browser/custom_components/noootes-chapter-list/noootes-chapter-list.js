@@ -11,7 +11,7 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.ChapterBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
@@ -69,22 +69,6 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         }
     },
     _sortChapterList: function () {
-        // Chapter Number Methods
-        function incrementChapter(numbers, indentation) {
-            if (indentation === undefined) {
-                return [];
-            }
-
-            var newNumbers = numbers.slice(0, indentation + 1);
-            newNumbers[indentation] = ++newNumbers[indentation] || 1;
-
-            return newNumbers;
-        }
-
-        function chapterNumbersToString(numbers) {
-            return numbers.join('.');
-        }
-
         var container = this.$['chapters-container'];
         var chapterNumbers = [];
 
@@ -93,8 +77,8 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         var insert = container.firstChild;
 
         do {
-            chapterNumbers = incrementChapter(chapterNumbers, node.indentation);
-            node.chapterNumber = chapterNumbersToString(chapterNumbers);
+            chapterNumbers = this.incrementChapter(chapterNumbers, node.indentation);
+            node.chapterNumber = this.chapterNumbersToString(chapterNumbers);
 
             // On the first call this will ensure that #start is the firstChild of the container
             container.insertBefore(node, insert.nextSibling);
