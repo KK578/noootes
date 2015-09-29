@@ -3,11 +3,20 @@
 <!-- Iron -->
 <!-- Paper -->
 <!-- Neon -->
+<link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html" />
+<link rel="import" href="../../../bower_components/neon-animation/neon-animatable.html" />
 <!-- Custom/Behaviors -->
 <!-- Other -->
 
 <dom-module id="page-editor">
     <link rel="import" type="css" href="page-editor.css?__inline" />
-    <template></template>
+    <template>
+        <neon-animated-pages selected="{{_selectedPage}}">
+            <neon-animatable>
+                <paper-material id="editor-error">{{errorMessage}}</paper-material>
+            </neon-animatable>
+            <neon-animatable></neon-animatable>
+        </neon-animated-pages>
+    </template>
     <script src="page-editor.js?__inline"></script>
 </dom-module>
