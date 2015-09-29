@@ -112,5 +112,12 @@
         });
     },
 
-    deleteChapter: function (key) { }
+    deleteChapter: function (group, key) {
+        this.removeChapter(group, key, function (data) {
+            // Very Delete. Much Destruct. Wow.
+            data[key] = null;
+
+            return data;
+        });
+    }
 };
