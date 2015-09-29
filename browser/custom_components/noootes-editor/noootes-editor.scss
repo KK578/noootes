@@ -6,6 +6,16 @@
     display: block;
 }
 
+paper-drawer-panel#drawer-chapters::shadow {
+    #scrim {
+        z-index: $firepad-z-index;
+    }
+
+    #drawer {
+        z-index: $firepad-z-index + 1;
+    }
+}
+
 #firepad-container {
     padding: 0;
     overflow: auto;
