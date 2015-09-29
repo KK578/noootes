@@ -71,9 +71,29 @@ Noootes.Elements['page-editor'] = Polymer({
                 this.user = hash[2];
                 this.code = hash[3];
             }
+            else {
+                if (this.user && this.code) {
+                    this._forcePreviousGroup();
+                }
+            }
         }
     },
+    _forcePreviousGroup: function () {
+        var hash = '#/editor/' + this.user + '/' + this.code;
+        history.replaceState(null, null, hash);
+        this._checkHash();
+    },
+
+    // Group
     _loadGroup: function (user, code) {
+        this._selectedPage = 0;
+
+        if (!user || !code) {
+            this._group = '';
+            this._errorMessage = 'No group selected. Please select a group from your Noootes.';
+            return;
+        }
+
         this.getUid(user, function (err, uid) {
             if (err) {
                 this._errorMessage = 'Couldn\'t find a user with the name "' + user + '".';

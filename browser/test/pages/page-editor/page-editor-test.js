@@ -87,4 +87,17 @@ describe('<page-editor>', function () {
 
         window.location.hash = '/editor/WCT/PERMANENT';
     });
+
+    it('should set the hash to previous valid group on changing back to #/editor/', function (done) {
+        listenOnce('hashchange', function () {
+            var handle = window.setInterval(function () {
+                if (window.location.hash === '#/editor/WCT/PERMANENT') {
+                    window.clearInterval(handle);
+                    done();
+                }
+            }, 100);
+        });
+
+        window.location.hash = '/editor/';
+    });
 });
