@@ -11,7 +11,7 @@ Noootes.Elements['noootes-editor'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.FirebaseBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -48,14 +48,38 @@ Noootes.Elements['noootes-editor'] = Polymer({
     _loadNoootes: function (group, chapter) {
         /* globals Firepad, CodeMirror */
         if (group && chapter) {
-            var firebase = Noootes.FirebaseRef('notes/chapters/').child(group).child(chapter);
+            if (this._firepad) {
+                this._unbindFirepad();
+            }
 
-            var codeMirror = CodeMirror(this.$.firepad, {
-                lineNumbers: true,
-                lineWrapping: true
-            });
+            this.getUsername(Noootes.Firebase.User.uid, function (err, name) {
+                if (err) {
+                    throw err;
+                }
 
-            this._firepad = Firepad.fromCodeMirror(firebase, codeMirror);
+                var firebase = Noootes.FirebaseRef('notes/chapters/').child(group).child(chapter);
+
+                var codeMirror = CodeMirror(this.$.firepad, {
+                    lineNumbers: true,
+                    lineWrapping: true
+                });
+
+                this._firepad = Firepad.fromCodeMirror(firebase, codeMirror, {
+                    userId: name
+                });
+            }.bind(this));
+        }
+    },
+
+    // Cleanup
+    _unbindFirepad: function () {
+        this._firepad.firebaseAdapter_.saveCheckpoint_();
+        this._firepad.dispose();
+        this.firepad = undefined;
+
+        var firepad = this.$.firepad;
+        while (firepad.firstChild) {
+            firepad.removeChild(firepad.firstChild);
         }
     },
 
