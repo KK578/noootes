@@ -136,10 +136,13 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         };
 
         this._setContainerTop();
-    }
+    },
 
     // Add Menu
     // Edit Menu
     // Move Menu
     // Delete Menu
+    openMenuDelete: function () {
+        this._openMenu('delete');
+    }
 });
