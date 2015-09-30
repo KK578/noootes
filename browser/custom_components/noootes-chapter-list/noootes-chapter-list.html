@@ -32,7 +32,7 @@
                     <paper-icon-button id="button-add" icon="add" on-tap="openMenuAdd"></paper-icon-button>
                     <paper-icon-button id="button-edit" icon="create"></paper-icon-button>
                     <paper-icon-button id="button-move" icon="reorder"></paper-icon-button>
-                    <paper-icon-button id="button-delete" icon="delete"></paper-icon-button>
+                    <paper-icon-button id="button-delete" icon="delete" on-tap="openMenuDelete"></paper-icon-button>
                 </iron-collapse>
 
                 <!-- Add -->
@@ -54,6 +54,16 @@
                 <!-- Edit -->
                 <!-- Move -->
                 <!-- Delete -->
+                <iron-collapse opened="{{_menusOpen.delete}}">
+                    <span>Are you sure you want to delete this chapter?</span>
+                    <form is="iron-form" id="form-delete" method="get" action="/form.html">
+                        <div class="button-container layout horizontal">
+                            <span class="flex"></span>
+                            <paper-button on-tap="resetMenus">Cancel</paper-button>
+                            <paper-button on-tap="submitForm">Delete</paper-button>
+                        </div>
+                    </form>
+                </iron-collapse>
             </iron-collapse>
         </div>
 
