@@ -44,7 +44,8 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     properties: {
         selected: {
             type: String,
-            value: ''
+            value: '',
+            notify: true
         },
         _selectedChapter: {
             type: String,

@@ -40,7 +40,6 @@ Noootes.Elements['noootes-editor'] = Polymer({
         },
         chapter: {
             type: String,
-            value: 'Test',
             reflectToAttribute: true
         }
     },
