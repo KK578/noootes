@@ -146,7 +146,24 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     },
     _submitFormAdd: function (event) {
         var detail = event.detail;
-        console.log(detail);
+
+        var chapter = this.$['chapters-container'].querySelector('#' + this._selectedChapter);
+        var indentation;
+        switch (detail.type) {
+            case 'child':
+                indentation = chapter.indentation + 1;
+                break;
+
+            case 'sibling':
+                indentation = chapter.indentation;
+                break;
+
+            default:
+                return;
+        }
+
+        // TODO: Need to getLastChild of selectedChapter.
+        this.addChapter(this.group, this._selectedChapter, detail.title, indentation);
 
         this._openMenu('main');
     },
