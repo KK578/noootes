@@ -30,6 +30,60 @@
         return numbers.join('.');
     },
 
+    /////////////////
+    // Chapter Search
+    /////////////////
+    /**
+     * Finds the next chapter that has the same or lower indentation as the given chapter.
+     *
+     * @param {HTMLElement} container - Element that contains all chapters.
+     * @param {String} key - Chapter key to start search from.
+     * @returns {String} Chapter key of input key's next sibling or parent.
+     */
+    getNextSibling: function (container, key) {
+        var start = container.querySelector('#' + key);
+        var lastChild = container.querySelector(start.nextChapter);
+
+        // Standard linked list traversal until the node has an indentation that matches
+        // or is lower (indicates the chapter is the last child of it's parent.)
+        while (lastChild.indentation > start.indentation) {
+            lastChild = container.querySelector(lastChild.nextChapter);
+        }
+
+        return lastChild;
+    },
+
+    /**
+     * Finds the last child chapter of the given key, or itself.
+     *
+     * @param {HTMLElement} container - Element that contains all chapters.
+     * @param {String} key - Chapter key to start search from.
+     * @returns {String} Chapter key of input key's last child.
+     */
+    getLastChild: function (container, key) {
+        var start = container.querySelector('#' + key);
+        var targetIndentation = start.indentation + 1;
+        var nextChapter = start;
+        // If the loop finds no sibling chapters, and as chapters should not be allowed if
+        // their indentation is not <= (previousChapter.indentation + 1), the given key must
+        // have no sibling elements, and for calculation purposes can be treated as the last
+        // child of itself.
+        var lastChild = start;
+
+        do {
+            nextChapter = container.querySelector('#' + nextChapter.nextChapter);
+
+            // If the chapter's indentation is 1 higher than this chapter's indentation,
+            // it indicates that it is a direct child of the chapter.
+            if (nextChapter.indentation === targetIndentation) {
+                lastChild = nextChapter;
+            }
+        }
+        while (nextChapter.indentation > start.indentation);
+
+        return lastChild;
+    },
+
     ////////////////////////
     // Chapter Order Editing
     ////////////////////////
