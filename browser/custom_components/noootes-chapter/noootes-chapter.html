@@ -10,10 +10,11 @@
     <link rel="import" type="css" href="noootes-chapter.css?__inline" />
     <template>
         <paper-item>
-            <h3>
+            <paper-ripple></paper-ripple>
+            <div class="layout vertical">
                 <span>{{chapterNumber}}</span>
-                <span>{{chapter.title}}</span>
-            </h3>
+                <h3>{{chapter.title}}</h3>
+            </div>
         </paper-item>
     </template>
     <script src="noootes-chapter.js?__inline"></script>

@@ -33,6 +33,10 @@ Noootes.Elements['noootes-chapter'] = Polymer({
             type: Object,
             value: {},
             observer: '_chapterChanged'
+        },
+        indentation: {
+            type: Number,
+            reflectToAttribute: true
         }
     },
 

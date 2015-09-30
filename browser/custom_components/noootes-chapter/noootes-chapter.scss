@@ -2,6 +2,8 @@
 @import '../../stylesheets/partials/_mixins.scss';
 @import '../../stylesheets/partials/_theme.scss';
 
+$chapter-margin: 12px;
+
 :host {
     @include transition(transition-standard((background-color, color)));
     display: block;
@@ -14,5 +16,24 @@
     &.iron-selected {
         background-color: $theme-primary-dark;
         color: $white-primary;
+    }
+
+    @for $i from 0 to 5 {
+        &[indentation="#{$i}"] paper-item {
+            padding-left: $chapter-margin * $i + 8px;
+        }
+    }
+
+    &[indentation="0"] {
+        border-top: $black-divider 1px solid;
+    }
+}
+
+paper-item {
+    position: relative;
+    padding: 8px 12px;
+
+    h3, span {
+        margin: 0;
     }
 }
