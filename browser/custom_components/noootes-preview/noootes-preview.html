@@ -1,0 +1,21 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+
+<!-- Iron -->
+<!-- Paper -->
+<link rel="import" href="../../bower_components/paper-material/paper-material.html" />
+<!-- Neon -->
+<!-- Custom/Behaviors -->
+<!-- Other -->
+<link rel="import" href="../../bower_components/marked-element/marked-element.html" />
+
+<dom-module id="noootes-preview">
+    <link rel="import" type="css" href="noootes-preview.css?__inline" />
+    <template>
+        <paper-material id="markdown-container" class="fit">
+            <marked-element markdown="{{markdown}}">
+                <div class="markdown-html"></div>
+            </marked-element>
+        </paper-material>
+    </template>
+    <script src="noootes-preview.js?__inline"></script>
+</dom-module>

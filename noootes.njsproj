@@ -867,6 +867,8 @@
     <Content Include="browser\custom_components\noootes-group-management\noootes-group-management.scss" />
     <Content Include="browser\custom_components\noootes-group\noootes-group.html" />
     <Content Include="browser\custom_components\noootes-group\noootes-group.scss" />
+    <Content Include="browser\custom_components\noootes-preview\noootes-preview.html" />
+    <Content Include="browser\custom_components\noootes-preview\noootes-preview.scss" />
     <Content Include="browser\custom_components\noootes-user\noootes-user.html" />
     <Content Include="browser\custom_components\noootes-user\noootes-user.scss" />
     <Content Include="browser\custom_components\pages\page-about\page-about.html" />
@@ -902,6 +904,7 @@
     <Content Include="browser\test\noootes-editor\noootes-editor-test.html" />
     <Content Include="browser\test\noootes-group-management\noootes-group-management-test.html" />
     <Content Include="browser\test\noootes-group\noootes-group-test.html" />
+    <Content Include="browser\test\noootes-preview\noootes-preview-test.html" />
     <Content Include="browser\test\noootes-user\noootes-user-test.html" />
     <Content Include="browser\test\pages\page-account\page-account-test.html" />
     <Content Include="browser\test\pages\page-editor\page-editor-test.html" />
@@ -988,6 +991,8 @@
     <Content Include="browser\custom_components\noootes-editor\noootes-editor.js" />
     <Content Include="browser\custom_components\noootes-chapter-list\noootes-chapter-list.js" />
     <Content Include="browser\custom_components\noootes-chapter\noootes-chapter.js" />
+    <Content Include="browser\test\noootes-preview\noootes-preview-test.js" />
+    <Content Include="browser\custom_components\noootes-preview\noootes-preview.js" />
     <Compile Include="server\developer.js" />
     <Compile Include="server\production.js" />
     <Compile Include="server\server.js" />
@@ -1261,6 +1266,7 @@
     <Folder Include="browser\custom_components\noootes-editor\" />
     <Folder Include="browser\custom_components\noootes-group-management\" />
     <Folder Include="browser\custom_components\noootes-group\" />
+    <Folder Include="browser\custom_components\noootes-preview\" />
     <Folder Include="browser\custom_components\noootes-user\" />
     <Folder Include="browser\custom_components\pages\" />
     <Folder Include="browser\custom_components\pages\page-about\" />
@@ -1287,6 +1293,7 @@
     <Folder Include="browser\test\noootes-editor\" />
     <Folder Include="browser\test\noootes-group-management\" />
     <Folder Include="browser\test\noootes-group\" />
+    <Folder Include="browser\test\noootes-preview\" />
     <Folder Include="browser\test\noootes-user\" />
     <Folder Include="browser\test\pages\" />
     <Folder Include="browser\test\pages\page-account\" />
