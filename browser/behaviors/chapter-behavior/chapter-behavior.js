@@ -1,4 +1,14 @@
 ﻿Noootes.Behaviors.ChapterBehavior = {
+    ////////////////////
+    // Chapter Numbering
+    ////////////////////
+    /**
+     * Handles ordering of chapter numbers
+     *
+     * @param {Array} numbers - Chapter number set.
+     * @param {Number} indentation - Indentation of new chapter.
+     * @returns {Array} Updated numbers array.
+     */
     incrementChapter: function (numbers, indentation) {
         if (indentation === undefined) {
             return [];
@@ -9,10 +19,20 @@
 
         return newNumbers;
     },
+
+    /**
+     * Stringify chapter numbers.
+     *
+     * @param {Array} numbers - Chapter number set.
+     * @returns {String} Stringified chapter numbers.
+     */
     chapterNumbersToString: function (numbers) {
         return numbers.join('.');
     },
 
+    ////////////////////////
+    // Chapter Order Editing
+    ////////////////////////
     /**
      * Add new chapter to Noootes before the target key.
      *
@@ -112,6 +132,12 @@
         });
     },
 
+    /**
+     * Delete chapter and it's data.
+     *
+     * @param {String} group - Group ID.
+     * @param {String} key - Key of chapter to delete.
+     */
     deleteChapter: function (group, key) {
         this.removeChapter(group, key, function (data) {
             // Very Delete. Much Destruct. Wow.
