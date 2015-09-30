@@ -125,5 +125,24 @@ Noootes.Elements['page-editor'] = Polymer({
                 }
             }.bind(this));
         }
+    },
+
+    // Editor/Preview
+    togglePage: function () {
+        switch (this._selectedPage) {
+            case 1:
+                // Currently Editor
+                this.$.preview.render();
+                this._selectedPage = 2;
+                return;
+
+            case 2:
+                // Currently Preview
+                this._selectedPage = 1;
+                return;
+
+            default:
+                return;
+        }
     }
 });
