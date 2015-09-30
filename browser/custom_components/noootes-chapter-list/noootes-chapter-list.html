@@ -36,6 +36,15 @@
                 </iron-collapse>
 
                 <!-- Add -->
+                <iron-collapse opened="{{_menusOpen.add}}">
+                    <form is="iron-form">
+                        <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
+                        <paper-radio-group selected="{{_addType}}" attr-for-selected="value">
+                            <paper-radio-button name="type" value="child">Child</paper-radio-button>
+                            <paper-radio-button name="type" value="sibling">Sibling</paper-radio-button>
+                        </paper-radio-group>
+                    </form>
+                </iron-collapse>
                 <!-- Edit -->
                 <!-- Move -->
                 <!-- Delete -->
