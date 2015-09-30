@@ -39,6 +39,7 @@
                 <iron-collapse opened="{{_menusOpen.add}}">
                     <form is="iron-form" id="form-add" method="get" action="/form.html">
                         <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
+                        <span>Add chapter as '<span>{{_addPreview}}</span>'</span>
                         <paper-radio-group selected="{{_addType}}" attr-for-selected="value">
                             <paper-radio-button name="type" value="child">Child</paper-radio-button>
                             <paper-radio-button name="type" value="sibling">Sibling</paper-radio-button>
