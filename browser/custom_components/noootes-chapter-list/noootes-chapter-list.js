@@ -96,6 +96,9 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
             this.selected = n;
         }
     },
+    _selectFirstChapter: function () {
+        this._selectedChapter = this.$['chapters-container'].childNodes[1].id;
+    },
 
     // Edit Mode
     _setContainerTop: function () {
@@ -144,5 +147,10 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     // Delete Menu
     openMenuDelete: function () {
         this._openMenu('delete');
+    },
+    _submitFormDelete: function () {
+        var chapter = this._selectedChapter;
+        this._selectFirstChapter();
+        this.deleteChapter(this.group, chapter);
     }
 });
