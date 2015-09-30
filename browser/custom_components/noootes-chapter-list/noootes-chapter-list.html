@@ -9,6 +9,7 @@
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../noootes-chapter/noootes-chapter.html" />
+<link rel="import" href="../../behaviors/chapter-behavior/chapter-behavior.html" />
 <!-- Other -->
 <link rel="import" href="../../bower_components/firebase-element/firebase-collection.html" />
 
@@ -17,11 +18,44 @@
     <template>
         <firebase-collection id="firebase-chapter-list" location="[[_location]]" data="{{_data}}"></firebase-collection>
 
-        <paper-toolbar>
-            <h3>Chapters</h3>
-            <span class="flex"></span>
-            <paper-icon-button id="button-mode" icon="{{_getIcon(_editMode)}}" on-tap="toggleMode"></paper-icon-button>
-        </paper-toolbar>
+        <div id="chapter-toolbar" class="layout vertical">
+            <div class="layout horizontal">
+                <h3>Chapters</h3>
+                <span class="flex"></span>
+                <paper-icon-button id="button-mode" icon="{{_getIcon(_editMode)}}" on-tap="toggleMode"></paper-icon-button>
+            </div>
+
+            <!-- Editing Menu -->
+            <iron-collapse opened="{{_editMode}}">
+                <!-- Main Menu -->
+                <iron-collapse class="layout horizontal justified" opened="{{_menusOpen.main}}">
+                    <paper-icon-button id="button-add" icon="add" on-tap="openMenuAdd"></paper-icon-button>
+                    <paper-icon-button id="button-edit" icon="create"></paper-icon-button>
+                    <paper-icon-button id="button-move" icon="reorder"></paper-icon-button>
+                    <paper-icon-button id="button-delete" icon="delete"></paper-icon-button>
+                </iron-collapse>
+
+                <!-- Add -->
+                <iron-collapse opened="{{_menusOpen.add}}">
+                    <form is="iron-form" id="form-add" method="get" action="/form.html">
+                        <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
+                        <span>Add chapter as '<span>{{_addPreview}}</span>'</span>
+                        <paper-radio-group selected="{{_addType}}" attr-for-selected="value">
+                            <paper-radio-button name="type" value="child">Child</paper-radio-button>
+                            <paper-radio-button name="type" value="sibling">Sibling</paper-radio-button>
+                        </paper-radio-group>
+                        <div class="button-container layout horizontal">
+                            <span class="flex"></span>
+                            <paper-button on-tap="resetMenus">Cancel</paper-button>
+                            <paper-button on-tap="submitForm">Create</paper-button>
+                        </div>
+                    </form>
+                </iron-collapse>
+                <!-- Edit -->
+                <!-- Move -->
+                <!-- Delete -->
+            </iron-collapse>
+        </div>
 
         <iron-selector id="chapters-container" selected="{{_selectedChapter}}" attr-for-selected="id">
             <template is="dom-repeat" id="chapters-template" items="{{_data}}">

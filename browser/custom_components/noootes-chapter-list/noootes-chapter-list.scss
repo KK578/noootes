@@ -6,19 +6,62 @@
     display: block;
 }
 
-paper-toolbar {
+#chapter-toolbar {
+    background-color: $theme-primary;
+    color: $white-primary;
     position: absolute;
+    padding: 16px;
     top: 0;
     left: 0;
     right: 0;
-    height: 64px;
 }
 
 #chapters-container {
-    position: absolute;
+    @include transition(top 0.1s ease-out);
+    position: relative;
     overflow: auto;
-    top: 64px;
+    /* Top is set to under #chapter-toolbar via Javascript. */
+    top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+}
+
+/* paper-input */
+paper-input.paper-input-0::shadow {
+    .paper-input-container {
+        &.input-content {
+            label {
+                color: $white-secondary;
+            }
+
+            &.label-is-floating.label-is-highlighted label, input {
+                color: $white-primary;
+            }
+        }
+
+        &.underline.is-highlighted .focused-line {
+            background-color: $white-primary;
+        }
+    }
+}
+
+/* paper-radio-button */
+paper-radio-button.paper-radio-button-0 {
+    &::shadow .paper-radio-button {
+        &#onRadio {
+            background-color: $white-primary;
+        }
+
+        &#offRadio {
+            border-color: $white-secondary;
+        }
+
+        &#radioLabel {
+            color: $white-secondary;
+        }
+    }
+
+    &[checked]::shadow #offRadio.paper-radio-button {
+        border-color: $white-primary;
+    }
 }

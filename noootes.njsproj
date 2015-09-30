@@ -16,6 +16,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="browser\behaviors\chapter-behavior\chapter-behavior.html" />
     <Content Include="browser\behaviors\firebase-behavior\firebase-behavior.html" />
     <Content Include="browser\behaviors\form-behavior\form-behavior.html" />
     <Content Include="browser\behaviors\group-behavior\group-behavior.html" />
@@ -925,6 +926,7 @@
     <Content Include="browser\behaviors\page-behavior\page-behavior.js" />
     <Content Include="browser\bower_components\promise-polyfill\Gruntfile.js" />
     <Content Include="browser\behaviors\group-behavior\group-behavior.js" />
+    <Content Include="browser\behaviors\chapter-behavior\chapter-behavior.js" />
     <Compile Include="browser\bower_components\promise-polyfill\LICENSE" />
     <Content Include="browser\bower_components\promise-polyfill\Promise.js" />
     <Content Include="browser\bower_components\promise-polyfill\Promise.min.js" />
@@ -1045,6 +1047,7 @@
     <Folder Include="browser\behaviors\firebase-behavior\" />
     <Folder Include="browser\behaviors\form-behavior\" />
     <Folder Include="browser\behaviors\group-behavior\" />
+    <Folder Include="browser\behaviors\chapter-behavior\" />
     <Folder Include="browser\behaviors\page-behavior\" />
     <Folder Include="browser\bower_components\" />
     <Folder Include="browser\bower_components\firebase-element\" />

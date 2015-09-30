@@ -11,7 +11,7 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.ChapterBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
@@ -20,7 +20,8 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
     /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
     observers: [
-        '_loadChapters(group)'
+        '_loadChapters(group)',
+        '_setPreviewChapterNumber(_selectedChapter, _addType)'
     ],
 
     /**
@@ -56,6 +57,7 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     // Load
     _loadChapters: function (group) {
         this._location = Noootes.Firebase.Location + 'notes/order/' + group;
+        this._setContainerTop();
     },
 
     // Order
@@ -68,22 +70,6 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         }
     },
     _sortChapterList: function () {
-        // Chapter Number Methods
-        function incrementChapter(numbers, indentation) {
-            if (indentation === undefined) {
-                return [];
-            }
-
-            var newNumbers = numbers.slice(0, indentation + 1);
-            newNumbers[indentation] = ++newNumbers[indentation] || 1;
-
-            return newNumbers;
-        }
-
-        function chapterNumbersToString(numbers) {
-            return numbers.join('.');
-        }
-
         var container = this.$['chapters-container'];
         var chapterNumbers = [];
 
@@ -92,8 +78,8 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         var insert = container.firstChild;
 
         do {
-            chapterNumbers = incrementChapter(chapterNumbers, node.indentation);
-            node.chapterNumber = chapterNumbersToString(chapterNumbers);
+            chapterNumbers = this.incrementChapter(chapterNumbers, node.indentation);
+            node.chapterNumber = this.chapterNumbersToString(chapterNumbers);
 
             // On the first call this will ensure that #start is the firstChild of the container
             container.insertBefore(node, insert.nextSibling);
@@ -113,15 +99,101 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     },
 
     // Edit Mode
+    _setContainerTop: function () {
+        var container = this.$['chapters-container'];
+        var toolbar = this.$['chapter-toolbar'];
+
+        function set(duration) {
+            container.style.top = toolbar.clientHeight + 'px';
+
+            if (duration < 300) {
+                this.async(set.bind(this, duration + 10), 10);
+            }
+        }
+
+        set.call(this, 0);
+    },
+    _getIcon: function (edit) {
+        return edit ? 'done' : 'create';
+    },
+
+    // Changing Menus
     toggleMode: function () {
         this._editMode = !this._editMode;
+        this._openMenu('main');
 
         if (!this._editMode) {
             // On exiting edit mode, match private chapter to public chapter.
             this._selectedChapter = this.selected;
         }
     },
-    _getIcon: function (edit) {
-        return edit ? 'done' : 'create';
+    _openMenu: function (menu) {
+        this._menusOpen = {
+            main: menu === 'main',
+            add: menu === 'add',
+            edit: menu === 'edit',
+            move: menu === 'move',
+            delete: menu === 'delete'
+        };
+
+        this._setContainerTop();
+    },
+
+    // Add Menu
+    openMenuAdd: function () {
+        this._openMenu('add');
+        this._addType = 'child';
+    },
+    _submitFormAdd: function (event) {
+        var detail = event.detail;
+
+        var chapter = this.$['chapters-container'].querySelector('#' + this._selectedChapter);
+        var indentation;
+        switch (detail.type) {
+            case 'child':
+                indentation = chapter.indentation + 1;
+                break;
+
+            case 'sibling':
+                indentation = chapter.indentation;
+                break;
+
+            default:
+                return;
+        }
+
+        // TODO: Need to getLastChild of selectedChapter.
+        this.addChapter(this.group, this._selectedChapter, detail.title, indentation);
+
+        this._openMenu('main');
+    },
+    _setPreviewChapterNumber: function (key, type) {
+        if (!key || !type) {
+            return;
+        }
+
+        // TODO: Change to getLastChild.
+        var chapter = this.$['chapters-container'].querySelector('#' + key);
+        // TODO: Chapter-Behavior add function for splitting chapter numbers.
+        var chapterNumbers = chapter.chapterNumber.split('.');
+        var indentation;
+        switch (type) {
+            case 'child':
+                indentation = chapter.indentation + 1;
+                break;
+
+            case 'sibling':
+                indentation = chapter.indentation;
+                break;
+
+            default:
+                return;
+        }
+
+        chapterNumbers = this.incrementChapter(chapterNumbers, indentation);
+        this._addPreview = this.chapterNumbersToString(chapterNumbers);
     }
+    // Edit Menu
+    // Move Menu
+    // Delete Menu
 });
