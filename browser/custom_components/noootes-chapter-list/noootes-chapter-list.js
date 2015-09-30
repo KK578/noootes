@@ -11,11 +11,16 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    behaviors: [Noootes.Behaviors.ChapterBehavior],
+    behaviors: [
+        Noootes.Behaviors.ChapterBehavior,
+        Noootes.Behaviors.FormBehavior
+    ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     listeners: {
-        'chapters-template.dom-change': '_setupChapterList'
+        'chapters-template.dom-change': '_setupChapterList',
+        'form-add.iron-form-submit': '_submitFormAdd',
+        'form-delete.iron-form-submit': '_submitFormDelete'
     },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
@@ -141,6 +146,11 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
         this._setContainerTop();
     },
+    resetMenus: function () {
+        this.resetForm(this.$['form-add'], true);
+
+        this._openMenu('main');
+    },
 
     // Add Menu
     openMenuAdd: function () {
@@ -150,7 +160,8 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     _submitFormAdd: function (event) {
         var detail = event.detail;
 
-        var chapter = this.$['chapters-container'].querySelector('#' + this._selectedChapter);
+        var container = this.$['chapters-container'];
+        var chapter = container.querySelector('#' + this._selectedChapter);
         var indentation;
         switch (detail.type) {
             case 'child':
@@ -165,34 +176,36 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
                 return;
         }
 
-        // TODO: Need to getLastChild of selectedChapter.
-        this.addChapter(this.group, this._selectedChapter, detail.title, indentation);
+        var insertTarget = this.getNextSibling(container, this._selectedChapter);
+        this.addChapter(this.group, insertTarget.id, detail.title, indentation);
 
-        this._openMenu('main');
+        this.resetMenus();
     },
     _setPreviewChapterNumber: function (key, type) {
         if (!key || !type) {
             return;
         }
 
-        // TODO: Change to getLastChild.
-        var chapter = this.$['chapters-container'].querySelector('#' + key);
-        // TODO: Chapter-Behavior add function for splitting chapter numbers.
-        var chapterNumbers = chapter.chapterNumber.split('.');
+        var container = this.$['chapters-container'];
+        var selected = container.querySelector('#' + key);
+
         var indentation;
         switch (type) {
             case 'child':
-                indentation = chapter.indentation + 1;
+                indentation = selected.indentation + 1;
                 break;
 
             case 'sibling':
-                indentation = chapter.indentation;
+                indentation = selected.indentation;
                 break;
 
             default:
                 return;
         }
 
+        // TODO: Chapter-Behavior add function for splitting chapter numbers.
+        var chapter = this.getLastChild(container, key);
+        var chapterNumbers = chapter.chapterNumber.split('.');
         chapterNumbers = this.incrementChapter(chapterNumbers, indentation);
         this._addPreview = this.chapterNumbersToString(chapterNumbers);
     },
@@ -207,5 +220,7 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         var chapter = this._selectedChapter;
         this._selectFirstChapter();
         this.deleteChapter(this.group, chapter);
+
+        this.resetMenus();
     }
 });

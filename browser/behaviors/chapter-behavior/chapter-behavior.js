@@ -42,12 +42,12 @@
      */
     getNextSibling: function (container, key) {
         var start = container.querySelector('#' + key);
-        var lastChild = container.querySelector(start.nextChapter);
+        var lastChild = container.querySelector('#' + start.nextChapter);
 
         // Standard linked list traversal until the node has an indentation that matches
         // or is lower (indicates the chapter is the last child of it's parent.)
         while (lastChild.indentation > start.indentation) {
-            lastChild = container.querySelector(lastChild.nextChapter);
+            lastChild = container.querySelector('#' + lastChild.nextChapter);
         }
 
         return lastChild;
