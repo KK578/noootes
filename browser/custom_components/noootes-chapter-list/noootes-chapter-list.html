@@ -29,7 +29,7 @@
             <iron-collapse opened="{{_editMode}}">
                 <!-- Main Menu -->
                 <iron-collapse class="layout horizontal justified" opened="{{_menusOpen.main}}">
-                    <paper-icon-button id="button-add" icon="add"></paper-icon-button>
+                    <paper-icon-button id="button-add" icon="add" on-tap="openMenuAdd"></paper-icon-button>
                     <paper-icon-button id="button-edit" icon="create"></paper-icon-button>
                     <paper-icon-button id="button-move" icon="reorder"></paper-icon-button>
                     <paper-icon-button id="button-delete" icon="delete"></paper-icon-button>
@@ -37,12 +37,17 @@
 
                 <!-- Add -->
                 <iron-collapse opened="{{_menusOpen.add}}">
-                    <form is="iron-form">
+                    <form is="iron-form" id="form-add" method="get" action="/form.html">
                         <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
                         <paper-radio-group selected="{{_addType}}" attr-for-selected="value">
                             <paper-radio-button name="type" value="child">Child</paper-radio-button>
                             <paper-radio-button name="type" value="sibling">Sibling</paper-radio-button>
                         </paper-radio-group>
+                        <div class="button-container layout horizontal">
+                            <span class="flex"></span>
+                            <paper-button on-tap="resetMenus">Cancel</paper-button>
+                            <paper-button on-tap="submitForm">Create</paper-button>
+                        </div>
                     </form>
                 </iron-collapse>
                 <!-- Edit -->
