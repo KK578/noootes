@@ -17,8 +17,8 @@
 }
 
 #chapters-container {
-    @include transition(top 0.1s ease-out);
     position: relative;
+    display: block;
     overflow: auto;
     /* Top is set to under #chapter-toolbar via Javascript. */
     top: 0;

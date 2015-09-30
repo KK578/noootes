@@ -139,7 +139,9 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         var toolbar = this.$['chapter-toolbar'];
 
         function set(duration) {
-            container.style.top = toolbar.clientHeight + 'px';
+            var height = toolbar.clientHeight;
+            container.style.top = height + 'px';
+            container.style.height = 'calc(100% - ' + height + 'px)';
 
             if (duration < 300) {
                 this.async(set.bind(this, duration + 10), 10);
