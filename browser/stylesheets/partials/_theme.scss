@@ -1,5 +1,8 @@
 ﻿@import '_material_color.scss';
 
+/* Firepad */
+$firepad-z-index: 6;
+
 /* Transitions */
 $theme-transition-duration: 0.3s;
 @function transition-standard($args, $duration:$theme-transition-duration) {
