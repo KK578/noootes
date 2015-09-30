@@ -154,4 +154,24 @@ describe('<noootes-group-management>', function () {
             listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
         });
     });
+
+    describe('Links', function () {
+        it('should navigate to Editor hash on clicking button', function (done) {
+            function assertions() {
+                window.location.hash.should.equal('#/editor/WCT/PERMANENT');
+            }
+
+            var button = 'paper-button[target=editor]';
+            listenToEventOnClickingButton(null, 'hashchange', [], button, done, assertions);
+        });
+
+        it('should navigate to Reader hash on clicking button', function (done) {
+            function assertions() {
+                window.location.hash.should.equal('#/reader/WCT/PERMANENT');
+            }
+
+            var button = 'paper-button[target=reader]';
+            listenToEventOnClickingButton(null, 'hashchange', [], button, done, assertions);
+        });
+    });
 });
