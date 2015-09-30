@@ -20,7 +20,8 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
     /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
     observers: [
-        '_loadChapters(group)'
+        '_loadChapters(group)',
+        '_setPreviewChapterNumber(_selectedChapter, _addType)'
     ],
 
     /**
@@ -136,9 +137,62 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         };
 
         this._setContainerTop();
-    }
+    },
 
     // Add Menu
+    openMenuAdd: function () {
+        this._openMenu('add');
+        this._addType = 'child';
+    },
+    _submitFormAdd: function (event) {
+        var detail = event.detail;
+
+        var chapter = this.$['chapters-container'].querySelector('#' + this._selectedChapter);
+        var indentation;
+        switch (detail.type) {
+            case 'child':
+                indentation = chapter.indentation + 1;
+                break;
+
+            case 'sibling':
+                indentation = chapter.indentation;
+                break;
+
+            default:
+                return;
+        }
+
+        // TODO: Need to getLastChild of selectedChapter.
+        this.addChapter(this.group, this._selectedChapter, detail.title, indentation);
+
+        this._openMenu('main');
+    },
+    _setPreviewChapterNumber: function (key, type) {
+        if (!key || !type) {
+            return;
+        }
+
+        // TODO: Change to getLastChild.
+        var chapter = this.$['chapters-container'].querySelector('#' + key);
+        // TODO: Chapter-Behavior add function for splitting chapter numbers.
+        var chapterNumbers = chapter.chapterNumber.split('.');
+        var indentation;
+        switch (type) {
+            case 'child':
+                indentation = chapter.indentation + 1;
+                break;
+
+            case 'sibling':
+                indentation = chapter.indentation;
+                break;
+
+            default:
+                return;
+        }
+
+        chapterNumbers = this.incrementChapter(chapterNumbers, indentation);
+        this._addPreview = this.chapterNumbersToString(chapterNumbers);
+    }
     // Edit Menu
     // Move Menu
     // Delete Menu

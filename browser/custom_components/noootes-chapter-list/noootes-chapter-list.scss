@@ -25,3 +25,43 @@
     left: 0;
     right: 0;
 }
+
+/* paper-input */
+paper-input.paper-input-0::shadow {
+    .paper-input-container {
+        &.input-content {
+            label {
+                color: $white-secondary;
+            }
+
+            &.label-is-floating.label-is-highlighted label, input {
+                color: $white-primary;
+            }
+        }
+
+        &.underline.is-highlighted .focused-line {
+            background-color: $white-primary;
+        }
+    }
+}
+
+/* paper-radio-button */
+paper-radio-button.paper-radio-button-0 {
+    &::shadow .paper-radio-button {
+        &#onRadio {
+            background-color: $white-primary;
+        }
+
+        &#offRadio {
+            border-color: $white-secondary;
+        }
+
+        &#radioLabel {
+            color: $white-secondary;
+        }
+    }
+
+    &[checked]::shadow #offRadio.paper-radio-button {
+        border-color: $white-primary;
+    }
+}
