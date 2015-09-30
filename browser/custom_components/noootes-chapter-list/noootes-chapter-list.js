@@ -72,6 +72,32 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
         if (length > 1) {
             this._sortChapterList();
+
+            // If the data only consists of the template, start and end, Add a new chapter.
+            if (length <= 3) {
+                this.addChapter(this.group, 'end', 'My Notes', 0);
+            }
+
+            if (!this._selectedChapter) {
+                this._selectFirstChapter();
+            }
+        }
+        else {
+            var firebase = this.$['firebase-chapter-list'].query;
+
+            if (firebase) {
+                // HACK: Loads data to check if it exists, as accessing _data always returns [].
+                // Perhaps change to only load start/end?
+                firebase.once('value', function (ss) {
+                    if (!ss.val()) {
+                        // If no content is found, set up start and end.
+                        firebase.set({
+                            start: { next: 'end' },
+                            end: { previous: 'start' }
+                        });
+                    }
+                });
+            }
         }
     },
     _sortChapterList: function () {
@@ -120,6 +146,9 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
         }
 
         set.call(this, 0);
+    },
+    _drawerTitle: function (mode) {
+        return mode ? 'Edit Chapters' : 'Chapters';
     },
     _getIcon: function (edit) {
         return edit ? 'done' : 'create';
