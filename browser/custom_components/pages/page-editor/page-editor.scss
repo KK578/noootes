@@ -5,3 +5,10 @@
 :host {
     display: block;
 }
+
+paper-fab {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    z-index: 4;
+}

@@ -21,7 +21,9 @@ Noootes.Elements['page-editor'] = Polymer({
     ],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'pages.neon-animation-finish': 'cleanupAnimation'
+    },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/properties.html#multi-property-observers */
     observers: [
@@ -143,6 +145,15 @@ Noootes.Elements['page-editor'] = Polymer({
 
             default:
                 return;
+        }
+    },
+    // NOTE: Temporary fix for https://github.com/PolymerElements/neon-animation/issues/71
+    cleanupAnimation: function () {
+        var pages = this.$.pages;
+        var animators = pages.querySelectorAll('.neon-animating');
+
+        for (var i = 0; i < animators.length; i++) {
+            animators[i].classList.remove('neon-animating');
         }
     }
 });
