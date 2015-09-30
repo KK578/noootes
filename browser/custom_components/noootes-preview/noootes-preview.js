@@ -28,7 +28,21 @@ Noootes.Elements['noootes-preview'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        markdown: {
+            type: String,
+            value: ''
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    render: function () {
+        var editor = this.parentNode.querySelector('noootes-editor');
+
+        // Add selected chapter as title.
+        var selected = editor.querySelector('#chapters-container').selectedItem;
+        var title = '#'.repeat(selected.indentation + 1) + ' ' + selected.chapter.title;
+
+        this.markdown = title + '\n\n' + editor.getText();
+    }
 });
