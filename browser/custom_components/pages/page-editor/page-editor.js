@@ -74,14 +74,20 @@ Noootes.Elements['page-editor'] = Polymer({
                 this.code = hash[3];
             }
             else {
-                if (this.user && this.code) {
-                    this._forcePreviousGroup();
+                var page = document.querySelector('page-reader');
+
+                // Prefer to load the group from reader, in order to keep preview and editor linked.
+                if (page.user && page.code) {
+                    this._forceGroup(page.user, page.code);
+                }
+                else if (this.user && this.code) {
+                    this._forceGroup(this.user, this.code);
                 }
             }
         }
     },
-    _forcePreviousGroup: function () {
-        var hash = '#/editor/' + this.user + '/' + this.code;
+    _forceGroup: function (user, code) {
+        var hash = '#/editor/' + user + '/' + code;
         history.replaceState(null, null, hash);
         this._checkHash();
     },
