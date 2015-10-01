@@ -59,7 +59,17 @@
                     </form>
                 </iron-collapse>
                 <!-- Edit -->
-                <iron-collapse id="collapse-edit" opened="{{_menusOpen.edit}}"></iron-collapse>
+                <iron-collapse id="collapse-edit" opened="{{_menusOpen.edit}}">
+                    <form is="iron-form" id="form-edit" method="get" action="/form.html">
+                        <paper-input name="title" label="New Title" required on-keydown="submitForm"></paper-input>
+                        <span>Chapter position changes are not supported currently.</span>
+                        <div class="button-container layout horizontal">
+                            <span class="flex"></span>
+                            <paper-button on-tap="resetMenus">Cancel</paper-button>
+                            <paper-button class="submit" on-tap="submitForm">Edit</paper-button>
+                        </div>
+                    </form>
+                </iron-collapse>
                 <!-- Move -->
                 <iron-collapse id="collapse-move" opened="{{_menusOpen.move}}"></iron-collapse>
                 <!-- Delete -->
