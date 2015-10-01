@@ -202,6 +202,11 @@ describe('<noootes-chapter-list>', function () {
                 chapterList.querySelector('#collapse-delete').opened.should.equal(false);
             });
 
+            it('should set inputs to current values', function () {
+                form.querySelector('paper-input[name=title]').value.should.equal('Sub Chapter');
+                // TODO: Indentation changes.
+            });
+
             it('should fire iron-form-invalid with empty inputs', function (done) {
                 var inputs = [
                     { name: 'paper-input[name=title]', value: '' }
@@ -211,18 +216,12 @@ describe('<noootes-chapter-list>', function () {
                 listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
             });
 
-            it('should set inputs to current values', function () {
-                form.querySelector('paper-input[name=title]').value.should.equal('Sub Chapter');
-                // TODO: Indentation changes.
-            });
-
             it('should call editChapter on submit', function (done) {
                 function assertions() {
                     chapterList.editChapter.should.have.been.calledWith(
                         '-K-9osCRSNg4n6dtFgcB', // Group
                         '-K-OS5tB1C8Y_TfGmx5I', // Current Chapter.
-                        'Replaced Title', // New Title
-                        1 // No change to indentations.
+                        'Replaced Title' // New Title
                     );
                 }
 
