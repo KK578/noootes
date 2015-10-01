@@ -14,7 +14,9 @@ Noootes.Elements['page-reader'] = Polymer({
     //behaviors: [],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
-    //listeners: {},
+    listeners: {
+        'pages.neon-animation-finish': 'cleanupAnimation'
+    },
 
     /**
      * https://www.polymer-project.org/1.0/docs/devguide/properties.html
@@ -28,7 +30,25 @@ Noootes.Elements['page-reader'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        _selectedPage: {
+            type: Number,
+            value: 0
+        },
+        _errorMessage: {
+            type: String,
+            value: 'No group selected. Please select a group from your Noootes.'
+        }
+    },
 
     /* Functions specific to this element go under here. */
+    // NOTE: Temporary fix for https://github.com/PolymerElements/neon-animation/issues/71
+    cleanupAnimation: function () {
+        var pages = this.$.pages;
+        var animators = pages.querySelectorAll('.neon-animating');
+
+        for (var i = 0; i < animators.length; i++) {
+            animators[i].classList.remove('neon-animating');
+        }
+    }
 });
