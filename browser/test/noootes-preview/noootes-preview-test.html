@@ -8,6 +8,14 @@
     <script src="../../bower_components/web-component-tester/browser.js"></script>
 
     <script src="../../scripts/noootes-staging.js"></script>
+    <script>
+    // String Repeat Polyfill
+    if (!String.prototype.repeat) {
+        String.prototype.repeat = function (count) {
+            return new Array(count + 1).join(this);
+        };
+    }
+    </script>
     <link rel="import" href="../../custom_components/noootes-preview/noootes-preview.html" />
 </head>
 <body>

@@ -37,6 +37,6 @@ describe('<noootes-reader>', function () {
                 window.clearInterval(handle);
                 done();
             }
-        });
+        }, 100);
     });
 });

@@ -9,6 +9,14 @@
 
     <link rel="import" href="../../bower_components/firebase-element/firebase.html" />
     <script src="../../scripts/noootes-staging.js"></script>
+    <script>
+    // String Repeat Polyfill
+    if (!String.prototype.repeat) {
+        String.prototype.repeat = function (count) {
+            return new Array(count + 1).join(this);
+        };
+    }
+    </script>
     <link rel="import" href="../../custom_components/noootes-reader/noootes-reader.html" />
 </head>
 <body>

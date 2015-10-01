@@ -959,7 +959,7 @@
     <Content Include="browser\bower_components\webcomponentsjs\webcomponents.min.js" />
     <Content Include="browser\scripts\noootes.js" />
     <Content Include="browser\scripts\noootes-staging.js" />
-    <Content Include="browser\scripts\toast.js" />
+    <Content Include="browser\scripts\util.js" />
     <Content Include="browser\custom_components\noootes-app\noootes-app.js" />
     <Content Include="browser\test\noootes-app\noootes-app-test.js" />
     <Content Include="browser\test\screen-main\screen-main-test.js" />
