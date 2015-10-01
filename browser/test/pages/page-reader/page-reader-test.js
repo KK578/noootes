@@ -100,8 +100,4 @@ describe('<page-reader>', function () {
 
         window.location.hash = '/reader/';
     });
-
-    describe('Noootes', function () {
-        it('has no tests written yet');
-    });
 });
