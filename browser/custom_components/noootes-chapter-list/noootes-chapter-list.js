@@ -255,6 +255,8 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     _submitFormEdit: function (event) {
         var detail = event.detail;
         this.editChapter(this.group, this._selectedChapter, detail.title);
+
+        this.resetMenus();
     },
 
     // Move Menu
