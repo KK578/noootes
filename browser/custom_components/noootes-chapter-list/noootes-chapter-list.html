@@ -1,11 +1,17 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html" />
 
 <!-- Iron -->
+<link rel="import" href="../../bower_components/iron-form/iron-form.html" />
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html" />
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html" />
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html" />
 <!-- Paper -->
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="../../bower_components/paper-input/paper-input.html" />
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html" />
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../noootes-chapter/noootes-chapter.html" />
@@ -27,17 +33,18 @@
             </div>
 
             <!-- Editing Menu -->
-            <iron-collapse opened="{{_editMode}}">
+            <iron-collapse id="collapse-menu" opened="{{_editMode}}">
                 <!-- Main Menu -->
-                <iron-collapse class="layout horizontal justified" opened="{{_menusOpen.main}}">
+                <iron-collapse id="collapse-main" class="layout horizontal justified" opened="{{_menusOpen.main}}">
                     <paper-icon-button id="button-add" icon="add" on-tap="openMenuAdd"></paper-icon-button>
-                    <paper-icon-button id="button-edit" icon="create"></paper-icon-button>
-                    <paper-icon-button id="button-move" icon="reorder"></paper-icon-button>
+                    <paper-icon-button id="button-edit" icon="create" on-tap="openMenuEdit"></paper-icon-button>
+                    <paper-icon-button id="button-move" icon="reorder" on-tap="openMenuMove"></paper-icon-button>
                     <paper-icon-button id="button-delete" icon="delete" on-tap="openMenuDelete"></paper-icon-button>
                 </iron-collapse>
 
                 <!-- Add -->
-                <iron-collapse opened="{{_menusOpen.add}}">
+                <iron-collapse id="collapse-add" opened="{{_menusOpen.add}}">
+                    <span>Add New Chapter</span>
                     <form is="iron-form" id="form-add" method="get" action="/form.html">
                         <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
                         <span>Add chapter as '<span>{{_addPreview}}</span>'</span>
@@ -48,20 +55,44 @@
                         <div class="button-container layout horizontal">
                             <span class="flex"></span>
                             <paper-button on-tap="resetMenus">Cancel</paper-button>
-                            <paper-button on-tap="submitForm">Create</paper-button>
+                            <paper-button class="submit" on-tap="submitForm">Create</paper-button>
                         </div>
                     </form>
                 </iron-collapse>
+
                 <!-- Edit -->
+                <iron-collapse id="collapse-edit" opened="{{_menusOpen.edit}}">
+                    <span>Edit Chapter</span>
+                    <form is="iron-form" id="form-edit" method="get" action="/form.html">
+                        <paper-input name="title" label="New Title" required on-keydown="submitForm"></paper-input>
+                        <p>Chapter position changes are not supported currently.</p>
+                        <div class="button-container layout horizontal">
+                            <span class="flex"></span>
+                            <paper-button on-tap="resetMenus">Cancel</paper-button>
+                            <paper-button class="submit" on-tap="submitForm">Edit</paper-button>
+                        </div>
+                    </form>
+                </iron-collapse>
+
                 <!-- Move -->
+                <iron-collapse id="collapse-move" opened="{{_menusOpen.move}}">
+                    <span class="collapse-title">Move Chapter</span>
+                    <p>Sorry, this function is not implemented yet.</p>
+                    <div class="button-container layout horizontal">
+                        <span class="flex"></span>
+                        <paper-button on-tap="resetMenus">Back</paper-button>
+                    </div>
+                </iron-collapse>
+
                 <!-- Delete -->
-                <iron-collapse opened="{{_menusOpen.delete}}">
-                    <span>Are you sure you want to delete this chapter?</span>
+                <iron-collapse id="collapse-delete" opened="{{_menusOpen.delete}}">
+                    <span class="collapse-title">Delete Chapter</span>
+                    <p>Are you sure you want to delete this chapter?</p>
                     <form is="iron-form" id="form-delete" method="get" action="/form.html">
                         <div class="button-container layout horizontal">
                             <span class="flex"></span>
                             <paper-button on-tap="resetMenus">Cancel</paper-button>
-                            <paper-button on-tap="submitForm">Delete</paper-button>
+                            <paper-button class="submit" on-tap="submitForm">Delete</paper-button>
                         </div>
                     </form>
                 </iron-collapse>
