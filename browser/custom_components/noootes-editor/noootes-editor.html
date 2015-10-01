@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+
+<!-- Iron -->
+<!-- Paper -->
+<link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html" />
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html" />
+<link rel="import" href="../../bower_components/paper-material/paper-material.html" />
+<!-- Neon -->
+<!-- Custom/Behaviors -->
+<link rel="import" href="../noootes-chapter-list/noootes-chapter-list.html" />
+<link rel="import" href="../../behaviors/firebase-behavior/firebase-behavior.html" />
+<!-- Other -->
+<!-- Firepad/CodeMirror -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.min.css" />
+<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.2.0/firepad.css" />
+<script src="https://cdn.firebase.com/libs/firepad/1.2.0/firepad.min.js"></script>
+
+<dom-module id="noootes-editor">
+    <link rel="import" type="css" href="noootes-editor.css?__inline" />
+    <template>
+        <paper-drawer-panel id="drawer-chapters" force-narrow right-drawer disable-swipe drawer-toggle-attribute="chapter-drawer-toggle">
+            <paper-header-panel drawer>
+                <div id="tab" chapter-drawer-toggle>Chapters</div>
+                <noootes-chapter-list class="fit" group="{{group}}" selected="{{chapter}}"></noootes-chapter-list>
+            </paper-header-panel>
+
+            <paper-header-panel main mode="seamed">
+                <paper-material id="firepad-container" class="fit">
+                    <div id="firepad"></div>
+                </paper-material>
+            </paper-header-panel>
+        </paper-drawer-panel>
+    </template>
+    <script src="noootes-editor.js?__inline"></script>
+</dom-module>

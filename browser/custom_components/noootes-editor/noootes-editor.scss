@@ -1,0 +1,43 @@
+@import '../../stylesheets/partials/_layouts.scss';
+@import '../../stylesheets/partials/_mixins.scss';
+@import '../../stylesheets/partials/_theme.scss';
+
+:host {
+    display: block;
+}
+
+paper-drawer-panel#drawer-chapters::shadow {
+    #scrim {
+        z-index: $firepad-z-index;
+    }
+
+    #drawer {
+        z-index: $firepad-z-index + 1;
+    }
+}
+
+#firepad-container {
+    padding: 0;
+    overflow: auto;
+
+    #firepad {
+        height: 100%;
+    }
+}
+
+#tab {
+    @include border-radius(4px 4px 0 0);
+    position: absolute;
+    transform-origin: 0% 0%;
+    transform: rotate(270deg) translate(-120%, -100%);
+    background-color: $theme-primary;
+    color: $white-primary;
+    cursor: pointer;
+    padding: 4px 8px;
+    visibility: visible;
+}
+
+#drawer-chapters::shadow #mainContainer {
+    overflow: visible;
+    overflow: initial;
+}

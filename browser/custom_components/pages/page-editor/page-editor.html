@@ -1,0 +1,33 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html" />
+
+<!-- Iron -->
+<!-- Paper -->
+<link rel="import" href="../../../bower_components/paper-fab/paper-fab.html" />
+<!-- Neon -->
+<link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html" />
+<link rel="import" href="../../../bower_components/neon-animation/neon-animatable.html" />
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-up-animation.html" />
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-down-animation.html" />
+<!-- Custom/Behaviors -->
+<link rel="import" href="../../noootes-editor/noootes-editor.html" />
+<link rel="import" href="../../noootes-preview/noootes-preview.html" />
+<link rel="import" href="../../../behaviors/firebase-behavior/firebase-behavior.html" />
+<link rel="import" href="../../../behaviors/group-behavior/group-behavior.html" />
+<!-- Other -->
+
+<dom-module id="page-editor">
+    <link rel="import" type="css" href="page-editor.css?__inline" />
+    <template>
+        <!-- Temporary button -->
+        <paper-fab icon="gesture" mini on-tap="togglePage"></paper-fab>
+
+        <neon-animated-pages id="pages" class="fit" selected="{{_selectedPage}}" entry-animation="slide-down-animation" exit-animation="slide-up-animation">
+            <neon-animatable class="layout vertical center center-justified fit">
+                <paper-material id="editor-error" class="">{{_errorMessage}}</paper-material>
+            </neon-animatable>
+            <noootes-editor id="editor" group="{{_group}}"></noootes-editor>
+            <noootes-preview id="preview"></noootes-preview>
+        </neon-animated-pages>
+    </template>
+    <script src="page-editor.js?__inline"></script>
+</dom-module>

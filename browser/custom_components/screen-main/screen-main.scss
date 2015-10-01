@@ -6,6 +6,16 @@
     display: block;
 }
 
+paper-drawer-panel#drawer-container::shadow {
+    #scrim {
+        z-index: $firepad-z-index + 2;
+    }
+
+    #drawer {
+        z-index: $firepad-z-index + 3;
+    }
+}
+
 .navigation-item {
     @include transition(transition-standard((background-color, color)));
     position: relative;

@@ -1,0 +1,21 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+
+<!-- Iron -->
+<!-- Paper -->
+<!-- Neon -->
+<!-- Custom/Behaviors -->
+<!-- Other -->
+
+<dom-module id="noootes-chapter">
+    <link rel="import" type="css" href="noootes-chapter.css?__inline" />
+    <template>
+        <paper-item>
+            <paper-ripple></paper-ripple>
+            <div class="layout vertical">
+                <span>{{chapterNumber}}</span>
+                <h3>{{chapter.title}}</h3>
+            </div>
+        </paper-item>
+    </template>
+    <script src="noootes-chapter.js?__inline"></script>
+</dom-module>

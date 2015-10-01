@@ -1,0 +1,11 @@
+@import '../../stylesheets/partials/_layouts.scss';
+@import '../../stylesheets/partials/_mixins.scss';
+@import '../../stylesheets/partials/_theme.scss';
+
+:host {
+    display: block;
+}
+
+#markdown-container {
+    overflow: auto;
+}

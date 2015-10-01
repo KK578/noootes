@@ -26,7 +26,7 @@ paper-dialog {
 }
 
 /* paper-material */
-:not(paper-button) > paper-material {
+:not(paper-button):not(paper-fab) > paper-material {
     @include border-radius(4px);
     padding: 20px;
     margin: 16px 12px;
@@ -49,6 +49,11 @@ paper-item:focus {
 /* paper-button */
 paper-button {
     text-transform: none;
+}
+
+/* paper-fab */
+paper-fab.paper-fab-0 {
+    background-color: $theme-accent;
 }
 
 /* paper-input */

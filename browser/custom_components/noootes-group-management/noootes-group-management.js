@@ -139,6 +139,24 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             this._collapseOpen = true;
         }
     },
+    navigateToNoootes: function (event) {
+        var target = event.target;
+        while (!target.getAttribute('target')) {
+            target = target.parentNode;
+        }
+
+        var page = target.getAttribute('target');
+        var hash = [
+            '/',
+            page,
+            '/',
+            this._username,
+            '/',
+            this._data.code
+        ].join('');
+
+        window.location.hash = hash;
+    },
 
     // Edit Collapse
     toggleEditCollapse: function () {
