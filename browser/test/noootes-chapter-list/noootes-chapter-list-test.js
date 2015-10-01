@@ -206,6 +206,13 @@ describe('<noootes-chapter-list>', function () {
         });
 
         describe('Delete Menu', function () {
+            var form;
+
+            before(function () {
+                form = chapterList.querySelector('#form-delete');
+                sinon.stub(chapterList, 'deleteChapter');
+            });
+
             it('should show delete menu only on clicking button', function () {
                 var button = chapterList.querySelector('#button-delete');
                 button.click();
@@ -217,7 +224,18 @@ describe('<noootes-chapter-list>', function () {
                 chapterList.querySelector('#collapse-delete').opened.should.equal(true);
             });
 
-            it('should call deleteChapter on submit');
+            it('should call deleteChapter on submit', function (done) {
+                function assertions() {
+                    chapterList.deleteChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB', // Group
+                        '-K-OS5tB1C8Y_TfGmx5I' // Deleted Chapter
+                    );
+                }
+
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', [], button, done, assertions);
+            });
         });
     });
 
