@@ -14,7 +14,7 @@ describe('<page-reader>', function () {
     var readerError;
 
     before(function () {
-        pageReader = document.querySelector('page-editor');
+        pageReader = document.querySelector('page-reader');
         readerError = pageReader.querySelector('#reader-error');
     });
 
@@ -63,7 +63,7 @@ describe('<page-reader>', function () {
     it('should display a message if the user isn\'t allowed to read the group\'s notes', function (done) {
         listenOnce('hashchange', function () {
             var handle = window.setInterval(function () {
-                if (readerError.textContent === 'You don\'t have permission to read to these Noootes.') {
+                if (readerError.textContent === 'You don\'t have permission to read these Noootes.') {
                     window.clearInterval(handle);
                     done();
                 }
