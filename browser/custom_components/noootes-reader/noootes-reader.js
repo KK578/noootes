@@ -32,7 +32,7 @@ Noootes.Elements['noootes-reader'] = Polymer({
         group: {
             type: String,
             value: '',
-            observer: '_groupChanged'
+            observer: 'render'
         },
         markdown: {
             type: String,
@@ -41,10 +41,9 @@ Noootes.Elements['noootes-reader'] = Polymer({
     },
 
     /* Functions specific to this element go under here. */
-    _groupChanged: function (n) {
-        if (n) {
+    render: function () {
+        if (this.group) {
             this.markdown = '# Compiling Noootes...';
-
             this._bindOrder();
         }
     },
