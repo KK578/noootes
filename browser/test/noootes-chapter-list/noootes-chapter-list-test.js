@@ -202,6 +202,11 @@ describe('<noootes-chapter-list>', function () {
                 chapterList.querySelector('#collapse-delete').opened.should.equal(false);
             });
 
+            it('should set inputs to current values', function () {
+                form.querySelector('paper-input[name=title]').value.should.equal('Sub Chapter');
+                // TODO: Indentation changes.
+            });
+
             it('should fire iron-form-invalid with empty inputs', function (done) {
                 var inputs = [
                     { name: 'paper-input[name=title]', value: '' }
@@ -209,11 +214,6 @@ describe('<noootes-chapter-list>', function () {
                 var button = form.querySelector('paper-button.submit');
 
                 listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
-            });
-
-            it('should set inputs to current values', function () {
-                form.querySelector('paper-input[name=title]').value.should.equal('Sub Chapter');
-                // TODO: Indentation changes.
             });
 
             it('should call editChapter on submit', function (done) {

@@ -244,6 +244,13 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     },
 
     // Edit Menu
+    openMenuEdit: function () {
+        var title = this.$['chapters-container'].selectedItem.chapter.title;
+        var input = this.$['form-edit'].querySelector('paper-input[name=title]');
+        input.value = title;
+
+        this._openMenu('edit');
+    },
     // Move Menu
     // Delete Menu
     openMenuDelete: function () {
