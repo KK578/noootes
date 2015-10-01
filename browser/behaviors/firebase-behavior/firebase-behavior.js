@@ -21,6 +21,10 @@
      * @param {Function (err, username)} callback - Function to be called when username is found.
      */
     getUsername: function (uid, callback) {
+        if (!uid) {
+            return;
+        }
+
         if (Noootes.Usernames.uid[uid]) {
             callback(null, Noootes.Usernames.uid[uid]);
         }
@@ -48,6 +52,10 @@
      * @param {Function (err, uid)} callback - Function to be called when uid is found.
      */
     getUid: function (name, callback) {
+        if (!name) {
+            return;
+        }
+
         if (Noootes.Usernames.names[name]) {
             callback(null, Noootes.Usernames.names[name]);
         }
