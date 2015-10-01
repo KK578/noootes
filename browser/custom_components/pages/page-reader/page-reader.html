@@ -3,11 +3,26 @@
 <!-- Iron -->
 <!-- Paper -->
 <!-- Neon -->
+<link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html" />
+<link rel="import" href="../../../bower_components/neon-animation/neon-animatable.html" />
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-up-animation.html" />
+<link rel="import" href="../../../bower_components/neon-animation/animations/slide-down-animation.html" />
 <!-- Custom/Behaviors -->
+<link rel="import" href="../../noootes-reader/noootes-reader.html" />
+<link rel="import" href="../../../behaviors/firebase-behavior/firebase-behavior.html" />
+<link rel="import" href="../../../behaviors/group-behavior/group-behavior.html" />
 <!-- Other -->
 
 <dom-module id="page-reader">
     <link rel="import" type="css" href="page-reader.css?__inline" />
-    <template></template>
+    <template>
+        <neon-animated-pages id="pages" class="fit" selected="{{_selectedPage}}" entry-animation="slide-down-animation" exit-animation="slide-up-animation">
+            <neon-animatable class="layout vertical center center-justified fit">
+                <paper-material id="reader-error">{{_errorMessage}}</paper-material>
+            </neon-animatable>
+
+            <noootes-reader id="reader" group="{{_group}}"></noootes-reader>
+        </neon-animated-pages>
+    </template>
     <script src="page-reader.js?__inline"></script>
 </dom-module>

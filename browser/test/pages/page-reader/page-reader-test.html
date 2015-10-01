@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>WCT Test - page-reader</title>
@@ -7,11 +7,14 @@
     <script src="../../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="../../../bower_components/web-component-tester/browser.js"></script>
 
+    <link rel="import" href="../../../bower_components/firebase-element/firebase.html" />
     <script src="../../../scripts/noootes-staging.js"></script>
     <link rel="import" href="../../../custom_components/pages/page-reader/page-reader.html" />
 </head>
 <body>
     <!-- Add element markup here -->
+    <!-- Page-Editor to allow hash change check to find the opposite page. -->
+    <page-editor></page-editor>
     <page-reader></page-reader>
 
     <!-- WCT Suite -->

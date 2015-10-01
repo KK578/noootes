@@ -100,6 +100,13 @@
     /////////////////////////
     // Group Detail Functions
     /////////////////////////
+    getGroupMetadata: function (key, callback) {
+        var firebase = Noootes.FirebaseRef('groups/metadata').child(key);
+        firebase.once('value', function (ss) {
+            callback(ss.val());
+        });
+    },
+
     /**
      * Update metadata for the given group key.
      * Use to only update a specific path without accidentally removing other metadata.
