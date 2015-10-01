@@ -184,6 +184,13 @@ describe('<noootes-chapter-list>', function () {
         });
 
         describe('Edit Menu', function () {
+            var form;
+
+            before(function () {
+                form = chapterList.querySelector('#form-edit');
+                sinon.stub(chapterList, 'editChapter');
+            });
+
             it('should show edit menu only on clicking button', function () {
                 var button = chapterList.querySelector('#button-edit');
                 button.click();
@@ -195,10 +202,37 @@ describe('<noootes-chapter-list>', function () {
                 chapterList.querySelector('#collapse-delete').opened.should.equal(false);
             });
 
-            it('should fire iron-form-invalid with empty inputs');
-            it('should set title input to current title');
-            it('should set indentation to current indentation');
-            it('should call editChapter on submit');
+            it('should fire iron-form-invalid with empty inputs', function (done) {
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: '' }
+                ];
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
+            });
+
+            it('should set inputs to current values', function () {
+                form.querySelector('paper-input[name=title]').value.should.equal('Sub Chapter');
+                // TODO: Indentation changes.
+            });
+
+            it('should call editChapter on submit', function (done) {
+                function assertions() {
+                    chapterList.editChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB', // Group
+                        '-K-OS5tB1C8Y_TfGmx5I', // Current Chapter.
+                        'Replaced Title', // New Title
+                        1 // No change to indentations.
+                    );
+                }
+
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: 'Replaced Title' }
+                ];
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            });
         });
 
         describe('Move Menu', function () {
@@ -228,7 +262,7 @@ describe('<noootes-chapter-list>', function () {
                 function assertions() {
                     chapterList.deleteChapter.should.have.been.calledWith(
                         '-K-9osCRSNg4n6dtFgcB', // Group
-                        '-K-OS5tB1C8Y_TfGmx5I' // Deleted Chapter
+                        '-K-OS5tB1C8Y_TfGmx5I' // Current Chapter
                     );
                 }
 
