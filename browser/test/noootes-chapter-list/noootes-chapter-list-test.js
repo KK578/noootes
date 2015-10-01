@@ -1,6 +1,26 @@
 chai.should();
 
 describe('<noootes-chapter-list>', function () {
+    function listenToEventOnClickingButton(form, eventName, inputs, button, done, assertions) {
+        function listener(event) {
+            if (assertions) {
+                assertions(event);
+            }
+
+            window.removeEventListener(eventName, listener);
+            done();
+        }
+
+        window.addEventListener(eventName, listener);
+
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            form.querySelector(input.name).value = input.value;
+        }
+
+        button.click();
+    }
+
     var chapterList;
 
     before(function (done) {
@@ -81,6 +101,15 @@ describe('<noootes-chapter-list>', function () {
             button.icon.should.equal('done');
         });
 
+        it('should show main menu only', function () {
+            chapterList.querySelector('#collapse-menu').opened.should.equal(true);
+            chapterList.querySelector('#collapse-main').opened.should.equal(true);
+            chapterList.querySelector('#collapse-add').opened.should.equal(false);
+            chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+            chapterList.querySelector('#collapse-move').opened.should.equal(false);
+            chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+        });
+
         it('should only change the private chapter on tapping item', function () {
             chapterList.querySelector('#-K-OS5tB1C8Y_TfGmx5I').click();
             chapterList._selectedChapter.should.equal('-K-OS5tB1C8Y_TfGmx5I');
@@ -88,17 +117,122 @@ describe('<noootes-chapter-list>', function () {
         });
 
         describe('Add Menu', function () {
-            it('should show add menu only');
-            it('should fire iron-form-invalid with empty inputs');
-            it('should call addChapter on submit');
+            var form;
+
+            before(function () {
+                form = chapterList.querySelector('#form-add');
+                sinon.stub(chapterList, 'addChapter');
+            });
+
+            it('should show add menu only on clicking button', function () {
+                var button = chapterList.querySelector('#button-add');
+                button.click();
+
+                chapterList.querySelector('#collapse-main').opened.should.equal(false);
+                chapterList.querySelector('#collapse-add').opened.should.equal(true);
+                chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+                chapterList.querySelector('#collapse-move').opened.should.equal(false);
+                chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+            });
+
+            it('should fire iron-form-invalid with empty inputs', function (done) {
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: '' }
+                ];
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
+            });
+
+            it('should call addChapter on submit adding as child', function (done) {
+                function assertions() {
+                    chapterList.addChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB',
+                        '-K-OYPE-cxp4xzlAX9yi',
+                        'WCT Child',
+                        2
+                    );
+                }
+
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: 'WCT Child' }
+                ];
+                form.querySelector('paper-radio-group').selected = 'child';
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            });
+
+            it('should call addChapter on submit adding as sibling', function (done) {
+                function assertions() {
+                    chapterList.addChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB', // Group
+                        '-K-OYPE-cxp4xzlAX9yi', // Next Sibling of current selected chapter.
+                        'WCT Sibling',
+                        1
+                    );
+                }
+
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: 'WCT Sibling' }
+                ];
+                form.querySelector('paper-radio-group').selected = 'sibling';
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            });
         });
 
         describe('Edit Menu', function () {
-            it('should show edit menu only');
-            it('should fire iron-form-invalid with empty inputs');
-            it('should set title input to current title');
-            it('should set indentation to current indentation');
-            it('should call editChapter on submit');
+            var form;
+
+            before(function () {
+                form = chapterList.querySelector('#form-edit');
+                sinon.stub(chapterList, 'editChapter');
+            });
+
+            it('should show edit menu only on clicking button', function () {
+                var button = chapterList.querySelector('#button-edit');
+                button.click();
+
+                chapterList.querySelector('#collapse-main').opened.should.equal(false);
+                chapterList.querySelector('#collapse-add').opened.should.equal(false);
+                chapterList.querySelector('#collapse-edit').opened.should.equal(true);
+                chapterList.querySelector('#collapse-move').opened.should.equal(false);
+                chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+            });
+
+            it('should fire iron-form-invalid with empty inputs', function (done) {
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: '' }
+                ];
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
+            });
+
+            it('should set inputs to current values', function () {
+                form.querySelector('paper-input[name=title]').value.should.equal('Sub Chapter');
+                // TODO: Indentation changes.
+            });
+
+            it('should call editChapter on submit', function (done) {
+                function assertions() {
+                    chapterList.editChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB', // Group
+                        '-K-OS5tB1C8Y_TfGmx5I', // Current Chapter.
+                        'Replaced Title', // New Title
+                        1 // No change to indentations.
+                    );
+                }
+
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: 'Replaced Title' }
+                ];
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            });
         });
 
         describe('Move Menu', function () {
@@ -106,8 +240,36 @@ describe('<noootes-chapter-list>', function () {
         });
 
         describe('Delete Menu', function () {
-            it('should show delete menu only');
-            it('should call deleteChapter on submit');
+            var form;
+
+            before(function () {
+                form = chapterList.querySelector('#form-delete');
+                sinon.stub(chapterList, 'deleteChapter');
+            });
+
+            it('should show delete menu only on clicking button', function () {
+                var button = chapterList.querySelector('#button-delete');
+                button.click();
+
+                chapterList.querySelector('#collapse-main').opened.should.equal(false);
+                chapterList.querySelector('#collapse-add').opened.should.equal(false);
+                chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+                chapterList.querySelector('#collapse-move').opened.should.equal(false);
+                chapterList.querySelector('#collapse-delete').opened.should.equal(true);
+            });
+
+            it('should call deleteChapter on submit', function (done) {
+                function assertions() {
+                    chapterList.deleteChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB', // Group
+                        '-K-OS5tB1C8Y_TfGmx5I' // Current Chapter
+                    );
+                }
+
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', [], button, done, assertions);
+            });
         });
     });
 
@@ -117,10 +279,18 @@ describe('<noootes-chapter-list>', function () {
 
             var button = chapterList.querySelector('#button-mode');
             button.click();
+            button.icon.should.equal('create');
             chapterList._editMode.should.equal(false);
             chapterList._selectedChapter.should.equal('-K-OYWuzamCbn6-9j8FB');
         });
 
-        it('should reset and close any open menus');
+        it('should reset and close any open menus', function () {
+            chapterList.querySelector('#collapse-menu').opened.should.equal(false);
+            chapterList.querySelector('#collapse-main').opened.should.equal(true);
+            chapterList.querySelector('#collapse-add').opened.should.equal(false);
+            chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+            chapterList.querySelector('#collapse-move').opened.should.equal(false);
+            chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+        });
     });
 });
