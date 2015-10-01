@@ -9,6 +9,7 @@ Noootes.Elements['page-editor'] = Polymer({
     //created: function () {},
     ready: function () {
         this._attachListeners();
+        this._setupToolbar();
     },
     attached: function () {
         this._checkHash();
@@ -62,6 +63,19 @@ Noootes.Elements['page-editor'] = Polymer({
     _attachListeners: function () {
         window.addEventListener('hashchange', this._checkHash.bind(this));
     },
+    _setupToolbar: function () {
+        var button = document.createElement('paper-icon-button');
+        button.icon = 'gesture';
+        button.onclick = this.togglePage.bind(this);
+
+        this._toolbar = {
+            title: 'Noootes Editor',
+            subtitle: '',
+            buttons: [
+                button
+            ]
+        };
+    },
     // Hash Change
     _checkHash: function () {
         var hash = window.location.hash.split('/');
@@ -72,6 +86,8 @@ Noootes.Elements['page-editor'] = Polymer({
             if (hash.length >= 4) {
                 this.user = hash[2];
                 this.code = hash[3];
+
+                this.fire('toolbar-update', this._toolbar);
             }
             else {
                 if (this.user && this.code) {
@@ -124,6 +140,13 @@ Noootes.Elements['page-editor'] = Polymer({
                 else {
                     this._errorMessage = '';
                     this._selectedPage = 1;
+
+                    this.getGroupMetadata(this._group, function (metadata) {
+                        this._toolbar.title = this.user + '/' + this.code;
+                        this._toolbar.subtitle = metadata.title;
+
+                        this.fire('toolbar-update', this._toolbar);
+                    }.bind(this));
                 }
             }.bind(this));
         }

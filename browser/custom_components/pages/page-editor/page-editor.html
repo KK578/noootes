@@ -2,7 +2,6 @@
 
 <!-- Iron -->
 <!-- Paper -->
-<link rel="import" href="../../../bower_components/paper-fab/paper-fab.html" />
 <!-- Neon -->
 <link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html" />
 <link rel="import" href="../../../bower_components/neon-animation/neon-animatable.html" />
@@ -18,9 +17,6 @@
 <dom-module id="page-editor">
     <link rel="import" type="css" href="page-editor.css?__inline" />
     <template>
-        <!-- Temporary button -->
-        <paper-fab icon="gesture" mini on-tap="togglePage"></paper-fab>
-
         <neon-animated-pages id="pages" class="fit" selected="{{_selectedPage}}" entry-animation="slide-down-animation" exit-animation="slide-up-animation">
             <neon-animatable class="layout vertical center center-justified fit">
                 <paper-material id="editor-error" class="">{{_errorMessage}}</paper-material>
