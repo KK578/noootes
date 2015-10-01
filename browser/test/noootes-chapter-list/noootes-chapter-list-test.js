@@ -221,8 +221,7 @@ describe('<noootes-chapter-list>', function () {
                     chapterList.editChapter.should.have.been.calledWith(
                         '-K-9osCRSNg4n6dtFgcB', // Group
                         '-K-OS5tB1C8Y_TfGmx5I', // Current Chapter.
-                        'Replaced Title', // New Title
-                        1 // No change to indentations.
+                        'Replaced Title' // New Title
                     );
                 }
 

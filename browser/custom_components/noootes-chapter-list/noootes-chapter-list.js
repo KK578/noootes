@@ -20,6 +20,7 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     listeners: {
         'chapters-template.dom-change': '_setupChapterList',
         'form-add.iron-form-submit': '_submitFormAdd',
+        'form-edit.iron-form-submit': '_submitFormEdit',
         'form-delete.iron-form-submit': '_submitFormDelete'
     },
 
@@ -251,6 +252,11 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
         this._openMenu('edit');
     },
+    _submitFormEdit: function (event) {
+        var detail = event.detail;
+        this.editChapter(this.group, this._selectedChapter, detail.title);
+    },
+
     // Move Menu
     // Delete Menu
     openMenuDelete: function () {
