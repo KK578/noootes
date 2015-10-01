@@ -167,5 +167,67 @@ describe('<screen-main>', function () {
             var toolbar = screenMain.querySelector('#main-toolbar');
             toolbar.querySelector('h2').textContent.should.equal('Home');
         });
+
+        it('should change toolbar title and subtitle on "toolbar-update"', function (done) {
+            function assertions() {
+                var toolbar = screenMain.querySelector('#main-toolbar');
+                toolbar.querySelector('h2').textContent.should.equal('The Title');
+                toolbar.querySelector('span').textContent.should.equal('The Subtitle');
+            }
+
+            listenToEventOnce('toolbar-update', done, assertions);
+
+            var detail = {
+                title: 'The Title',
+                subtitle: 'The Subtitle'
+            };
+
+            window.dispatchEvent(new CustomEvent('toolbar-update', { detail: detail }));
+        });
+
+        it('should run callbacks on buttons passed via "toolbar-update"', function (done) {
+            var toolbar = screenMain.querySelector('#main-toolbar');
+
+            function click() {
+                toolbar.querySelector('paper-button').click();
+            }
+
+            function assertions() {
+                toolbar.querySelector('h2').textContent.should.equal('');
+                toolbar.querySelector('span').textContent.should.equal('');
+            }
+
+            listenToEventOnce('toolbar-update', click, assertions);
+
+            var button = document.createElement('paper-button');
+            button.onclick = function () {
+                done();
+            };
+
+            var detail = {
+                buttons: [
+                    button
+                ]
+            };
+
+            window.dispatchEvent(new CustomEvent('toolbar-update', { detail: detail }));
+        });
+
+        it('should remove buttons on "toolbar-update" with no buttons array', function (done) {
+            function assertions() {
+                var toolbar = screenMain.querySelector('#main-toolbar');
+                toolbar.querySelector('h2').textContent.should.equal('Just a Title');
+                toolbar.querySelector('span').textContent.should.equal('');
+                toolbar.querySelector('#toolbar-buttons').childNodes.length.should.equal(0);
+            }
+
+            listenToEventOnce('toolbar-update', done, assertions);
+
+            var detail = {
+                title: 'Just a Title'
+            };
+
+            window.dispatchEvent(new CustomEvent('toolbar-update', { detail: detail }));
+        });
     });
 });

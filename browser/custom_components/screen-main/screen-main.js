@@ -50,6 +50,7 @@ Noootes.Elements['screen-main'] = Polymer({
     // Element Setup
     _attachListeners: function () {
         window.addEventListener('hashchange', this._checkHash.bind(this));
+        window.addEventListener('toolbar-update', this._updateToolbar.bind(this));
 
         this.bindToLogin(this._setUser);
     },
@@ -77,7 +78,7 @@ Noootes.Elements['screen-main'] = Polymer({
     },
     _handlePageChange: function (index, page) {
         this._selectedPage = index;
-        this._updateToolbar(page);
+        this.fire('toolbar-update', { title: page.title });
         this.fire('page-changed', page);
     },
     _forceHome: function () {
@@ -109,8 +110,23 @@ Noootes.Elements['screen-main'] = Polymer({
     _setUser: function () {
         this._username = Noootes.Firebase.User.password.email;
     },
-    _updateToolbar: function (page) {
-        this._title = page.title;
-        this._subtitle = '';
+    _updateToolbar: function (event) {
+        var detail = event.detail;
+        var buttons = detail.buttons;
+
+        this._title = detail.title;
+        this._subtitle = detail.subtitle;
+
+        // Clear buttons container.
+        var buttonContainer = this.$['toolbar-buttons'];
+        while (buttonContainer.firstChild) {
+            buttonContainer.removeChild(buttonContainer.firstChild);
+        }
+
+        if (buttons) {
+            for (var i = 0; i < buttons.length; i++) {
+                buttonContainer.appendChild(buttons[i]);
+            }
+        }
     }
 });
