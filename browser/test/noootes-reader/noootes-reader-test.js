@@ -20,7 +20,7 @@ describe('<noootes-reader>', function () {
         noootesReader.group = '-K-9osCRSNg4n6dtFgcB';
 
         var rendered = noootesReader.querySelector('#markdown');
-        rendered.textContent.should.equal('Compiling Noootes...');
+        rendered.textContent.should.match(/Compiling Noootes.../);
     });
 
     it('should render each chapter\'s titles', function (done) {

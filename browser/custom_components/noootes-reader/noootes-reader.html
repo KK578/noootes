@@ -2,12 +2,20 @@
 
 <!-- Iron -->
 <!-- Paper -->
+<link rel="import" href="../../bower_components/paper-material/paper-material.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <!-- Other -->
+<link rel="import" href="../../bower_components/marked-element/marked-element.html" />
 
 <dom-module id="noootes-reader">
     <link rel="import" type="css" href="noootes-reader.css?__inline" />
-    <template></template>
+    <template>
+        <paper-material class="fit">
+            <marked-element markdown="{{markdown}}">
+                <div id="markdown" class="markdown-html"></div>
+            </marked-element>
+        </paper-material>
+    </template>
     <script src="noootes-reader.js?__inline"></script>
 </dom-module>
