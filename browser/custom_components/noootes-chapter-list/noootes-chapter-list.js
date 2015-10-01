@@ -62,6 +62,7 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     /* Functions specific to this element go under here. */
     // Load
     _loadChapters: function (group) {
+        this._selectedChapter = '';
         this._location = Noootes.Firebase.Location + 'notes/order/' + group;
         this._setContainerTop();
     },
