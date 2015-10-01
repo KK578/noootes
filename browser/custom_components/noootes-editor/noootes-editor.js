@@ -46,12 +46,12 @@ Noootes.Elements['noootes-editor'] = Polymer({
 
     /* Functions specific to this element go under here. */
     _loadNoootes: function (group, chapter) {
+        if (this._firepad) {
+            this._unbindFirepad();
+        }
+
         /* globals Firepad, CodeMirror */
         if (group && chapter) {
-            if (this._firepad) {
-                this._unbindFirepad();
-            }
-
             this.getUsername(Noootes.Firebase.User.uid, function (err, name) {
                 if (err) {
                     throw err;
@@ -76,7 +76,7 @@ Noootes.Elements['noootes-editor'] = Polymer({
     _unbindFirepad: function () {
         this._firepad.firebaseAdapter_.saveCheckpoint_();
         this._firepad.dispose();
-        this.firepad = undefined;
+        this._firepad = undefined;
 
         var firepad = this.$.firepad;
         while (firepad.firstChild) {
