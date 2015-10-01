@@ -245,6 +245,10 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
     // Edit Menu
     // Move Menu
+    openMenuMove: function () {
+        this._openMenu('move');
+    },
+
     // Delete Menu
     openMenuDelete: function () {
         this._openMenu('delete');
