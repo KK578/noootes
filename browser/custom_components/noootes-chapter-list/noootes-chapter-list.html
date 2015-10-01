@@ -3,9 +3,13 @@
 <!-- Iron -->
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html" />
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html" />
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html" />
 <!-- Paper -->
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html" />
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html" />
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html" />
 <!-- Neon -->
 <!-- Custom/Behaviors -->
 <link rel="import" href="../noootes-chapter/noootes-chapter.html" />
@@ -27,9 +31,9 @@
             </div>
 
             <!-- Editing Menu -->
-            <iron-collapse opened="{{_editMode}}">
+            <iron-collapse id="collapse-menu" opened="{{_editMode}}">
                 <!-- Main Menu -->
-                <iron-collapse class="layout horizontal justified" opened="{{_menusOpen.main}}">
+                <iron-collapse id="collapse-main" class="layout horizontal justified" opened="{{_menusOpen.main}}">
                     <paper-icon-button id="button-add" icon="add" on-tap="openMenuAdd"></paper-icon-button>
                     <paper-icon-button id="button-edit" icon="create"></paper-icon-button>
                     <paper-icon-button id="button-move" icon="reorder"></paper-icon-button>
@@ -37,7 +41,7 @@
                 </iron-collapse>
 
                 <!-- Add -->
-                <iron-collapse opened="{{_menusOpen.add}}">
+                <iron-collapse id="collapse-add" opened="{{_menusOpen.add}}">
                     <form is="iron-form" id="form-add" method="get" action="/form.html">
                         <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
                         <span>Add chapter as '<span>{{_addPreview}}</span>'</span>
@@ -53,9 +57,11 @@
                     </form>
                 </iron-collapse>
                 <!-- Edit -->
+                <iron-collapse id="collapse-edit" opened="{{_menusOpen.edit}}"></iron-collapse>
                 <!-- Move -->
+                <iron-collapse id="collapse-move" opened="{{_menusOpen.move}}"></iron-collapse>
                 <!-- Delete -->
-                <iron-collapse opened="{{_menusOpen.delete}}">
+                <iron-collapse id="collapse-delete" opened="{{_menusOpen.delete}}">
                     <span>Are you sure you want to delete this chapter?</span>
                     <form is="iron-form" id="form-delete" method="get" action="/form.html">
                         <div class="button-container layout horizontal">

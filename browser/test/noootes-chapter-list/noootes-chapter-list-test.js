@@ -81,6 +81,15 @@ describe('<noootes-chapter-list>', function () {
             button.icon.should.equal('done');
         });
 
+        it('should show main menu only', function () {
+            chapterList.querySelector('#collapse-menu').opened.should.equal(true);
+            chapterList.querySelector('#collapse-main').opened.should.equal(true);
+            chapterList.querySelector('#collapse-add').opened.should.equal(false);
+            chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+            chapterList.querySelector('#collapse-move').opened.should.equal(false);
+            chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+        });
+
         it('should only change the private chapter on tapping item', function () {
             chapterList.querySelector('#-K-OS5tB1C8Y_TfGmx5I').click();
             chapterList._selectedChapter.should.equal('-K-OS5tB1C8Y_TfGmx5I');
@@ -88,13 +97,34 @@ describe('<noootes-chapter-list>', function () {
         });
 
         describe('Add Menu', function () {
-            it('should show add menu only');
+            it('should show add menu only on clicking button', function () {
+                var button = chapterList.querySelector('#button-add');
+                button.click();
+
+                chapterList.querySelector('#collapse-main').opened.should.equal(false);
+                chapterList.querySelector('#collapse-add').opened.should.equal(true);
+                chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+                chapterList.querySelector('#collapse-move').opened.should.equal(false);
+                chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+            });
+
             it('should fire iron-form-invalid with empty inputs');
+
             it('should call addChapter on submit');
         });
 
         describe('Edit Menu', function () {
-            it('should show edit menu only');
+            it('should show edit menu only on clicking button', function () {
+                var button = chapterList.querySelector('#button-edit');
+                button.click();
+
+                chapterList.querySelector('#collapse-main').opened.should.equal(false);
+                chapterList.querySelector('#collapse-add').opened.should.equal(false);
+                chapterList.querySelector('#collapse-edit').opened.should.equal(true);
+                chapterList.querySelector('#collapse-move').opened.should.equal(false);
+                chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+            });
+
             it('should fire iron-form-invalid with empty inputs');
             it('should set title input to current title');
             it('should set indentation to current indentation');
@@ -106,7 +136,17 @@ describe('<noootes-chapter-list>', function () {
         });
 
         describe('Delete Menu', function () {
-            it('should show delete menu only');
+            it('should show delete menu only on clicking button', function () {
+                var button = chapterList.querySelector('#button-delete');
+                button.click();
+
+                chapterList.querySelector('#collapse-main').opened.should.equal(false);
+                chapterList.querySelector('#collapse-add').opened.should.equal(false);
+                chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+                chapterList.querySelector('#collapse-move').opened.should.equal(false);
+                chapterList.querySelector('#collapse-delete').opened.should.equal(true);
+            });
+
             it('should call deleteChapter on submit');
         });
     });
@@ -117,10 +157,18 @@ describe('<noootes-chapter-list>', function () {
 
             var button = chapterList.querySelector('#button-mode');
             button.click();
+            button.icon.should.equal('create');
             chapterList._editMode.should.equal(false);
             chapterList._selectedChapter.should.equal('-K-OYWuzamCbn6-9j8FB');
         });
 
-        it('should reset and close any open menus');
+        it('should reset and close any open menus', function () {
+            chapterList.querySelector('#collapse-menu').opened.should.equal(false);
+            chapterList.querySelector('#collapse-main').opened.should.equal(true);
+            chapterList.querySelector('#collapse-add').opened.should.equal(false);
+            chapterList.querySelector('#collapse-edit').opened.should.equal(false);
+            chapterList.querySelector('#collapse-move').opened.should.equal(false);
+            chapterList.querySelector('#collapse-delete').opened.should.equal(false);
+        });
     });
 });
