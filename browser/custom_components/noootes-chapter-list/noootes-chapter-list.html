@@ -44,6 +44,7 @@
 
                 <!-- Add -->
                 <iron-collapse id="collapse-add" opened="{{_menusOpen.add}}">
+                    <span>Add New Chapter</span>
                     <form is="iron-form" id="form-add" method="get" action="/form.html">
                         <paper-input name="title" label="Title" required on-keydown="submitForm"></paper-input>
                         <span>Add chapter as '<span>{{_addPreview}}</span>'</span>
@@ -58,11 +59,13 @@
                         </div>
                     </form>
                 </iron-collapse>
+
                 <!-- Edit -->
                 <iron-collapse id="collapse-edit" opened="{{_menusOpen.edit}}">
+                    <span>Edit Chapter</span>
                     <form is="iron-form" id="form-edit" method="get" action="/form.html">
                         <paper-input name="title" label="New Title" required on-keydown="submitForm"></paper-input>
-                        <span>Chapter position changes are not supported currently.</span>
+                        <p>Chapter position changes are not supported currently.</p>
                         <div class="button-container layout horizontal">
                             <span class="flex"></span>
                             <paper-button on-tap="resetMenus">Cancel</paper-button>
@@ -70,17 +73,21 @@
                         </div>
                     </form>
                 </iron-collapse>
+
                 <!-- Move -->
                 <iron-collapse id="collapse-move" opened="{{_menusOpen.move}}">
-                    <span>Moving chapters is not implemented yet.</span>
+                    <span class="collapse-title">Move Chapter</span>
+                    <p>Sorry, this function is not implemented yet.</p>
                     <div class="button-container layout horizontal">
                         <span class="flex"></span>
                         <paper-button on-tap="resetMenus">Back</paper-button>
                     </div>
                 </iron-collapse>
+
                 <!-- Delete -->
                 <iron-collapse id="collapse-delete" opened="{{_menusOpen.delete}}">
-                    <span>Are you sure you want to delete this chapter?</span>
+                    <span class="collapse-title">Delete Chapter</span>
+                    <p>Are you sure you want to delete this chapter?</p>
                     <form is="iron-form" id="form-delete" method="get" action="/form.html">
                         <div class="button-container layout horizontal">
                             <span class="flex"></span>
