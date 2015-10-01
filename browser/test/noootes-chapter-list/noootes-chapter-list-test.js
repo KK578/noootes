@@ -1,6 +1,26 @@
 chai.should();
 
 describe('<noootes-chapter-list>', function () {
+    function listenToEventOnClickingButton(form, eventName, inputs, button, done, assertions) {
+        function listener(event) {
+            if (assertions) {
+                assertions(event);
+            }
+
+            window.removeEventListener(eventName, listener);
+            done();
+        }
+
+        window.addEventListener(eventName, listener);
+
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            form.querySelector(input.name).value = input.value;
+        }
+
+        button.click();
+    }
+
     var chapterList;
 
     before(function (done) {
@@ -97,6 +117,13 @@ describe('<noootes-chapter-list>', function () {
         });
 
         describe('Add Menu', function () {
+            var form;
+
+            before(function () {
+                form = chapterList.querySelector('#form-add');
+                sinon.stub(chapterList, 'addChapter');
+            });
+
             it('should show add menu only on clicking button', function () {
                 var button = chapterList.querySelector('#button-add');
                 button.click();
@@ -108,9 +135,52 @@ describe('<noootes-chapter-list>', function () {
                 chapterList.querySelector('#collapse-delete').opened.should.equal(false);
             });
 
-            it('should fire iron-form-invalid with empty inputs');
+            it('should fire iron-form-invalid with empty inputs', function (done) {
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: '' }
+                ];
+                var button = form.querySelector('paper-button.submit');
 
-            it('should call addChapter on submit');
+                listenToEventOnClickingButton(form, 'iron-form-invalid', inputs, button, done);
+            });
+
+            it('should call addChapter on submit adding as child', function (done) {
+                function assertions() {
+                    chapterList.addChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB',
+                        '-K-OYPE-cxp4xzlAX9yi',
+                        'WCT Child',
+                        2
+                    );
+                }
+
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: 'WCT Child' }
+                ];
+                form.querySelector('paper-radio-group').selected = 'child';
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            });
+
+            it('should call addChapter on submit adding as sibling', function (done) {
+                function assertions() {
+                    chapterList.addChapter.should.have.been.calledWith(
+                        '-K-9osCRSNg4n6dtFgcB', // Group
+                        '-K-OYPE-cxp4xzlAX9yi', // Next Sibling of current selected chapter.
+                        'WCT Sibling',
+                        1
+                    );
+                }
+
+                var inputs = [
+                    { name: 'paper-input[name=title]', value: 'WCT Sibling' }
+                ];
+                form.querySelector('paper-radio-group').selected = 'sibling';
+                var button = form.querySelector('paper-button.submit');
+
+                listenToEventOnClickingButton(form, 'iron-form-submit', inputs, button, done, assertions);
+            });
         });
 
         describe('Edit Menu', function () {
