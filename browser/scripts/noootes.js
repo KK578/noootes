@@ -2,7 +2,7 @@
 
 (function () {
     var firebaseLocation = 'https://noootes.firebaseio.com/';
-    var firebase = new Firebase(location);
+    var firebase;
 
     Noootes = {
         Behaviors: {},
