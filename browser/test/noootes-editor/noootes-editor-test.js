@@ -16,9 +16,20 @@ describe('<noootes-editor>', function () {
         });
     });
 
-    it('should setup firepad on group and chapter being set', function (done) {
+    it('should select first chapter on group being set', function (done) {
         noootesEditor.group = '-K-9osCRSNg4n6dtFgcB';
-        noootesEditor.chapter = '-K-OQciTe2Q7ltENcAx7';
+        var indicator = noootesEditor.querySelector('#chapter-container');
+
+        var handle = window.setInterval(function () {
+            if (noootesEditor.chapter === '-K-OQciTe2Q7ltENcAx7') {
+                indicator.textContent.should.equal('Chapter 1: First');
+                window.clearInterval(handle);
+                done();
+            }
+        }, 100);
+    });
+
+    it('should setup firepad with chapter and group set', function (done) {
         var firepad = noootesEditor.querySelector('#firepad');
 
         var handle = window.setInterval(function () {
