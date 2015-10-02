@@ -8,7 +8,25 @@ Noootes.Elements['noootes-reader'] = Polymer({
      */
     //created: function () {},
     //ready: function () {},
-    //attached: function () {},
+    attached: function () {
+        if (!window.MathJax) {
+            /* globals MathJax */
+            var script = document.createElement('script');
+            script.src = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js' +
+                '?config=AM_HTMLorMML-full';
+            script.onload = function () {
+                MathJax.Hub.Config({
+                    asciimath2jax: {
+                        delimiters: [
+                            ['$$', '$$']
+                        ]
+                    }
+                });
+            };
+
+            document.head.appendChild(script);
+        }
+    },
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
     //behaviors: [],
@@ -108,5 +126,12 @@ Noootes.Elements['noootes-reader'] = Polymer({
         }
 
         this.markdown = rendered.join('\n');
+        this.async(function () {
+            MathJax.Hub.Queue([
+                'Typeset',
+                MathJax.Hub,
+                this.$.markdown
+            ]);
+        });
     }
 });
