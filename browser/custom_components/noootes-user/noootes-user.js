@@ -77,9 +77,6 @@ Noootes.Elements['noootes-user'] = Polymer({
     _changeMode: function (n) {
         this._requestMode = n !== undefined;
     },
-    _checkboxText: function (checked) {
-        return checked ? 'Read/Write' : 'Read';
-    },
     requestReject: function () {
         this.moveToCollaborators(this.group, this.user, null);
     },
