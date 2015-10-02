@@ -27,10 +27,8 @@
             <h1 class="top">Create a new Group</h1>
 
             <iron-collapse opened="[[!_formCreateOpen]]">
-                <p>Want to make your own group? Click the button!</p>
-                <div class="layout horizontal">
-                    <span class="flex"></span>
-                    <paper-button id="button-form-create" on-tap="openFormCreate">Create New Group</paper-button>
+                <div class="layout vertical center">
+                    <paper-button id="button-form-create" on-tap="openFormCreate" raised>Create New Group</paper-button>
                 </div>
             </iron-collapse>
 
@@ -70,10 +68,8 @@
 
             <!-- Prior to load -->
             <iron-collapse opened="[[!_ownedLocationSet]]">
-                <p>To load your groups, click the button!</p>
-                <div class="layout horizontal">
-                    <span class="flex"></span>
-                    <paper-button id="button-groups-owned" on-tap="setOwnedLocation">Show My Groups</paper-button>
+                <div class="layout vertical center">
+                    <paper-button id="button-groups-owned" on-tap="setOwnedLocation" raised>Show My Groups</paper-button>
                 </div>
             </iron-collapse>
 
@@ -92,10 +88,8 @@
 
             <!-- Prior to load -->
             <iron-collapse opened="[[!_joinedLocationSet]]">
-                <p>To load your groups, click the button!</p>
-                <div class="layout horizontal">
-                    <span class="flex"></span>
-                    <paper-button id="button-groups-joined" on-tap="setJoinedLocation">Show Joined Groups</paper-button>
+                <div class="layout vertical center">
+                    <paper-button id="button-groups-joined" on-tap="setJoinedLocation" raised>Show My Joined Groups</paper-button>
                 </div>
             </iron-collapse>
 
