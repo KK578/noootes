@@ -25,5 +25,5 @@
             firebase = new Firebase(firebaseLocation);
             window.clearInterval(handle);
         }
-    });
+    }, 1);
 })();
