@@ -17,7 +17,7 @@
             break;
 
         case 'production':
-            server.user(morgan('tiny'));
+            server.use(morgan('tiny'));
             break;
     }
 };
