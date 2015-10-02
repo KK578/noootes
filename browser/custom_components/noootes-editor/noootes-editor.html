@@ -22,13 +22,18 @@
         <paper-drawer-panel id="drawer-chapters" force-narrow right-drawer disable-swipe drawer-toggle-attribute="chapter-drawer-toggle">
             <paper-header-panel drawer>
                 <div id="tab" chapter-drawer-toggle>Chapters</div>
-                <noootes-chapter-list class="fit" group="{{group}}" selected="{{chapter}}"></noootes-chapter-list>
+                <noootes-chapter-list id="chapter-list" class="fit" group="{{group}}" selected="{{chapter}}" selected-item="{{_selectedItem}}"></noootes-chapter-list>
             </paper-header-panel>
 
             <paper-header-panel main mode="seamed">
-                <paper-material id="firepad-container" class="fit">
-                    <div id="firepad"></div>
-                </paper-material>
+                <div class="container layout vertical flex fit">
+                    <paper-material id="chapter-container">
+                        <span>{{_chapterInfo}}</span>
+                    </paper-material>
+                    <paper-material id="firepad-container" class="layout flex">
+                        <div id="firepad"></div>
+                    </paper-material>
+                </div>
             </paper-header-panel>
         </paper-drawer-panel>
     </template>
