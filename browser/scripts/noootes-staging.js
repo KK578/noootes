@@ -1,21 +1,29 @@
-﻿var Noootes = Noootes || {
-    Behaviors: {},
-    Elements: {},
-    Firebase: {
-        Location: 'https://noootes-staging.firebaseio.com/',
-        User: {}
-    },
-    FirebaseRef: function (location) {
-        var firebase = new Firebase(this.Firebase.Location);
+﻿var Noootes = {};
 
-        if (location) {
-            firebase = firebase.child(location);
+(function () {
+    var firebaseLocation = 'https://noootes-staging.firebaseio.com/';
+    var firebase;
+
+    Noootes = {
+        Behaviors: {},
+        Elements: {},
+        Firebase: {
+            Location: firebaseLocation,
+            User: {}
+        },
+        FirebaseRef: function (location) {
+            return location ? firebase.child(location) : firebase;
+        },
+        Usernames: {
+            names: {},
+            uid: {}
         }
+    };
 
-        return firebase;
-    },
-    Usernames: {
-        names: {},
-        uid: {}
-    }
-};
+    var handle = window.setInterval(function () {
+        if (window.Firebase) {
+            firebase = new Firebase(firebaseLocation);
+            window.clearInterval(handle);
+        }
+    });
+})();

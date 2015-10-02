@@ -153,6 +153,8 @@ Noootes.Elements['noootes-app'] = Polymer({
         this._selectedPage = 0;
         Noootes.Firebase.User = undefined;
         this._fireSuccessEvent('firebase-logout');
+
+        this.async(this._refresh, 500);
     },
     _firebaseRegister: function () {
         // Registration was successful, fire event for listening elements
@@ -190,5 +192,10 @@ Noootes.Elements['noootes-app'] = Polymer({
                 this.fire('toast-message', { message: 'You\'re not logged in!' });
             }
         }
+    },
+    // On Logout
+    _refresh: function () {
+        window.location.hash = '';
+        window.location.reload();
     }
 });
