@@ -65,7 +65,6 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     _loadChapters: function (group) {
         this._selectedChapter = '';
         this._location = Noootes.Firebase.Location + 'notes/order/' + group;
-        this._setContainerTop();
     },
 
     // Order
@@ -136,22 +135,6 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     },
 
     // Edit Mode
-    _setContainerTop: function () {
-        var container = this.$['chapters-container'];
-        var toolbar = this.$['chapter-toolbar'];
-
-        function set(duration) {
-            var height = toolbar.clientHeight;
-            container.style.top = height + 'px';
-            container.style.height = 'calc(100% - ' + height + 'px)';
-
-            if (duration < 300) {
-                this.async(set.bind(this, duration + 10), 10);
-            }
-        }
-
-        set.call(this, 0);
-    },
     _drawerTitle: function (mode) {
         return mode ? 'Edit Chapters' : 'Chapters';
     },
@@ -177,8 +160,6 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
             move: menu === 'move',
             delete: menu === 'delete'
         };
-
-        this._setContainerTop();
     },
     resetMenus: function () {
         this.resetForm(this.$['form-add'], true);

@@ -4,26 +4,19 @@
 
 :host {
     display: block;
+    @include layout;
+    @include layout-vertical;
 }
 
 #chapter-toolbar {
     background-color: $theme-primary;
     color: $white-primary;
-    position: absolute;
     padding: 16px;
-    top: 0;
-    left: 0;
-    right: 0;
 }
 
 #chapters-container {
-    position: relative;
     display: block;
     overflow: auto;
-    /* Top is set to under #chapter-toolbar via Javascript. */
-    top: 0;
-    left: 0;
-    right: 0;
 }
 
 /* paper-input */
