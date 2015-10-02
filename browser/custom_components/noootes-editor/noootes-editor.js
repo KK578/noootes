@@ -40,10 +40,7 @@ Noootes.Elements['noootes-editor'] = Polymer({
         },
         chapter: {
             type: String,
-            reflectToAttribute: true
-        },
-        _selectedItem: {
-            type: Object,
+            reflectToAttribute: true,
             observer: '_chapterChanged'
         }
     },
@@ -77,8 +74,9 @@ Noootes.Elements['noootes-editor'] = Polymer({
     },
     _chapterChanged: function (n) {
         if (n) {
-            var number = n.chapterNumber;
-            var title = n.chapter.title;
+            var chapter = this.$['chapter-list'].querySelector('#' + n);
+            var number = chapter.chapterNumber;
+            var title = chapter.chapter.title;
 
             this._chapterInfo = 'Chapter ' + number + ': ' + title;
         }

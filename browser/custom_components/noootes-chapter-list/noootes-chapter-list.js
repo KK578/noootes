@@ -53,10 +53,6 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
             value: '',
             observer: '_selectedChapterChanged'
         },
-        selectedItem: {
-            type: Object,
-            notify: true
-        },
 
         _editMode: {
             type: Boolean,
