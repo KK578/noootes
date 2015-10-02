@@ -19,9 +19,9 @@
 <dom-module id="noootes-editor">
     <link rel="import" type="css" href="noootes-editor.css?__inline" />
     <template>
-        <paper-drawer-panel id="drawer-chapters" force-narrow right-drawer disable-swipe drawer-toggle-attribute="chapter-drawer-toggle">
+        <paper-drawer-panel id="drawer-chapters" responsive-width="1200px" right-drawer disable-swipe drawer-toggle-attribute="chapter-drawer-toggle" narrow="{{_narrow}}">
             <paper-header-panel drawer>
-                <div id="tab" chapter-drawer-toggle>Chapters</div>
+                <div id="tab" hidden$="{{!_narrow}}" chapter-drawer-toggle>Chapters</div>
                 <noootes-chapter-list class="fit" group="{{group}}" selected="{{chapter}}"></noootes-chapter-list>
             </paper-header-panel>
 
