@@ -99,7 +99,7 @@
             </iron-collapse>
         </div>
 
-        <iron-selector id="chapters-container" selected="{{_selectedChapter}}" attr-for-selected="id">
+        <iron-selector id="chapters-container" class="layout vertical flex" selected="{{_selectedChapter}}" attr-for-selected="id">
             <template is="dom-repeat" id="chapters-template" items="{{_data}}">
                 <noootes-chapter id="{{item.__firebaseKey__}}" chapter="{{item}}"></noootes-chapter>
             </template>
