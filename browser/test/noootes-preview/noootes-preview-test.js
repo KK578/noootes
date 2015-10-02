@@ -17,6 +17,7 @@ describe('<noootes-preview>', function () {
         container.selectedItem = fakeChapter;
         fakeChapter.indentation = 3;
         fakeChapter.chapter = { title: 'The Title' };
+        fakeChapter.chapterNumber = '1';
     });
 
     it('should set markdown to editor\'s text on render', function () {
@@ -25,6 +26,6 @@ describe('<noootes-preview>', function () {
     });
 
     it('should prepend the title to the start as a header', function () {
-        noootesPreview.markdown.should.match(/^#### The Title/);
+        noootesPreview.markdown.should.match(/^#### 1 The Title/);
     });
 });

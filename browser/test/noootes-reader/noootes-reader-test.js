@@ -23,16 +23,16 @@ describe('<noootes-reader>', function () {
         rendered.textContent.should.match(/Compiling Noootes.../);
     });
 
-    it('should render each chapter\'s titles', function (done) {
+    it('should render each chapter\'s titles with it\'s chapter number', function (done) {
         var handle = window.setInterval(function () {
             var text = noootesReader.markdown;
 
             if (text !== '# Compiling Noootes...') {
-                text.should.match(/# First\n/m);
-                text.should.match(/## Sub Chapter\n/m);
-                text.should.match(/### Level 3\n/m);
-                text.should.match(/## Second Inner\n/m);
-                text.should.match(/# Second\n/m);
+                text.should.match(/# 1 First\n/m);
+                text.should.match(/## 1.1 Sub Chapter\n/m);
+                text.should.match(/### 1.1.1 Level 3\n/m);
+                text.should.match(/## 1.2 Second Inner\n/m);
+                text.should.match(/# 2 Second\n/m);
 
                 window.clearInterval(handle);
                 done();

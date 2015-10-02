@@ -11,7 +11,7 @@ Noootes.Elements['noootes-reader'] = Polymer({
     //attached: function () {},
 
     /* https://www.polymer-project.org/1.0/docs/devguide/behaviors.html */
-    //behaviors: [],
+    behaviors: [Noootes.Behaviors.ChapterBehavior],
 
     /* https://www.polymer-project.org/1.0/docs/devguide/events.html#event-listeners */
     //listeners: {},
@@ -95,16 +95,19 @@ Noootes.Elements['noootes-reader'] = Polymer({
     },
     _renderMarkdown: function (chapters, notes) {
         var rendered = [];
+        var numbers = [];
 
         for (var i = 0; i < chapters.length; i++) {
             var chapter = chapters[i];
 
-            var markdown = [
-                '#'.repeat(chapter.indentation + 1) + ' ' + chapter.title,
-                notes[i]
-            ];
+            numbers = this.incrementChapter(numbers, chapter.indentation);
+            var title = [
+                '#'.repeat(chapter.indentation + 1),
+                this.chapterNumbersToString(numbers),
+                chapter.title
+            ].join(' ');
 
-            rendered.push(markdown.join('\n'));
+            rendered.push(title + '\n' + notes[i]);
         }
 
         this.markdown = rendered.join('\n');
