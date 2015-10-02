@@ -40,7 +40,8 @@ Noootes.Elements['noootes-editor'] = Polymer({
         },
         chapter: {
             type: String,
-            reflectToAttribute: true
+            reflectToAttribute: true,
+            observer: '_chapterChanged'
         }
     },
 
@@ -69,6 +70,15 @@ Noootes.Elements['noootes-editor'] = Polymer({
                     userId: name
                 });
             }.bind(this));
+        }
+    },
+    _chapterChanged: function (n) {
+        if (n) {
+            var chapter = this.$['chapter-list'].querySelector('#' + n);
+            var number = chapter.chapterNumber;
+            var title = chapter.chapter.title;
+
+            this._chapterInfo = 'Chapter ' + number + ': ' + title;
         }
     },
 

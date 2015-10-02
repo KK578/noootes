@@ -16,13 +16,18 @@ paper-drawer-panel#drawer-chapters::shadow {
     }
 }
 
+.container {
+    height: 100%;
+}
+
+#chapter-container {
+    margin-bottom: 8px;
+}
+
 #firepad-container {
+    margin-top: 8px;
     padding: 0;
     overflow: auto;
-
-    #firepad {
-        height: 100%;
-    }
 }
 
 #tab {
