@@ -83,6 +83,7 @@
                 this.editGroupAccessibility(key, null);
                 this.editUserOwned(key, null);
                 this.editGroupAccessId(code, null);
+                // TODO: Delete notes
 
                 // As security rules depend on checking user's authentication against the
                 // group metadata, the metadata must be deleted last.

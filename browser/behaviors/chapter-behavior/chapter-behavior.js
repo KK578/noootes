@@ -199,5 +199,8 @@
 
             return data;
         });
+
+        var firebase = Noootes.FirebaseRef('notes/chapters').child(group).child(key);
+        firebase.set(null);
     }
 };
