@@ -23,6 +23,18 @@
             <p>Noootes is open source! Find the repository <a target="_blank" href="https://github.com/KK578/noootes">here</a>.</p>
             <p>Please note that Noootes is developed on Node.js, so you will need <a target="_blank" href="https://nodejs.org">Node.js</a> to develop.</p>
         </fancy-material>
+
+        <fancy-material>
+            <h1 class="top">Known Issues</h1>
+            <h3>Noootes Version: 0.0.10</h3>
+            <ul>
+                <template is="dom-repeat" items="{{issues}}">
+                    <li>{{item}}</li>
+                </template>
+            </ul>
+
+            <p>If you find any issues that aren't listed here, you may add them as an issue on the <a target="_blank" href="https://github.com/KK578/noootes/issues">Noootes Repository</a>.</p>
+        </fancy-material>
     </template>
     <script src="page-about.js?__inline"></script>
 </dom-module>
