@@ -182,24 +182,6 @@
         firebase.set(value);
     },
 
-    checkGroupRequestStatus: function (group, callback) {
-        var user = Noootes.Firebase.User;
-        var firebase = Noootes.FirebaseRef('groups/access');
-
-        var collaborator;
-        var request;
-
-        firebase.child('members').child(group).child(user.uid).on('value', function (ss) {
-            collaborator = ss.val();
-            callback(collaborator, request);
-        });
-
-        firebase.child('requests').child(group).child(user.uid).on('value', function (ss) {
-            request = ss.val();
-            callback(collaborator, request);
-        });
-    },
-
     //////////////
     // Conversions
     //////////////
@@ -235,8 +217,55 @@
     },
 
     /////////////////
-    // Owner Functions
+    // User Functions
     /////////////////
+    /**
+     * Add request to join group and add to user's joined groups.
+     *
+     * @param {String} key - Group key for group.
+     * @param {Any} value - Value to set group to. Use null if deleting.
+     */
+    applyToGroup: function (key, value) {
+        var user = Noootes.Firebase.User;
+        var firebase = Noootes.FirebaseRef();
+
+        firebase.child('groups/access/public').child(key).once('value', function (ss) {
+            var access = ss.val();
+
+            if (access !== null) {
+                // Able to automatically apply to group.
+                firebase.child('groups/access/members').child(key).child(user.uid).set(access);
+            }
+            else {
+                // Must request for access.
+                firebase.child('groups/access/requests').child(key).child(user.uid).set(value);
+            }
+
+            firebase.child('users/personal').child(user.uid).child('joined').child(key).set(value);
+        });
+    },
+
+    checkGroupRequestStatus: function (group, callback) {
+        var user = Noootes.Firebase.User;
+        var firebase = Noootes.FirebaseRef('groups/access');
+
+        var collaborator;
+        var request;
+
+        firebase.child('members').child(group).child(user.uid).on('value', function (ss) {
+            collaborator = ss.val();
+            callback(collaborator, request);
+        });
+
+        firebase.child('requests').child(group).child(user.uid).on('value', function (ss) {
+            request = ss.val();
+            callback(collaborator, request);
+        });
+    },
+
+    //////////////////
+    // Owner Functions
+    //////////////////
     /**
      * Add group key to current user's owned groups list.
      *
@@ -248,20 +277,6 @@
         var firebase = Noootes.FirebaseRef('users/personal').child(user.uid).child('owned')
             .child(key);
         firebase.set(value);
-    },
-
-    /**
-     * Add request to join group and add to user's joined groups.
-     *
-     * @param {String} key - Group key for group.
-     * @param {Any} value - Value to set group to. Use null if deleting.
-     */
-    applyToGroup: function (key, value) {
-        var user = Noootes.Firebase.User;
-        var firebase = Noootes.FirebaseRef();
-
-        firebase.child('groups/access/requests').child(key).child(user.uid).set(value);
-        firebase.child('users/personal').child(user.uid).child('joined').child(key).set(value);
     },
 
     /**
