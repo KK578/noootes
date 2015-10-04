@@ -32,9 +32,7 @@
      * @property {String} meta.code - New group's code.
      * @property {String} meta.title - New group's title.
      * @property {String} meta.description - New group's description.
-     * @param {Object} access - Access data for new group.
-     * @property {String} access.global - Set to 'none', 'read' or 'write'.
-     * @property {Any} access.public - Set any value to make group public.
+     * @param {String} access -  Set 'none', 'read' or 'write' for public access permissions.
      */
     createGroup: function (meta, access) {
         var user = Noootes.Firebase.User;
@@ -56,19 +54,16 @@
                 this.editGroupMetadata(key, meta);
                 // Add group identifier (User/Code)
                 this.editGroupAccessId(meta.code, key);
-                // Add group's global access permissions.
-                this.editGroupAccessGlobal(key, access.global);
 
                 // Add group to public listings if requested.
-                this.editGroupVisibility(key, access.public);
+                this.editGroupAccessibility(key, access);
             }.bind(this));
         }
     },
 
     editGroup: function (group, meta, access) {
         this.updateGroupMetadata(group, meta);
-        this.editGroupAccessGlobal(group, access.global);
-        this.editGroupVisibility(group, access.public);
+        this.editGroupAccessibility(group, access);
     },
 
     /**
@@ -85,8 +80,7 @@
                     return;
                 }
 
-                this.editGroupAccessGlobal(key, null);
-                this.editGroupVisibility(key, null);
+                this.editGroupAccessibility(key, null);
                 this.editUserOwned(key, null);
                 this.editGroupAccessId(code, null);
 
@@ -138,14 +132,22 @@
         firebase.set(value);
     },
 
+    getGroupAccessibility: function (key, callback) {
+        var firebase = Noootes.FirebaseRef('groups/access/public').child(key);
+        firebase.on('value', function (ss) {
+            var data = ss.val();
+            callback(data);
+        });
+    },
+
     /**
-     * Set global access variable for the given group key.
+     * Set public accessibility for the given group key.
      *
      * @param {String} key - Group key for group to set new value.
      * @param {String} value - Value to set.
      */
-    editGroupAccessGlobal: function (key, value) {
-        var firebase = Noootes.FirebaseRef('groups/access/global').child(key);
+    editGroupAccessibility: function (key, value) {
+        var firebase = Noootes.FirebaseRef('groups/access/public').child(key);
         var set;
 
         switch (value) {
@@ -180,48 +182,6 @@
         firebase.set(value);
     },
 
-    getGroupVisibility: function (key, callback) {
-        var firebase = Noootes.FirebaseRef('groups/public').child(key);
-        firebase.on('value', function (ss) {
-            var data = ss.val();
-            callback(data ? true : false);
-        });
-    },
-
-    /**
-     * Set group public visibility.
-     *
-     * @param {String} key - Group key for group.
-     * @param {Any} value - Set to any truthy value to make public.
-     */
-    editGroupVisibility: function (key, value) {
-        var firebase = Noootes.FirebaseRef('groups/public').child(key);
-        firebase.set(value ? true : null);
-    },
-
-    ///////////////////
-    // Status Functions
-    ///////////////////
-    checkGroupGlobalStatus: function (group, callback) {
-        var firebase = Noootes.FirebaseRef('groups/access/global').child(group);
-        firebase.on('value', function (ss) {
-            callback(ss.val());
-        });
-    },
-
-    readableGroupGlobalStatus: function (global) {
-        switch (global) {
-            case true:
-                return 'Read/Write';
-
-            case false:
-                return 'Read';
-
-            default:
-                return 'None';
-        }
-    },
-
     checkGroupRequestStatus: function (group, callback) {
         var user = Noootes.Firebase.User;
         var firebase = Noootes.FirebaseRef('groups/access');
@@ -238,6 +198,22 @@
             request = ss.val();
             callback(collaborator, request);
         });
+    },
+
+    //////////////
+    // Conversions
+    //////////////
+    readableGroupAccessibility: function (access) {
+        switch (access) {
+            case true:
+                return 'Read/Write';
+
+            case false:
+                return 'Read';
+
+            default:
+                return 'None';
+        }
     },
 
     readableGroupRequestStatus: function (uid, collaborator, request) {

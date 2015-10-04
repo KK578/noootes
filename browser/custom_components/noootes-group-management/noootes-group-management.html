@@ -54,8 +54,8 @@
                 <!-- Access Information -->
                 <iron-collapse id="group-collapse-display" opened="{{!_editCollapseOpen}}">
                     <p id="group-status-access" class="layout horizontal">
-                        <span class="flex">Global Access Status:</span>
-                        <span class="flex">{{_accessData.global}}</span>
+                        <span class="flex">Public Access:</span>
+                        <span class="flex">{{_accessData.access}}</span>
                     </p>
                     <p id="group-status-request" class="layout horizontal">
                         <span class="flex">Your Status:</span>
@@ -70,22 +70,14 @@
                             <paper-input name="title" label="Title" value="{{_editData.title}}" required on-keydown="submitForm"></paper-input>
                             <paper-input name="description" label="Description" value="{{_editData.description}}" on-keydown="submitForm"></paper-input>
 
-                            <!-- Global Permissions -->
+                            <!-- Public Permissions -->
                             <div class="layout horizontal center">
-                                <p class="helper flex">Global Allowed Access:</p>
-                                <paper-radio-group class="flex" attr-for-selected="value" selected="{{_editData.global}}">
-                                    <paper-radio-button name="global" value="none">None</paper-radio-button>
-                                    <paper-radio-button name="global" value="read">Read</paper-radio-button>
-                                    <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
+                                <p class="helper flex">Public Access:</p>
+                                <paper-radio-group class="flex" attr-for-selected="value" selected="{{_editData.access}}">
+                                    <paper-radio-button name="access" value="none">None</paper-radio-button>
+                                    <paper-radio-button name="access" value="read">Read</paper-radio-button>
+                                    <paper-radio-button name="access" value="write">Read/Write</paper-radio-button>
                                 </paper-radio-group>
-                            </div>
-
-                            <!-- Visibility Permissions -->
-                            <div class="layout horizontal center">
-                                <p class="helper flex">Public?</p>
-                                <div class="flex">
-                                    <paper-checkbox name="public" checked="{{_editData.public}}"></paper-checkbox>
-                                </div>
                             </div>
 
                             <div class="button-container layout horizontal">

@@ -113,7 +113,6 @@ describe('<noootes-group-management>', function () {
             form.querySelector('paper-input[name=title]').value.should.equal('Owned Groups');
             form.querySelector('paper-input[name=description]').value.should.equal('[WCT] Do not remove.');
             form.querySelector('paper-radio-group').selected.should.equal('read');
-            form.querySelector('paper-checkbox').checked.should.equal(true);
         });
 
         it('should fire "iron-form-invalid" if title is not set', function (done) {
@@ -136,10 +135,7 @@ describe('<noootes-group-management>', function () {
                         owner: '3f8f4d76-8d58-4a56-a3f2-661dce66d085',
                         description: '[WCT] Please do not remove.'
                     },
-                    {
-                        global: 'none',
-                        public: undefined
-                    });
+                    'none');
             }
 
             var inputs = [
@@ -147,7 +143,6 @@ describe('<noootes-group-management>', function () {
                 { name: 'paper-input[name=description]', value: '[WCT] Please do not remove.' }
             ];
             form.querySelector('paper-radio-button[value=none]').click();
-            form.querySelector('paper-checkbox[name=public]').click();
 
             var button = 'paper-button#button-edit-apply';
 

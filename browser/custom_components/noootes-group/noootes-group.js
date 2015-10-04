@@ -98,9 +98,9 @@ Noootes.Elements['noootes-group'] = Polymer({
         this._buttonIcon = 'arrow-drop-' + (n ? 'up' : 'down');
     },
     _loadAccessData: function () {
-        this.checkGroupGlobalStatus(this.group, function (global) {
-            var status = this.readableGroupGlobalStatus(global);
-            this.set('_accessData.global', status);
+        this.getGroupAccessibility(this.group, function (access) {
+            var status = this.readableGroupAccessibility(access);
+            this.set('_accessData.access', status);
 
             if (this._accessData.user) {
                 this._accessDataLoaded = true;
@@ -112,7 +112,7 @@ Noootes.Elements['noootes-group'] = Polymer({
             this.set('_accessData.user', status);
             this._setApplyButtonVisibility(status);
 
-            if (this._accessData.global) {
+            if (this._accessData.access) {
                 this._accessDataLoaded = true;
             }
         }.bind(this));

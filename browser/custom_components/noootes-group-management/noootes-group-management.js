@@ -116,9 +116,9 @@ Noootes.Elements['noootes-group-management'] = Polymer({
         this._memberCollapseOpen = false;
     },
     _loadAccessData: function () {
-        this.checkGroupGlobalStatus(this.group, function (global) {
-            var status = this.readableGroupGlobalStatus(global);
-            this.set('_accessData.global', status);
+        this.getGroupAccessibility(this.group, function (access) {
+            var status = this.readableGroupAccessibility(access);
+            this.set('_accessData.access', status);
 
             if (this._accessData.user) {
                 this._accessDataLoaded = true;
@@ -129,7 +129,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             var status = this.readableGroupRequestStatus(this._data.owner, collaborator, request);
             this.set('_accessData.user', status);
 
-            if (this._accessData.global) {
+            if (this._accessData.access) {
                 this._accessDataLoaded = true;
             }
         }.bind(this));
@@ -165,27 +165,22 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     _loadEditData: function () {
         var data = this._data;
 
-        switch (this._accessData.global) {
+        switch (this._accessData.access) {
             case 'Read':
-                data.global = 'read';
+                data.access = 'read';
                 break;
 
             case 'Read/Write':
-                data.global = 'write';
+                data.access = 'write';
                 break;
 
             default:
-                data.global = 'none';
+                data.access = 'none';
                 break;
         }
 
         this.set('_editData', data);
-
-        this.getGroupVisibility(this.group, function (isPublic) {
-            data.public = isPublic;
-            this.set('_editData.public', isPublic);
-            this._editCollapseOpen = !this._editCollapseOpen;
-        }.bind(this));
+        this._editCollapseOpen = !this._editCollapseOpen;
     },
     _validateFormEdit: function (event) {
         var detail = event.detail;
@@ -196,12 +191,8 @@ Noootes.Elements['noootes-group-management'] = Polymer({
             description: detail.description,
             owner: this._data.owner
         };
-        var access = {
-            global: detail.global,
-            public: detail.public
-        };
 
-        this.editGroup(this.group, meta, access);
+        this.editGroup(this.group, meta, detail.access);
         this._editCollapseOpen = false;
     },
 

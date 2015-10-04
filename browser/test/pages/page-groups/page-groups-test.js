@@ -137,7 +137,7 @@ describe('<page-groups>', function () {
 
             var button = pageGroups.querySelector('#button-public-groups');
             button.click();
-            firebase.location.should.equal('https://noootes-staging.firebaseio.com/groups/public');
+            firebase.location.should.equal('https://noootes-staging.firebaseio.com/groups/access/public');
         });
 
         it('should template items from firebase-collection', function (done) {

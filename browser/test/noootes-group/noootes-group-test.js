@@ -62,7 +62,7 @@ describe('<noootes-group>', function () {
 
     it('should show access status in iron-collapse', function () {
         var statusAccess = noootesGroup.querySelector('#group-status-access');
-        statusAccess.textContent.should.equal('Global Access Status: Read');
+        statusAccess.textContent.should.equal('Public Access: Read');
 
         var statusRequest = noootesGroup.querySelector('#group-status-request');
         statusRequest.textContent.should.equal('Your Status:Read');

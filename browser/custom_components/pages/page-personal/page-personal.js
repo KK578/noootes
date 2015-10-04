@@ -97,12 +97,8 @@ Noootes.Elements['page-personal'] = Polymer({
                         owner: Noootes.Firebase.User.uid,
                         description: detail.description
                     };
-                    var access = {
-                        global: detail.global,
-                        public: detail.public
-                    };
 
-                    this.createGroup(meta, access);
+                    this.createGroup(meta, detail.access);
 
                     this.fire('toast-message', {
                         message: 'Group "' + detail.code + '" created!'

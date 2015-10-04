@@ -41,19 +41,12 @@
                     <paper-input name="description" label="Description" on-keydown="submitForm"></paper-input>
 
                     <div class="layout horizontal center">
-                        <p class="helper flex">Global Allowed Access:</p>
+                        <p class="helper flex">Public Access:</p>
                         <paper-radio-group class="flex" attr-for-selected="value" selected="none">
-                            <paper-radio-button name="global" value="none">None</paper-radio-button>
-                            <paper-radio-button name="global" value="read">Read</paper-radio-button>
-                            <paper-radio-button name="global" value="write">Read/Write</paper-radio-button>
+                            <paper-radio-button name="access" value="none">None</paper-radio-button>
+                            <paper-radio-button name="access" value="read">Read</paper-radio-button>
+                            <paper-radio-button name="access" value="write">Read/Write</paper-radio-button>
                         </paper-radio-group>
-                    </div>
-
-                    <div class="layout horizontal center">
-                        <p class="helper flex">Public?</p>
-                        <div class="flex">
-                            <paper-checkbox name="public"></paper-checkbox>
-                        </div>
                     </div>
 
                     <div class="button-container layout horizontal">
