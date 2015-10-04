@@ -28,7 +28,18 @@ Noootes.Elements['page-about'] = Polymer({
      *  computed {string}
      *  observer {string}
      */
-    properties: {}
+    properties: {
+        issues: {
+            type: Array,
+            value: [
+                'Cannot delete groups.',
+                'Cannot leave groups.',
+                'Member and Request lists on owned groups don\'t indicate empty lists.',
+                'Cannot change user permissions once they have joined the group.',
+                'Cannot change username after registering.'
+            ]
+        }
+    }
 
     /* Functions specific to this element go under here. */
 });
