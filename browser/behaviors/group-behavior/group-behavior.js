@@ -229,7 +229,7 @@
         var collaborator;
         var request;
 
-        firebase.child('collaborators').child(group).child(user.uid).on('value', function (ss) {
+        firebase.child('members').child(group).child(user.uid).on('value', function (ss) {
             collaborator = ss.val();
             callback(collaborator, request);
         });
@@ -289,13 +289,13 @@
     },
 
     /**
-     * Move join request to collaborators.
+     * Move join request to members.
      *
      * @param {String} key - Group key for group.
      * @param {String} uid - UID to move.
      * @param {Any} value - Value to set collaborator to. Use null if rejecting.
      */
-    moveToCollaborators: function (key, uid, value) {
+    moveToMembers: function (key, uid, value) {
         var firebase = Noootes.FirebaseRef('groups/access');
         firebase.child('requests').child(key).child(uid).set(null);
 
@@ -317,6 +317,6 @@
                 break;
         }
 
-        firebase.child('collaborators').child(key).child(uid).set(set);
+        firebase.child('members').child(key).child(uid).set(set);
     }
 };

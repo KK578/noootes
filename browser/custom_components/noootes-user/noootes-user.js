@@ -65,7 +65,7 @@ Noootes.Elements['noootes-user'] = Polymer({
     },
     _loadUserAccess: function (group, user) {
         if (this.request === undefined) {
-            var firebase = Noootes.FirebaseRef('groups/access/collaborators');
+            var firebase = Noootes.FirebaseRef('groups/access/members');
 
             firebase.child(group).child(user).on('value', function (ss) {
                 this._status = this.readableGroupRequestStatus(user, ss.val());
@@ -81,10 +81,10 @@ Noootes.Elements['noootes-user'] = Polymer({
         return checked ? 'Read/Write' : 'Read';
     },
     requestReject: function () {
-        this.moveToCollaborators(this.group, this.user, null);
+        this.moveToMembers(this.group, this.user, null);
     },
     requestAccept: function () {
         var value = this.querySelector('#checkbox-access').checked;
-        this.moveToCollaborators(this.group, this.user, value);
+        this.moveToMembers(this.group, this.user, value);
     }
 });

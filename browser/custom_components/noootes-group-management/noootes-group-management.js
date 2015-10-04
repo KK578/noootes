@@ -209,7 +209,7 @@ Noootes.Elements['noootes-group-management'] = Polymer({
     toggleMemberCollapse: function () {
         if (!this._memberLocation) {
             this._memberLocation = Noootes.Firebase.Location +
-                'groups/access/collaborators/' + this.group;
+                'groups/access/members/' + this.group;
         }
 
         this._memberCollapseOpen = !this._memberCollapseOpen;
