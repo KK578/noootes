@@ -101,8 +101,8 @@ Noootes.Elements['noootes-editor'] = Polymer({
             this._firepad.firebaseAdapter_.saveCheckpoint_();
 
             // TODO: Testing?
-            var firebase = Noootes.FirebaseRef('notes/chapters/');
-            firebase.child(this.group).child(this.chapter).child('history').set(null);
+            var firebase = this._firepad.firebaseAdapter_.ref_;
+            firebase.child('history').set(null);
         }
     },
     getText: function () {
