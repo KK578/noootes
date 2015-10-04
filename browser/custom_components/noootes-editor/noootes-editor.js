@@ -51,6 +51,7 @@ Noootes.Elements['noootes-editor'] = Polymer({
             this._unbindFirepad();
         }
 
+        // TODO: Add test for user permission?
         /* globals Firepad, CodeMirror */
         if (group && chapter) {
             this.getUsername(Noootes.Firebase.User.uid, function (err, name) {
@@ -84,7 +85,7 @@ Noootes.Elements['noootes-editor'] = Polymer({
 
     // Cleanup
     _unbindFirepad: function () {
-        this._firepad.firebaseAdapter_.saveCheckpoint_();
+        this.save();
         this._firepad.dispose();
         this._firepad = undefined;
 
@@ -94,7 +95,16 @@ Noootes.Elements['noootes-editor'] = Polymer({
         }
     },
 
-    // Text
+    // Public
+    save: function () {
+        if (this._firepad) {
+            this._firepad.firebaseAdapter_.saveCheckpoint_();
+
+            // TODO: Testing?
+            var firebase = Noootes.FirebaseRef('notes/chapters/');
+            firebase.child(this.group).child(this.chapter).child('history').set(null);
+        }
+    },
     getText: function () {
         return this._firepad.getText();
     }
