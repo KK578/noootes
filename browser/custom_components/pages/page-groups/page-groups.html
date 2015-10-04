@@ -42,12 +42,8 @@
             <h1 class="top">Public Groups</h1>
 
             <!-- Prior to load -->
-            <iron-collapse opened="[[!_locationSet]]">
-                <p>To see the list of all publically available groups. Click the button!</p>
-                <div class="layout horizontal">
-                    <span class="flex"></span>
-                    <paper-button id="button-public-groups" on-tap="setLocation">Show Groups</paper-button>
-                </div>
+            <iron-collapse class="layout vertical center" opened="[[!_locationSet]]">
+                <paper-button id="button-public-groups" on-tap="setLocation">Show Public Groups</paper-button>
             </iron-collapse>
 
             <!-- Location set, groups will load. -->

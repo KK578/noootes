@@ -64,8 +64,10 @@ Noootes.Elements['page-editor'] = Polymer({
         window.addEventListener('hashchange', this._checkHash.bind(this));
     },
     _setupToolbar: function () {
-        var button = document.createElement('paper-icon-button');
-        button.icon = 'gesture';
+        var button = document.createElement('paper-button');
+        var span = document.createElement('span');
+        span.textContent = 'Preview';
+        button.appendChild(span);
         button.onclick = this.togglePage.bind(this);
 
         this._toolbar = {
@@ -160,16 +162,20 @@ Noootes.Elements['page-editor'] = Polymer({
 
     // Editor/Preview
     togglePage: function () {
+        var span = this._toolbar.buttons[0].querySelector('span');
+
         switch (this._selectedPage) {
             case 1:
                 // Currently Editor
                 this.$.preview.render();
+                span.textContent = 'Editor';
                 this._selectedPage = 2;
                 return;
 
             case 2:
                 // Currently Preview
                 this._selectedPage = 1;
+                span.textContent = 'Preview';
                 return;
 
             default:
