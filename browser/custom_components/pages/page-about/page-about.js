@@ -36,7 +36,8 @@ Noootes.Elements['page-about'] = Polymer({
                 'Cannot leave groups.',
                 'Member and Request lists on owned groups don\'t indicate empty lists.',
                 'Cannot change user permissions once they have joined the group.',
-                'Cannot change username after registering.'
+                'Cannot change username after registering.',
+                'Editor has no spell checker.'
             ]
         }
     }
