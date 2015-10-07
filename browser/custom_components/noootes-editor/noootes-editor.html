@@ -32,6 +32,10 @@
                     </paper-material>
                     <paper-material id="firepad-container" class="layout flex">
                         <div id="firepad" class="fit" hidden$="{{_editMode}}"></div>
+                        <div id="edit" class="fit layout vertical center center-justified" hidden$="{{!_editMode}}">
+                            <h1>You're in edit mode.</h1>
+                            <p>Text editing is disabled while the Chapter Edit menu is open.</p>
+                        </div>
                 </paper-material>
                 </div>
             </paper-header-panel>

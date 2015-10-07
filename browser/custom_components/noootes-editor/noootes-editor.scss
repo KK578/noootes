@@ -28,6 +28,16 @@ paper-drawer-panel#drawer-chapters::shadow {
     margin-top: 8px;
     padding: 0;
     overflow: auto;
+
+    #edit {
+        h1 {
+            color: $theme-accent;
+        }
+
+        p {
+            color: $theme-accent-dark;
+        }
+    }
 }
 
 #tab {
