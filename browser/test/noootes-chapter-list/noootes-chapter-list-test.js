@@ -97,7 +97,7 @@ describe('<noootes-chapter-list>', function () {
         it('should change to edit mode on tapping icon', function () {
             var button = chapterList.querySelector('#button-mode');
             button.click();
-            chapterList._editMode.should.equal(true);
+            chapterList.editMode.should.equal(true);
             button.icon.should.equal('done');
         });
 
@@ -279,7 +279,7 @@ describe('<noootes-chapter-list>', function () {
             var button = chapterList.querySelector('#button-mode');
             button.click();
             button.icon.should.equal('create');
-            chapterList._editMode.should.equal(false);
+            chapterList.editMode.should.equal(false);
             chapterList._selectedChapter.should.equal('-K-OYWuzamCbn6-9j8FB');
         });
 

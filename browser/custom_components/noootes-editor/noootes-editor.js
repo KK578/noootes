@@ -67,7 +67,7 @@ Noootes.Elements['noootes-editor'] = Polymer({
                 });
 
                 this._firepad = Firepad.fromCodeMirror(firebase, codeMirror, {
-                    defaultText: ' ',
+                    defaultText: '\n',
                     userId: name
                 });
             }.bind(this));

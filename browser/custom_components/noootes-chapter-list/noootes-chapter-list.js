@@ -54,9 +54,10 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
             observer: '_selectedChapterChanged'
         },
 
-        _editMode: {
+        editMode: {
             type: Boolean,
-            value: false
+            value: false,
+            notify: true
         }
     },
 
@@ -104,10 +105,14 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
     },
     _sortChapterList: function () {
         var container = this.$['chapters-container'];
-        var chapterNumbers = [];
-
         // Setup by first moving the start tag to the top.
         var node = container.querySelector('#start');
+        // Ensure the list isn't empty.
+        if (!node) {
+            return;
+        }
+
+        var chapterNumbers = [];
         var insert = container.firstChild;
 
         do {
@@ -126,7 +131,7 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
     // Selected Chapter
     _selectedChapterChanged: function (n) {
-        if (!this._editMode) {
+        if (!this.editMode) {
             this.selected = n;
         }
     },
@@ -144,10 +149,10 @@ Noootes.Elements['noootes-chapter-list'] = Polymer({
 
     // Changing Menus
     toggleMode: function () {
-        this._editMode = !this._editMode;
+        this.editMode = !this.editMode;
         this._openMenu('main');
 
-        if (!this._editMode) {
+        if (!this.editMode) {
             // On exiting edit mode, match private chapter to public chapter.
             this._selectedChapter = this.selected;
         }

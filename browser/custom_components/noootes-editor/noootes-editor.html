@@ -22,7 +22,7 @@
         <paper-drawer-panel id="drawer-chapters" responsive-width="1200px" right-drawer disable-swipe drawer-toggle-attribute="chapter-drawer-toggle" narrow="{{_narrow}}">
             <paper-header-panel drawer>
                 <div id="tab" hidden$="{{!_narrow}}" chapter-drawer-toggle>Chapters</div>
-                <noootes-chapter-list id="chapter-list" class="fit" group="{{group}}" selected="{{chapter}}"></noootes-chapter-list>
+                <noootes-chapter-list id="chapter-list" class="fit" group="{{group}}" selected="{{chapter}}" edit-mode="{{_editMode}}"></noootes-chapter-list>
             </paper-header-panel>
 
             <paper-header-panel main mode="seamed">
@@ -31,7 +31,7 @@
                         <span>{{_chapterInfo}}</span>
                     </paper-material>
                     <paper-material id="firepad-container" class="layout flex">
-                        <div id="firepad" class="fit"></div>
+                        <div id="firepad" class="fit" hidden$="{{_editMode}}"></div>
                 </paper-material>
                 </div>
             </paper-header-panel>

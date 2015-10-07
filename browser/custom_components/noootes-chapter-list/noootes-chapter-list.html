@@ -27,13 +27,13 @@
 
         <div id="chapter-toolbar" class="layout vertical">
             <div class="layout horizontal">
-                <h3>{{_drawerTitle(_editMode)}}</h3>
+                <h3>{{_drawerTitle(editMode)}}</h3>
                 <span class="flex"></span>
-                <paper-icon-button id="button-mode" icon="{{_getIcon(_editMode)}}" on-tap="toggleMode"></paper-icon-button>
+                <paper-icon-button id="button-mode" icon="{{_getIcon(editMode)}}" on-tap="toggleMode"></paper-icon-button>
             </div>
 
             <!-- Editing Menu -->
-            <iron-collapse id="collapse-menu" opened="{{_editMode}}">
+            <iron-collapse id="collapse-menu" opened="{{editMode}}">
                 <!-- Main Menu -->
                 <iron-collapse id="collapse-main" class="layout horizontal justified" opened="{{_menusOpen.main}}">
                     <paper-icon-button id="button-add" icon="add" on-tap="openMenuAdd"></paper-icon-button>
