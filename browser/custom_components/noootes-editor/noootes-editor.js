@@ -100,9 +100,10 @@ Noootes.Elements['noootes-editor'] = Polymer({
         if (this._firepad) {
             this._firepad.firebaseAdapter_.saveCheckpoint_();
 
-            // TODO: Testing?
-            var firebase = this._firepad.firebaseAdapter_.ref_;
-            firebase.child('history').set(null);
+            // TODO: Setup offline handling before setting this up.
+            // Issues with Firebase losing connection and changing groups, destroys data as there's no history.
+            //var firebase = this._firepad.firebaseAdapter_.ref_;
+            //firebase.child('history').set(null);
         }
     },
     getText: function () {
