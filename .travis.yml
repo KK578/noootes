@@ -16,7 +16,7 @@ script:
 after_success:
   - grunt clean:deploy
 before_deploy:
-  - npm install -g firebase-tools
+  - npm install -g firebase-tools@1.2.0
   - chmod +x configs/deploy.sh
   - chmod +x configs/deploy-staging.sh
 deploy:
